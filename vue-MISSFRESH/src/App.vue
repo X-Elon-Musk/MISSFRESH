@@ -1,7 +1,13 @@
 <template>
-	<div id="app">
-		<img src="./assets/logo.png" alt="">
-		<router-view/>	
+	<div>
+		<transition name="router-fade" mode="out-in">
+			<keep-alive>
+			    <router-view v-if="$route.meta.keepAlive"></router-view>
+			</keep-alive>
+    	</transition>
+    	<transition name="router-fade" mode="out-in">
+			<router-view v-if="!$route.meta.keepAlive"></router-view>
+		</transition>
 	</div>
 </template>
 <script>
@@ -14,6 +20,7 @@
 	}
 </script>
 <style>
+	@import './style/common';
 	#app{
 		margin-top: 60px;
 	}
