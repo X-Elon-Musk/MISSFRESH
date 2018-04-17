@@ -70,22 +70,6 @@
 			    background-size: 100% 100%; 
 			    background-repeat: no-repeat;
 	    	}
-	    	.nav-home{
-	    		// background: url(src/images/home.png) no-repeat;
-	    		background-size: 100% 100%; 
-	    	}
-	    	.nav-newvp{
-	    		// background: url(src/images/newvp.png) no-repeat;
-	    		background-size: 100% 100%; 
-	    	}
-	    	.nav-cart{
-	    		// background: url(src/images/cart.png) no-repeat;
-	    		background-size: 100% 100%; 
-	    	}
-	    	.nav-mine{
-	    		// background: url(src/images/mine.png) no-repeat;
-	    		background-size: 100% 100%; 
-	    	}
 	    	.nav-label{
 	    		text-align: center;
 			    color: #999;
