@@ -4,7 +4,7 @@
         	<div class="addr"></div>
         	<div class="swiper-container" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
-        			<div class="swiper-slide" v-for="(item,index) in tabSlide" @click="tabClick(index,$event)">
+        			<div class="swiper-slide" v-for="(item,index) in tabSlide" @click="tabClick(index,$event)" :class="{active:tabIndex==index}">
         				<span>{{item.text}}</span></div>
 					<div class="bar">
 						<div class="color"></div>
@@ -114,6 +114,7 @@
 	export default{
 		data(){
 			return {
+				tabIndex: 0,
 				navSlideWidth: 0,
 				bar: null,
 				tSpeed: 300,
@@ -199,6 +200,7 @@
 					  	on: {
 					  		transitionStart: function () {
 					  			var index=this.activeIndex;
+					  			_this.tabIndex=index;
 					  			_this.slideMove(index);
 					  		}
 					  			
@@ -303,14 +305,20 @@
 		border-bottom:1px solid #ebebeb;
 		height: 40px;
 	}
+	#nav .swiper-slide{
+		text-align: center;
+	}
 	#nav .swiper-slide span {
-		margin:0 5px;
+		/*margin:0 5px;*/
 		text-align:center;
-		display:block;
+		/*display:block;*/
 		/*line-height:2.5;*/
+		display: inline-block;
+		height: 100%;
 		line-height: 40px;
 		font-size:14px;
 		color:#333333;
+		position: relative;
 	}
 	#nav .bar {
 		width:50px;
@@ -356,6 +364,20 @@
 		position:fixed;
 		bottom:0;
 		z-index:5;
+	}
+
+
+
+	.swiper-slide.active{
+		span:after{
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 0px;
+			height: 0;
+			width: 100%;
+			border-bottom: 2px solid #ff4891;
+		}
 	}
 
 
