@@ -1,25 +1,152 @@
 <template>
 	<div>
-        <scrollX ref="scroll">
-			<ul class="index-nav scroll content" id="scroller" ref="content">
-		      	<li v-for="(item,index) in tabItems" class="navItem" :class="{active:tabIndex==index}" @click="tabClick(index,$event)">
-		        	<strong class="text">{{item.text}}</strong>
-		        	<!-- <span class="amount" v-if="navItem.amount">{{amount}}</span>
-		        	<span class="amount nav-total" v-if="navItem.vuex" :class="{active:into}">{{total}}</span> -->
-		      	</li>
-		    </ul> 
-		</scrollX>
-		<ul class=""></ul>
+        <div id="top">
+        	<div class="addr"></div>
+        	<div class="swiper-container" id="nav" ref="tabNav">
+        		<div class="swiper-wrapper" ref="tabItems">
+        			<div class="swiper-slide" v-for="(item,index) in tabSlide" @click="tabClick(index,$event)">
+        				<span>{{item.text}}</span></div>
+    				<!-- <div class="swiper-slide">
+    					<span>水果</span></div>
+					<div class="swiper-slide">
+						<span>乳品</span></div>
+					<div class="swiper-slide">
+						<span>零食</span></div>
+					<div class="swiper-slide">
+						<span>肉蛋</span></div>
+					<div class="swiper-slide">
+						<span>蔬菜</span></div>
+					<div class="swiper-slide">
+						<span>酒饮</span></div>
+					<div class="swiper-slide">
+						<span>速食</span></div>
+					<div class="swiper-slide">
+						<span>熟食</span></div>
+					<div class="swiper-slide">
+						<span>水产</span></div>
+					<div class="swiper-slide">
+						<span>粮油</span></div>
+					<div class="swiper-slide">
+						<span>轻食</span></div>
+					<div class="swiper-slide">
+						<span>火锅</span></div>
+					<div class="swiper-slide">
+						<span>日百</span></div> -->
+					<div class="bar">
+						<div class="color"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+<div class="swiper-container" id="page" ref="page">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide1</div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide2</div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide3</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide4</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide5</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide6</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide7</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide8</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide9</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide10</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide11</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide12</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide13</div></div>
+      </div>
+    </div>
+    <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide slidescroll">slide14</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="img" id="footer"><img src="images/footer.png"></div>
 	</div>
 </template>
 <script>
+	import Swiper from 'swiper';
+    import 'swiper/dist/css/swiper.min.css';
+
+
 	import scrollX from 'src/components/scroll/scroll'
 	export default{
 		data(){
 			return {
-				scroll: null,
-				maxLeft: 0,
-				tabItems: [
+				navSlideWidth: 0,
+				bar: null,
+				tSpeed: 300,
+				navSum: 0,
+				clientWidth: 0,
+				navWidth: 0,
+				tabSlide: [
 					{
 						text: '热卖',
 					},
@@ -60,67 +187,74 @@
 						text: '日百',
 					},
 					{
-						text: '明日早餐',
+						text: '明日',
 					}
 				],
-				tabIndex: 0
 			}
 		},
 		mounted (){
+			var _this=this;
 			this.$nextTick(() => {
-				if (!this.scroll) {
-		   			//this.$refs.scroll直接获取滑动对象
-		   			this.scroll=this.$refs.scroll;
-		        } else{
-					this.scroll.refresh();
-				}
-				// this.changeActive();	
+				if (!this.navSwiper) {
+					_this.navSwiper = new Swiper(this.$refs.tabNav, {
+						slidesPerView: 6,
+						freeMode: true,
+						on: {
+							init: function() {
+								//设置transition-duration值
+								this.setTransition(_this.tSpeed);
+								//导航字数需要统一,每个导航宽度一致
+					  			_this.navSlideWidth = this.slides.eq(0).css('width'); 
+					  			//最后一个slide的位置
+					  			_this.navSum = this.slides[this.slides.length - 1].offsetLeft 
+					  			//Nav的可视宽度
+					  			_this.clientWidth = parseInt(this.$wrapperEl.css('width')) 
+					  			_this.navWidth = 0
+					  			for (var i = 0; i < this.slides.length; i++) {
+					  				_this.navWidth += parseInt(this.slides.eq(i).css('width'))
+					  			}
+
+					  		},
+					  	},
+					});
+				} 
+				if (!this.pageSwiper) {
+					_this.pageSwiper = new Swiper(this.$refs.page, {
+					  	watchSlidesProgress: true,
+					  	resistanceRatio: 0,
+					  	on: {
+					  		// touchMove: _this.touchMove,
+					  		// transitionStart: _this.transitionStart
+					  	}
+					});
+				}	
             })
-			this.maxLeft=this.$refs.content.offsetWidth-this.$refs.content.parentNode.offsetWidth;
+
+
+
+			
 		},
 		methods: {
-        	// 导航点击
 			tabClick(index,event) {
-				// this.$router.push({path: event.currentTarget.title,replace: true});
-				// this.changeActive();
 				this.tabIndex=index;
-				this.tabMove(index);
+				this.tabNavMove(index);
 			},
-			// 点击导航后，导航根据点击位置进行移动
-			tabMove(index){
-				var left=this.$refs.content.children[0].offsetWidth*index-this.$refs.content.parentNode.offsetWidth/2;
-				// console.log(left);
-				if (left<=0) {
-					left=0;	
-				} else if(left>=this.maxLeft){
-					left=this.maxLeft;
-				} 
-				this.scroll.scrollTo(-left, 0, 400);
+			tabNavMove: function (index) {
+				var navSwiper=this.navSwiper,
+				clientWidth=this.clientWidth,
+				navSlideWidth=this.navSlideWidth,
+				navWidth=this.navWidth;
+				var navActiveSlideLeft=navSwiper.slides[index].offsetLeft;
+				if (navActiveSlideLeft < (clientWidth - parseInt(navSlideWidth)) / 2) {
+	  				navSwiper.setTranslate(0)
+	  			} else if (navActiveSlideLeft > navWidth - (parseInt(navSlideWidth) + clientWidth) / 2) {
+	  				navSwiper.setTranslate(clientWidth - navWidth)
+	  			} else {
+	  				navSwiper.setTranslate((clientWidth - parseInt(navSlideWidth)) / 2 - navActiveSlideLeft)
+	  			}
 			},
-			// 初始化导航，默认都为非点击状态
-			initTab(){
-				this.tabItems.forEach(function (item) {
-					item.active=false;
-				})
-			},
-			// changeActive(){
-			// 	var pathname=window.location.pathname,
-			// 		patharr=pathname.split('/');
-			// 	this.initTab();
-		 //      	this.tabItems.forEach((item,index)=>{
-		 //      		var router=item.to;
-		 //      		if(index!=0&&pathname.indexOf(router)!=-1){
-		 //      			this.tabItems[index].active=true;
-		 //      		} else if(pathname.indexOf('aomen')!=-1){
-		 //      			this.scroll.scrollTo(-this.maxLeft, 0, 400);
-		 //      		} else if(patharr[patharr.length-1]==''){
-		 //      			this.tabItems[0].active=true;
-		 //      		}
-		 //      	})
-  	// 		},
-  			getStyle(ele,attr){
-				return parseFloat(ele.currentStyle?ele.currentStyle[attr]:getComputedStyle(ele)[attr]);
-			}
+				
+			
         },
         components: {
 			scrollX
@@ -128,39 +262,105 @@
 	}
 </script>
 <style lang='less'>
-	#scroller {
-	    position: absolute;
-	    z-index: 1;
-	    height: 40px;
-	    display: flex;
-	    color: #262626;
-    	font-size: 14PX;
+
+
+	html,body {
+		position:relative;
+		height:100%;
 	}
-	.navItem {
-	    padding: 10px 0;
-	    float: left;
-    	padding: 0 0.8em;
-	    line-height: 40px;
-	    text-align: center;
-	    position: relative;
-	    .text{
-	    	display: inline-block;
-	    	white-space: nowrap;
-	    	font-weight: normal;
-	    	height: 100%;
-	    	width: 100%;
-	    	position: relative;
-	    }
+	html {
+		overflow:hidden;
 	}
-	.navItem.active{
-		.text:after{
-			content: "";
-			position: absolute;
-			left: 0;
-			bottom: 0px;
-			height: 0;
-			width: 100%;
-			border-bottom: 2px solid #ff4891;
-		}
+	* {
+		padding:0;
+		margin:0;
 	}
+	li {
+		list-style:none;
+	}
+	body {
+		background:#fff;
+		font-family:Helvetica Neue,Helvetica,Arial,sans-serif;
+		font-size:12px;
+	}
+	.img img {
+		width:100%;
+		display:block;
+	}
+	#top {
+		position:absolute;
+		top:0;
+		z-index:5;
+		width:100%;
+		background:#fff;
+	}
+	#top .addr {
+		height:36px;
+		margin:0 auto;
+		display:block;
+	}
+	#top .search {
+		position:absolute;
+		top:0;
+		right:0;
+		height:36px;
+		display:block;
+	}
+	#nav {
+		border-bottom:1px solid #ebebeb;
+	}
+	#nav .swiper-slide span {
+		margin:0 5px;
+		text-align:center;
+		display:block;
+		line-height:2.5;
+		font-size:14px;
+		color:#333333;
+	}
+	#nav .bar {
+		width:50px;
+		height:3px;
+		position:absolute;
+		bottom:0px;
+	}
+	#nav .bar .color {
+		width:36px;
+		margin:0 auto;
+		height:3px;
+		background:#ff4891;
+	}
+	.banner img {
+		width:100%;
+		display:block;
+	}
+	.banner	.swiper-pagination {
+		left:auto;
+		right:7px;
+		bottom:7px;
+		width:auto;
+		padding:2px 7px;
+		border-radius:10px;
+		color:#fff;
+		background:rgba(0,0,0,.3);
+	}
+	#page {
+		margin-bottom:50px;
+		height:100%;
+	}
+	#page .slidepage {
+		height:100%;
+	}
+	.scroll {
+		height:100%;
+	}
+	.slidescroll {
+		height:auto;
+	}
+	#footer {
+		position:fixed;
+		bottom:0;
+		z-index:5;
+	}
+
+
 </style>

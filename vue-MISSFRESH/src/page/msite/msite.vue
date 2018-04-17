@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<tabbar></tabbar>
-		<div class="category-nav-wrap">
+		<!-- <div class="category-nav-wrap">
 			<mt-tabbar v-model="selected">  
 	            <mt-tab-item id="热卖">  
 	                热卖  
@@ -20,7 +20,7 @@
             <mt-tab-container-item id="火锅">  
                 <pot></pot>
             </mt-tab-container-item>   
-        </mt-tab-container>  
+        </mt-tab-container>   -->
 		<foot-guide></foot-guide>
 	</div>
 </template>

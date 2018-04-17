@@ -26,6 +26,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 - backgroundImage中url的使用
 - mint-ui的引入
+- swiper的使用
 
 
 
