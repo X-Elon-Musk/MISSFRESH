@@ -1,37 +1,11 @@
 <template>
-	<div>
+	<div class="tabbar">
         <div id="top">
         	<div class="addr"></div>
         	<div class="swiper-container" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
         			<div class="swiper-slide" v-for="(item,index) in tabSlide" @click="tabClick(index,$event)">
         				<span>{{item.text}}</span></div>
-    				<!-- <div class="swiper-slide">
-    					<span>水果</span></div>
-					<div class="swiper-slide">
-						<span>乳品</span></div>
-					<div class="swiper-slide">
-						<span>零食</span></div>
-					<div class="swiper-slide">
-						<span>肉蛋</span></div>
-					<div class="swiper-slide">
-						<span>蔬菜</span></div>
-					<div class="swiper-slide">
-						<span>酒饮</span></div>
-					<div class="swiper-slide">
-						<span>速食</span></div>
-					<div class="swiper-slide">
-						<span>熟食</span></div>
-					<div class="swiper-slide">
-						<span>水产</span></div>
-					<div class="swiper-slide">
-						<span>粮油</span></div>
-					<div class="swiper-slide">
-						<span>轻食</span></div>
-					<div class="swiper-slide">
-						<span>火锅</span></div>
-					<div class="swiper-slide">
-						<span>日百</span></div> -->
 					<div class="bar">
 						<div class="color"></div>
 					</div>
@@ -40,92 +14,92 @@
 		</div>
 <div class="swiper-container" id="page" ref="page">
   <div class="swiper-wrapper">
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+    <div class="swiper-slide slidepage" v-for="(item,index) in tabSlide">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide1</div>
+          <div class="swiper-slide slidescroll">{{item.text}}</div>
         </div>
       </div>
     </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+    <!-- <div class="swiper-slide slidepage">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide2</div>
         </div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide3</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide4</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide5</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide6</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide7</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide8</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide9</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide10</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide11</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide12</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide13</div></div>
       </div>
     </div>
     <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll">
+      <div class="swiper-container scroll" ref="scroll">
         <div class="swiper-wrapper">
           <div class="swiper-slide slidescroll">slide14</div></div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 <div class="img" id="footer"><img src="images/footer.png"></div>
@@ -223,34 +197,48 @@
 					  	watchSlidesProgress: true,
 					  	resistanceRatio: 0,
 					  	on: {
-					  		// touchMove: _this.touchMove,
-					  		// transitionStart: _this.transitionStart
+					  		transitionStart: function () {
+					  			var index=this.activeIndex;
+					  			_this.slideMove(index);
+					  		}
+					  			
 					  	}
+					});
+				}
+				if (!this.scrollSwiper) {
+					_this.scrollSwiper = new Swiper('.scroll', {
+					  	slidesOffsetBefore: 77,
+					  	direction: 'vertical',
+					  	freeMode: true,
+					  	slidesPerView: 'auto',
+
+					  	mousewheel: {
+					  		releaseOnEdges: true,
+					  	},
 					});
 				}	
             })
-
-
-
-			
 		},
 		methods: {
 			tabClick(index,event) {
 				this.tabIndex=index;
-				this.tabNavMove(index);
+				//tab导航移动
+				this.slideMove(index);
+				//对应的内容显示
+				this.pageSwiper.slideTo(index, 0);
 			},
-			tabNavMove: function (index) {
+			slideMove: function (index) {
 				var navSwiper=this.navSwiper,
 				clientWidth=this.clientWidth,
 				navSlideWidth=this.navSlideWidth,
 				navWidth=this.navWidth;
 				var navActiveSlideLeft=navSwiper.slides[index].offsetLeft;
-				if (navActiveSlideLeft < (clientWidth - parseInt(navSlideWidth)) / 2) {
+				if (navActiveSlideLeft < (clientWidth-parseInt(navSlideWidth))/2) {
 	  				navSwiper.setTranslate(0)
-	  			} else if (navActiveSlideLeft > navWidth - (parseInt(navSlideWidth) + clientWidth) / 2) {
-	  				navSwiper.setTranslate(clientWidth - navWidth)
+	  			} else if (navActiveSlideLeft > navWidth-(parseInt(navSlideWidth) + clientWidth)/2) {
+	  				navSwiper.setTranslate(clientWidth-navWidth)
 	  			} else {
-	  				navSwiper.setTranslate((clientWidth - parseInt(navSlideWidth)) / 2 - navActiveSlideLeft)
+	  				navSwiper.setTranslate((clientWidth-parseInt(navSlideWidth))/2-navActiveSlideLeft)
 	  			}
 			},
 				
@@ -271,6 +259,7 @@
 	html {
 		overflow:hidden;
 	}
+
 	* {
 		padding:0;
 		margin:0;
@@ -286,6 +275,10 @@
 	.img img {
 		width:100%;
 		display:block;
+	}
+	.tabbar{
+		width: 100%;
+		height: 100%;
 	}
 	#top {
 		position:absolute;
@@ -308,12 +301,14 @@
 	}
 	#nav {
 		border-bottom:1px solid #ebebeb;
+		height: 40px;
 	}
 	#nav .swiper-slide span {
 		margin:0 5px;
 		text-align:center;
 		display:block;
-		line-height:2.5;
+		/*line-height:2.5;*/
+		line-height: 40px;
 		font-size:14px;
 		color:#333333;
 	}
@@ -355,6 +350,7 @@
 	}
 	.slidescroll {
 		height:auto;
+		/*padding-top: 77px;*/
 	}
 	#footer {
 		position:fixed;

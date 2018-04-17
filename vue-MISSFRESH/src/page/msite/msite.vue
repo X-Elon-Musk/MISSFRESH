@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div style="height: 100%;">
 		<tabbar></tabbar>
 		<!-- <div class="category-nav-wrap">
 			<mt-tabbar v-model="selected">  
