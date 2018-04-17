@@ -5,6 +5,9 @@ import routes from './router/router'
 
 import FastClick from 'fastclick'
 
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {
         FastClick.attach(document.body);
@@ -14,6 +17,7 @@ if ('addEventListener' in document) {
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
+Vue.use(MintUI)
 const router = new VueRouter({
 	routes,
 	mode: 'hash',
