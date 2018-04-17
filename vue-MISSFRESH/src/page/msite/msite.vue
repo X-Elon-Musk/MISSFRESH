@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<tabbar></tabbar>
 		<div class="category-nav-wrap">
 			<mt-tabbar v-model="selected">  
 	            <mt-tab-item id="热卖">  
@@ -25,6 +26,7 @@
 </template>
 <script>
 	import footGuide from 'src/components/footer/footGuide'
+	import tabbar from 'src/components/tabbar/tabbar'
 	import hot from 'src/page/msite/children/hot'
 	import pot from 'src/page/msite/children/pot'
 	export default{
@@ -35,6 +37,7 @@
 		},
 		components: {
 	    	footGuide,
+	    	tabbar,
 	    	hot,
 	    	pot
 	    }
