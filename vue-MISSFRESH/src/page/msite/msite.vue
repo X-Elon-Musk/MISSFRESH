@@ -1,5 +1,5 @@
 <template>
-	<div style="height: 100%;">
+	<div class="full">
 		<tabbar></tabbar>
 		<!-- <div class="category-nav-wrap">
 			<mt-tabbar v-model="selected">  
@@ -43,7 +43,8 @@
 	    }
 	}
 </script>
-<style lang='less'>
+<style lang='less' scoped rel="stylesheet/less">
+	@import '~src/style/mixin';
 	.category-nav-wrap{
 		position: fixed;
 		top: 2em;

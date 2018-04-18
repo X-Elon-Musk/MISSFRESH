@@ -12,97 +12,28 @@
 				</div>
 			</div>
 		</div>
-<div class="swiper-container" id="page" ref="page">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide slidepage" v-for="(item,index) in tabSlide">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">{{item.text}}</div>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide2</div>
-        </div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide3</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide4</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide5</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide6</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide7</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide8</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide9</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide10</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide11</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide12</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide13</div></div>
-      </div>
-    </div>
-    <div class="swiper-slide slidepage">
-      <div class="swiper-container scroll" ref="scroll">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slidescroll">slide14</div></div>
-      </div>
-    </div> -->
-  </div>
-</div>
-<div class="img" id="footer"><img src="images/footer.png"></div>
+		<div class="swiper-container" id="page" ref="page">
+		  	<div class="swiper-wrapper">
+
+			    <div class="swiper-slide slidepage" v-for="(item,index) in tabSlide">
+			      	<div class="swiper-container scroll" ref="scroll">
+				        <div class="swiper-wrapper">
+				          	<div class="swiper-slide slidescroll">
+								{{item.text}}
+				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="../../images/fresh-news/0.jpg">
+				          		<!-- <img src="../../images/fresh-news/0.jpg">
+				          		<img src="../../images/fresh-news/0.jpg">
+				          		<img src="../../images/fresh-news/0.jpg">
+				          		<img src="../../images/fresh-news/0.jpg"> -->
+				      		</div>
+				        </div>
+			      	</div>
+			    </div>
+
+		  	</div>
+		</div>
+		<!-- <div class="img" id="footer"><img src="../../images/fresh-news/0.jpg"></div> -->
 	</div>
 </template>
 <script>
@@ -181,10 +112,10 @@
 								//导航字数需要统一,每个导航宽度一致
 					  			_this.navSlideWidth = this.slides.eq(0).css('width'); 
 					  			//最后一个slide的位置
-					  			_this.navSum = this.slides[this.slides.length - 1].offsetLeft 
+					  			_this.navSum = this.slides[this.slides.length - 1].offsetLeft;
 					  			//Nav的可视宽度
-					  			_this.clientWidth = parseInt(this.$wrapperEl.css('width')) 
-					  			_this.navWidth = 0
+					  			_this.clientWidth = parseInt(this.$wrapperEl.css('width'));
+					  			_this.navWidth = 0;
 					  			for (var i = 0; i < this.slides.length; i++) {
 					  				_this.navWidth += parseInt(this.slides.eq(i).css('width'))
 					  			}

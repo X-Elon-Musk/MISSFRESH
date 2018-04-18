@@ -1,5 +1,5 @@
 <template>
-	<div style="height: 100%;">
+	<div class="full">
 		<transition name="router-fade" mode="out-in">
 			<keep-alive>
 			    <router-view v-if="$route.meta.keepAlive"></router-view>
@@ -21,6 +21,7 @@
 </script>
 <style>
 	@import './style/common';
+	@import './style/mixin';
 	#app{
 		/*margin-top: 60px;*/
 	}
