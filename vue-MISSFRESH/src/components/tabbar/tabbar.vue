@@ -29,11 +29,8 @@
 								<guarantee></guarantee>
 								<card></card>
 								<!-- 上滑加载、下拉刷新 -->
-								
-								
-								
-								<div class="clearfix list-group-item ticket-item" v-for="item in goods">
-									{{item.text}}
+								<div class="clearfix list-group-item ticket-item" v-for="item in products">
+									<product :product="item"></product>
 								</div>
 								<div class="swiper-scrollbar"></div>
 
@@ -187,6 +184,7 @@
     import carousel from 'src/components/carousel/carousel'
     import guarantee from 'src/components/guarantee/guarantee'
     import card from 'src/components/tabbar/children/card'
+    import product from 'src/components/product/product'
 
 	export default{
 		data(){
@@ -242,48 +240,66 @@
 						text: '明日',
 					}
 				],
-				goods: [
+				products: [
 					{
-						text: '1111'
+						hot: 0,
+						img: '',
+						name: '月盛斋羔羊肉片300g',
+						point: '预计11月26日后兑换兑换券',
+						preferential: [
+							'限每人1份',
+							'进口检验合格'
+						],
+						price: 29.9,
+						vip: 19.9
 					},
 					{
-						text: '1111'
+						hot: 1,
+						img: '',
+						name: '月盛斋羔羊肉片300g',
+						point: '预计11月26日后兑换兑换券',
+						preferential: [
+							'限每人1份',
+							'进口检验合格'
+						],
+						price: 29.9,
+						vip: 19.9
 					},
 					{
-						text: '1111'
+						hot: 3,
+						img: '',
+						name: '月盛斋羔羊肉片300g',
+						point: '预计11月26日后兑换兑换券',
+						preferential: [
+							'限每人1份',
+							'进口检验合格'
+						],
+						price: 29.9,
+						vip: 19.9
 					},
 					{
-						text: '1111'
+						hot: 2,
+						img: '',
+						name: '月盛斋羔羊肉片300g',
+						point: '预计11月26日后兑换兑换券',
+						preferential: [
+							'限每人1份',
+							'进口检验合格'
+						],
+						price: 29.9,
+						vip: 19.9
 					},
 					{
-						text: '1111'
-					},
-					{
-						text: '1111'
-					},
-					{
-						text: '1111'
-					},
-					{
-						text: '1111'
-					},
-					{
-						text: '1111'
-					},
-					{
-						text: '1111'
-					},
-					{
-						text: '1111'
-					},
-					{
-						text: '1111'
-					},
-					{
-						text: '1111'
-					},
-					{
-						text: '1111'
+						hot: 3,
+						img: '',
+						name: '月盛斋羔羊肉片300g',
+						point: '预计11月26日后兑换兑换券',
+						preferential: [
+							'限每人1份',
+							'进口检验合格'
+						],
+						price: 29.9,
+						vip: 19.9
 					}
 				],
 				loadFlag: true,
@@ -387,7 +403,8 @@
 				pullRefresh=this.pullRefresh;
 				var viewHeight=pullRefresh.$wrapperEl[0].offsetHeight,
 				contentHeight=pullRefresh.slides[0].offsetHeight;
-				if(pullRefresh.translate<=viewHeight-contentHeight-50&&pullRefresh.translate<0) {
+				// console.log(viewHeight-contentHeight+300);
+				if(pullRefresh.translate<=viewHeight-contentHeight+300&&pullRefresh.translate<0) {
 	            	setTimeout(function() {
 	            		for(var i = 0; i <2; i++) {
 	                		_this.num++;
@@ -396,9 +413,9 @@
 		                	div.innerHTML = _this.num;
 		                	_this.$refs.listGroup.appendChild(div)
 		                }
-		                console.log(pullRefresh.translate);
+		                // console.log(pullRefresh.translate);
 	                    pullRefresh.update(); // 重新计算高度;
-	                }, 800);
+	                }, 300);
 	            }
 	            
 	            // 下拉刷新
@@ -410,13 +427,12 @@
 	            }
 	            return false;
 	        }
-					
-			
         },
         components: {
 			carousel,
 			guarantee,
-			card
+			card,
+			product
 		},
 	}
 </script>
@@ -505,31 +521,20 @@
 		margin-top: -43px;
 		margin-bottom: 53px;
 	}
-	// .pull-refresh .loadtip { display: block;width: 100%;line-height: 40px; height: 40px;text-align: center;color: #999;border-top: 1px solid #ddd;}
-	// .pull-refresh .loadtip{
-	// 	position: absolute;
-	// 	left: 0;
-	// 	bottom: 0;
-	// }
 	.swiper-container.pull-refresh{
 		width: 100%;
 		height: 100%;
-		// position: fixed;
-		// left: 0;
-		// top: 0;
-		// bottom: 0;
 	}
-	// .pull-refresh .swiper-slide{height: auto;}
-	// .pull-refresh .list-group{padding-left: 0;margin-bottom: 20px;}
-	.pull-refresh .list-group-item{    position: relative; display: block;padding: 10px 15px;margin-bottom: -1px;background-color: #fff;border: 1px solid #ddd;}
-	// .pull-refresh .list-group-item:first-child {border-top-left-radius: 4px;border-top-right-radius: 4px;}
-	// .pull-refresh .list-group{
-	// 	margin-top: -43px;
-	// }
-	// .swiper-container .carousel{
-	// 	padding: 0;
-	// 	border: none;
-	// }
+	.pull-refresh .list-group-item{    
+		position: relative; 
+		display: block;
+		/*padding: 10px 15px;*/
+		padding: 10px 2%;
+		margin-bottom: -1px;
+		background-color: #fff;
+		box-sizing: border-box;
+		/*border: 1px solid #ddd;*/
+	}
 	.pull-refresh .refresh-gif{
 		text-align: center;
 		padding: 0;
@@ -547,7 +552,6 @@
 
 	/*票*/
 	.ticket-item{
-		// height: 90px;
 		padding: 9px 2%;
 		box-sizing: border-box;
 	}

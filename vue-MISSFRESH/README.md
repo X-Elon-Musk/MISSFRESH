@@ -33,6 +33,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - mint-ui的引入
 - swiper的使用
 - @impot引入less问题
+
     ```
     <style lang='less' scoped rel="stylesheet/less">
         @import 'src/style/mixin'(报错)
@@ -41,6 +42,15 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
     </style>
     ```
 
+-报错：`Cannot use v-for on stateful component root element because it renders multiple elements.`
+ 原因：
 
+    ```
+        <template>
+            <div class="product" v-for="product in products">
+            ···
+            </div> 
+        </template>
+    ```
 
 
