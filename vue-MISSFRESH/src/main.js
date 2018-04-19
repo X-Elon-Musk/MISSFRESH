@@ -5,6 +5,9 @@ import routes from './router/router'
 
 import FastClick from 'fastclick'
 
+// import 'swiper/dist/css/swiper.min.css';
+// import Swiper from "swiper";
+
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 
@@ -18,6 +21,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueRouter)
 Vue.use(MintUI)
+// Vue.use(Swiper)
 const router = new VueRouter({
 	routes,
 	mode: 'hash',

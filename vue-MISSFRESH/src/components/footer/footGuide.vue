@@ -25,14 +25,14 @@
 		data(){
 			return {
 				backgroundImage:{
-					home: require('src/images/home.png'),
-					newvp: require('src/images/newvp.png'),
-					cart: require('src/images/cart.png'),
-					mine: require('src/images/mine.png'),
-					homeActive: require('src/images/home-active.png'),
-					newvpActive: require('src/images/newvp-active.png'),
-					cartActive: require('src/images/cart-active.png'),
-					mineActive: require('src/images/mine-active.png')
+					home: require('images/icon/home.png'),
+					newvp: require('images/icon/newvp.png'),
+					cart: require('images/icon/cart.png'),
+					mine: require('images/icon/mine.png'),
+					homeActive: require('images/icon/home-active.png'),
+					newvpActive: require('images/icon/newvp-active.png'),
+					cartActive: require('images/icon/cart-active.png'),
+					mineActive: require('images/icon/mine-active.png')
 				}
 			}
 		},

@@ -15,33 +15,48 @@
 		<div class="swiper-container" id="page" ref="page">
 		  	<div class="swiper-wrapper">
 
-
+			    <!-- <div class="swiper-slide slidepage"> -->
 			      	<div class="swiper-slide slidepage swiper-container scroll pull-refresh" ref="refresh">
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll list-group" ref="listGroup">
 								
-
-								<div class="list-group-item refresh-gif">
-									<span></span>
-								</div>
 								<!-- 内容部分 -->
-								<carousel></carousel>
-								<guarantee></guarantee>
-								<card></card>
 								<!-- 上滑加载、下拉刷新 -->
-								
-								
-								
-								<div class="clearfix list-group-item ticket-item" v-for="item in goods">
-									{{item.text}}
-								</div>
-								<div class="swiper-scrollbar"></div>
+								<!-- <div class="swiper-container pull-refresh">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide"> -->
+											<!-- <div class="swiper-slide"> -->
+												<div class="list-group-item refresh-gif">
+													<span></span>
+												</div>
+												
+												<div class="clearfix list-group-item ticket-item" v-for="item in goods">
+													{{item.text}}
+												</div>
+												
+
+
+
+
+											<!-- </div> -->
+											
+										<!-- </div>
+									</div> -->
+									
+									<!-- <div class="loadtip">上拉加载更多</div> -->
+									<div class="swiper-scrollbar"></div>
+								<!-- </div> -->
+
+
+								<!-- <carousel></carousel>
+								<guarantee></guarantee>
+								<card></card> -->
 
 
 				      		</div>
 				        </div>
 			      	</div>
-
+			    <!-- </div> -->
 			    <div class="swiper-slide slidepage">
 			      	<div class="swiper-container scroll" ref="scroll">
 				        <div class="swiper-wrapper">
@@ -295,6 +310,17 @@
 			this.$nextTick(() => {
 				if (!this.navSwiper) this.tab();
 				if (!this.pageSwiper) this.page();
+				// if (!this.scrollSwiper) {
+				// 	_this.scrollSwiper = new Swiper('.scroll', {
+				// 	  	slidesOffsetBefore: 77,
+				// 	  	direction: 'vertical',
+				// 	  	freeMode: true,
+				// 	  	slidesPerView: 'auto',
+				// 		mousewheel: {
+				// 	  		releaseOnEdges: true,
+				// 	  	},
+				// 	});
+				// }	
 				if (!this.pullRefresh) this.refresh();
             })
 		},
@@ -347,6 +373,7 @@
 				this.slideMove(index);
 				//对应的内容显示
 				this.pageSwiper.slideTo(index, 0);
+				// console.log(this.pullRefresh);
 			},
 			slideMove: function (index) {
 				var navSwiper=this.navSwiper,
@@ -364,6 +391,7 @@
 			},
 			refresh: function () {
 				var _this=this;
+				// _this.pullRefresh=null;
 				this.pullRefresh= new Swiper('.pull-refresh',{
 					slidesOffsetBefore: 77,
 					direction: 'vertical',
@@ -376,6 +404,7 @@
 					on: {
 						// 触摸释放时执行
 						touchEnd: function(swiper) {
+							// console.log('加载');
 							_this.touchEnd();
 				        }
 					}
@@ -383,11 +412,24 @@
 			    });		
 			},
 			touchEnd: function () {
+				// console.log(1111);
 				var _this=this,
 				pullRefresh=this.pullRefresh;
+				// console.log(pullRefresh);
+				// console.log(pullRefresh);
+				// var viewHeight = document.getElementsByClassName('swiper-wrapper')[0].offsetHeight;
+				// var contentHeight = document.getElementsByClassName('swiper-slide')[0].offsetHeight;
 				var viewHeight=pullRefresh.$wrapperEl[0].offsetHeight,
 				contentHeight=pullRefresh.slides[0].offsetHeight;
-				if(pullRefresh.translate<=viewHeight-contentHeight-50&&pullRefresh.translate<0) {
+				// console.log(pullRefresh.translate,viewHeight-contentHeight-50,pullRefresh.translate<0);
+	            // 上拉加载
+	            if(pullRefresh.translate<=viewHeight-contentHeight-50&&pullRefresh.translate<0) {
+	            	// if(loadFlag){
+	            	// 	$(".loadtip").html('正在加载...');
+	            	// }else{
+	            	// 	$(".loadtip").html('没有更多啦！');
+	            	// }
+
 	            	setTimeout(function() {
 	            		for(var i = 0; i <2; i++) {
 	                		_this.num++;
@@ -403,8 +445,12 @@
 	            
 	            // 下拉刷新
 	            if(pullRefresh.translate >= 50) {
+	            	// $(".loadtip").html('上拉加载更多');
+	            	// loadFlag = true;
+
 	            	setTimeout(function() {
-	            		//刷新操作
+	            		// $(".loadtip").show(0);
+	                    //刷新操作
 	                    pullRefresh.update(); // 重新计算高度;
 	                }, 1000);
 	            }
