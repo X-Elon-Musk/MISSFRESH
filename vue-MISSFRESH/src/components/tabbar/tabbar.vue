@@ -20,7 +20,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll list-group" ref="listGroup">
 								
-
+								<!-- 刷新GIF -->
 								<div class="list-group-item refresh-gif">
 									<span></span>
 								</div>
