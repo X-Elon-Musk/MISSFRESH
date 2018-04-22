@@ -15,29 +15,29 @@
 		<div class="swiper-container" id="page" ref="page">
 		  	<div class="swiper-wrapper">
 
+				<!-- nav对应页面 -->
+		      	<div class="swiper-slide slidepage swiper-container scroll pull-refresh" ref="refresh">
+			        <div class="swiper-wrapper">
+			          	<div class="swiper-slide slidescroll list-group" ref="listGroup">
+							
+							<!-- 刷新GIF -->
+							<div class="list-group-item refresh-gif">
+								<span></span>
+							</div>
+							<!-- 内容部分 -->
+							<carousel></carousel>
+							<guarantee></guarantee>
+							<card></card>
+							<!-- 上滑加载、下拉刷新 -->
+							<div class="clearfix list-group-item ticket-item" v-for="item in products">
+								<product :product="item"></product>
+							</div>
+							<div class="swiper-scrollbar"></div>
 
-			      	<div class="swiper-slide slidepage swiper-container scroll pull-refresh" ref="refresh">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll list-group" ref="listGroup">
-								
-								<!-- 刷新GIF -->
-								<div class="list-group-item refresh-gif">
-									<span></span>
-								</div>
-								<!-- 内容部分 -->
-								<carousel></carousel>
-								<guarantee></guarantee>
-								<card></card>
-								<!-- 上滑加载、下拉刷新 -->
-								<div class="clearfix list-group-item ticket-item" v-for="item in products">
-									<product :product="item"></product>
-								</div>
-								<div class="swiper-scrollbar"></div>
 
-
-				      		</div>
-				        </div>
-			      	</div>
+			      		</div>
+			        </div>
+		      	</div>
 
 			    <div class="swiper-slide slidepage">
 			      	<div class="swiper-container scroll" ref="scroll">
