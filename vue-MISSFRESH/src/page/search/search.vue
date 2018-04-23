@@ -6,7 +6,7 @@
 				<img src="~images/vip.png">
 			</div>
 		</div>
-		<!-- <Icons></Icons> -->
+		<icons></icons>
 		<div class="vip-calculator">
 			<div class="calculator-content">
 				<div class="calculator-header">
@@ -57,6 +57,7 @@
 </template>
 <script>
 	import footGuide from 'src/components/footer/footGuide'
+	import icons from './children/icons'
 	export default{
 		data(){
 			return {
@@ -64,7 +65,8 @@
 			}
 		},
 		components:{
-	        footGuide
+	        footGuide,
+	        icons
 	    },
 	}
 </script>
@@ -75,6 +77,7 @@
 	/*会员页面*/
 	.member{
 		width: 100%;
+		height: 2000px;
 		padding-bottom: 47px;
 		.vip-card{
 			width: 100%;
@@ -195,5 +198,9 @@
 			}
 			
 		}
+	}
+	.member ::-webkit-scrollbar {
+	    width: 0;
+	    height: 0;
 	}
 </style>
