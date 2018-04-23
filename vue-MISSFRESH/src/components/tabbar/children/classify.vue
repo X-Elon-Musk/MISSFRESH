@@ -5,8 +5,8 @@
             <span class="close-icon" @click="closeButton"></span>
         </div>
         <ul class="clearfix classify-icons">
-            <li><span></span><h4>热卖</h4></li>
-            <li><span></span><h4>抢30元红包</h4></li>
+            <li v-for="(item,index) in tabSlide" @click="iconClick(index)"><span></span><h4>{{item.text}}</h4></li>
+            <!-- <li><span></span><h4>抢30元红包</h4></li>
             <li><span></span><h4>水果</h4></li>
             <li><span></span><h4>蔬菜</h4></li>
             <li><span></span><h4>乳品</h4></li>
@@ -19,7 +19,7 @@
             <li><span></span><h4>粮油</h4></li>
             <li><span></span><h4>轻食</h4></li>
             <li><span></span><h4>日百</h4></li>
-            <li><span></span><h4>明日早餐</h4></li>
+            <li><span></span><h4>明日早餐</h4></li> -->
         </ul>
     </div>
 	
@@ -32,10 +32,17 @@
 				
 			}
 		},
+        props: ['tabSlide'],
         methods: {
             closeButton: function () {
-                this.$emit("close");
-            }    
+                this.$emit("closeClassify");
+            },
+            iconClick: function (index) {
+                console.log(index);
+                this.closeButton();
+                this.$emit("tabMove",index);
+            }
+                   
         }
 	}
 </script>

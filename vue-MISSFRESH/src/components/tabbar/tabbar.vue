@@ -14,7 +14,7 @@
 			<div class="ellipsis-icon" @click="showClassify"></div>
 		</div>
 		<!-- 分类 -->
-		<classify v-show="classifyState" v-on:close="closeClassify"></classify>
+		<classify v-show="classifyState" :tabSlide="tabSlide" v-on:closeClassify="closeClassify"  v-on:tabMove="tabMove"></classify>
 		<div class="swiper-container" id="page" ref="page">
 		  	<div class="swiper-wrapper">
 
@@ -442,7 +442,12 @@
 	        },
 	        closeClassify: function () {
 	        	this.classifyState=false;
-	        }	
+	        },
+	        //导航移动、导航对应的page显示
+	        tabMove: function (index) {
+	        	this.tabClick(index);
+	        }
+	        	
         },
         components: {
 			carousel,
