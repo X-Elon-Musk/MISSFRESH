@@ -1,5 +1,4 @@
 <template>
-	<!-- <div class="full"> -->
 	<div>
 		<transition name="router-fade" mode="out-in">
 			<keep-alive>
@@ -23,7 +22,4 @@
 <style>
 	@import './style/common';
 	@import './style/mixin';
-	#app{
-		/*margin-top: 60px;*/
-	}
 </style>

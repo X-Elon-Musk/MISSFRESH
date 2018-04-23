@@ -11,7 +11,10 @@
 					</div> -->
 				</div>
 			</div>
+			<div class="ellipsis-icon" @click="showClassify"></div>
 		</div>
+		<!-- 分类 -->
+		<classify v-show="classifyState" v-on:close="closeClassify"></classify>
 		<div class="swiper-container" id="page" ref="page">
 		  	<div class="swiper-wrapper">
 
@@ -183,8 +186,9 @@
 
     import carousel from 'src/components/carousel/carousel'
     import guarantee from 'src/components/guarantee/guarantee'
-    import card from 'src/components/tabbar/children/card'
+    import card from './children/card'
     import product from 'src/components/product/product'
+    import classify from './children/classify'
 
 	export default{
 		data(){
@@ -303,7 +307,8 @@
 					}
 				],
 				loadFlag: true,
-				num: 0
+				num: 0,
+				classifyState: false
 			}
 		},
 		mounted (){
@@ -356,7 +361,7 @@
 				  	}
 				});
 			},
-				
+			//点击导航	
 			tabClick: function(index,event) {
 				this.tabIndex=index;
 				//tab导航移动
@@ -364,6 +369,7 @@
 				//对应的内容显示
 				this.pageSwiper.slideTo(index, 0);
 			},
+			//导航移动
 			slideMove: function (index) {
 				var navSwiper=this.navSwiper,
 				clientWidth=this.clientWidth,
@@ -378,6 +384,7 @@
 	  				navSwiper.setTranslate((clientWidth-parseInt(navSlideWidth))/2-navActiveSlideLeft)
 	  			}
 			},
+			//下拉刷新、上滑加载初始化函数
 			refresh: function () {
 				var _this=this;
 				this.pullRefresh= new Swiper('.pull-refresh',{
@@ -398,12 +405,14 @@
 					
 			    });		
 			},
+			// 下拉刷新、上滑加载动作触摸释放时执行
 			touchEnd: function () {
 				var _this=this,
 				pullRefresh=this.pullRefresh;
 				var viewHeight=pullRefresh.$wrapperEl[0].offsetHeight,
 				contentHeight=pullRefresh.slides[0].offsetHeight;
 				// console.log(viewHeight-contentHeight+300);
+				//上滑加载
 				if(pullRefresh.translate<=viewHeight-contentHeight+300&&pullRefresh.translate<0) {
 	            	setTimeout(function() {
 	            		for(var i = 0; i <2; i++) {
@@ -426,13 +435,21 @@
 	                }, 1000);
 	            }
 	            return false;
-	        }
+	        },
+	        //分类切换显示状态
+	        showClassify: function () {
+	        	this.classifyState=true;
+	        },
+	        closeClassify: function () {
+	        	this.classifyState=false;
+	        }	
         },
         components: {
 			carousel,
 			guarantee,
 			card,
-			product
+			product,
+			classify
 		},
 	}
 </script>
@@ -489,6 +506,16 @@
 					border-bottom: 2px solid #ff4891;
 				}
 			}
+		}
+		.ellipsis-icon{
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 40px;
+			height: 40px;
+		    background: #fff url(~images/icon/ellipsis.png) no-repeat center center;
+		    background-size: 1.375rem;
+		    z-index: 15;
 		}
 	}
 	
