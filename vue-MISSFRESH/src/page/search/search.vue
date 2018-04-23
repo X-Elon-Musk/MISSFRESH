@@ -69,6 +69,9 @@
 	}
 </script>
 <style lang="less">
+	// .full{
+	// 	height: auto;
+	// }
 	/*会员页面*/
 	.member{
 		width: 100%;
