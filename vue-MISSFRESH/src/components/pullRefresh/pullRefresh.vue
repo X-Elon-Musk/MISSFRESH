@@ -4,7 +4,7 @@
           	<div class="swiper-slide slidescroll list-group" ref="listGroup">
 				
 				<!-- 刷新GIF -->
-				<div class="list-group-item refresh-gif">
+				<div class="list-group-item refresh-gif" v-show="gif">
 					<span></span>
 				</div>
 				<!-- 插槽 -->
@@ -31,10 +31,12 @@
 				translate: 0
 			}
 		},
-		props: ['tabIndex'],
+		props: ['tabIndex','gif'],
 		mounted (){
+			console.log(this.pullRefresh);
 			this.$nextTick(() => {
 				if (!this.pullRefresh) this.refresh();
+				// console.log(typeof this.pullRefresh);
             })
 		},
 		methods: {
@@ -42,7 +44,7 @@
 			refresh: function () {
 				var _this=this;
 				this.pullRefresh= new Swiper('.scroll',{
-					slidesOffsetBefore: 34,
+					slidesOffsetBefore: _this.gif?34:0,
 					direction: 'vertical',
 					scrollbar: '.swiper-scrollbar',
 					slidesPerView: 'auto',
@@ -66,17 +68,28 @@
 			// 下拉刷新、上滑加载动作触摸释放时执行
 			touchEnd: function () {
 				var _this=this;
+				console.log(this.translate,this.startPosition);
 				if (this.translate<this.startPosition) {
 	                setTimeout(function() {
 	                	//发送ajax请求
 	                	_this.$emit('getData');
-
+	                	console.log(_this.pullRefresh,_this.isArray(_this.pullRefresh));
 	                  	// 重新计算高度;
-	                  	_this.pullRefresh[_this.tabIndex].update(); 
+	                  	if (_this.isArray(_this.pullRefresh)) {
+	                  		_this.pullRefresh[_this.tabIndex].update(); 		
+	                  	} else{
+	                  		console.log('刷新');
+	                  		_this.pullRefresh.update(); 
+	                  	}
 	                }, 300);
 	        	}
 	            return false;
 	        },
+
+	        isArray: function (obj) {
+	        	return Object.prototype.toString.call(obj)=='[object Array]';
+	        }
+	        	
 		}
 	}
 </script>

@@ -21,7 +21,7 @@
 				<!-- nav对应页面 -->
 		      	<div class="swiper-slide slidepage swiper-container">
 
-		      		<pullRefresh :tabIndex="tabIndex" @getData="getData">
+		      		<pullRefresh :tabIndex="tabIndex" @getData="getData" :gif="true">
 		      			<!-- 内容部分 -->
 						<carousel></carousel>
 						<guarantee></guarantee>
@@ -36,7 +36,7 @@
 		      	</div>
 
 			    <div class="swiper-slide slidepage swiper-container">
-			        <pullRefresh :tabIndex="tabIndex" @getData="getData">
+			        <pullRefresh :tabIndex="tabIndex" @getData="getData" :gif="true">
 		      			<!-- 内容部分 -->
 						<carousel></carousel>
 						<guarantee></guarantee>
