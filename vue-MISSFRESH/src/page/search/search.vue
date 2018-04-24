@@ -114,7 +114,7 @@
 						vip: 19.9
 					});
               	}
-              	console.log(this.products.length);
+              	// console.log(this.products.length);
 			}	
 		},
 		components:{
@@ -133,15 +133,7 @@
 		top: 0;
 		bottom: 0;
 		width: 100%;
-		// height: 2000px;
 		height: 100%;
-		// padding-bottom: 43px;
-		// margin-top: -77px;
-		// .content{
-		// 	width: 100%;
-		// 	height: 100%;
-		// 	margin-top: -77px;
-		// }
 		.vip-card{
 			width: 100%;
 			.card-bg{
