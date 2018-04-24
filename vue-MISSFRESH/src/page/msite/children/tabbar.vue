@@ -32,7 +32,7 @@
 							<guarantee></guarantee>
 							<card></card>
 							<!-- 上滑加载、下拉刷新 -->
-							<div class="clearfix list-group-item ticket-item" v-for="item in products">
+							<div class="clearfix list-group-item ticket-item" v-for="item in products[0]">
 								<product :product="item"></product>
 							</div>
 							<div class="swiper-scrollbar"></div>
@@ -51,6 +51,10 @@
 							</div>
 							<!-- 内容部分 -->
 							<!-- <carousel></carousel> -->
+							<!-- 上滑加载、下拉刷新 -->
+							<div class="clearfix list-group-item ticket-item" v-for="item in products[1]">
+								<product :product="item"></product>
+							</div>
 			      		</div>
 			        </div>
 			    </div>
@@ -254,72 +258,80 @@
 					}
 				],
 				products: [
-					{
-						hot: 0,
-						img: '',
-						name: '月盛斋羔羊肉片300g',
-						point: '预计11月26日后兑换兑换券',
-						preferential: [
-							'限每人1份',
-							'进口检验合格'
-						],
-						price: 29.9,
-						vip: 19.9
-					},
-					{
-						hot: 1,
-						img: '',
-						name: '月盛斋羔羊肉片300g',
-						point: '预计11月26日后兑换兑换券',
-						preferential: [
-							'限每人1份',
-							'进口检验合格'
-						],
-						price: 29.9,
-						vip: 19.9
-					},
-					{
-						hot: 3,
-						img: '',
-						name: '月盛斋羔羊肉片300g',
-						point: '预计11月26日后兑换兑换券',
-						preferential: [
-							'限每人1份',
-							'进口检验合格'
-						],
-						price: 29.9,
-						vip: 19.9
-					},
-					{
-						hot: 2,
-						img: '',
-						name: '月盛斋羔羊肉片300g',
-						point: '预计11月26日后兑换兑换券',
-						preferential: [
-							'限每人1份',
-							'进口检验合格'
-						],
-						price: 29.9,
-						vip: 19.9
-					},
-					{
-						hot: 3,
-						img: '',
-						name: '月盛斋羔羊肉片300g',
-						point: '预计11月26日后兑换兑换券',
-						preferential: [
-							'限每人1份',
-							'进口检验合格'
-						],
-						price: 29.9,
-						vip: 19.9
-					}
+					[
+						{
+							hot: 0,
+							img: '',
+							name: '11111月盛斋羔羊肉片300g',
+							point: '预计11月26日后兑换兑换券',
+							preferential: [
+								'限每人1份',
+								'进口检验合格'
+							],
+							price: 29.9,
+							vip: 19.9
+						},
+						{
+							hot: 1,
+							img: '',
+							name: '11111月盛斋羔羊肉片300g',
+							point: '预计11月26日后兑换兑换券',
+							preferential: [
+								'限每人1份',
+								'进口检验合格'
+							],
+							price: 29.9,
+							vip: 19.9
+						},
+						{
+							hot: 3,
+							img: '',
+							name: '月盛斋羔羊肉片300g',
+							point: '预计11月26日后兑换兑换券',
+							preferential: [
+								'限每人1份',
+								'进口检验合格'
+							],
+							price: 29.9,
+							vip: 19.9
+						}
+					],
+					[
+						{
+							hot: 0,
+							img: '',
+							name: '222月盛斋羔羊肉片300g',
+							point: '预计11月26日后兑换兑换券',
+							preferential: [
+								'限每人1份',
+								'进口检验合格'
+							],
+							price: 29.9,
+							vip: 19.9
+						},
+						{
+							hot: 1,
+							img: '',
+							name: '2222月盛斋羔羊肉片300g',
+							point: '预计11月26日后兑换兑换券',
+							preferential: [
+								'限每人1份',
+								'进口检验合格'
+							],
+							price: 29.9,
+							vip: 19.9
+						}
+					]
 				],
 				// loadFlag: true,
 				//计数，后面需要去除
 				num: 0,
 				//“分类”显示状态
-				classifyState: false
+				classifyState: false,
+				//上滑加载初始的位置
+				startPosition:0,
+				//上滑加载滑动的位置
+				translate: 0
 			}
 		},
 		mounted (){
@@ -395,7 +407,7 @@
 	  				navSwiper.setTranslate((clientWidth-parseInt(navSlideWidth))/2-navActiveSlideLeft)
 	  			}
 			},
-			//下拉刷新、上滑加载初始化函数
+			/*//下拉刷新、上滑加载初始化函数
 			refresh: function () {
 				var _this=this;
 				this.pullRefresh= new Swiper('.pull-refresh-0',{
@@ -415,8 +427,61 @@
 					}
 					
 			    });		
+			},*/
+			//下拉刷新、上滑加载初始化函数
+			refresh: function () {
+				var _this=this;
+				this.pullRefresh= new Swiper('.scroll',{
+					slidesOffsetBefore: 77,
+					direction: 'vertical',
+					// scrollbar: '.swiper-scrollbar',
+					slidesPerView: 'auto',
+					initialSlide :0,
+				    observer:true,//修改swiper自己或子元素时，自动初始化swiper
+				    observeParents:true,//修改swiper的父元素时，自动初始化swiper
+					freeMode: true,//slide滑动时只滑动一格，并自动贴合wrapper，设置为true则变为free模式，slide会根据惯性滑动可能不止一格且不会贴合。
+					on: {
+						touchStart: function() {
+					        _this.startPosition=this.translate;
+					        // _this.translate=this.translate;
+					        // console.log(this.translate,startPosition,4444444);
+					    },
+						// 触摸释放时执行
+						touchEnd: function(swiper) {
+							_this.translate=this.translate;
+							_this.touchEnd();
+				        }
+					}
+					
+			    });		
 			},
 			// 下拉刷新、上滑加载动作触摸释放时执行
+			touchEnd: function () {
+				var _this=this;
+				console.log(this.translate,this.startPosition);
+				if (this.translate<this.startPosition) {
+	                setTimeout(function() {
+	                  	for(var i = 0; i <3; i++) {
+	                  	  	_this.products[_this.tabIndex].push({
+								hot: 0,
+								img: '',
+								name: _this.tabIndex+'月盛斋羔羊肉片300g',
+								point: '预计11月26日后兑换兑换券',
+								preferential: [
+									'限每人1份',
+									'进口检验合格'
+								],
+								price: 29.9,
+								vip: 19.9
+							});
+	                  	}
+	                  	// 重新计算高度;
+	                  	_this.pullRefresh[_this.tabIndex].update(); 
+	                }, 300);
+	        	}
+	            return false;
+	        },
+			/*// 下拉刷新、上滑加载动作触摸释放时执行
 			touchEnd: function () {
 				var _this=this,
 				pullRefresh=this.pullRefresh;
@@ -446,7 +511,7 @@
 	                }, 1000);
 	            }
 	            return false;
-	        },
+	        },*/
 	        //分类切换显示状态
 	        showClassify: function () {
 	        	this.classifyState=true;
