@@ -57,7 +57,7 @@
 </template>
 <script>
 	import footGuide from 'src/components/footer/footGuide'
-	import icons from './children/icons'
+	import icons from 'src/components/icons/icons'
 	export default{
 		data(){
 			return {
