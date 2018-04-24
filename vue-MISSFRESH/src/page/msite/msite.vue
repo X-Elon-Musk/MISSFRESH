@@ -7,8 +7,6 @@
 <script>
 	import footGuide from 'src/components/footer/footGuide'
 	import tabbar from './children/tabbar'
-	// import hot from 'src/page/msite/children/hot'
-	// import pot from 'src/page/msite/children/pot'
 	export default{
 		data(){
 			return {

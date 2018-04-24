@@ -19,6 +19,7 @@
 		  	<div class="swiper-wrapper">
 
 				<!-- nav对应页面 -->
+		      	<!-- <div class="swiper-slide slidepage swiper-container scroll pull-refresh" ref="refresh"> -->
 		      	<div class="swiper-slide slidepage swiper-container">
 
 		      		<pullRefresh :tabIndex="tabIndex" @getData="getData">
@@ -31,7 +32,27 @@
 							<product :product="item"></product>
 						</div>
 		      		</pullRefresh>
-		      		
+		      		<!-- <div class="swiper-container scroll">
+				        <div class="swiper-wrapper">
+				          	<div class="swiper-slide slidescroll list-group" ref="listGroup">
+								
+								<div class="list-group-item refresh-gif">
+									<span></span>
+								</div>
+
+								<carousel></carousel>
+								<guarantee></guarantee>
+								<card></card>
+
+								<div class="clearfix list-group-item ticket-item" v-for="item in products[0]">
+									<product :product="item"></product>
+								</div>
+								<div class="swiper-scrollbar"></div>
+
+
+				      		</div>
+				        </div>
+					</div> -->
 
 		      	</div>
 
@@ -397,6 +418,43 @@
 	  				navSwiper.setTranslate((clientWidth-parseInt(navSlideWidth))/2-navActiveSlideLeft)
 	  			}
 			},
+			/*//下拉刷新、上滑加载初始化函数
+			refresh: function () {
+				var _this=this;
+				this.pullRefresh= new Swiper('.scroll',{
+					slidesOffsetBefore: 77,
+					direction: 'vertical',
+					// scrollbar: '.swiper-scrollbar',
+					slidesPerView: 'auto',
+					initialSlide :0,
+				    observer:true,//修改swiper自己或子元素时，自动初始化swiper
+				    observeParents:true,//修改swiper的父元素时，自动初始化swiper
+					freeMode: true,//slide滑动时只滑动一格，并自动贴合wrapper，设置为true则变为free模式，slide会根据惯性滑动可能不止一格且不会贴合。
+					on: {
+						touchStart: function() {
+					        _this.startPosition=this.translate;
+					    },
+						// 触摸释放时执行
+						touchEnd: function(swiper) {
+							_this.translate=this.translate;
+							_this.touchEnd();
+				        }
+					}
+					
+			    });		
+			},
+			// 下拉刷新、上滑加载动作触摸释放时执行
+			touchEnd: function () {
+				var _this=this;
+				if (this.translate<this.startPosition) {
+	                setTimeout(function() {
+	                	_this.getData();
+	                	// 重新计算高度;
+              			_this.pullRefresh[_this.tabIndex].update(); 
+	                }, 300);
+	        	}
+	            return false;
+	        },*/
 	        //发送ajax,请求数据
 	        getData: function () {
 	        	//发送ajax请求
