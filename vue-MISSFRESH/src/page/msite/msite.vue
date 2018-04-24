@@ -1,32 +1,12 @@
 <template>
 	<div class="full">
 		<tabbar></tabbar>
-		<!-- <div class="category-nav-wrap">
-			<mt-tabbar v-model="selected">  
-	            <mt-tab-item id="热卖">  
-	                热卖  
-	            </mt-tab-item>  
-	            <mt-tab-item id="火锅">  
-	                火锅  
-	            </mt-tab-item>  
-	        </mt-tabbar>  
-		</div>
-		
-
-		<mt-tab-container class="category-items" v-model="selected">  
-            <mt-tab-container-item id="热卖">
-            	<hot></hot>  
-            </mt-tab-container-item>  
-            <mt-tab-container-item id="火锅">  
-                <pot></pot>
-            </mt-tab-container-item>   
-        </mt-tab-container>   -->
 		<foot-guide></foot-guide>
 	</div>
 </template>
 <script>
 	import footGuide from 'src/components/footer/footGuide'
-	import tabbar from 'src/components/tabbar/tabbar'
+	import tabbar from './children/tabbar'
 	// import hot from 'src/page/msite/children/hot'
 	// import pot from 'src/page/msite/children/pot'
 	export default{

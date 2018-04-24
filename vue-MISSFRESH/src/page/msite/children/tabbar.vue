@@ -19,7 +19,7 @@
 		  	<div class="swiper-wrapper">
 
 				<!-- nav对应页面 -->
-		      	<div class="swiper-slide slidepage swiper-container scroll pull-refresh" ref="refresh">
+		      	<div class="swiper-slide slidepage swiper-container scroll pull-refresh pull-refresh-0" ref="refresh">
 			        <div class="swiper-wrapper">
 			          	<div class="swiper-slide slidescroll list-group" ref="listGroup">
 							
@@ -42,15 +42,17 @@
 			        </div>
 		      	</div>
 
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								2
-				          		<img src="~src/images/fresh-news/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
+			    <div class="swiper-slide slidepage swiper-container scroll pull-refresh pull-refresh-1">
+			        <div class="swiper-wrapper">
+			          	<div class="swiper-slide slidescroll">
+							<!-- 刷新GIF -->
+							<div class="list-group-item refresh-gif">
+								<span></span>
+							</div>
+							<!-- 内容部分 -->
+							<!-- <carousel></carousel> -->
+			      		</div>
+			        </div>
 			    </div>
 				<div class="swiper-slide slidepage">
 			      	<div class="swiper-container scroll" ref="scroll">
@@ -193,13 +195,20 @@
 	export default{
 		data(){
 			return {
+				//当前导航栏所处位置
 				tabIndex: 0,
+				//导航中每个按钮的宽度
 				navSlideWidth: 0,
-				bar: null,
+				// bar: null,
+				//导航的transition-duration值
 				tSpeed: 300,
+				//导航中最后一个按钮的位置
 				navSum: 0,
+				//导航的可视宽度
 				clientWidth: 0,
+				//导航的宽度
 				navWidth: 0,
+				//导航的文字内容
 				tabSlide: [
 					{
 						text: '热卖',
@@ -306,8 +315,10 @@
 						vip: 19.9
 					}
 				],
-				loadFlag: true,
+				// loadFlag: true,
+				//计数，后面需要去除
 				num: 0,
+				//“分类”显示状态
 				classifyState: false
 			}
 		},
@@ -340,7 +351,7 @@
 				  			for (var i = 0; i < this.slides.length; i++) {
 				  				_this.navWidth += parseInt(this.slides.eq(i).css('width'))
 				  			}
-
+				  			_this.navWidth+=40;
 				  		},
 				  	},
 				});
@@ -387,7 +398,7 @@
 			//下拉刷新、上滑加载初始化函数
 			refresh: function () {
 				var _this=this;
-				this.pullRefresh= new Swiper('.pull-refresh',{
+				this.pullRefresh= new Swiper('.pull-refresh-0',{
 					slidesOffsetBefore: 77,
 					direction: 'vertical',
 					scrollbar: '.swiper-scrollbar',
@@ -488,6 +499,7 @@
 		#nav {
 			border-bottom:1px solid #ebebeb;
 			height: 40px;
+			padding-right: 40px;
 			.swiper-slide{
 				text-align: center;
 				span {
@@ -563,34 +575,32 @@
 		overflow: visible;
 		margin-top: -43px;
 		margin-bottom: 53px;
-	}
-	.swiper-container.pull-refresh{
 		width: 100%;
 		height: 100%;
-	}
-	.pull-refresh .list-group-item{    
-		position: relative; 
-		display: block;
-		/*padding: 10px 15px;*/
-		padding: 10px 2%;
-		margin-bottom: -1px;
-		background-color: #fff;
-		box-sizing: border-box;
-		/*border: 1px solid #ddd;*/
-	}
-	.pull-refresh .refresh-gif{
-		text-align: center;
-		padding: 0;
-		height: 43px;
-		border: none;
-	}
-	.pull-refresh .refresh-gif span{
-		text-align: center;
-		display: inline-block;
-		height: 43px;
-		width: 43px;
-		background: url(~images/loading.gif) no-repeat;
-		background-size: 100% 100%;
+		.refresh-gif{
+			text-align: center;
+			padding: 0;
+			height: 43px;
+			border: none;
+			span{
+				text-align: center;
+				display: inline-block;
+				height: 43px;
+				width: 43px;
+				background: url(~images/loading.gif) no-repeat;
+				background-size: 100% 100%;
+			}
+		}
+		.list-group-item{    
+			position: relative; 
+			display: block;
+			/*padding: 10px 15px;*/
+			padding: 10px 2%;
+			margin-bottom: -1px;
+			background-color: #fff;
+			box-sizing: border-box;
+			/*border: 1px solid #ddd;*/
+		}
 	}
 
 	/*票*/
