@@ -73,12 +73,12 @@
 	                setTimeout(function() {
 	                	//发送ajax请求
 	                	_this.$emit('getData');
-	                	console.log(_this.pullRefresh,_this.isArray(_this.pullRefresh));
+	                	// console.log(_this.pullRefresh,_this.isArray(_this.pullRefresh));
 	                  	// 重新计算高度;
 	                  	if (_this.isArray(_this.pullRefresh)) {
 	                  		_this.pullRefresh[_this.tabIndex].update(); 		
 	                  	} else{
-	                  		console.log('刷新');
+	                  		// console.log('刷新');
 	                  		_this.pullRefresh.update(); 
 	                  	}
 	                }, 300);
