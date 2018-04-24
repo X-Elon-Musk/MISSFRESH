@@ -20,30 +20,20 @@
 
 				<!-- nav对应页面 -->
 		      	<!-- <div class="swiper-slide slidepage swiper-container scroll pull-refresh" ref="refresh"> -->
-		      	<div class="swiper-slide slidepage swiper-container">
-
-		      		<pullRefresh :tabIndex="tabIndex" @getData="getData">
-		      			<!-- 内容部分 -->
-						<carousel></carousel>
-						<guarantee></guarantee>
-						<card></card>
-						<!-- 上滑加载、下拉刷新 -->
-						<div class="clearfix list-group-item ticket-item" v-for="item in products[0]">
-							<product :product="item"></product>
-						</div>
-		      		</pullRefresh>
-		      		<!-- <div class="swiper-container scroll">
+		      	<div class="swiper-slide slidepage swiper-container pull-refresh" ref="refresh">
+		      		<div class="swiper-container scroll">
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll list-group" ref="listGroup">
 								
+								<!-- 刷新GIF -->
 								<div class="list-group-item refresh-gif">
 									<span></span>
 								</div>
-
+								<!-- 内容部分 -->
 								<carousel></carousel>
 								<guarantee></guarantee>
 								<card></card>
-
+								<!-- 上滑加载、下拉刷新 -->
 								<div class="clearfix list-group-item ticket-item" v-for="item in products[0]">
 									<product :product="item"></product>
 								</div>
@@ -52,21 +42,25 @@
 
 				      		</div>
 				        </div>
-					</div> -->
+					</div>
 
 		      	</div>
 
-			    <div class="swiper-slide slidepage swiper-container">
-			        <pullRefresh :tabIndex="tabIndex" @getData="getData">
-		      			<!-- 内容部分 -->
-						<carousel></carousel>
-						<guarantee></guarantee>
-						<card></card>
-						<!-- 上滑加载、下拉刷新 -->
-						<div class="clearfix list-group-item ticket-item" v-for="item in products[1]">
-							<product :product="item"></product>
-						</div>
-		      		</pullRefresh>
+			    <div class="swiper-slide slidepage swiper-container scroll pull-refresh">
+			        <div class="swiper-wrapper">
+			          	<div class="swiper-slide slidescroll">
+							<!-- 刷新GIF -->
+							<div class="list-group-item refresh-gif">
+								<span></span>
+							</div>
+							<!-- 内容部分 -->
+							<!-- <carousel></carousel> -->
+							<!-- 上滑加载、下拉刷新 -->
+							<div class="clearfix list-group-item ticket-item" v-for="item in products[1]">
+								<product :product="item"></product>
+							</div>
+			      		</div>
+			        </div>
 			    </div>
 				<div class="swiper-slide slidepage">
 			      	<div class="swiper-container scroll" ref="scroll">
@@ -205,7 +199,7 @@
     import card from './children/card'
     import product from 'src/components/product/product'
     import classify from './children/classify'
-    import pullRefresh from 'src/components/pullRefresh/pullRefresh'
+
 	export default{
 		data(){
 			return {
@@ -350,7 +344,7 @@
 			this.$nextTick(() => {
 				if (!this.navSwiper) this.tab();
 				if (!this.pageSwiper) this.page();
-				// if (!this.pullRefresh) this.refresh();
+				if (!this.pullRefresh) this.refresh();
             })
 		},
 		methods: {
@@ -421,6 +415,27 @@
 			/*//下拉刷新、上滑加载初始化函数
 			refresh: function () {
 				var _this=this;
+				this.pullRefresh= new Swiper('.pull-refresh-0',{
+					slidesOffsetBefore: 77,
+					direction: 'vertical',
+					scrollbar: '.swiper-scrollbar',
+					slidesPerView: 'auto',
+					initialSlide :0,
+				    observer:true,//修改swiper自己或子元素时，自动初始化swiper
+				    observeParents:true,//修改swiper的父元素时，自动初始化swiper
+					freeMode: true,//slide滑动时只滑动一格，并自动贴合wrapper，设置为true则变为free模式，slide会根据惯性滑动可能不止一格且不会贴合。
+					on: {
+						// 触摸释放时执行
+						touchEnd: function(swiper) {
+							_this.touchEnd();
+				        }
+					}
+					
+			    });		
+			},*/
+			//下拉刷新、上滑加载初始化函数
+			refresh: function () {
+				var _this=this;
 				this.pullRefresh= new Swiper('.scroll',{
 					slidesOffsetBefore: 77,
 					direction: 'vertical',
@@ -454,11 +469,11 @@
 	                }, 300);
 	        	}
 	            return false;
-	        },*/
+	        },
 	        //发送ajax,请求数据
 	        getData: function () {
 	        	//发送ajax请求
-	        	console.log(111);
+
               	for(var i = 0; i <3; i++) {
               	  	this.products[this.tabIndex].push({
 						hot: 0,
@@ -474,6 +489,43 @@
 					});
               	}
 	        },
+	        	
+
+
+
+
+
+			/*// 下拉刷新、上滑加载动作触摸释放时执行
+			touchEnd: function () {
+				var _this=this,
+				pullRefresh=this.pullRefresh;
+				var viewHeight=pullRefresh.$wrapperEl[0].offsetHeight,
+				contentHeight=pullRefresh.slides[0].offsetHeight;
+				// console.log(viewHeight-contentHeight+300);
+				//上滑加载
+				if(pullRefresh.translate<=viewHeight-contentHeight+300&&pullRefresh.translate<0) {
+	            	setTimeout(function() {
+	            		for(var i = 0; i <2; i++) {
+	                		_this.num++;
+		                	var div = document.createElement("div");
+		                	div.className = "clearfix list-group-item ticket-item";
+		                	div.innerHTML = _this.num;
+		                	_this.$refs.listGroup.appendChild(div)
+		                }
+		                // console.log(pullRefresh.translate);
+	                    pullRefresh.update(); // 重新计算高度;
+	                }, 300);
+	            }
+	            
+	            // 下拉刷新
+	            if(pullRefresh.translate >= 50) {
+	            	setTimeout(function() {
+	            		//刷新操作
+	                    pullRefresh.update(); // 重新计算高度;
+	                }, 1000);
+	            }
+	            return false;
+	        },*/
 	        //分类切换显示状态
 	        showClassify: function () {
 	        	this.classifyState=true;
@@ -492,8 +544,7 @@
 			guarantee,
 			card,
 			product,
-			classify,
-			pullRefresh
+			classify
 		},
 	}
 </script>
@@ -599,7 +650,7 @@
 
 
 	/*上滑加载、下拉刷新*/
-	/*.swiper-container.pull-refresh{
+	.swiper-container.pull-refresh{
 		overflow: visible;
 		margin-top: -43px;
 		margin-bottom: 53px;
@@ -622,12 +673,14 @@
 		.list-group-item{    
 			position: relative; 
 			display: block;
+			/*padding: 10px 15px;*/
 			padding: 10px 2%;
 			margin-bottom: -1px;
 			background-color: #fff;
 			box-sizing: border-box;
+			/*border: 1px solid #ddd;*/
 		}
-	}*/
+	}
 
 	/*票*/
 	.ticket-item{
