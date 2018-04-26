@@ -18,7 +18,7 @@
 <script>
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
-
+    import {isArray} from 'src/config/mUtils'
 
 	export default{
 		data(){
@@ -74,7 +74,7 @@
 	                	//发送ajax请求
 	                	_this.$emit('getData');
 	                	// 重新计算高度;
-	                  	if (_this.isArray(_this.pullRefresh)) {
+	                  	if (isArray(_this.pullRefresh)) {
 	                  		// _this.pullRefresh[_this.tabIndex].update(); 		
 	                  		_this.pullRefresh.forEach((item,index)=>{
 	                  			_this.pullRefresh[index].update();
@@ -88,23 +88,22 @@
 	                	//发送ajax请求
 	                	this.$emit('getData');
 	                	// 重新计算高度;
-	                  	if (this.isArray(this.pullRefresh)) {
+	                  	if (isArray(this.pullRefresh)) {
 	                  		// this.pullRefresh[this.tabIndex].update(); 		
 	                  		this.pullRefresh.forEach((item,index)=>{
 	                  			this.pullRefresh[index].update();
 	                  		}); 		
 	                  	} else{
-	                  		// console.log('刷新');
 	                  		this.pullRefresh.update(); 
 	                  	}
 	                }, 300);
 	        	}
 	            return false;
-	        },
-
-	        isArray: function (obj) {
-	        	return Object.prototype.toString.call(obj)=='[object Array]';
 	        }
+
+	        // isArray: function (obj) {
+	        // 	return Object.prototype.toString.call(obj)=='[object Array]';
+	        // }
 	        	
 		}
 	}
@@ -118,7 +117,6 @@
 		// bottom: 0;
 		// z-index: 1000;
 		overflow: visible;
-		// margin-top: -43px;
 		margin-bottom: 53px;
 		width: 100%;
 		height: 100%;
@@ -139,12 +137,9 @@
 		.list-group-item{    
 			position: relative; 
 			display: block;
-			/*padding: 10px 15px;*/
-			// padding: 10px 2%;
 			margin-bottom: -1px;
 			background-color: #fff;
 			box-sizing: border-box;
-			/*border: 1px solid #ddd;*/
 		}
 		.swiper-scrollbar{
 			display: none;
