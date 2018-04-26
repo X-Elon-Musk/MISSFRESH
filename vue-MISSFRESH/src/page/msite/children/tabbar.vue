@@ -1,7 +1,8 @@
 <template>
 	<div class="tabbar">
         <div id="top">
-        	<div class="addr"></div>
+        	<!-- <div class="addr"></div> -->
+        	<mheader></mheader>
         	<div class="swiper-container" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
         			<div class="swiper-slide" v-for="(item,index) in tabSlide" @click="tabClick(index,$event)" :class="{active:tabIndex==index}">
@@ -179,6 +180,8 @@
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
 
+
+    import mheader from './mheader'
     import carousel from 'src/components/carousel/carousel'
     import guarantee from './children/guarantee'
     import card from './children/card'
@@ -430,6 +433,7 @@
 	        	
         },
         components: {
+        	mheader,
 			carousel,
 			guarantee,
 			card,
@@ -461,11 +465,11 @@
 		z-index:5;
 		width:100%;
 		background:#fff;
-		.addr {
+		/*.addr {
 			height:36px;
 			margin:0 auto;
 			display:block;
-		}
+		}*/
 		#nav {
 			border-bottom:1px solid #ebebeb;
 			height: 40px;

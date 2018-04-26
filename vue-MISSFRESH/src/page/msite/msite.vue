@@ -7,6 +7,7 @@
 <script>
 	import footGuide from 'src/components/footer/footGuide'
 	import tabbar from './children/tabbar'
+	
 	export default{
 		data(){
 			return {
