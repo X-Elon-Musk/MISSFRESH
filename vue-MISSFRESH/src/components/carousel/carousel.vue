@@ -1,23 +1,21 @@
 <template>
-	<!-- <div> -->
-		<div class="swiper-container banner">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<img src="~images/carousel/0.jpg">
-				</div>
-				<div class="swiper-slide">
-					<img src="~images/carousel/1.jpg">
-				</div>
-				<div class="swiper-slide">
-					<img src="~images/carousel/2.jpg">
-				</div>
-				<div class="swiper-slide">
-					<img src="~images/carousel/3.jpg">
-				</div>
+	<div class="swiper-container banner">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<img src="~images/carousel/0.jpg">
 			</div>
-			<div class="swiper-pagination"></div>
+			<div class="swiper-slide">
+				<img src="~images/carousel/1.jpg">
+			</div>
+			<div class="swiper-slide">
+				<img src="~images/carousel/2.jpg">
+			</div>
+			<div class="swiper-slide">
+				<img src="~images/carousel/3.jpg">
+			</div>
 		</div>
-	<!-- </div>   -->
+		<div class="swiper-pagination"></div>
+	</div>
 </template>
 <script>
 	import Swiper from 'swiper';
