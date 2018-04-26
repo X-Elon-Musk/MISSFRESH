@@ -70,20 +70,6 @@
 				var _this=this;
 				console.log(this.translate,this.startPosition);
 				if (this.translate<this.startPosition) {
-	                /*setTimeout(function() {
-	                	//发送ajax请求
-	                	_this.$emit('getData');
-	                	// 重新计算高度;
-	                  	if (isArray(_this.pullRefresh)) {
-	                  		// _this.pullRefresh[_this.tabIndex].update(); 		
-	                  		_this.pullRefresh.forEach((item,index)=>{
-	                  			_this.pullRefresh[index].update();
-	                  		}); 		
-	                  	} else{
-	                  		// console.log('刷新');
-	                  		_this.pullRefresh.update(); 
-	                  	}
-	                }, 300);*/
 	                setTimeout(()=>{
 	                	//发送ajax请求
 	                	this.$emit('getData');
