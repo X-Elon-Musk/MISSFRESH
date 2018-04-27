@@ -1,1 +1,11 @@
-//宽高100%
+//背景图片设置
+.bg(@width,@height,@color,@url,@size){
+	width: @width;
+	height: @height;
+	background: @color url(@url) no-repeat center center;
+	background-size: @size;
+}
+.wh(@height,@width: 100%){
+	height: @height;
+	width: @width;
+}

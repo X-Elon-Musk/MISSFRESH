@@ -1,6 +1,6 @@
 <template>
-<!-- 	<div> -->
-	    <div class="product">
+    <div class="product">
+    	<router-link :to="{path: 'ug/productDetail',query:{id}}" tag="div" class="product-link">
 			<div class="product-img">
 				<span v-bind:class="{hot_0:product.hot==0,hot_1:product.hot==1,hot_2:product.hot==2}"></span>
 				<img src="~images/product_0.jpg">
@@ -21,8 +21,8 @@
 				</p>
 				<img src="~images/icon/shopping-cart.png" class="shopping-cart-img">
 			</div>
-		</div> 
-	<!-- </div> -->
+		</router-link>
+	</div> 
 </template>
 <script>
 	export default{
@@ -31,7 +31,7 @@
 				
 			}
 		},
-		props: ['product']
+		props: ['product','id']
 	}
 </script>
 <style lang="less">
@@ -45,6 +45,11 @@
 		padding-top: 18px;
 		padding-bottom: 18px;
 		border-bottom: 1px solid #f5f5f5;
+		.product-link{
+			display: flex;
+			position: relative;
+			height: auto;
+		}
 		.product-img{
 			flex: 1;
 			// margin: 0 15px 0 20px;

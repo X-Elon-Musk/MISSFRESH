@@ -21,5 +21,5 @@
 </script>
 <style>
 	@import './style/common';
-	@import './style/mixin';
+	/*@import './style/mixin';*/
 </style>

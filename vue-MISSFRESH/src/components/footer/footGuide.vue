@@ -1,16 +1,16 @@
 <template>
 	<div>
         <ul class="foot-nav">
-        	<li class="nav-item" @click="goAddress({path: '/msite'})">
-        		<span class="nav-icon nav-home" :style="{backgroundImage:$route.path.indexOf('msite')==-1?`url(${backgroundImage.home})`:`url(${backgroundImage.homeActive})`}"></span>
+        	<li class="nav-item" @click="goAddress({path: '/home'})">
+        		<span class="nav-icon nav-home" :style="{backgroundImage:$route.path.indexOf('home')==-1?`url(${backgroundImage.home})`:`url(${backgroundImage.homeActive})`}"></span>
         		<p class="nav-label">首页</p>
         	</li>
-        	<li class="nav-item" @click="goAddress({path: '/search/geohash'})">
-        		<span class="nav-icon nav-newvp" :style="{backgroundImage:$route.path.indexOf('search')==-1?`url(${backgroundImage.newvp})`:`url(${backgroundImage.newvpActive})`}"></span>
+        	<li class="nav-item" @click="goAddress({path: '/member'})">
+        		<span class="nav-icon nav-newvp" :style="{backgroundImage:$route.path.indexOf('member')==-1?`url(${backgroundImage.newvp})`:`url(${backgroundImage.newvpActive})`}"></span>
         		<p class="nav-label">会员</p>
         	</li>
-        	<li class="nav-item" @click="goAddress({path: '/order'})">
-        		<span class="nav-icon nav-cart" :style="{backgroundImage:$route.path.indexOf('order')==-1?`url(${backgroundImage.cart})`:`url(${backgroundImage.cartActive})`}"></span>
+        	<li class="nav-item" @click="goAddress({path: '/cart'})">
+        		<span class="nav-icon nav-cart" :style="{backgroundImage:$route.path.indexOf('cart')==-1?`url(${backgroundImage.cart})`:`url(${backgroundImage.cartActive})`}"></span>
         		<p class="nav-label">购物车</p>
         	</li>
         	<li class="nav-item" @click="goAddress({path: '/profile'})">

@@ -1,11 +1,11 @@
 import App from '../App'
 
-const home = r => require.ensure([], () => r(require('../page/home/home')), 'home')
+const ug = r => require.ensure([], () => r(require('../page/ug/ug')), 'ug')
+const productDetail = r => require.ensure([], () => r(require('../page/ug/hash/productDetail')), 'productDetail')
 const city = r => require.ensure([], () => r(require('../page/city/city')), 'city')
-const msite = r => require.ensure([], () => r(require('../page/msite/msite')), 'msite')
-const search = r => require.ensure([], () => r(require('../page/search/search')), 'search')
-const order = r => require.ensure([], () => r(require('../page/order/order')), 'order')
-const orderDetail = r => require.ensure([], () => r(require('../page/order/children/orderDetail')), 'orderDetail')
+const member = r => require.ensure([], () => r(require('../page/member/member')), 'member')
+const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'cart')
+const cartDetail = r => require.ensure([], () => r(require('../page/cart/children/cartDetail')), 'cartDetail')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
 const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
@@ -24,36 +24,41 @@ export default [{
 	path: '/',
 	component: App,//顶层路由，对应index.html
 	children: [
+        //首页
 		{
 			path: '',
-			redirect: '/home'
+			redirect: '/ug'
 		},
 		{
-			path: '/home',
-			component: home
+			path: '/ug',
+			component: ug,
+            children: [{
+                path: 'productDetail', //商品详情页
+                component: productDetail,
+            }, ]
 		},
 		{
 			path: '/city/:cityid',
 			component: city
 		},
-		//首页
-		{
+		
+		/*{
 			path: 'msite',
 			component: msite,
 			meta: {keepAlive: true}
-		},
-		//搜索页面
+		},*/
+		//会员页面
 		{
-            path: '/search/:geohash',
-            component: search
+            path: '/member',
+            component: member
         },
         //订单列表页
         {
-            path: '/order',
-            component: order,
+            path: '/cart',
+            component: cart,
             children: [{
-                path: 'orderDetail', //订单详情页
-                component: orderDetail,
+                path: 'cartDetail', //订单详情页
+                component: cartDetail,
             }, ]
         },
         //个人信息页

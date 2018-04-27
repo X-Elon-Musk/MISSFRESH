@@ -3,10 +3,6 @@
         <div class="swiper-wrapper">
           	<div class="swiper-slide slidescroll list-group" ref="listGroup">
 				
-				<!-- 刷新GIF -->
-				<div class="list-group-item refresh-gif" v-show="gif">
-					<span></span>
-				</div>
 				<!-- 插槽 -->
 				<slot></slot>
 				<div class="swiper-scrollbar"></div>
@@ -20,7 +16,7 @@
     import 'swiper/dist/css/swiper.min.css';
     import {isArray} from 'src/config/mUtils'
 
-	export default{
+    export default{
 		data(){
 			return {
 				//当前导航栏所处位置
@@ -31,7 +27,7 @@
 				translate: 0
 			}
 		},
-		props: ['tabIndex','gif'],
+		props: ['tabIndex'],
 		mounted (){
 			console.log(this.pullRefresh);
 			this.$nextTick(() => {
@@ -44,7 +40,7 @@
 			refresh: function () {
 				var _this=this;
 				this.pullRefresh= new Swiper('.scroll',{
-					slidesOffsetBefore: _this.gif?34:0,
+					slidesOffsetBefore: 0,
 					direction: 'vertical',
 					scrollbar: '.swiper-scrollbar',
 					slidesPerView: 'auto',
@@ -86,7 +82,7 @@
 	        	}
 	            return false;
 	        }
-		}
+		},
 	}
 </script>
 <style lang="less">
@@ -101,20 +97,6 @@
 		margin-bottom: 53px;
 		width: 100%;
 		height: 100%;
-		.refresh-gif{
-			text-align: center;
-			padding: 0;
-			height: 43px;
-			border: none;
-			span{
-				text-align: center;
-				display: inline-block;
-				height: 43px;
-				width: 43px;
-				background: url(~images/loading.gif) no-repeat;
-				background-size: 100% 100%;
-			}
-		}
 		.list-group-item{    
 			position: relative; 
 			display: block;

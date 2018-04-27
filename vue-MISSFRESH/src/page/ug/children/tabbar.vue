@@ -20,24 +20,26 @@
 		  	<div class="swiper-wrapper">
 
 				<!-- nav对应页面 -->
-		      	<div class="swiper-slide slidepage swiper-container">
+		      	<div class="swiper-slide slidepage swiper-container gif-show">
 
-		      		<pullRefresh :tabIndex="tabIndex" @getData="getData" :gif="true">
+		      		<pullRefresh :tabIndex="tabIndex" @getData="getData">
+		      			<gif></gif>
 		      			<!-- 内容部分 -->
 						<carousel></carousel>
 						<guarantee></guarantee>
 						<card></card>
 						<!-- 上滑加载、下拉刷新 -->
 						<div class="clearfix list-group-item ticket-item" v-for="item in products[0]">
-							<product :product="item"></product>
+							<product :product="item" :id="item.id"></product>
 						</div>
 		      		</pullRefresh>
 		      		
 
 		      	</div>
 
-			    <div class="swiper-slide slidepage swiper-container">
-			        <pullRefresh :tabIndex="tabIndex" @getData="getData" :gif="true">
+			    <div class="swiper-slide slidepage swiper-container gif-show">
+			        <pullRefresh :tabIndex="tabIndex" @getData="getData">
+			        	<gif></gif>
 		      			<!-- 内容部分 -->
 						<carousel></carousel>
 						<guarantee></guarantee>
@@ -188,6 +190,7 @@
     import product from 'src/components/product/product'
     import classify from './children/classify'
     import pullRefresh from 'src/components/pullRefresh/pullRefresh'
+    import gif from 'src/components/gif/gif'
 	export default{
 		data(){
 			return {
@@ -253,6 +256,7 @@
 				products: [
 					[
 						{
+							id: 0,
 							hot: 0,
 							img: '',
 							name: '11111月盛斋羔羊肉片300g',
@@ -265,6 +269,7 @@
 							vip: 19.9
 						},
 						{
+							id: 0,
 							hot: 1,
 							img: '',
 							name: '11111月盛斋羔羊肉片300g',
@@ -277,6 +282,7 @@
 							vip: 19.9
 						},
 						{
+							id: 0,
 							hot: 3,
 							img: '',
 							name: '月盛斋羔羊肉片300g',
@@ -291,6 +297,7 @@
 					],
 					[
 						{
+							id: 0,
 							hot: 0,
 							img: '',
 							name: '222月盛斋羔羊肉片300g',
@@ -303,6 +310,7 @@
 							vip: 19.9
 						},
 						{
+							id: 0,
 							hot: 1,
 							img: '',
 							name: '2222月盛斋羔羊肉片300g',
@@ -406,6 +414,7 @@
 	        	console.log(111);
               	for(var i = 0; i <3; i++) {
               	  	this.products[this.tabIndex].push({
+              	  		id: 0,
 						hot: 0,
 						img: '',
 						name: this.tabIndex+'月盛斋羔羊肉片300g',
@@ -439,19 +448,17 @@
 			card,
 			product,
 			classify,
-			pullRefresh
+			pullRefresh,
+			gif
 		},
 	}
 </script>
 <style lang='less'>
-	/*.full{
-		width: 100%;
-		height: 100%;
+	@import '~src/style/mixin';
+	// 添加gif的pullRefresh组件的父级需要加‘gif-show’的ClassName
+	.gif-show{
+		margin-top: 34px;
 	}
-	.tabbar{
-		width: 100%;
-		height: 100%;
-	}*/
 	.tabbar{
 		position: absolute;
 		left: 0;
@@ -492,8 +499,7 @@
 					position: absolute;
 					left: 0;
 					bottom: 0px;
-					height: 0;
-					width: 100%;
+					.wh(0);
 					border-bottom: 2px solid #ff4891;
 				}
 			}
@@ -502,10 +508,7 @@
 			position: absolute;
 			right: 0;
 			bottom: 0;
-			width: 40px;
-			height: 40px;
-		    background: #fff url(~images/icon/ellipsis.png) no-repeat center center;
-		    background-size: 1.375rem;
+			.bg(40px,40px,#fff,'~images/icon/ellipsis.png',1.375rem);
 		    z-index: 15;
 		}
 	}
@@ -540,41 +543,6 @@
 	.slidescroll {
 		height:auto;
 	}
-
-
-
-
-	/*上滑加载、下拉刷新*/
-	/*.swiper-container.pull-refresh{
-		overflow: visible;
-		margin-top: -43px;
-		margin-bottom: 53px;
-		width: 100%;
-		height: 100%;
-		.refresh-gif{
-			text-align: center;
-			padding: 0;
-			height: 43px;
-			border: none;
-			span{
-				text-align: center;
-				display: inline-block;
-				height: 43px;
-				width: 43px;
-				background: url(~images/loading.gif) no-repeat;
-				background-size: 100% 100%;
-			}
-		}
-		.list-group-item{    
-			position: relative; 
-			display: block;
-			padding: 10px 2%;
-			margin-bottom: -1px;
-			background-color: #fff;
-			box-sizing: border-box;
-		}
-	}*/
-
 	/*票*/
 	.ticket-item{
 		padding: 9px 2%;

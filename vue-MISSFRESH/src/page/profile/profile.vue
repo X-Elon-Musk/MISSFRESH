@@ -99,16 +99,13 @@
 	}
 </script>
 <style lang="less">
+	@import '~src/style/mixin';
 	.my-center{
 		padding-bottom: 47px;
-		width: 100%;
-		height: 100%;
-		background: url(~images/my-container.png) no-repeat;
+		.wh(100%);
 		.sign-in{
-			background: url(~images/my-bg.png) no-repeat;
+			.bg(100%,110px,#fff,'~images/my-bg.png',100% 100%);
 			text-align: center;
-			height: 110px;
-			background-size: 100% 100%;
 			padding-top: 17px;
 			box-sizing: border-box;
 			span{
@@ -129,8 +126,7 @@
 			}
 		}
 		.wallet{
-			width: 100%;
-			height: 84px;
+			.wh(84px);
 			background: #fff;
 			display: table;
 			table-layout: fixed;
@@ -153,14 +149,14 @@
 			}
 		}
 		.rights{
-			width: 100%;
+			.wh(45px);
 			padding-left: 15px;
 			padding-right: 10px;
 			padding-top: 15px;
 			background-color: #fff;
-	    	height: 30px;
+	    	// height: 30px;
 	    	box-sizing: border-box;
-	    	height: 45px;
+	    	// height: 45px;
 	    	span{
 	    		&:nth-of-type(1){
 	    			line-height: 30px;
@@ -206,9 +202,7 @@
 				position: relative;
 				&:after{
 					content: "";
-					width: 17px;
-					height: 17px;
-					background: url(~images/icon/right-jiantou.png) no-repeat;
+					.bg(17px,17px,transparent,'~images/icon/right-jiantou.png',100% 100%);
 					background-size: 100% 100%;
 					position: absolute;
 					right: 0;
@@ -216,8 +210,7 @@
 				}
 				a{
 					display: inline-block;
-					height: 100%;
-					width: 100%;
+					.wh(100%);
 					color: #000;
 				}
 			}
