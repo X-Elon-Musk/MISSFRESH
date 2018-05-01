@@ -1,7 +1,12 @@
 <template>
 	<div class="full">
+		<!-- <router-link :to="{path: '/ug/productDetail'}" tag="div" style="position: relative; z-index: 1000000000; padding: 3em; background: #fff;" class="product-link">dddddddd</router-link> -->
 		<tabbar></tabbar>
 		<foot-guide></foot-guide>
+
+		<transition name="router-fade" mode="out-in">
+			<router-view v-if="!$route.meta.keepAlive"></router-view>
+		</transition>
 	</div>
 </template>
 <script>

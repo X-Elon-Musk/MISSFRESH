@@ -49,7 +49,7 @@
 	    background-color: #fff;
 	    line-height: 1;
 	    display: flex;
-	    z-index: 500;
+	    z-index: 1;
 	    bottom: 0;
 	    width: 100%;
 	    .nav-item{

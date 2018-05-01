@@ -35,8 +35,12 @@ export default [{
             children: [{
                 path: 'productDetail', //商品详情页
                 component: productDetail,
-            }, ]
+            }]
 		},
+        // {
+        //     path: 'productDetail', //商品详情页
+        //         component: productDetail,
+        // },
 		{
 			path: '/city/:cityid',
 			component: city

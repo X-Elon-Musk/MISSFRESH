@@ -52,7 +52,7 @@
         left: 0;
         top: 36px;
         bottom: 0;
-        z-index: 499;
+        z-index: 2;
         width: 100%;
         background: rgba(0,0,0,0.7);
         color: #4d4d4d;
@@ -72,7 +72,7 @@
                 height: 40px;
                 background: #fff url(~images/icon/close.png) no-repeat center center;
                 background-size: 1.2rem;
-                z-index: 15;
+                // z-index: 15;
             }
         }
         .classify-icons{

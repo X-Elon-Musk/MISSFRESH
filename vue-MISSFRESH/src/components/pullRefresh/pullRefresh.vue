@@ -92,7 +92,6 @@
 		// left: 0;
 		// top: 0;
 		// bottom: 0;
-		// z-index: 1000;
 		overflow: visible;
 		margin-bottom: 53px;
 		width: 100%;

@@ -176,6 +176,8 @@
 		  	</div>
 		</div>
 		<!-- <div class="img" id="footer"><img src="../../images/fresh-news/0.jpg"></div> -->
+
+		
 	</div>
 </template>
 <script>
@@ -469,7 +471,7 @@
 	#top {
 		position:absolute;
 		top:0;
-		z-index:5;
+		z-index:2;
 		width:100%;
 		background:#fff;
 		/*.addr {
@@ -508,8 +510,9 @@
 			position: absolute;
 			right: 0;
 			bottom: 0;
+			z-index: 2;
 			.bg(40px,40px,#fff,'~images/icon/ellipsis.png',1.375rem);
-		    z-index: 15;
+		    /*z-index: 15;*/
 		}
 	}
 	

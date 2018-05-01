@@ -1,6 +1,6 @@
 <template>
     <div class="product">
-    	<router-link :to="{path: 'ug/productDetail',query:{id}}" tag="div" class="product-link">
+    	<router-link :to="{path: '/ug/productDetail',query:{id}}" tag="div" class="product-link">
 			<div class="product-img">
 				<span v-bind:class="{hot_0:product.hot==0,hot_1:product.hot==1,hot_2:product.hot==2}"></span>
 				<img src="~images/product_0.jpg">
@@ -68,7 +68,7 @@
 				width: 24px;
 				top: 0;
 				left: 0px;
-				z-index: 2;
+				// z-index: 2;
 			}
 			// .hot_0{
 			// 	background: url(../images/index/hot_0.png) no-repeat;

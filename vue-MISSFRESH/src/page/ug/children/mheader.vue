@@ -81,7 +81,7 @@
 				position: absolute;
 				left: 50%;
 				top: 2em;
-				z-index: 16;
+				z-index: 2;
 				width: 50%;
 				transform: translateX(-50%);
 			    white-space: normal;
