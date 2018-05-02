@@ -1,23 +1,24 @@
 <template>
     <div class="product">
-    	<router-link :to="{path: '/ug/productDetail',query:{id}}" tag="div" class="product-link">
-			<div class="product-img">
+    	<router-link :to="{path: '/ug/productDetail',query:{id}}" tag="div" class="clearfix product-link">
+			<div class="f_l product-img">
 				<span v-bind:class="{hot_0:product.hot==0,hot_1:product.hot==1,hot_2:product.hot==2}"></span>
 				<img src="~images/product_0.jpg">
 			</div>
-			<div class="product-info">
+			<div class="f_r product-info">
 				<p class="name">{{product.name}}</p>
 				<p class="point">{{product.point}}</p>
 				<ul class="preferential">
 					<li v-for="item in product.preferential">{{item}}</li>
 				</ul>
 				<p class="price">
-					商城价 ¥
-					<span>{{product.price}}</span>
+					商城价
+					<!-- <span>{{product.price}}</span> -->
+					<price :price="product.price"></price>
 				</p>
 				<p class="vip">
-					会员专享价 ¥
-					<span>{{product.vip}}</span>
+					会员专享价
+					<price :price="product.vip"></price>
 				</p>
 				<img src="~images/icon/shopping-cart.png" class="shopping-cart-img">
 			</div>
@@ -25,16 +26,21 @@
 	</div> 
 </template>
 <script>
+	import price from 'src/components/price/price'
 	export default{
 		data(){
 			return {
 				
 			}
 		},
-		props: ['product','id']
+		props: ['product','id'],
+		components: {
+			price
+		}
 	}
 </script>
 <style lang="less">
+	@import '~src/style/mixin';
 	.product{
 		width: 100%;
 	    background-color: #fff;
@@ -46,14 +52,12 @@
 		padding-bottom: 18px;
 		border-bottom: 1px solid #f5f5f5;
 		.product-link{
-			display: flex;
 			position: relative;
 			height: auto;
+			width: 100%;
 		}
 		.product-img{
-			flex: 1;
-			// margin: 0 15px 0 20px;
-			width: auto;
+			width: 40%;
 			height: auto;
 			position: relative;
 			img{
@@ -84,7 +88,7 @@
 			// }
 		}
 		.product-info{
-			flex: 2;
+			width: 60%;
 			text-align: left;
 			margin: 0;
 			color: #262626;
@@ -103,7 +107,6 @@
 				color: #474245;
 			}
 			.point{
-				// font-size: 14px;
 				font-size: 12px;
 				color: #969696;
 				white-space: nowrap;
@@ -130,19 +133,19 @@
 			.price{
 				line-height: 1.4;
 				font-size: 12px;
-				color: rgb(255, 72, 145);
+				color: @color_main;
 			}
 			.vip{
 				line-height: 1.4;
 				font-size: 12px;
-				color: #f2bb26;
+				color: @color_assist;
 			}
 			.shopping-cart-img{
 				width: 46px;
 				height: 46px;
 				position: absolute;
 				right: 6px;
-				bottom: 0px;
+				bottom: -16px;
 			}
 		}
 	}

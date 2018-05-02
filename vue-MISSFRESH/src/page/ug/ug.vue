@@ -1,5 +1,5 @@
 <template>
-	<div class="full">
+	<div class="ug">
 		<!-- <router-link :to="{path: '/ug/productDetail'}" tag="div" style="position: relative; z-index: 1000000000; padding: 3em; background: #fff;" class="product-link">dddddddd</router-link> -->
 		<tabbar></tabbar>
 		<foot-guide></foot-guide>
@@ -53,5 +53,9 @@
 				border-bottom: 2px solid #ff4891;
 			}
 	    }
+	}
+	.ug ::-webkit-scrollbar {
+	    width: 0;
+	    height: 0;
 	}
 </style>

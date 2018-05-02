@@ -48,7 +48,7 @@
 </script>
 <style lang="less">
 	.section-classify{
-        position: absolute;
+        position: fixed;
         left: 0;
         top: 36px;
         bottom: 0;

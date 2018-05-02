@@ -43,5 +43,21 @@
 	}
 </script>
 <style lang="less">
-	
+	.banner{
+		img {
+			width:100%;
+			display:block;
+		}
+		.swiper-pagination {
+			left:auto;
+			right:7px;
+			bottom:7px;
+			width:auto;
+			padding:2px 7px;
+			border-radius:10px;
+			color:#fff;
+			background:rgba(0,0,0,.3);
+			font-size: 14px;
+		}
+	}
 </style>

@@ -457,7 +457,7 @@
 </script>
 <style lang='less'>
 	@import '~src/style/mixin';
-	// 添加gif的pullRefresh组件的父级需要加‘gif-show’的ClassName
+	/*添加gif的pullRefresh组件的父级需要加‘gif-show’的ClassName*/
 	.gif-show{
 		margin-top: 34px;
 	}
@@ -467,18 +467,14 @@
 		top: 0;
 		bottom: 0;
 		right: 0;
+		overflow-y: auto;
 	}
 	#top {
-		position:absolute;
+		position:fixed;
 		top:0;
 		z-index:2;
 		width:100%;
 		background:#fff;
-		/*.addr {
-			height:36px;
-			margin:0 auto;
-			display:block;
-		}*/
 		#nav {
 			border-bottom:1px solid #ebebeb;
 			height: 40px;
@@ -519,25 +515,9 @@
 	#page {
 		margin-bottom:50px;
 		height:100%;
+		overflow-y: auto;
 		.slidepage {
 			height: auto;
-			.banner{
-				img {
-					width:100%;
-					display:block;
-				}
-				.swiper-pagination {
-					left:auto;
-					right:7px;
-					bottom:7px;
-					width:auto;
-					padding:2px 7px;
-					border-radius:10px;
-					color:#fff;
-					background:rgba(0,0,0,.3);
-					font-size: 14px;
-				}
-			}
 		}
 	}
 	.scroll {
@@ -550,6 +530,11 @@
 	.ticket-item{
 		padding: 9px 2%;
 		box-sizing: border-box;
+	}
+
+	.tabber ::-webkit-scrollbar {
+	    width: 0;
+	    height: 0;
 	}
 
 	
