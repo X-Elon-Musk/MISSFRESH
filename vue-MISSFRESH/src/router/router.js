@@ -2,6 +2,7 @@ import App from '../App'
 
 const ug = r => require.ensure([], () => r(require('../page/ug/ug')), 'ug')
 const productDetail = r => require.ensure([], () => r(require('../page/ug/hash/productDetail')), 'productDetail')
+const safeDetection = r => require.ensure([], () => r(require('../page/ug/hash/safeDetection')), 'safeDetection')
 const city = r => require.ensure([], () => r(require('../page/city/city')), 'city')
 const member = r => require.ensure([], () => r(require('../page/member/member')), 'member')
 const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'cart')
@@ -35,6 +36,9 @@ export default [{
             children: [{
                 path: 'productDetail', //商品详情页
                 component: productDetail,
+            },{
+                path: 'safeDetection',
+                component: safeDetection//安心指纹
             }]
 		},
         // {

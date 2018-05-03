@@ -37,7 +37,7 @@
 			成为优享会员，预计1年将为你
 			<span>节省1121.30元</span>
 		</div>
-		<icons></icons>
+		<icons :icons="icons"></icons>
 		<img src="~images/invitation.png" class="invitation-img">
 		<ul class="other-items">
 			<li v-for="otherItem in otherItems">
@@ -89,7 +89,29 @@
 		  				to: '/',
 		  				text: '设置'
 		  			}
-		  		]
+		  		],
+		  		icons: [
+					{
+						src: require('images/icon/privilege_0.png'),
+						text: '会员专享价'
+					},
+					{
+						src: require('images/icon/privilege_1.png'),
+						text: '购物返现'
+					},
+					{
+						src: require('images/icon/privilege_2.png'),
+						text: '1小时送达'
+					},
+					{
+						src: require('images/icon/privilege_3.png'),
+						text: '会员商品'
+					},
+					{
+						src: require('images/icon/privilege_4.png'),
+						text: '专享客服'
+					}
+				]
 			}
 		},
 		components:{

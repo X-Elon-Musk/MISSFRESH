@@ -1,6 +1,10 @@
 <template>
     <ul class="icons">
-		<li class="icon">
+    	<li class="icon" v-for="(item,index) in icons" :key="index">
+			<img :src="item.src">
+			<span>{{item.text}}</span>
+		</li>
+		<!-- <li class="icon" v-for="(item,index) in items" :key="index">
 			<img src="~images/icon/privilege_0.png">
 			<span>会员专享价</span>
 		</li>
@@ -19,7 +23,7 @@
 		<li class="icon">
 			<img src="~images/icon/privilege_4.png">
 			<span>专享客服</span>
-		</li>
+		</li> -->
 	</ul> 
 </template>
 <script>
@@ -28,7 +32,8 @@
 			return {
 				
 			}
-		}
+		},
+		props: ['icons']
 	}
 </script>
 <style lang="less">

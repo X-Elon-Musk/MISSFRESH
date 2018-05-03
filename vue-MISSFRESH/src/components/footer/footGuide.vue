@@ -1,8 +1,8 @@
 <template>
 	<div>
         <ul class="foot-nav">
-        	<li class="nav-item" @click="goAddress({path: '/home'})">
-        		<span class="nav-icon nav-home" :style="{backgroundImage:$route.path.indexOf('home')==-1?`url(${backgroundImage.home})`:`url(${backgroundImage.homeActive})`}"></span>
+        	<li class="nav-item" @click="goAddress({path: '/ug'})">
+        		<span class="nav-icon nav-home" :style="{backgroundImage:$route.path.indexOf('ug')==-1?`url(${backgroundImage.home})`:`url(${backgroundImage.homeActive})`}"></span>
         		<p class="nav-label">首页</p>
         	</li>
         	<li class="nav-item" @click="goAddress({path: '/member'})">

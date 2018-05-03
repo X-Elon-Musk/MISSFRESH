@@ -22,3 +22,13 @@
 	line-height: @height;
     color: @color;
 }
+//设置处于当前状态时元素的边框
+.border(@left,@bottom,@height,@width,@color){
+	content: "";
+	position: absolute;
+	left: @left;
+	bottom: @bottom;
+	height: @height;
+	width: @width;
+	background: @color;
+}

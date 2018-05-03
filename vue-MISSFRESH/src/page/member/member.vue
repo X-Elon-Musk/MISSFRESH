@@ -8,7 +8,7 @@
 						<img src="~images/vip.png">
 					</div>
 				</div>
-				<icons></icons>
+				<icons :icons="icons"></icons>
 				<div class="vip-calculator">
 					<div class="calculator-content">
 						<div class="calculator-header">
@@ -96,6 +96,28 @@
 						vip: 19.9
 					}
 				],
+				icons: [
+					{
+						src: require('images/icon/privilege_0.png'),
+						text: '会员专享价'
+					},
+					{
+						src: require('images/icon/privilege_1.png'),
+						text: '购物返现'
+					},
+					{
+						src: require('images/icon/privilege_2.png'),
+						text: '1小时送达'
+					},
+					{
+						src: require('images/icon/privilege_3.png'),
+						text: '会员商品'
+					},
+					{
+						src: require('images/icon/privilege_4.png'),
+						text: '专享客服'
+					}
+				]
 			}
 		},
 		methods: {

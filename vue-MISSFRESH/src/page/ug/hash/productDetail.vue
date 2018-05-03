@@ -48,6 +48,16 @@
     			<div class="padding_common share-volume">已经有<span>1172</span>人分享了该商品</div>
     		</li>
     	</ul>
+    	<div class="padding_common product-safe-area">
+    		<div class="clearfix security-tit">
+    			<span class="security-tit-title">安心指纹</span>
+    			<span class="f_r security-tit-see">点击查看 ></span>
+    		</div>
+    		<p class="security-txt">经14项感官排查64项农残专检，100%可溯，点标签查看。</p>
+    		<div class="scroll-box">
+    			<icons :icons="icons"></icons>
+    		</div>
+    	</div>
     	<div class="buyer-said">
     		<div class="buyer-area-person">
     			<div class="clearfix flexbox">
@@ -102,15 +112,26 @@
 <script>
 	import carousel from 'src/components/carousel/carousel'
 	import price from 'src/components/price/price'
+	import icons from 'src/components/icons/icons'
 	export default{
 		data(){
 			return {
-				
+				icons: [
+					{
+						src: require('images/icon/security_1_0.png'),
+						text: '优鲜安心检测'
+					},
+					{
+						src: require('images/icon/security_2_0.png'),
+						text: '100%品控检测'
+					}
+				]
 			}
 		},
 		components: {
 			carousel,
-			price
+			price,
+			icons
 		}
 	}
 </script>
@@ -252,13 +273,33 @@
 					}
 				}
 				.share-volume{
-					padding: 0.5em 3% 4em;
+					padding: 0.5em 3% 2em;
 					color: @color_gray;
 				}
 			}
 		}
+		.product-safe-area{
+			.font(1.4em,0.8em,@color_gray);
+			.security-tit{
+				.security-tit-title{
+					line-height: 2.2em;
+					color: @color_common;
+					font-weight: 700;
+
+				}
+				.security-tit-see{
+
+				}
+			}
+			.security-txt{
+				padding-bottom: 1em;
+			}
+			.scroll-box{
+
+			}
+		}
 		.buyer-said{
-			margin: 1em 3% 2em;
+			margin: 3em 3% 2em;
 		    box-sizing: border-box;
 			.buyer-area-person{
 				box-shadow: 0 0.125rem 0.5rem 0 #E7E7E7;
