@@ -51,7 +51,10 @@
     	<div class="padding_common product-safe-area">
     		<div class="clearfix security-tit">
     			<span class="security-tit-title">安心指纹</span>
-    			<span class="f_r security-tit-see">点击查看 ></span>
+    			<router-link :to="{path: 'safeDetection'}" tag='span' class="f_r security-tit-see">
+    				点击查看 >
+    			</router-link>	
+    			<!-- <span class="f_r security-tit-see">点击查看 ></span> -->
     		</div>
     		<p class="security-txt">经14项感官排查64项农残专检，100%可溯，点标签查看。</p>
     		<div class="scroll-box">
@@ -166,13 +169,7 @@
 				display: inline-block;
 				height: 100%;
 				&:after{
-					content: "";
-					position: absolute;
-					left: 0;
-					bottom: -1px;
-					height: 2px;
-					width: 100%;
-					background: @color_main;
+					.border(0,-1px,2px,100%,@color_main);
 				}
 			}
 			.share-icon{
@@ -214,13 +211,7 @@
 				position: relative;
 				margin-left: 1em;
 				&:before{
-					content: "";
-					position: absolute;
-					left: 0;
-					top: 8px;
-					height: 2px;
-					width: 2px;
-					background: @color_common;
+					.border(0,0,2px,2px,@color_common,8px);
 				}
 			}
 			li:nth-of-type(1){

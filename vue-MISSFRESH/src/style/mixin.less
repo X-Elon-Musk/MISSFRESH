@@ -23,11 +23,12 @@
     color: @color;
 }
 //设置处于当前状态时元素的边框
-.border(@left,@bottom,@height,@width,@color){
+.border(@left,@bottom,@height,@width,@color,@top: auto){
 	content: "";
 	position: absolute;
 	left: @left;
 	bottom: @bottom;
+	top: @top;
 	height: @height;
 	width: @width;
 	background: @color;
