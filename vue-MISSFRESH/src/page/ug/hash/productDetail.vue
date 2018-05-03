@@ -2,7 +2,7 @@
     <div class="product-detail">
     	<div class="clearfix section-header">
     		<span class="header-text">商品详情</span>
-    		<strong class="share-icon"></strong>
+    		<strong class="share-icon" @click="shareAction(true)"></strong>
     	</div>
     	<div class="product-img-container">
     		<carousel></carousel>
@@ -40,10 +40,10 @@
     			<div class="clearfix vip-share-item">
     				<span class="f_l item-card"></span>
     				<div class="f_l item-text">
-    					分享有机会得30元红包
-    					<span class="doubt"></span>
+    					<span>分享有机会得30元红包</span>
+    					<span class="doubt" @click="doubtAction(true)"></span>
     				</div>
-    				<span class="f_r go-on">去分享></span>
+    				<span class="f_r go-on" @click="shareAction(true)">去分享></span>
     			</div>
     			<div class="padding_common share-volume">已经有<span>1172</span>人分享了该商品</div>
     		</li>
@@ -110,6 +110,31 @@
     		<li><img src="~src/images/productdetail/15.jpg" alt=""></li>
     		<li><img src="~src/images/productdetail/16.jpg" alt=""></li>
     	</ul>
+    	<div class="weui-mask" v-show="share">
+    		<div class="mask-bg" @click="shareAction(false)"></div>
+    		<div class="weui-mask-buttons">
+    			<ul class="share-menu">
+    				<li class="menu-item share-wechat" @click="shareMode('wechat')">微信好友</li>
+    				<li class="menu-item share-circle" @click="shareMode('circle')">朋友圈</li>
+    			</ul>
+    			<div class="share-cancle" @click="shareAction(false)">取消</div>
+    		</div>
+    	</div>
+    	<div class="weui-mask" v-show="dialog">
+    		<div class="mask-bg" @click="dialogAction(false)"></div>
+    		<div class="weui-mask-dialog">
+    			<div class="share-name">快来看好商品！<span>「千禧圣女果500g*1盒」</span></div>
+    			<div class="share-link">长按文字及链接复制 分享给好友</div>
+    			<div class="share-cancle" @click="dialogAction(false)">取消</div>
+    		</div>
+    	</div>
+    	<div class="weui-mask" v-show="doubt">
+    		<div class="mask-bg" @click="doubtAction(false)"></div>
+    		<div class="weui-mask-dialog share-doubt">
+    			<div class="clearfix share-title"><span class="f_r" @click="doubtAction(false)"></span></div>
+    			<div class="share-text">分享商品，邀请新用户点击链接并下单，可得59减30元红包。会员分享商品，非会员下单签收后，会员得5%返现。</div>
+    		</div>
+    	</div>
     </div>  
 </template>
 <script>
@@ -128,7 +153,25 @@
 						src: require('images/icon/security_2_0.png'),
 						text: '100%品控检测'
 					}
-				]
+				],
+				share: false,
+				dialog: false,
+				doubt: false
+			}
+		},
+		methods: {
+			shareAction(state){
+				this.share=state;
+			},
+			shareMode(mode){
+				this.share=false;
+				this.dialog=true;
+			},
+			dialogAction(state){
+				this.dialog=state;
+			},
+			doubtAction(state){
+				this.doubt=state;
 			}
 		},
 		components: {
@@ -230,7 +273,7 @@
 				}
 				.item-text{
 					margin-left: 5%;
-					width: 50%;
+					width: 60%;
 					line-height: 25px;
 					span{
 						display: block;
@@ -239,16 +282,25 @@
 							color: @color_main;
 						}
 					}
+					.doubt{
+						display: inline-block;
+						margin-top: 10px;
+						.bg(30px,30px,transparent,'~src/images/icon/doubt.png',80% 80%);
+					}
 				}
 				.go-on{
 					width: 20%;
 					line-height: 50px;
 				}
 			}
-			.vip-info{
+			.share-info{
 				.vip-share-item{
 					.item-text{
-
+						span{
+							display: inline-block;
+							line-height: 50px;
+							vertical-align: top;
+						}
 					}
 				}
 			}
@@ -365,6 +417,84 @@
 					margin: 0;
 					padding: 0;
 					.wh(auto);
+				}
+			}
+		}
+		.weui-mask{
+			position: fixed;
+		    z-index: 3;
+		    top: 0;
+		    right: 0;
+		    left: 0;
+		    bottom: 0;
+		    background: transparent;
+		    .mask-bg{
+		    	.wh(100%);
+		    	background: rgba(0, 0, 0, 0.6);
+		    }
+			.weui-mask-buttons{
+				position: absolute;
+			    left: 0;
+			    bottom: 0;
+			    width: 100%;
+				background-color: #efeff4;
+				.share-menu{
+					.menu-item{
+						.wh(2.6em);
+						.font(2.6em);
+						text-align: center;
+						position: relative;
+						&:nth-of-type(1):after{
+							.border(0,0,1px,100%,#D5D5D6);
+						}
+						&:nth-of-type(2){
+							padding-bottom: 4px;
+						}
+						&:nth-of-type(2):after{
+							.border(0,0,4px,100%,#D5D5D6);
+						}
+					}
+				}
+			}
+			.share-cancle{
+				.wh(2.6em);
+				.font(2.6em);
+				text-align: center;
+			}
+			.weui-mask-dialog{
+				position: absolute;
+			    width: 80%;
+			    top: 50%;
+			    left: 50%;
+			    transform: translate(-50%, -50%);
+			    background-color: #FFFFFF;
+			    text-align: center;
+			    border-radius: 0.2em;
+			    overflow: hidden;
+			    box-sizing: border-box;
+				.share-name{
+					padding: 2em 6% 0;
+					.font(1.4em);
+				}
+				.share-link{
+					padding: 2em 6% 1.5em;
+					.font(1em,0.8em,@color_gray);
+				}
+				.share-cancle{
+					border-top: 1px solid #D5D5D6;
+				}
+			}
+			.share-doubt{
+				.share-title{
+					height: 36px;
+					span{
+						.wh(36px,36px);
+						.bg(36px,36px,#fff,'~src/images/icon/share-close.png',80% 80%);
+					}
+				}
+				.share-text{
+					padding: 0.4em 6% 1.5em;
+					.font(1.4em,0.8em,@color_gray);
 				}
 			}
 		}
