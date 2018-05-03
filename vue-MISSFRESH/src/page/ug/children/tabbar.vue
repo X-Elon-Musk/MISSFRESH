@@ -55,7 +55,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								3
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -65,7 +65,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								4
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -75,7 +75,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								5
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -85,7 +85,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								6
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -95,7 +95,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								7
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -105,7 +105,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								8
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -115,7 +115,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								9
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -125,7 +125,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								10
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -135,7 +135,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								11
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -145,7 +145,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								12
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -155,7 +155,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								13
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -165,7 +165,7 @@
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
 								14
-				          		<img src="~src/images/fresh-news/0.jpg">
+				          		<img src="~src/images/carousel/0.jpg">
 				      		</div>
 				        </div>
 			      	</div>
@@ -175,7 +175,7 @@
 
 		  	</div>
 		</div>
-		<!-- <div class="img" id="footer"><img src="../../images/fresh-news/0.jpg"></div> -->
+		<!-- <div class="img" id="footer"><img src="../../images/carousel/0.jpg"></div> -->
 
 		
 	</div>
