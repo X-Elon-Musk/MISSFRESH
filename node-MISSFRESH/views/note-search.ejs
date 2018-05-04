@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link rel="icon" href="/images/favicon.ico">
+    <title>node-note</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/reset.less" rel="stylesheet/less"/>
+    <link href="/css/main.less" rel="stylesheet/less"/>
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <script src="/js/less.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/zepto.js"></script>
+    <script src="/js/knockout-3.4.0.js"></script>
+</head>
+<body>
+
+<div class="container note-search note-notes" id="notes">
+    <header class="clearfix header">
+        <a href="javascript:history.back(-1);" class="return-button">
+            <i class="fa fa-chevron-left fa-lg memorandum"></i>
+        </a>
+        <a href="/noteUser" class="user-info f_r">
+            <i class="fa fa-user fa-lg"></i>
+            <%=username%>
+        </a>
+    </header>
+    <div class="content">
+        <div class="note-search-input">
+            <i class="fa fa-search fa-lg search-icon"></i>
+            <input type="text" class="form-control" id="search" placeholder="搜索">
+        </div>
+        <div class="notes">
+            <ul class="notes-items" data-bind="foreach:{data: notes},visible: notes().length>0" id="notes-items">
+                <li class="notes-item clearfix" data-bind="attr:{id:id}">
+                   <div class="item-container f_l" data-bind="zepto: $root.zepto">
+                        <div class="item-title">
+                            <span data-bind="text:note_show.note_analyze(text).title"></span>
+                        </div>
+                        <div class="item-content">
+                            <span data-bind="text:note_show.time_change(time)" class="item-time"></span>
+                            <span data-bind="text:note_show.note_analyze(text).content" class="item-text"></span>
+                        </div>
+                    </div>
+                    <!-- <div class="item-delete" style="" data-bind="delete_note: $root.delete_note">
+                        <i class="fa fa-trash fa-lg"></i>
+                    </div> -->
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        $('#search').focus();
+    })
+    var notes_list;
+    //备忘录搜索
+    var Note_search=function () {
+        this.init();
+    }
+    Note_search.prototype={
+        constructor: Note_search,
+        init: function () {
+            this.bind('');
+            this.search();
+        },
+        //搜索
+        search: function () {
+            var _this=this;
+            $('#search').bind('input',function () {
+                _this.search_ajax();
+            })
+        },
+        //数据请求
+        search_ajax: function () {
+            var _this=this;
+            if ($('#search').val()=='') {
+                this.bind(''); 
+                return;            
+            }
+            $.post('/search',{
+                'text': $('#search').val()
+            },function (result) {
+                if (result!=='-2') {
+                    _this.bind(JSON.parse(result).text);
+                } else{
+                    alert('错误！'); 
+                }
+            })
+        },
+        //数据绑定
+        bind: function (result) {
+            if (!notes_list) {
+                notes_list={
+                    notes: ko.observableArray()
+                }
+                ko.applyBindings(notes_list,document.getElementById("notes-items"));             
+            }
+            notes_list.notes(result);
+        }
+    }
+    var note_search=new Note_search(); 
+
+    //备忘录显示
+    var Note_show=function () {};
+    Note_show.prototype={
+        constructor: Note_show,
+        init: function () {
+
+        },
+        //时间格式修改   
+        time_change: function (text) {
+            var content=text.replace(/([^\u0000-\u00FF])/g,'/')
+            return content;
+        },
+        //获得备忘笔记的头部和内容部分
+        note_analyze: function (text) {
+            var obj={};
+            var arr=text.split('\r\n');
+            if (arr[0].length>=20) {
+                obj.title=text.substring(0,19);
+                obj.content=text.substring(20);      
+            } else{
+                obj.title=arr[0];
+                obj.content=text.substring(arr[0].length); 
+            }
+            return obj;
+        }     
+    }
+    var note_show=new Note_show();
+    //zepto手势事件
+    var Zepto=function () {};
+    Zepto.prototype={
+        constructor: Zepto,
+        init: function (element) {
+            //事件调用
+            this.zepto_tap(element);
+        },
+        //点击
+        zepto_tap: function (element) {
+            var _this=this;
+            $(element).tap(function () {
+                var id=$(this).parent().attr('id');
+                window.location="/noteEdit/"+id; 
+            })
+        }
+    }  
+    var zepto=new Zepto();
+    //备忘录操作
+    //自定义‘zepto’事件
+    ko.bindingHandlers.zepto={
+        init: function (element) {
+            zepto.init(element);
+        }
+    };
+</script>
+</body>
+</html>
