@@ -14,6 +14,7 @@
 	}
 </script>
 <style lang="less">
+    @import '~src/style/mixin';
 	.refresh-gif{
 		text-align: center;
 		padding: 0;
@@ -22,10 +23,7 @@
 		span{
 			text-align: center;
 			display: inline-block;
-			height: 43px;
-			width: 43px;
-			background: url(~images/loading.gif) no-repeat;
-			background-size: 100% 100%;
+			.bg(93px, 43px,transparent,'~images/icon/loading-gif-vip.gif',100% 100%);
 		}
 	}
 </style>

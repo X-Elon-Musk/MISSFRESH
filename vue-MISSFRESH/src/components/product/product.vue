@@ -3,7 +3,8 @@
     	<router-link :to="{path: '/ug/productDetail',query:{id}}" tag="div" class="clearfix product-link">
 			<div class="f_l product-img">
 				<span v-bind:class="{hot_0:product.hot==0,hot_1:product.hot==1,hot_2:product.hot==2}"></span>
-				<img src="~images/product_0.jpg">
+				<!-- <img src="~images/product_0.jpg"> -->
+				<img src="" v-lazy="img" alt="">
 			</div>
 			<div class="f_r product-info">
 				<p class="name">{{product.name}}</p>
@@ -30,7 +31,7 @@
 	export default{
 		data(){
 			return {
-				
+				img: require('images/product_0.jpg')
 			}
 		},
 		props: ['product','id'],

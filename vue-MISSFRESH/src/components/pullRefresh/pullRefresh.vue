@@ -29,11 +29,9 @@
 		},
 		props: ['tabIndex'],
 		mounted (){
-			console.log(this.pullRefresh);
 			this.$nextTick(() => {
 				if (!this.pullRefresh) this.refresh();
-				// console.log(typeof this.pullRefresh);
-            })
+			})
 		},
 		methods: {
 			//下拉刷新、上滑加载初始化函数
@@ -64,7 +62,7 @@
 			// 下拉刷新、上滑加载动作触摸释放时执行
 			touchEnd: function () {
 				var _this=this;
-				console.log(this.translate,this.startPosition);
+				//console.log(this.translate,this.startPosition);
 				if (this.translate<this.startPosition) {
 	                setTimeout(()=>{
 	                	//发送ajax请求

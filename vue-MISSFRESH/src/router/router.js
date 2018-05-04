@@ -45,11 +45,7 @@ export default [{
                 component: safeDetection//安心指纹
             }]
 		},
-        // {
-        //     path: 'productDetail', //商品详情页
-        //         component: productDetail,
-        // },
-		{
+        {
 			path: '/city/:cityid',
 			component: city
 		},

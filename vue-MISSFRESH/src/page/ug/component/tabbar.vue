@@ -413,8 +413,7 @@
 	        //发送ajax,请求数据
 	        getData: function () {
 	        	//发送ajax请求
-	        	console.log(111);
-              	for(var i = 0; i <3; i++) {
+	        	for(var i = 0; i <3; i++) {
               	  	this.products[this.tabIndex].push({
               	  		id: 0,
 						hot: 0,
