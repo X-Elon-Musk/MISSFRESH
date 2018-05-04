@@ -11,7 +11,7 @@
 </template>
 <script>
 	import footGuide from 'src/components/footer/footGuide'
-	import tabbar from './children/tabbar'
+	import tabbar from './component/tabbar'
 	
 	export default{
 		data(){

@@ -1,8 +1,8 @@
 import App from '../App'
 
 const ug = r => require.ensure([], () => r(require('../page/ug/ug')), 'ug')
-const productDetail = r => require.ensure([], () => r(require('../page/ug/hash/productDetail')), 'productDetail')
-const safeDetection = r => require.ensure([], () => r(require('../page/ug/hash/safeDetection')), 'safeDetection')
+const productDetail = r => require.ensure([], () => r(require('../page/ug/children/productDetail')), 'productDetail')
+const safeDetection = r => require.ensure([], () => r(require('../page/ug/children/safeDetection')), 'safeDetection')
 const city = r => require.ensure([], () => r(require('../page/city/city')), 'city')
 const member = r => require.ensure([], () => r(require('../page/member/member')), 'member')
 const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'cart')
@@ -14,6 +14,10 @@ const setusername = r => require.ensure([], () => r(require('../page/profile/chi
 const address = r => require.ensure([], () => r(require('../page/profile/children/children/address')), 'address')
 const add = r => require.ensure([], () => r(require('../page/profile/children/children/children/add')), 'add')
 const addDetail = r => require.ensure([], () => r(require('../page/profile/children/children/children/children/addDetail')), 'addDetail')
+
+
+
+const loading = r => require.ensure([], () => r(require('../components/loading/loading')), 'loading')
 
 
 import Vue from 'vue'
@@ -96,6 +100,10 @@ export default [{
                 path: 'service', //服务中心
                 component: service,
             },]
+        },
+        {
+            path: '/loading',
+            component: loading
         },
 	]
 }]

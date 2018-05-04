@@ -187,10 +187,10 @@
 
     import mheader from './mheader'
     import carousel from 'src/components/carousel/carousel'
-    import guarantee from './children/guarantee'
-    import card from './children/card'
+    import guarantee from './component/guarantee'
+    import card from './component/card'
     import product from 'src/components/product/product'
-    import classify from './children/classify'
+    import classify from './component/classify'
     import pullRefresh from 'src/components/pullRefresh/pullRefresh'
     import gif from 'src/components/gif/gif'
 	export default{

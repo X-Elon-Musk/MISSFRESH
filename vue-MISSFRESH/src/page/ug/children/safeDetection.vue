@@ -97,8 +97,7 @@
 			li{
 				img{
 					display: inline-block;
-					width: 100%;
-					height: auto;
+					.wh(auto,100%);
 				}
 			}
 		}
