@@ -39,24 +39,33 @@
 		</div>
 		<icons :icons="icons"></icons>
 		<img src="~images/invitation.png" class="invitation-img">
-		<ul class="other-items">
-			<li v-for="otherItem in otherItems">
+		<div class="other-items">
+			<!-- <div v-for="otherItem in otherItems">
 				<router-link :to="otherItem.to">
 					<span>{{otherItem.text}}</span>
 					<span class="arrow"></span>
 				</router-link>
-			</li>
-		</ul>
+			</div> -->
+			<profileItem v-for="(item,index) in otherItems" :to="item.to" :text="item.text" :arrow="true" :key="index"></profileItem>
+		</div>
+		<transition name="sideslip" mode="out-in">
+			<router-view v-if="!$route.meta.keepAlive"></router-view>
+		</transition>
 		<foot-guide></foot-guide>
 	</div>
 </template>
 <script>
 	import footGuide from 'src/components/footer/footGuide'
 	import icons from 'src/components/icons/icons'
+	import profileItem from './component/profileItem'
 	export default{
 		data(){
 			return {
 				otherItems: [
+					{
+		  				to: '/profile/safe',
+		  				text: '账户与安全'
+		  			},
 		  			{
 		  				to: '/',
 		  				text: '我的订单'
@@ -116,7 +125,8 @@
 		},
 		components:{
 	        footGuide,
-	        icons
+	        icons,
+	        profileItem
 	    },
 	}
 </script>
@@ -212,32 +222,16 @@
 			padding-top: 25px;
 			width: 100%;
 			background: #fff;
-			li{
-				line-height: 60px;
-				width: 90%;
-				display: block;
-				color: #000;
-				font-size: 15px;
-				background: #fff;
-				margin-left: 16px;
-				border-top: 1px solid #f0f0f0;
-				position: relative;
-				&:after{
-					content: "";
-					.bg(17px,17px,transparent,'~images/icon/right-jiantou.png',100% 100%);
-					background-size: 100% 100%;
-					position: absolute;
-					right: 0;
-					top: 21px;
-				}
-				a{
-					display: inline-block;
-					.wh(100%);
-					color: #000;
-				}
-			}
+			
 		}
 	}
+	.sideslip-enter-active, .sideslip-leave-active {
+        transition: all .4s;
+    }
+    .sideslip-enter, .sideslip-leave-active {
+        transform: translate3d(100%, 0, 0);
+        // opacity: 0;
+    }
 	.my-center ::-webkit-scrollbar{
 		display: none;
 	}

@@ -8,6 +8,7 @@ const member = r => require.ensure([], () => r(require('../page/member/member'))
 const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'cart')
 const cartDetail = r => require.ensure([], () => r(require('../page/cart/children/cartDetail')), 'cartDetail')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
+const safe = r => require.ensure([], () => r(require('../page/profile/children/safe')), 'safe')
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
 const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
 const setusername = r => require.ensure([], () => r(require('../page/profile/children/children/setusername')), 'setusername')
@@ -74,28 +75,30 @@ export default [{
             path: '/profile',
             component: profile,
             children: [{
-                path: 'info', //个人信息详情页
-                component: info,
-                children: [{
-                    path: 'setusername',
-                    component: setusername,
+                    path: 'safe',//账户与安全
+                    component: safe,
                 },{
-                    path: 'address',
-                    component: address,     //编辑地址
-                    children:[{
-                        path:'add',
-                        component:add,
-                        children:[{
-                            path:'addDetail',
-                            component:addDetail
+                    path: 'info', //个人信息详情页
+                    component: info,
+                    children: [{
+                            path: 'setusername',
+                            component: setusername,
+                        },{
+                            path: 'address',
+                            component: address,     //编辑地址
+                            children:[{
+                                    path:'add',
+                                    component:add,
+                                    children:[{
+                                            path:'addDetail',
+                                            component:addDetail
+                                        }]
+                                }]
                         }]
-                    }]
+                },{
+                    path: 'service', //服务中心
+                    component: service,
                 }]
-            },
-            {
-                path: 'service', //服务中心
-                component: service,
-            },]
         },
         {
             path: '/loading',
