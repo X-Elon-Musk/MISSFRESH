@@ -22,8 +22,9 @@ app.use(express.static("./public",{
 
 
 app.get('/test',router.test);
+app.get('/sql',router.sql);
 
 app.listen(3390);
 app.listen(app.get('port'), function () {
-    console.log('node-note');
+    console.log('======启动服务======');
 });

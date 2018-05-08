@@ -6,34 +6,50 @@ var md5=require('../model/md5.js');
 /*const accessKeyId = 'LTAINkfU7xNmo0qb'
 const secretAccessKey = 'WNce8J1x0TQFkb57jYOnXW2xyM8pD7'*/
 
-//操作用户数据库
-var User_sql=function () {};
-User_sql.prototype={
-    constructor: User_sql,
-    init: function () {
-        
-    },
-    insert: function (username,password,qq_wechat) {
-        if (qq_wechat) {
-            return 'insert into users(username,'+qq_wechat+'_openId,'+qq_wechat+'_accessToken,'+qq_wechat+'_figureurl) values(?,?,?,?)';                                
-        } else{
-            return 'insert into users('+username+','+password+') values(?,?)';
-        }
-    },
-    select: function (condition,column) {
-        if (!column) column='*';
-        return 'select '+column+' from users where '+condition+'=?';
-    },
-    update: function (column,condition) {
-        return 'update users set '+column+'=? where '+condition+'=?';
-    }
-}
-//操作备忘录数据库
+
+/*//操作备产品数据库
 var Product_sql=function () {};
 Product_sql.prototype={
     constructor: Product_sql,
     init: function () {
         
+    },
+    selectAll: function (column,condition,additional) {
+        return 'select '+column+' from products where '+condition+'=?'+additional;
+    },
+    insert: function (user_id,text,time) {
+        return 'insert into notes('+user_id+','+text+','+time+') values(?,?,?)';
+    },
+    select: function (column,condition,additional) {
+        if (!additional) additional=''; 
+        return 'select '+column+' from notes where '+condition+'=?'+additional;
+    },
+    //模糊查找
+    select_fuzzy: function (text,column) {
+        if (!column) column='*';
+        return 'select '+column+' from notes where '+text+' like concat("%",?,"%") and user_id=?'  
+    },
+    update: function (condition) {
+        return 'update notes set time=?,text=? where '+condition+'=?';
+    },
+    delete: function (condition) {
+        return 'delete from notes where '+condition+'=?';   
+    },
+    //删除后显示下一条信息
+    delete_select: function () {
+        return 'select * from notes where id=(select min(id) from notes where id>? and user_id=?)';
+    }
+}*/
+
+//操作备产品数据库
+var Product_sql=function () {};
+Product_sql.prototype={
+    constructor: Product_sql,
+    init: function () {
+        
+    },
+    selectAll: function () {
+        return 'select * from products';
     },
     insert: function (user_id,text,time) {
         return 'insert into notes('+user_id+','+text+','+time+') values(?,?,?)';
@@ -58,7 +74,7 @@ Product_sql.prototype={
         return 'select * from notes where id=(select min(id) from notes where id>? and user_id=?)';
     }
 }
-var user_sql=new User_sql();
+
 var product_sql=new Product_sql();
 
 
@@ -70,6 +86,11 @@ exports.test=function (req,res) {
     };
     res.type('application/json');
     res.jsonp(obj);
+}
+exports.sql=function (req,res) {
+    mysql(product_sql.selectAll(),function (err,result) {
+        console.log(result);
+    })
 }
     
 
