@@ -5,6 +5,8 @@ import routes from './router/router'
 
 import FastClick from 'fastclick'
 
+import axios from 'axios'
+
 // import 'swiper/dist/css/swiper.min.css';
 // import Swiper from "swiper";
 
@@ -33,6 +35,8 @@ Vue.use(VueLazyload, {
   	loading: defaultImage,
   	attempt: 1
 })
+
+Vue.prototype.axios=axios
 
 const router = new VueRouter({
 	routes,

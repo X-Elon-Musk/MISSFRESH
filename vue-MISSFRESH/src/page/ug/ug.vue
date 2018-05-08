@@ -12,12 +12,22 @@
 <script>
 	import footGuide from 'src/components/footer/footGuide'
 	import tabbar from './component/tabbar'
-	
+
 	export default{
 		data(){
 			return {
 				selected:'热卖'
 			}
+		},
+		mounted: function () {
+			this.axios.get('http://10.0.8.11:3390/sql')
+			.then(function (response) {
+				console.log(response.data);
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 		},
 		components: {
 	    	footGuide,
