@@ -90,6 +90,8 @@ exports.test=function (req,res) {
 exports.sql=function (req,res) {
     mysql(product_sql.selectAll(),function (err,result) {
         console.log(result);
+        res.type('application/json');
+        res.jsonp(result);
     })
 }
     
