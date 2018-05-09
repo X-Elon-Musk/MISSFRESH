@@ -7,15 +7,19 @@ var connection=mysql.createConnection({
 })
 
 connection.connect();
-//操作数据库
-exports.mysql=function (sql,params,callback) {
-	connection.query(sql,params,function (err,result) {
-		if (err) {
-			callback(err,null);
-			return;
-		} else{
-			callback(null,result);
-		}		
-	})
-	// connection.end();
+var Mysql=function () {};
+Mysql.prototype={
+	constructor: Mysql,
+	async mysql_(sql,params){
+		var result=await new Promise((resolve, reject) =>{
+			connection.query(sql,params,function (err,result) {
+				if(err){
+	              	reject(err)
+	            }
+	            resolve(result)	
+			})
+	    })
+	    return result;
+	}
 }
+export default new Mysql();
