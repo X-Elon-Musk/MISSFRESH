@@ -20,31 +20,30 @@
 		  	<div class="swiper-wrapper">
 
 				<!-- nav对应页面 -->
-		      	<div class="swiper-slide slidepage swiper-container gif-show">
+		      	<!-- <div class="swiper-slide slidepage swiper-container gif-show">
 
 		      		<pullRefresh :tabIndex="tabIndex" @getData="getData">
 		      			<gif></gif>
-		      			<!-- 内容部分 -->
-						<carousel></carousel>
+		      			<carousel></carousel>
 						<guarantee></guarantee>
 						<card></card>
-						<!-- 上滑加载、下拉刷新 -->
 						<div class="clearfix list-group-item ticket-item" v-for="item in products[0]">
 							<product :product="item" :id="item.id"></product>
 						</div>
 		      		</pullRefresh>
 		      		
 
-		      	</div>
+		      	</div> -->
+		      	<productHot :productsHot="products.products_hot"></productHot>
+		      	<!-- <productHot></productHot>
+		      	<productHot></productHot> -->
 
 			    <div class="swiper-slide slidepage swiper-container gif-show">
 			        <pullRefresh :tabIndex="tabIndex" @getData="getData">
 			        	<gif></gif>
-		      			<!-- 内容部分 -->
-						<carousel></carousel>
+		      			<carousel></carousel>
 						<guarantee></guarantee>
 						<card></card>
-						<!-- 上滑加载、下拉刷新 -->
 						<div class="clearfix list-group-item ticket-item" v-for="item in products[1]">
 							<product :product="item"></product>
 						</div>
@@ -193,6 +192,7 @@
     import classify from './component/classify'
     import pullRefresh from 'src/components/pullRefresh/pullRefresh'
     import gif from 'src/components/gif/gif'
+    import productHot from './component/productHot'
 	export default{
 		data(){
 			return {
@@ -334,7 +334,10 @@
 				//上滑加载初始的位置
 				startPosition:0,
 				//上滑加载滑动的位置
-				translate: 0
+				translate: 0,
+				products: {
+					products_hot:[]
+				}
 			}
 		},
 		mounted (){
@@ -343,6 +346,8 @@
 				if (!this.navSwiper) this.tab();
 				if (!this.pageSwiper) this.page();
 				// if (!this.pullRefresh) this.refresh();
+
+				this.getData_();
             })
 		},
 		methods: {
@@ -410,6 +415,19 @@
 	  				navSwiper.setTranslate((clientWidth-parseInt(navSlideWidth))/2-navActiveSlideLeft)
 	  			}
 			},
+			getData_: function () {
+				var _this=this;
+				this.axios.get('http://10.0.8.11:3390/getProduct')
+				.then(function (response) {
+					console.log(response.data);
+					// console.log(response);
+					_this.products.products_hot=_this.products.products_hot.concat(response.data.products);
+					console.log(_this.products.products_hot);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			},
 	        //发送ajax,请求数据
 	        getData: function () {
 	        	//发送ajax请求
@@ -450,7 +468,8 @@
 			product,
 			classify,
 			pullRefresh,
-			gif
+			gif,
+			productHot
 		},
 	}
 </script>

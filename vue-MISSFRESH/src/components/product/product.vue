@@ -1,9 +1,8 @@
 <template>
     <div class="product">
-    	<router-link :to="{path: '/ug/productDetail',query:{id}}" tag="div" class="clearfix product-link">
+    	<!-- <router-link :to="{path: '/ug/productDetail',query:{id}}" tag="div" class="clearfix product-link">
 			<div class="f_l product-img">
 				<span v-bind:class="{hot_0:product.hot==0,hot_1:product.hot==1,hot_2:product.hot==2}"></span>
-				<!-- <img src="~images/product_0.jpg"> -->
 				<img src="" v-lazy="img" alt="">
 			</div>
 			<div class="f_r product-info">
@@ -14,13 +13,36 @@
 				</ul>
 				<p class="price">
 					商城价
-					<!-- <span>{{product.price}}</span> -->
 					<price :price="product.price"></price>
 				</p>
 				<p class="vip">
 					会员专享价
 					<price :price="product.vip"></price>
 				</p>
+				<img src="~images/icon/shopping-cart.png" class="shopping-cart-img">
+			</div>
+		</router-link> -->
+
+
+		<router-link :to="{path: '/ug/productDetail',query:{id: product.product_id,index: product.product_index}}" tag="div" class="clearfix product-link">
+			<div class="f_l product-img">
+				<!-- <span v-bind:class="{hot_0:product.hot==0,hot_1:product.hot==1,hot_2:product.hot==2}"></span> -->
+				<img src="" v-lazy="product.image" alt="">
+			</div>
+			<div class="f_r product-info">
+				<p class="name">{{product.name}}</p>
+				<p class="point">{{product.subtitle}}</p>
+				<!-- <ul class="preferential">
+					<li v-for="item in product.preferential">{{item}}</li>
+				</ul> -->
+				<!-- <p class="price">
+					商城价
+					<price :price="product.price"></price>
+				</p>
+				<p class="vip">
+					会员专享价
+					<price :price="product.vip"></price>
+				</p> -->
 				<img src="~images/icon/shopping-cart.png" class="shopping-cart-img">
 			</div>
 		</router-link>
@@ -34,7 +56,7 @@
 				img: require('images/product_0.jpg')
 			}
 		},
-		props: ['product','id'],
+		props: ['product'],
 		components: {
 			price
 		}

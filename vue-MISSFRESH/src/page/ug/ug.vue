@@ -20,7 +20,7 @@
 			}
 		},
 		mounted: function () {
-			this.axios.get('http://10.0.8.11:3390/sql')
+			this.axios.get('http://10.0.8.11:3390/getProduct')
 			.then(function (response) {
 				console.log(response.data);
 				console.log(response);

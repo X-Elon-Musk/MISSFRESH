@@ -6,12 +6,23 @@ var app = express();
 // var router=require('./router/index.js');
 var session =require('express-session');
 import Location from './router/location.js'
+import Product from './router/product.js'
 //使用session
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true
 }))
+
+//静态。(设置Response Headers请求头的Cache-Control为max-age=7200)
+app.use(express.static("./public",{
+    maxage: '30d'
+}));
+
+app.get('/public/images/*', function (req, res) {
+    res.sendFile( __dirname + "/" + req.url );
+    console.log("Request for " + req.url + " received.");
+})
 
 //设置跨域访问
 app.all('*', function(req, res, next) {
@@ -24,16 +35,9 @@ app.all('*', function(req, res, next) {
 });
   
 
-// router(app);
-app.get('/sql',Location.sql);
-// app.get('/sql',function (req,res) {
-//     // res.send('测试数据');
-//     var obj={
-//         'text': '测试数据'
-//     };
-//     res.type('application/json');
-//     res.jsonp(obj);
-// });
+app.get('/getProduct',Product.getProduct);
+
+
 
 app.listen(3390);
 app.listen(app.get('port'), function () {
