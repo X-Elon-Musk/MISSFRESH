@@ -30,19 +30,20 @@
 				<img src="" v-lazy="product.image" alt="">
 			</div>
 			<div class="f_r product-info">
-				<p class="name">{{product.name}}</p>
+				<!-- <p class="name">{{product.name}}</p> -->
+				<p class="name">{{product.id}}</p>
 				<p class="point">{{product.subtitle}}</p>
-				<!-- <ul class="preferential">
-					<li v-for="item in product.preferential">{{item}}</li>
-				</ul> -->
-				<!-- <p class="price">
+				<ul class="preferential">
+					<li v-for="item in product.product_tags">{{item.name}}</li>
+				</ul>
+				<p class="price">
 					商城价
-					<price :price="product.price"></price>
+					<price :price="product.vip_price_pro.price_up.price"></price>
 				</p>
 				<p class="vip">
 					会员专享价
-					<price :price="product.vip"></price>
-				</p> -->
+					<price :price="product.vip_price_pro.price_down.price"></price>
+				</p>
 				<img src="~images/icon/shopping-cart.png" class="shopping-cart-img">
 			</div>
 		</router-link>
@@ -88,6 +89,7 @@
 				border-radius: 0;
 				width: 120px;
 				height: 120px;
+				border-radius: 100%;
 			}
 			span{
 				position: absolute;
@@ -120,9 +122,7 @@
 			padding-left: 2%;
 			box-sizing: border-box;
 			.name{
-				padding-top: 11px;
-				font-size: 16px;
-				padding-top: 15px;
+				font-size: 14px;
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
@@ -157,6 +157,7 @@
 				line-height: 1.4;
 				font-size: 12px;
 				color: @color_main;
+				padding-top: 18px;
 			}
 			.vip{
 				line-height: 1.4;

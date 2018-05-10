@@ -34,7 +34,7 @@
 		      		
 
 		      	</div> -->
-		      	<productHot :productsHot="products.products_hot"></productHot>
+		      	<productHot :productsHot="productsShow"></productHot>
 		      	<!-- <productHot></productHot>
 		      	<productHot></productHot> -->
 
@@ -335,9 +335,10 @@
 				startPosition:0,
 				//上滑加载滑动的位置
 				translate: 0,
-				products: {
-					products_hot:[]
-				}
+				products:[],
+				productsShow:[],
+				productsStart: 0,
+				productsEnd: 4
 			}
 		},
 		mounted (){
@@ -416,13 +417,13 @@
 	  			}
 			},
 			getData_: function () {
+				var productsStart=this.productsStart,
+     			productsEnd=this.productsEnd;
 				var _this=this;
 				this.axios.get('http://10.0.8.11:3390/getProduct')
 				.then(function (response) {
-					console.log(response.data);
-					// console.log(response);
-					_this.products.products_hot=_this.products.products_hot.concat(response.data.products);
-					console.log(_this.products.products_hot);
+					_this.products=_this.products.concat(response.data.products);
+					_this.productsShow=_this.products.slice(productsStart,productsEnd);
 				})
 				.catch(function (error) {
 					console.log(error);
@@ -430,22 +431,14 @@
 			},
 	        //发送ajax,请求数据
 	        getData: function () {
-	        	//发送ajax请求
-	        	for(var i = 0; i <3; i++) {
-              	  	this.products[this.tabIndex].push({
-              	  		id: 0,
-						hot: 0,
-						img: '',
-						name: this.tabIndex+'月盛斋羔羊肉片300g',
-						point: '预计11月26日后兑换兑换券',
-						preferential: [
-							'限每人1份',
-							'进口检验合格'
-						],
-						price: 29.9,
-						vip: 19.9
-					});
-              	}
+     			var productsStart=this.productsStart,
+     			productsEnd=this.productsEnd;
+     			this.productsEnd+=8;
+     			if (this.productsEnd>=this.products.length) {
+     				console.log('-----------------------------');
+     				this.productsEnd=this.products.length;
+     			}
+     			this.productsShow=this.products.slice(productsStart,this.productsEnd);
 	        },
 	        //分类切换显示状态
 	        showClassify: function () {
