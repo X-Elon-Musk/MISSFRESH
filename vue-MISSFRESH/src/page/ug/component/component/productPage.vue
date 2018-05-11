@@ -18,8 +18,8 @@
     import pullRefresh from 'src/components/pullRefresh/pullRefresh'
     import gif from 'src/components/gif/gif'
     import carousel from 'src/components/carousel/carousel'
-    import guarantee from './guarantee'
-    import card from './card'
+    import guarantee from './component/guarantee'
+    import card from './component/card'
     import product from 'src/components/product/product'
 
     // import {getValue} from 'src/config/mUtils'
@@ -30,7 +30,7 @@
                 tabIndex: 0,
 				// productsShow:[],
                 productsStart: 0,
-                productsEnd: 4
+                productsEnd: 8
 			}
 		},
         mounted(){

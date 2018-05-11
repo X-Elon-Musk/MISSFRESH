@@ -20,25 +20,8 @@
 		  	<div class="swiper-wrapper">
 
 				<!-- nav对应页面 -->
-		      	<!-- <div class="swiper-slide slidepage swiper-container gif-show">
-
-		      		<pullRefresh :tabIndex="tabIndex" @getData="getData">
-		      			<gif></gif>
-		      			<carousel></carousel>
-						<guarantee></guarantee>
-						<card></card>
-						<div class="clearfix list-group-item ticket-item" v-for="item in products[0]">
-							<product :product="item" :id="item.id"></product>
-						</div>
-		      		</pullRefresh>
-		      		
-
-		      	</div> -->
-		      	<!-- <productPage :products="productsShow"></productPage> -->
-		      	<productPage :products="products"></productPage>
-		      	<!-- <productPage></productPage>
-		      	<productPage></productPage> -->
-
+				<!-- 热卖 -->
+		      	<productPage :products="products" class="product_index_0"></productPage>
 			    <div class="swiper-slide slidepage swiper-container gif-show">
 			        <!-- <pullRefresh :tabIndex="tabIndex" @getData="getData">
 			        	<gif></gif>
@@ -184,24 +167,17 @@
 		  	</div>
 		</div>
 		<!-- <div class="img" id="footer"><img src="../../images/carousel/0.jpg"></div> -->
-
-		
+	
+		<loading :loading="loading"></loading>
 	</div>
 </template>
 <script>
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
-
-
-    import mheader from './mheader'
-    import carousel from 'src/components/carousel/carousel'
-    import guarantee from './component/guarantee'
-    import card from './component/card'
-    import product from 'src/components/product/product'
+  	import mheader from './component/mheader'
     import classify from './component/classify'
-    import pullRefresh from 'src/components/pullRefresh/pullRefresh'
-    import gif from 'src/components/gif/gif'
     import productPage from './component/productPage'
+    import loading from 'src/components/loading/loading'
 	export default{
 		data(){
 			return {
@@ -344,23 +320,20 @@
 				startPosition:0,
 				//上滑加载滑动的位置
 				translate: 0,
+				//产品
 				products:[],
-				productsShow:[],
-				productsStart: 0,
-				productsEnd: 4
+				//loading组件状态
+				loading: false
 			}
 		},
 
 		mounted (){
-			var _this=this;
 			this.$nextTick(() => {
 				if (!this.navSwiper) this.tab();
 				if (!this.pageSwiper) this.page();
 				// if (!this.pullRefresh) this.refresh();
-
-				
-            })
-            this.getData_();
+			})
+            this.getData();
 		},
 		methods: {
 			//导航栏
@@ -427,33 +400,18 @@
 	  				navSwiper.setTranslate((clientWidth-parseInt(navSlideWidth))/2-navActiveSlideLeft)
 	  			}
 			},
-			getData_: function () {
-				var productsStart=this.productsStart,
-     			productsEnd=this.productsEnd;
+			getData: function () {
 				var _this=this;
+				this.loading=true;
 				this.axios.get('http://10.0.8.11:3390/getProduct')
 				.then(function (response) {
 					_this.products=_this.products.concat(response.data.products);
-					console.log('==============================');
-					console.log(_this.products[0]);
-					console.log('==============================');
-					// _this.productsShow=_this.products.slice(productsStart,productsEnd);
+					_this.loading=false;
 				})
 				.catch(function (error) {
 					console.log(error);
 				});
 			},
-	        //发送ajax,请求数据
-	        getData: function () {
-     			var productsStart=this.productsStart,
-     			productsEnd=this.productsEnd;
-     			this.productsEnd+=8;
-     			if (this.productsEnd>=this.products.length) {
-     				console.log('-----------------------------');
-     				this.productsEnd=this.products.length;
-     			}
-     			this.productsShow=this.products.slice(productsStart,this.productsEnd);
-	        },
 	        //分类切换显示状态
 	        showClassify: function () {
 	        	this.classifyState=true;
@@ -469,14 +427,9 @@
         },
         components: {
         	mheader,
-			carousel,
-			guarantee,
-			card,
-			product,
 			classify,
-			pullRefresh,
-			gif,
-			productPage
+			productPage,
+			loading
 		},
 	}
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="loading-container">
+    <div class="loading-container" v-show="loading">
 	    <div class="loading-icon"></div>
 	</div>
 </template>
@@ -8,7 +8,8 @@
 		data(){
             return{
             }
-        }
+        },
+        props: ['loading']
     }
 </script>
 <style lang="less">
@@ -19,6 +20,7 @@
 		top: 0;
 		right: 0;
 		bottom: 0;
+		z-index: 1;
 		background: #fff;
 		.loading-icon{
 	    	position: absolute;

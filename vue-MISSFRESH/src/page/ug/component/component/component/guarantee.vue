@@ -6,7 +6,7 @@
 	</div>	
 </template>
 <script>
-	import icon from './component/icon'
+	import icon from './icon'
 	export default{
 		data(){
 			return {

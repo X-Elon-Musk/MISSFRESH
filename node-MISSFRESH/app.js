@@ -6,7 +6,7 @@ var app = express();
 // var router=require('./router/index.js');
 var session =require('express-session');
 import Location from './router/location.js'
-import Product from './router/product.js'
+import Product from './router/products.js'
 //使用session
 app.use(session({
     secret: 'keyboard cat',
@@ -37,7 +37,7 @@ app.all('*', function(req, res, next) {
 console.log(Product);
 console.log(typeof Product);
 
-app.get('/getProduct',Product.getProduct);
+app.get('/getProduct',Product.getProducts);
 
 
 
