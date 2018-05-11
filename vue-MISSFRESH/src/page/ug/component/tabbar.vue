@@ -5,7 +5,7 @@
         	<mheader></mheader>
         	<div class="swiper-container" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
-        			<div class="swiper-slide" v-for="(item,index) in tabSlide" @click="tabClick(index,$event)" :class="{active:tabIndex==index}">
+        			<div class="swiper-slide" v-for="(item,index) in tabSlide" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index">
         				<span>{{item.text}}</span></div>
 					<!-- <div class="bar">
 						<div class="color"></div>
@@ -34,20 +34,29 @@
 		      		
 
 		      	</div> -->
-		      	<productHot :productsHot="productsShow"></productHot>
-		      	<!-- <productHot></productHot>
-		      	<productHot></productHot> -->
+		      	<!-- <productPage :products="productsShow"></productPage> -->
+		      	<productPage :products="products"></productPage>
+		      	<!-- <productPage></productPage>
+		      	<productPage></productPage> -->
 
 			    <div class="swiper-slide slidepage swiper-container gif-show">
-			        <pullRefresh :tabIndex="tabIndex" @getData="getData">
+			        <!-- <pullRefresh :tabIndex="tabIndex" @getData="getData">
 			        	<gif></gif>
 		      			<carousel></carousel>
 						<guarantee></guarantee>
 						<card></card>
-						<div class="clearfix list-group-item ticket-item" v-for="item in products[1]">
+						<div class="clearfix list-group-item ticket-item" v-for="(item,index) in products[1]" :key="index">
 							<product :product="item"></product>
 						</div>
-		      		</pullRefresh>
+		      		</pullRefresh> -->
+		      		<div class="swiper-container scroll" ref="scroll">
+				        <div class="swiper-wrapper">
+				          	<div class="swiper-slide slidescroll">
+								2
+				          		<img src="~src/images/carousel/0.jpg">
+				      		</div>
+				        </div>
+			      	</div>
 			    </div>
 				<div class="swiper-slide slidepage">
 			      	<div class="swiper-container scroll" ref="scroll">
@@ -192,7 +201,7 @@
     import classify from './component/classify'
     import pullRefresh from 'src/components/pullRefresh/pullRefresh'
     import gif from 'src/components/gif/gif'
-    import productHot from './component/productHot'
+    import productPage from './component/productPage'
 	export default{
 		data(){
 			return {
@@ -255,77 +264,77 @@
 					}
 				],
 				//上拉刷新数据
-				products: [
-					[
-						{
-							id: 0,
-							hot: 0,
-							img: '',
-							name: '11111月盛斋羔羊肉片300g',
-							point: '预计11月26日后兑换兑换券',
-							preferential: [
-								'限每人1份',
-								'进口检验合格'
-							],
-							price: 29.9,
-							vip: 19.9
-						},
-						{
-							id: 0,
-							hot: 1,
-							img: '',
-							name: '11111月盛斋羔羊肉片300g',
-							point: '预计11月26日后兑换兑换券',
-							preferential: [
-								'限每人1份',
-								'进口检验合格'
-							],
-							price: 29.9,
-							vip: 19.9
-						},
-						{
-							id: 0,
-							hot: 3,
-							img: '',
-							name: '月盛斋羔羊肉片300g',
-							point: '预计11月26日后兑换兑换券',
-							preferential: [
-								'限每人1份',
-								'进口检验合格'
-							],
-							price: 29.9,
-							vip: 19.9
-						}
-					],
-					[
-						{
-							id: 0,
-							hot: 0,
-							img: '',
-							name: '222月盛斋羔羊肉片300g',
-							point: '预计11月26日后兑换兑换券',
-							preferential: [
-								'限每人1份',
-								'进口检验合格'
-							],
-							price: 29.9,
-							vip: 19.9
-						},
-						{
-							id: 0,
-							hot: 1,
-							img: '',
-							name: '2222月盛斋羔羊肉片300g',
-							point: '预计11月26日后兑换兑换券',
-							preferential: [
-								'限每人1份',
-								'进口检验合格'
-							],
-							price: 29.9,
-							vip: 19.9
-						}
-					]
-				],
+				// products: [
+				// 	[
+				// 		{
+				// 			id: 0,
+				// 			hot: 0,
+				// 			img: '',
+				// 			name: '11111月盛斋羔羊肉片300g',
+				// 			point: '预计11月26日后兑换兑换券',
+				// 			preferential: [
+				// 				'限每人1份',
+				// 				'进口检验合格'
+				// 			],
+				// 			price: 29.9,
+				// 			vip: 19.9
+				// 		},
+				// 		{
+				// 			id: 0,
+				// 			hot: 1,
+				// 			img: '',
+				// 			name: '11111月盛斋羔羊肉片300g',
+				// 			point: '预计11月26日后兑换兑换券',
+				// 			preferential: [
+				// 				'限每人1份',
+				// 				'进口检验合格'
+				// 			],
+				// 			price: 29.9,
+				// 			vip: 19.9
+				// 		},
+				// 		{
+				// 			id: 0,
+				// 			hot: 3,
+				// 			img: '',
+				// 			name: '月盛斋羔羊肉片300g',
+				// 			point: '预计11月26日后兑换兑换券',
+				// 			preferential: [
+				// 				'限每人1份',
+				// 				'进口检验合格'
+				// 			],
+				// 			price: 29.9,
+				// 			vip: 19.9
+				// 		}
+				// 	],
+				// 	[
+				// 		{
+				// 			id: 0,
+				// 			hot: 0,
+				// 			img: '',
+				// 			name: '222月盛斋羔羊肉片300g',
+				// 			point: '预计11月26日后兑换兑换券',
+				// 			preferential: [
+				// 				'限每人1份',
+				// 				'进口检验合格'
+				// 			],
+				// 			price: 29.9,
+				// 			vip: 19.9
+				// 		},
+				// 		{
+				// 			id: 0,
+				// 			hot: 1,
+				// 			img: '',
+				// 			name: '2222月盛斋羔羊肉片300g',
+				// 			point: '预计11月26日后兑换兑换券',
+				// 			preferential: [
+				// 				'限每人1份',
+				// 				'进口检验合格'
+				// 			],
+				// 			price: 29.9,
+				// 			vip: 19.9
+				// 		}
+				// 	]
+				// ],
 				// loadFlag: true,
 				//计数，后面需要去除
 				num: 0,
@@ -341,6 +350,7 @@
 				productsEnd: 4
 			}
 		},
+
 		mounted (){
 			var _this=this;
 			this.$nextTick(() => {
@@ -348,8 +358,9 @@
 				if (!this.pageSwiper) this.page();
 				// if (!this.pullRefresh) this.refresh();
 
-				this.getData_();
+				
             })
+            this.getData_();
 		},
 		methods: {
 			//导航栏
@@ -423,7 +434,10 @@
 				this.axios.get('http://10.0.8.11:3390/getProduct')
 				.then(function (response) {
 					_this.products=_this.products.concat(response.data.products);
-					_this.productsShow=_this.products.slice(productsStart,productsEnd);
+					console.log('==============================');
+					console.log(_this.products[0]);
+					console.log('==============================');
+					// _this.productsShow=_this.products.slice(productsStart,productsEnd);
 				})
 				.catch(function (error) {
 					console.log(error);
@@ -462,11 +476,11 @@
 			classify,
 			pullRefresh,
 			gif,
-			productHot
+			productPage
 		},
 	}
 </script>
-<style lang='less'>
+<style lang="less">
 	@import '~src/style/mixin';
 	/*添加gif的pullRefresh组件的父级需要加‘gif-show’的ClassName*/
 	.gif-show{
@@ -527,7 +541,7 @@
 		margin-bottom:50px;
 		height:100%;
 		overflow-y: auto;
-		.slidepage {
+		.slidepage{
 			height: auto;
 		}
 	}
@@ -547,10 +561,5 @@
 	    width: 0;
 	    height: 0;
 	}
-
-	
-
-	
-
 
 </style>

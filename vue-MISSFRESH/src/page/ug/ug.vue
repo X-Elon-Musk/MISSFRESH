@@ -13,21 +13,39 @@
 	import footGuide from 'src/components/footer/footGuide'
 	import tabbar from './component/tabbar'
 
+	import {getValue} from 'src/config/mUtils'
 	export default{
 		data(){
 			return {
-				selected:'热卖'
+				selected:'热卖',
+				product:{
+					buy_permission:0,
+					seckill_limit:0,
+					sell_out:0,
+					sku:"p-blmlxlx4-6-500g",
+					vip_price_pro:{
+						price_up: {
+							color:"9868950"
+						}, 
+						price_down: {
+							color:"9868950"
+						}
+					}
+				}
 			}
 		},
 		mounted: function () {
-			this.axios.get('http://10.0.8.11:3390/getProduct')
-			.then(function (response) {
-				console.log(response.data);
-				console.log(response);
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
+			// console.log(getValue(this.product,'price_up').color);
+			// this.axios.get('http://10.0.8.11:3390/getProduct')
+			// .then(function (response) {
+			// 	console.log(response.data.products[0]);
+			// 	// console.log(getValue(response.data.products[0],'price_up'));
+				
+			// 	// console.log(response);
+			// })
+			// .catch(function (error) {
+			// 	console.log(error);
+			// });
 		},
 		components: {
 	    	footGuide,

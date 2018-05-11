@@ -7,6 +7,7 @@ import FastClick from 'fastclick'
 
 import axios from 'axios'
 
+import {getValue} from 'src/config/mUtils'
 // import 'swiper/dist/css/swiper.min.css';
 // import Swiper from "swiper";
 
@@ -37,6 +38,7 @@ Vue.use(VueLazyload, {
 })
 
 Vue.prototype.axios=axios
+Vue.prototype.getValue=getValue
 
 const router = new VueRouter({
 	routes,

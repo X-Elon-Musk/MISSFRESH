@@ -52,5 +52,18 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
             </div> 
         </template>
     ```
+- vue无法进行超过三层的数据传递
+```
+<p :price="product.vip_price_pro.price_up.price"></p>   //报错
+```
+- vue 项目中 “父组件” 异步获取数据之后，传递给子组件不显示
 
+```
+<productHot :products="products"></productHot>  //父组件
 
+<div v-for="(item,index) in productsShow" :key="index">    //子组件
+this.productsShow=this.products.slice(0,4);
+```
+因为进来的时候，products默认为空数组，子组件渲染的时候，props的值还没有传输进来，所以productsShow等于空数组。解决方法：
+1.直接渲染products，不要渲染productsShow
+2.建立一个watch,监听products变化，再赋值给productsShow

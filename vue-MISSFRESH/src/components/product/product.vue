@@ -34,15 +34,18 @@
 				<p class="name">{{product.id}}</p>
 				<p class="point">{{product.subtitle}}</p>
 				<ul class="preferential">
-					<li v-for="item in product.product_tags">{{item.name}}</li>
+					<li v-for="(item,index) in product.product_tags" :key="index">{{item.name}}</li>
 				</ul>
 				<p class="price">
 					商城价
-					<price :price="product.vip_price_pro.price_up.price"></price>
+					<!-- <price :price="product.vip_price_pro.price_up.price"></price> -->
+					<!-- <price :price="priceUp.price"></price> -->
+					<price :price="priceUp.price"></price>
 				</p>
 				<p class="vip">
 					会员专享价
-					<price :price="product.vip_price_pro.price_down.price"></price>
+					<!-- <price :price="product.vip_price_pro.price_down.price"></price> -->
+					<price :price="priceUp.price"></price>
 				</p>
 				<img src="~images/icon/shopping-cart.png" class="shopping-cart-img">
 			</div>
@@ -54,10 +57,13 @@
 	export default{
 		data(){
 			return {
-				img: require('images/product_0.jpg')
+				img: require('images/product_0.jpg'),
 			}
 		},
-		props: ['product'],
+		methods: {
+			
+		},
+		props: ['product','priceUp','priceDown'],
 		components: {
 			price
 		}
