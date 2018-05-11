@@ -1,41 +1,4 @@
-buy_permission:0
-cart_btn_name:"加入购物车"
-//cart_image:"https://j-image.missfresh.cn/img_20170425134548759.png"
-//image:"https://image.missfresh.cn/product_images/EA86A9F0D32F84B7CCB3321F6742AD65.JPG"
-//name:"维他柠檬茶6盒装"
-nationwide:0
-pao:0
-product_tags:[{name: "红包不可用",…}]
-promoteLevel:0
-promote_tag:"https://j-image.missfresh.cn/img_20180302175509409.png"
-promote_tag_new:""
-seckill_limit:0
-//sell_out:false
-//sku:"p-HBwtnmc-250ml*6"
-//stock:4783
-//subtitle:"港真 喝了它小心会上瘾哦（新老包装随机发货）"
-supplier:null
-type:"product"
-vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 1690},…}
-vip_product:0
-
-
-
-vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 1690},…}
-	price_down:{name: "", show_type: 1, color: 16730257, price: 1290}
-		color:16730257
-		name:""
-		price:1290
-		show_type:1
-	price_up:{name: "", show_type: 2, color: 9868950, price: 1690}
-		color:9868950
-		name:""
-		price:1690
-		show_type:2
-
-
-
-
+//首页
 {code: 0, is_chrome: 0, banner_bg_img: "", header_tip: {link_type: "app_download", image: "",…},…}
 banner_bg_img:""
 category_list:
@@ -59,9 +22,41 @@ product_list:{
 	wx_app_new_img:""
 
 
+//首页--->product_list--->brands
+banner:[{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…},…]
+	0:{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…}
+	height:525
+	link:"https://as-vip.missfresh.cn/ug/active-page.html?promotionId=2717&address_code=110108&station_code=&warehouse_code=MRYXTJ&category_code=hb-newsy&is_vip=1&parent_banner_type=1&parent_banner_id=2144&app_version=&banner_name=page_%E7%88%86%E6%96%99%E9%BA%BB%E5%B0%8F+1000%E7%9B%92%E6%8A%A2%E9%B2%9C%E5%90%83"
+	name:"爆料麻小 1000盒抢鲜吃"
+	path:"https://j-image.missfresh.cn/img_20180510000644953.jpg"
+	promotion_id:"2717"
+	share_invite_content:{wx_share_type: 1, image_url: "https://j-image.missfresh.cn/img_20180510182007000.jpg",…}
+	storage_money_status:"0"
+	type:"WEBPROMOTION"
+	width:1125
 
 
-单个产品
+//首页--->product_list--->brands--->share_invite_content
+share_invite_content:{wx_share_type: 0, image_url: "https://j-image.missfresh.cn/img_20180511021130943.jpg",…}
+	content:"时尚扒虾节，满99送99，抢>>>"
+	friend_share_type:0
+	friend_url:"https://as-vip.missfresh.cn/ug/active-page.html?promotionId=50190&address_code=110108&station_code=&warehouse_code=MRYXTJ&category_code=hb-newsy&is_vip=1&parent_banner_type=1&parent_banner_id=2171&app_version=&banner_name=page_%E6%97%B6%E5%B0%9A%E6%89%92%E8%99%BE%E8%8A%82"
+	image_url:"https://j-image.missfresh.cn/img_20180511021130943.jpg"
+	qqFriendShareType:0
+	qqFriendUrl:"https://as-vip.missfresh.cn/ug/active-page.html?promotionId=50190&address_code=110108&station_code=&warehouse_code=MRYXTJ&category_code=hb-newsy&is_vip=1&parent_banner_type=1&parent_banner_id=2171&app_version=&banner_name=page_%E6%97%B6%E5%B0%9A%E6%89%92%E8%99%BE%E8%8A%82"
+	qr_info:{bg_i_url: "", qr_size: 70, qr_y: 419, qr_x: 80}
+	sina_url:"https://as-vip.missfresh.cn/ug/active-page.html?promotionId=50190&address_code=110108&station_code=&warehouse_code=MRYXTJ&category_code=hb-newsy&is_vip=1&parent_banner_type=1&parent_banner_id=2171&app_version=&banner_name=page_%E6%97%B6%E5%B0%9A%E6%89%92%E8%99%BE%E8%8A%82"title:"1.5元一只的麻小快帮抢下，我扒虾呢，手上有油！"wx_share_type:0wx_url:"https://as-vip.missfresh.cn/ug/active-page.html?promotionId=50190&address_code=110108&station_code=&warehouse_code=MRYXTJ&category_code=hb-newsy&is_vip=1&parent_banner_type=1&parent_banner_id=2171&app_version=&banner_name=page_%E6%97%B6%E5%B0%9A%E6%89%92%E8%99%BE%E8%8A%82"
+
+
+//首页--->product_list--->brands--->share_invite_content--->qr_info
+qr_info:{bg_i_url: "", qr_size: 70, qr_y: 419, qr_x: 80}
+	bg_i_url:""
+	qr_size:70
+	qr_x:80
+	qr_y:419
+
+
+//单个产品
 {image: "http://missfresh-fms.ufile.ucloud.cn/9a4caa8c7a7c4caf938fd24997757a24.jpg",…}
 buy_permission:0
 cart_btn_name:"加入购物车"
@@ -83,3 +78,25 @@ supplier:null
 type:"product"
 vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 5990},…}
 vip_product:0
+
+
+//单个产品--->product_tags
+product_tags:[{name: "红包不可用",…}]
+	0:{name: "红包不可用",…}
+	color:16097217
+	icon:"https://image.missfresh.cn/category_tag_images/64C7BDFCE3063869F16B409A2851887D.PNG"
+	name:"红包不可用"
+	type:"property"
+
+//单个产品--->vip_price_pro
+vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 1690},…}
+	price_down:{name: "", show_type: 1, color: 16730257, price: 1290}
+		color:16730257
+		name:""
+		price:1290
+		show_type:1
+	price_up:{name: "", show_type: 2, color: 9868950, price: 1690}
+		color:9868950
+		name:""
+		price:1690
+		show_type:2

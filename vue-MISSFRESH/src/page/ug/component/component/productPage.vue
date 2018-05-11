@@ -3,7 +3,7 @@
         <pullRefresh :tabIndex="tabIndex" @getData="getData">
             <gif></gif>
             <!-- 内容部分 -->
-            <carousel></carousel>
+            <carousel :banner="banner"></carousel>
             <guarantee></guarantee>
             <card></card>
             <!-- 上滑加载、下拉刷新 -->
@@ -34,14 +34,14 @@
 			}
 		},
         mounted(){
-
+            console.log(this.banner);
         },
         /*watch: {
             products: function () {
                 this.productsShow=this.products.slice(this.productsStart,this.productsEnd);
             }
         },*/
-        props: ['products'],
+        props: ['products','banner'],
         methods: {
             //上滑加载
             getData: function () {

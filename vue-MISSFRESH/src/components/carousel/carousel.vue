@@ -1,10 +1,10 @@
 <template>
 	<div class="swiper-container banner">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide">
+			<!-- <div class="swiper-slide">
 				<img src="~images/carousel/0.jpg">
-			</div>
-			<div class="swiper-slide">
+			</div> -->
+			<!-- <div class="swiper-slide">
 				<img src="~images/carousel/1.jpg">
 			</div>
 			<div class="swiper-slide">
@@ -12,7 +12,16 @@
 			</div>
 			<div class="swiper-slide">
 				<img src="~images/carousel/3.jpg">
-			</div>
+			</div> -->
+			<!-- <div class="swiper-slide" v-for="(item,index) in banner" :key="index">
+				<router-link :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}">
+					<img :src="item.path">
+				</router-link>
+			</div> -->
+
+			<router-link  v-for="(item,index) in banner" :key="index" :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}" tag="div" class="swiper-slide">
+					<img :src="item.path" class="banner-img">
+			</router-link>
 		</div>
 		<div class="swiper-pagination"></div>
 	</div>
@@ -26,16 +35,20 @@
 				
 			}
 		},
+		props: ['banner'],
 		mounted(){
+			var _this=this;
 			this.$nextTick(()=>{
 				var carousel = new Swiper('.banner', {
 					loop: true,
+					observer:true,
+      				observeParents:true,
 					pagination: {
 						el: '.swiper-pagination',
-						type: 'fraction',
-						renderFraction: function(currentClass, totalClass) {
-							return '<span class="' + currentClass + '"></span>' + '/' + '<span class="' + totalClass + '"></span>';
-						},
+						type: 'custom',
+						renderCustom: function (swiper, current, total) {
+				          	return current + '/' + total;
+				        }
 					},
 				});
 			})
@@ -47,6 +60,11 @@
 		img {
 			width:100%;
 			display:block;
+		}
+		a{
+			display: inline-block;
+			width: 100%;
+			height: auto;	
 		}
 		.swiper-pagination {
 			left:auto;

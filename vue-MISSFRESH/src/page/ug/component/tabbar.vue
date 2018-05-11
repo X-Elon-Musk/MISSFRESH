@@ -21,7 +21,7 @@
 
 				<!-- nav对应页面 -->
 				<!-- 热卖 -->
-		      	<productPage :products="products" class="product_index_0"></productPage>
+		      	<productPage :products="products" :banner="banner" class="product_index_0"></productPage>
 			    <div class="swiper-slide slidepage swiper-container gif-show">
 			        <!-- <pullRefresh :tabIndex="tabIndex" @getData="getData">
 			        	<gif></gif>
@@ -317,11 +317,13 @@
 				//“分类”显示状态
 				classifyState: false,
 				//上滑加载初始的位置
-				startPosition:0,
+				startPosition: 0,
 				//上滑加载滑动的位置
 				translate: 0,
 				//产品
-				products:[],
+				products: [],
+				//banner
+				banner: [],
 				//loading组件状态
 				loading: false
 			}
@@ -403,9 +405,11 @@
 			getData: function () {
 				var _this=this;
 				this.loading=true;
-				this.axios.get('http://10.0.8.11:3390/getProduct')
+				this.axios.get('http://10.0.8.11:3390/index')
 				.then(function (response) {
-					_this.products=_this.products.concat(response.data.products);
+					console.log(response.data);
+					_this.products=_this.products.concat(response.data.product_list.products);
+					_this.banner=_this.banner.concat(response.data.product_list.banner);
 					_this.loading=false;
 				})
 				.catch(function (error) {
