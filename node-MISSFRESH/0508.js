@@ -22,7 +22,7 @@ product_list:{
 	wx_app_new_img:""
 
 
-//首页--->product_list--->brands
+//首页--->product_list--->banner
 banner:[{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…},…]
 	0:{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…}
 	height:525
@@ -36,7 +36,7 @@ banner:[{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…},…
 	width:1125
 
 
-//首页--->product_list--->brands--->share_invite_content
+//首页--->product_list--->banner--->share_invite_content
 share_invite_content:{wx_share_type: 0, image_url: "https://j-image.missfresh.cn/img_20180511021130943.jpg",…}
 	content:"时尚扒虾节，满99送99，抢>>>"
 	friend_share_type:0
@@ -48,12 +48,32 @@ share_invite_content:{wx_share_type: 0, image_url: "https://j-image.missfresh.cn
 	sina_url:"https://as-vip.missfresh.cn/ug/active-page.html?promotionId=50190&address_code=110108&station_code=&warehouse_code=MRYXTJ&category_code=hb-newsy&is_vip=1&parent_banner_type=1&parent_banner_id=2171&app_version=&banner_name=page_%E6%97%B6%E5%B0%9A%E6%89%92%E8%99%BE%E8%8A%82"title:"1.5元一只的麻小快帮抢下，我扒虾呢，手上有油！"wx_share_type:0wx_url:"https://as-vip.missfresh.cn/ug/active-page.html?promotionId=50190&address_code=110108&station_code=&warehouse_code=MRYXTJ&category_code=hb-newsy&is_vip=1&parent_banner_type=1&parent_banner_id=2171&app_version=&banner_name=page_%E6%97%B6%E5%B0%9A%E6%89%92%E8%99%BE%E8%8A%82"
 
 
-//首页--->product_list--->brands--->share_invite_content--->qr_info
+//首页--->product_list--->banner--->share_invite_content--->qr_info
 qr_info:{bg_i_url: "", qr_size: 70, qr_y: 419, qr_x: 80}
 	bg_i_url:""
 	qr_size:70
 	qr_x:80
 	qr_y:419
+
+
+//首页--->product_list--->brands
+brands:[{image: "https://j-image.missfresh.cn/img_20170627185311186.png", name: "优鲜严选",…},…]
+	0:{image: "https://j-image.missfresh.cn/img_20170627185311186.png", name: "优鲜严选",…}
+		image:"https://j-image.missfresh.cn/img_20170627185311186.png"
+		link:"https://as-vip.missfresh.cn/v1/h5model/strict-selection"
+		name:"优鲜严选"
+	1:{image: "https://j-image.missfresh.cn/img_20170627184654084.png", name: "安心检测",…}
+		image:"https://j-image.missfresh.cn/img_20170627184654084.png"
+		link:"https://as-vip.missfresh.cn/v1/h5model/safeguard"
+		name:"安心检测"
+	2:{image: "https://j-image.missfresh.cn/img_20170718194948016.png", name: "赔付保障",…}
+		image:"https://j-image.missfresh.cn/img_20170718194948016.png"
+		link:"https://p-h5.missfresh.cn/h5_file/467AA9256CCD5AB8F364815C073C00FD/index.html"
+		name:"赔付保障"
+
+
+
+
 
 
 //单个产品

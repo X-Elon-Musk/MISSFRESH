@@ -1,7 +1,7 @@
 <template>
 	<div class="guarantee-container">
-		<div v-for="item in icons"  class="guarantee-icons">
-			<icon :bgImage="item"></icon>	
+		<div v-for="item in brands"  class="guarantee-icons">
+			<icon :brand="item"></icon>	
 		</div>		
 	</div>	
 </template>
@@ -10,13 +10,14 @@
 	export default{
 		data(){
 			return {
-				icons:[
+				/*icons:[
 					require('images/icon/guarantee_0.png'),
 					require('images/icon/guarantee_1.png'),
 					require('images/icon/guarantee_2.png'),
-				]
+				]*/
 			}
 		},
+		props: ['brands'],
 		components: {
 			icon
 		}

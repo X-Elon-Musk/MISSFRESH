@@ -2,6 +2,7 @@
 
 import Product from './products.js'
 import Banner from './banner.js'
+import Brands from './brands.js'
 
 
 
@@ -13,10 +14,12 @@ MissFresh.prototype={
 		
 		var product_list={};
         var products=await Product.getProducts(),
-        banner=await Banner.getBanner();
+        banner=await Banner.getBanner(),
+        brands=await Brands.getBrands();
 
         product_list.products=products;
         product_list.banner=banner;
+        product_list.brands=brands;
         // console.log(products,banner);
         var missfresh={
         	'product_list': product_list

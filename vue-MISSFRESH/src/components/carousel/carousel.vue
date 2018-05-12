@@ -13,14 +13,9 @@
 			<div class="swiper-slide">
 				<img src="~images/carousel/3.jpg">
 			</div> -->
-			<!-- <div class="swiper-slide" v-for="(item,index) in banner" :key="index">
-				<router-link :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}">
-					<img :src="item.path">
-				</router-link>
-			</div> -->
 
 			<router-link  v-for="(item,index) in banner" :key="index" :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}" tag="div" class="swiper-slide">
-					<img :src="item.path" class="banner-img">
+					<img :src="item.image" class="banner-img">
 			</router-link>
 		</div>
 		<div class="swiper-pagination"></div>

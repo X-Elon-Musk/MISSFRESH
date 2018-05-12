@@ -4,7 +4,7 @@
             <gif></gif>
             <!-- 内容部分 -->
             <carousel :banner="banner"></carousel>
-            <guarantee></guarantee>
+            <guarantee :brands="brands"></guarantee>
             <card></card>
             <!-- 上滑加载、下拉刷新 -->
             <div class="clearfix list-group-item ticket-item" v-for="(item,index) in products.slice(productsStart,productsEnd)" :key="index">
@@ -41,7 +41,7 @@
                 this.productsShow=this.products.slice(this.productsStart,this.productsEnd);
             }
         },*/
-        props: ['products','banner'],
+        props: ['products','banner','brands'],
         methods: {
             //上滑加载
             getData: function () {

@@ -21,7 +21,7 @@
 
 				<!-- nav对应页面 -->
 				<!-- 热卖 -->
-		      	<productPage :products="products" :banner="banner" class="product_index_0"></productPage>
+		      	<productPage :products="products" :banner="banner" :brands="brands" class="product_index_0"></productPage>
 			    <div class="swiper-slide slidepage swiper-container gif-show">
 			        <!-- <pullRefresh :tabIndex="tabIndex" @getData="getData">
 			        	<gif></gif>
@@ -324,6 +324,8 @@
 				products: [],
 				//banner
 				banner: [],
+				//品牌
+				brands: [],
 				//loading组件状态
 				loading: false
 			}
@@ -410,6 +412,7 @@
 					console.log(response.data);
 					_this.products=_this.products.concat(response.data.product_list.products);
 					_this.banner=_this.banner.concat(response.data.product_list.banner);
+					_this.brands=_this.brands.concat(response.data.product_list.brands);
 					_this.loading=false;
 				})
 				.catch(function (error) {

@@ -67,3 +67,10 @@ this.productsShow=this.products.slice(0,4);
 因为进来的时候，products默认为空数组，子组件渲染的时候，props的值还没有传输进来，所以productsShow等于空数组。解决方法：
 1.直接渲染products，不要渲染productsShow
 2.建立一个watch,监听products变化，再赋值给productsShow
+- nodejs服务器读取图片返回给前端（浏览器）显示
+```
+app.get('/public/images/*', function (req, res) {
+    res.sendFile( __dirname + "/" + req.url );
+    console.log("Request for " + req.url + " received.");
+})
+```

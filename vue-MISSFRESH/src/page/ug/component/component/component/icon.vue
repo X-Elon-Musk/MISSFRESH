@@ -1,8 +1,13 @@
 <template>
-    <div class="guarantee">
+    <!-- <div class="guarantee">
         <span :style="{backgroundImage: `url(${bgImage})`}"></span>
+        <img :src="" alt="" class="guarantee-icon">
     	<strong>优鲜严选</strong>
-    </div>  
+    </div>  --> 
+    <router-link :to="{path: brand.link,query:{id: brand.product_index}}" tag="div" class="guarantee">
+    	<img :src="brand.image" alt="" class="guarantee-icon">
+    	<strong>{{brand.name}}</strong>
+    </router-link>
 </template>
 <script>
 	export default{
@@ -11,7 +16,7 @@
 				
 			}
 		},
-		props: ['bgImage']
+		props: ['brand']
 	}
 </script>
 <style lang="less">
@@ -20,7 +25,7 @@
 		font-size: 12px;
 		line-height: 49px;
 		text-align: center;
-		span{
+		.guarantee-icon{
 			vertical-align: top;
 			display: inline-block;
 			width: 16px;
