@@ -72,8 +72,24 @@ brands:[{image: "https://j-image.missfresh.cn/img_20170627185311186.png", name: 
 		name:"赔付保障"
 
 
+//首页--->product_list--->category_areas
+category_areas:[,…]
+	0:{image: "https://j-image.missfresh.cn/img_20180511015339404.png", user_type: "NEWUSER", ordering: 4,…}
+		id:6460
+		image:"https://j-image.missfresh.cn/img_20180511015339404.png"
+		name:"只属于你的特惠"
+		ordering:4
+		params:{image: "https://j-image.missfresh.cn/img_20180403101557574.jpg",…}
+		placeholder:0
+		type:"NEWUSER"
+		user_type:"NEWUSER"
 
 
+//首页--->product_list--->category_areas--->params
+params:{image: "https://j-image.missfresh.cn/img_20180403101557574.jpg",…}
+	bt_name:"新用户登录后就可获得大礼包哦"
+	image:"https://j-image.missfresh.cn/img_20180403101557574.jpg"
+	url:"https://as-vip.missfresh.cn/ug/new-enjoy.html?station_code=&address_code=110108"
 
 
 //单个产品
