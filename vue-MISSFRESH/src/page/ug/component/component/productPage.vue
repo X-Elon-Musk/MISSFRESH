@@ -5,7 +5,7 @@
             <!-- 内容部分 -->
             <carousel :banner="banner"></carousel>
             <guarantee :brands="brands"></guarantee>
-            <card></card>
+            <card :categoryareas="categoryareas"></card>
             <!-- 上滑加载、下拉刷新 -->
             <div class="clearfix list-group-item ticket-item" v-for="(item,index) in products.slice(productsStart,productsEnd)" :key="index">
             <!-- <div class="clearfix list-group-item ticket-item" v-for="(item,index) in productsShow" :key="index"> -->
@@ -41,7 +41,7 @@
                 this.productsShow=this.products.slice(this.productsStart,this.productsEnd);
             }
         },*/
-        props: ['products','banner','brands'],
+        props: ['products','banner','brands','categoryareas'],
         methods: {
             //上滑加载
             getData: function () {

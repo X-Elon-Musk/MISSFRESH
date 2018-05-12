@@ -21,7 +21,7 @@
 
 				<!-- nav对应页面 -->
 				<!-- 热卖 -->
-		      	<productPage :products="products" :banner="banner" :brands="brands" class="product_index_0"></productPage>
+		      	<productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage>
 			    <div class="swiper-slide slidepage swiper-container gif-show">
 			        <!-- <pullRefresh :tabIndex="tabIndex" @getData="getData">
 			        	<gif></gif>
@@ -239,78 +239,6 @@
 						text: '明日',
 					}
 				],
-				//上拉刷新数据
-				// products: [
-				// 	[
-				// 		{
-				// 			id: 0,
-				// 			hot: 0,
-				// 			img: '',
-				// 			name: '11111月盛斋羔羊肉片300g',
-				// 			point: '预计11月26日后兑换兑换券',
-				// 			preferential: [
-				// 				'限每人1份',
-				// 				'进口检验合格'
-				// 			],
-				// 			price: 29.9,
-				// 			vip: 19.9
-				// 		},
-				// 		{
-				// 			id: 0,
-				// 			hot: 1,
-				// 			img: '',
-				// 			name: '11111月盛斋羔羊肉片300g',
-				// 			point: '预计11月26日后兑换兑换券',
-				// 			preferential: [
-				// 				'限每人1份',
-				// 				'进口检验合格'
-				// 			],
-				// 			price: 29.9,
-				// 			vip: 19.9
-				// 		},
-				// 		{
-				// 			id: 0,
-				// 			hot: 3,
-				// 			img: '',
-				// 			name: '月盛斋羔羊肉片300g',
-				// 			point: '预计11月26日后兑换兑换券',
-				// 			preferential: [
-				// 				'限每人1份',
-				// 				'进口检验合格'
-				// 			],
-				// 			price: 29.9,
-				// 			vip: 19.9
-				// 		}
-				// 	],
-				// 	[
-				// 		{
-				// 			id: 0,
-				// 			hot: 0,
-				// 			img: '',
-				// 			name: '222月盛斋羔羊肉片300g',
-				// 			point: '预计11月26日后兑换兑换券',
-				// 			preferential: [
-				// 				'限每人1份',
-				// 				'进口检验合格'
-				// 			],
-				// 			price: 29.9,
-				// 			vip: 19.9
-				// 		},
-				// 		{
-				// 			id: 0,
-				// 			hot: 1,
-				// 			img: '',
-				// 			name: '2222月盛斋羔羊肉片300g',
-				// 			point: '预计11月26日后兑换兑换券',
-				// 			preferential: [
-				// 				'限每人1份',
-				// 				'进口检验合格'
-				// 			],
-				// 			price: 29.9,
-				// 			vip: 19.9
-				// 		}
-				// 	]
-				// ],
 				// loadFlag: true,
 				//计数，后面需要去除
 				num: 0,
@@ -326,6 +254,8 @@
 				banner: [],
 				//品牌
 				brands: [],
+				//分类区域
+				categoryareas: [],
 				//loading组件状态
 				loading: false
 			}
@@ -413,6 +343,7 @@
 					_this.products=_this.products.concat(response.data.product_list.products);
 					_this.banner=_this.banner.concat(response.data.product_list.banner);
 					_this.brands=_this.brands.concat(response.data.product_list.brands);
+					_this.categoryareas=_this.categoryareas.concat(response.data.product_list['category_areas']);
 					_this.loading=false;
 				})
 				.catch(function (error) {
