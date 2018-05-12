@@ -1,34 +1,21 @@
 <template>
 	<div class="clearfix card-wrap">
 		<div class="wrap-left f_l">
-			<!-- <a href="/" class="card-wrap-img card-wrap-0">
-				<img src="~images/card-wrap-0.png">
-			</a> -->
-            <router-link :to="{path: '/',query:{id: categoryareas[0].product_id,index: categoryareas[0].product_index}}" tag="div" class="card-wrap-img">
+			<router-link :to="{path: '/',query:{id: categoryareas[0].product_id,index: categoryareas[0].product_index}}" tag="div" class="card-wrap-img">
                 <img :src="categoryareas[0].image">
             </router-link>
 		</div>
 		<div class="wrap-right f_r">
             <div class="wrap-right-top">
-                <!-- <a href="/" class="card-wrap-img card-wrap-1">
-                    <img src="~images/card-wrap-1.png">
-                </a> -->
                 <router-link :to="{path: '/',query:{id: categoryareas[1].product_id,index: categoryareas[1].product_index}}" tag="div" class="card-wrap-img">
                     <img :src="categoryareas[1].image">
                 </router-link>
             </div>
 			<div class="clearfix wrap-right-bottom">
-				<!-- <a href="/" class="card-wrap-img card-wrap-2">
-    				<img src="~images/card-wrap-2.png">
-    			</a>
-    			<a href="/" class="card-wrap-img card-wrap-3">
-    				<img src="~images/card-wrap-3.png">
-    			</a> -->
-                <router-link v-for="(item,index) in categoryareas" v-if="index>1" :to="{path: '/',query:{id: categoryareas.product_id,index: categoryareas.product_index}}" :key="index" tag="div" class="f_l card-wrap-img">
+				<router-link v-for="(item,index) in categoryareas" v-if="index>1" :to="{path: '/',query:{id: categoryareas.product_id,index: categoryareas.product_index}}" :key="index" tag="div" class="f_l card-wrap-img">
                     <img :src="item.image">
                 </router-link>
-
-			</div>
+            </div>
 		</div>
   	</div>
 </template>

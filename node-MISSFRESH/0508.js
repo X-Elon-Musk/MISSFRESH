@@ -22,6 +22,36 @@ product_list:{
 	wx_app_new_img:""
 
 
+//首页--->category_list
+category_list:[,…]
+	0:{category_image: "https://j-image.missfresh.cn/img_20180511013332836.png", presell: 0, default: 1,…}
+		category_image:"https://j-image.missfresh.cn/img_20180511013332836.png"
+		category_tag:""
+		category_type:"首页频道"
+		default:1
+		group:0
+		group_bottom_img:""
+		icon:"https://j-image.missfresh.cn/img_20180321171715156.jpg"
+		internal_id:"hb-newsy"
+		is_home:1
+		name:"时尚扒虾节"
+		ordering:2000
+		presell:0
+	1:{category_image: "https://j-image.missfresh.cn/img_20180424000836595.png", presell: 0, default: 0,…}
+		category_image:"https://j-image.missfresh.cn/img_20180424000836595.png"
+		category_tag:""
+		category_type:""
+		default:0
+		group:0
+		group_bottom_img:""
+		icon:"https://j-image.missfresh.cn/img_20180424115241210.png"
+		internal_id:"bj-vip"
+		is_home:0
+		name:"会员6折"
+		ordering:1000
+		presell:0
+
+
 //首页--->product_list--->banner
 banner:[{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…},…]
 	0:{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…}
