@@ -1,53 +1,56 @@
 <template>
 	<div class="my-center">
-		<div class="sign-in">
-			<span>用户登录</span>
+		<div class="my-center-content">
+			<div class="sign-in">
+				<span>用户登录</span>
+			</div>
+			<ul class="wallet">
+				<li>
+					<span>
+						<i>0</i>元
+					</span>
+					<span>余额</span>
+				</li>
+				<li>
+					<span>
+						<i></i>张
+					</span>
+					<span>红包</span>
+				</li>
+				<li>
+					<span>
+						<i></i>张
+					</span>
+					<span>商品券</span>
+				</li>
+				<li>
+					<span>
+						<i></i>分
+					</span>
+					<span>积分兑换></span>
+				</li>
+			</ul>
+			<div class="rights clearfix">
+				<span>会员权益</span>
+				<span class="open-membership">开通会员></span>
+			</div>
+			<div class="rights-detail">
+				成为优享会员，预计1年将为你
+				<span>节省1121.30元</span>
+			</div>
+			<icons :icons="icons"></icons>
+			<img src="~images/invitation.png" class="invitation-img">
+			<div class="other-items">
+				<!-- <div v-for="otherItem in otherItems">
+					<router-link :to="otherItem.to">
+						<span>{{otherItem.text}}</span>
+						<span class="arrow"></span>
+					</router-link>
+				</div> -->
+				<profileItem v-for="(item,index) in otherItems" :to="item.to" :text="item.text" :arrow="true" :key="index"></profileItem>
+			</div>
 		</div>
-		<ul class="wallet">
-			<li>
-				<span>
-					<i>0</i>元
-				</span>
-				<span>余额</span>
-			</li>
-			<li>
-				<span>
-					<i></i>张
-				</span>
-				<span>红包</span>
-			</li>
-			<li>
-				<span>
-					<i></i>张
-				</span>
-				<span>商品券</span>
-			</li>
-			<li>
-				<span>
-					<i></i>分
-				</span>
-				<span>积分兑换></span>
-			</li>
-		</ul>
-		<div class="rights clearfix">
-			<span>会员权益</span>
-			<span class="open-membership">开通会员></span>
-		</div>
-		<div class="rights-detail">
-			成为优享会员，预计1年将为你
-			<span>节省1121.30元</span>
-		</div>
-		<icons :icons="icons"></icons>
-		<img src="~images/invitation.png" class="invitation-img">
-		<div class="other-items">
-			<!-- <div v-for="otherItem in otherItems">
-				<router-link :to="otherItem.to">
-					<span>{{otherItem.text}}</span>
-					<span class="arrow"></span>
-				</router-link>
-			</div> -->
-			<profileItem v-for="(item,index) in otherItems" :to="item.to" :text="item.text" :arrow="true" :key="index"></profileItem>
-		</div>
+		
 		<transition name="sideslip" mode="out-in">
 			<router-view v-if="!$route.meta.keepAlive"></router-view>
 		</transition>
@@ -95,7 +98,7 @@
 		  				text: '关于我们'
 		  			},
 		  			{
-		  				to: '/',
+		  				to: '/profile/frontend',
 		  				text: '设置'
 		  			}
 		  		],
@@ -133,8 +136,23 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.my-center{
-		padding-bottom: 47px;
-		.wh(100%);
+		// padding-bottom: 47px;
+		// .wh(100%);
+		position: fixed;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		overflow-y: scroll;
+		.my-center-content{
+			// position: fixed;
+			// left: 0;
+			// top: 0;
+			// bottom: 0;
+			// right: 0;
+			// overflow-y: scroll;
+			padding-bottom: 47px;
+		}
 		.sign-in{
 			.bg(100%,110px,#fff,'~images/my-bg.png',100% 100%);
 			text-align: center;

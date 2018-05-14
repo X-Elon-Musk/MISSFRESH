@@ -35,7 +35,7 @@
     		height: 100%;
 		}
 		.back{
-			.bg(18px,100%,transparent,'~src/images/icon/back.png',100% 50%);
+			.bg(18px,100%,transparent,'~src/images/icon/back.png',100% 38%);
 			position: absolute;
 			left: 18px;
 			top: 0;

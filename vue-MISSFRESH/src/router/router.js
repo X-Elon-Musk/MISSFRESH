@@ -9,6 +9,7 @@ const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'car
 const cartDetail = r => require.ensure([], () => r(require('../page/cart/children/cartDetail')), 'cartDetail')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const safe = r => require.ensure([], () => r(require('../page/profile/children/safe')), 'safe')
+const frontend = r => require.ensure([], () => r(require('../page/profile/children/frontend')), 'frontend')
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
 const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
 const setusername = r => require.ensure([], () => r(require('../page/profile/children/children/setusername')), 'setusername')
@@ -77,6 +78,9 @@ export default [{
             children: [{
                     path: 'safe',//账户与安全
                     component: safe,
+                },{
+                    path: 'frontend',//设置
+                    component: frontend,
                 },{
                     path: 'info', //个人信息详情页
                     component: info,
