@@ -11,8 +11,8 @@ export const getValue=(objProvide,keyNeed)=>{
 	 if(Object.prototype.toString.call(objProvide) === '[object Object]'){
         var obj={};
         (function getValueFun(object, char) {
-            var key='';
-            for(key in object){
+            // var key='';
+            for(var key in object){
                 if (key==char) {
                     obj.value=object[key];
                 } else if (Object.prototype.toString.call(object[key]) === '[object Object]') {

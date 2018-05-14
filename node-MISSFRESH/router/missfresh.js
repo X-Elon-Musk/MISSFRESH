@@ -1,5 +1,7 @@
 'use strict';
 
+import CategoryList from './category_list.js'
+
 import Product from './products.js'
 import Banner from './banner.js'
 import Brands from './brands.js'
@@ -11,8 +13,8 @@ var MissFresh=function () {};
 MissFresh.prototype={
 	constructor: MissFresh,
 	async getMissFresh(req, res, next){
-		//商品基本信息
-		
+		var category_list=await CategoryList.getCategoryList();
+
 		var product_list={};
         var products=await Product.getProducts(),
         banner=await Banner.getBanner(),
@@ -25,6 +27,7 @@ MissFresh.prototype={
         product_list['category_areas']=categoryareas;
         // console.log(products,banner);
         var missfresh={
+            'category_list': category_list,
         	'product_list': product_list
         }
 		res.type('application/json');
