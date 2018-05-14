@@ -5,7 +5,10 @@
             <span class="close-icon" @click="closeButton"></span>
         </div>
         <ul class="clearfix classify-icons">
-            <li v-for="(item,index) in tabSlide" @click="iconClick(index)"><span></span><h4>{{item.text}}</h4></li>
+            <li v-for="(item,index) in categorylist" @click="iconClick(index)">
+                <span :style="{backgroundImage:`url(${item.image})`}"></span>
+                <h4>{{item.name}}</h4>
+            </li>
             <!-- <li><span></span><h4>抢30元红包</h4></li>
             <li><span></span><h4>水果</h4></li>
             <li><span></span><h4>蔬菜</h4></li>
@@ -32,7 +35,7 @@
 				
 			}
 		},
-        props: ['tabSlide'],
+        props: ['categorylist'],
         methods: {
             closeButton: function () {
                 this.$emit("closeClassify");
@@ -102,7 +105,7 @@
                     font-weight: normal;
                 }
             }
-            li:nth-of-type(1){
+            /* li:nth-of-type(1){
                 span{
                     background-image: url(~images/classify/classify_0.png);
                 }
@@ -176,7 +179,7 @@
                 span{
                     background-image: url(~images/classify/classify_14.png);
                 }
-            }
+            } */
         }
     }
     .section-classify ::-webkit-scrollbar {

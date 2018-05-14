@@ -1,8 +1,8 @@
 //首页
 {code: 0, is_chrome: 0, banner_bg_img: "", header_tip: {link_type: "app_download", image: "",…},…}
 banner_bg_img:""
-category_list:
-[,…]code:0
+category_list:[,…]
+code:0
 default_category:"hb-newsy"
 event:{group_purchase_hint: "赚80元"}
 first_page_addr_text:"本城市支持会员1小时达，选择详细地址完成匹配"
@@ -10,7 +10,7 @@ header_tip:{link_type: "app_download", image: "",…}
 img_url:"https://j-image.missfresh.cn/img_20161108170905880.png"
 is_chrome:0
 product_list:{
-	brands: [{image: "https://j-image.missfresh.cn/img_20170627185311186.png", name: "优鲜严选",…},…],…}banner:[{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…},…]
+	banner: [{image: "https://j-image.missfresh.cn/img_20170627185311186.png", name: "优鲜严选",…},…],…}banner:[{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…},…]
 	brands:[{image: "https://j-image.missfresh.cn/img_20170627185311186.png", name: "优鲜严选",…},…]
 	category_areas:[,…]
 	is_vip:1

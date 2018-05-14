@@ -34,7 +34,7 @@
 			}
 		},
         mounted(){
-            console.log(this.banner);
+            // console.log(this.banner);
         },
         /*watch: {
             products: function () {
