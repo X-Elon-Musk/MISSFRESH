@@ -1,5 +1,5 @@
 <template>
-    <div class="safe">
+    <div class="profile-item-page safe">
     	<mheader></mheader>	
         <profileItem to="/" text="手机号" arrow="true">
         	<span class="f_r text-prompt">立即绑定</span>
@@ -24,9 +24,5 @@
 	}
 </script>
 <style lang="less">
-	@import '~src/style/mixin';
-	.safe{
-		.fullscreen(3);
-		background: #fff;
-	}
+
 </style>

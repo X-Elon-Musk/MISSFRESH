@@ -1,5 +1,5 @@
 <template>
-    <div class="frontend">
+    <div class="profile-item-page frontend">
     	<mheader></mheader>	
         <profileItem to="/" text="版本" arrow="true"></profileItem>
         <profileItem to="/" text="清除缓存" arrow="true"></profileItem>

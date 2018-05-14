@@ -86,7 +86,7 @@
 		  				text: '联系客服'
 		  			},
 		  			{
-		  				to: '/',
+		  				to: '/profile/feedback',
 		  				text: '意见反馈'
 		  			},
 		  			{
@@ -94,7 +94,7 @@
 		  				text: '消息'
 		  			},
 		  			{
-		  				to: '/',
+		  				to: '/profile/about_us',
 		  				text: '关于我们'
 		  			},
 		  			{
@@ -136,8 +136,6 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.my-center{
-		// padding-bottom: 47px;
-		// .wh(100%);
 		position: fixed;
 		left: 0;
 		top: 0;
@@ -145,103 +143,102 @@
 		right: 0;
 		overflow-y: scroll;
 		.my-center-content{
-			// position: fixed;
-			// left: 0;
-			// top: 0;
-			// bottom: 0;
-			// right: 0;
-			// overflow-y: scroll;
 			padding-bottom: 47px;
-		}
-		.sign-in{
-			.bg(100%,110px,#fff,'~images/my-bg.png',100% 100%);
-			text-align: center;
-			padding-top: 17px;
-			box-sizing: border-box;
-			span{
-				display: inline-block;
-				margin-top: 36px;
-				background: 0 0;
-				min-width: 83px;
-				min-height: 36px;
-				line-height: 36px;
-				font-size: 14px;
-				color: #ff4891;
+			.sign-in{
+				.bg(100%,110px,#fff,'~images/my-bg.png',100% 100%);
 				text-align: center;
-				border: 1px solid #ff4891;
-				border-radius: 4px;
-				position: relative;
-				padding: 0 12px;
+				padding-top: 17px;
 				box-sizing: border-box;
-			}
-		}
-		.wallet{
-			.wh(84px);
-			background: #fff;
-			display: table;
-			table-layout: fixed;
-			padding: 12px 0;
-			li{
-				display: table-cell;
-				text-align: center;
-				padding-top: 10px;
 				span{
-					display: block;
+					display: inline-block;
+					margin-top: 36px;
+					background: 0 0;
+					min-width: 83px;
+					min-height: 36px;
+					line-height: 36px;
+					font-size: 14px;
+					color: #ff4891;
 					text-align: center;
-					display: block;
-	    			color: #4d4d4d;
-	    			font-size: 12px;
-	    			line-height: 2;
-	    			i{
-	    				font-size: 18px;
-	    			}
+					border: 1px solid #ff4891;
+					border-radius: 4px;
+					position: relative;
+					padding: 0 12px;
+					box-sizing: border-box;
 				}
 			}
-		}
-		.rights{
-			.wh(45px);
-			padding-left: 15px;
-			padding-right: 10px;
-			padding-top: 15px;
-			background-color: #fff;
-	    	// height: 30px;
-	    	box-sizing: border-box;
-	    	// height: 45px;
-	    	span{
-	    		&:nth-of-type(1){
-	    			line-height: 30px;
-	    			font-size: 20px;
-	    			color: #474245;
-	    		}
-	    	}
-	    	.open-membership{
-	    		float: right;
-	    		line-height: 30px;
-	    		color: #969696;
-	    		font-size: 12px;
-	    	}
-		}
-		.rights-detail{
-			font-size: 12px;
-			color: #969696;
-			line-height: 18px;
-			padding-left: 15px;
-			padding-bottom: 20px;
-			span{
-			    color: #ff4891;
+			.wallet{
+				.wh(84px);
+				background: #fff;
+				display: table;
+				table-layout: fixed;
+				padding: 12px 0;
+				li{
+					display: table-cell;
+					text-align: center;
+					padding-top: 10px;
+					span{
+						display: block;
+						text-align: center;
+						display: block;
+		    			color: #4d4d4d;
+		    			font-size: 12px;
+		    			line-height: 2;
+		    			i{
+		    				font-size: 18px;
+		    			}
+					}
+				}
+			}
+			.rights{
+				.wh(45px);
+				padding-left: 15px;
+				padding-right: 10px;
+				padding-top: 15px;
+				background-color: #fff;
+		    	// height: 30px;
+		    	box-sizing: border-box;
+		    	// height: 45px;
+		    	span{
+		    		&:nth-of-type(1){
+		    			line-height: 30px;
+		    			font-size: 20px;
+		    			color: #474245;
+		    		}
+		    	}
+		    	.open-membership{
+		    		float: right;
+		    		line-height: 30px;
+		    		color: #969696;
+		    		font-size: 12px;
+		    	}
+			}
+			.rights-detail{
+				font-size: 12px;
+				color: #969696;
+				line-height: 18px;
+				padding-left: 15px;
+				padding-bottom: 20px;
+				span{
+				    color: #ff4891;
+				}
+			}
+			.invitation-img{
+				margin-top: 15px;
+				width: 100%;
+			}
+			.other-items{
+				padding-bottom: 30px;
+				padding-top: 25px;
+				width: 100%;
+				background: #fff;
+				
 			}
 		}
-		.invitation-img{
-			margin-top: 15px;
-			width: 100%;
-		}
-		.other-items{
-			padding-bottom: 30px;
-			padding-top: 25px;
-			width: 100%;
+		.profile-item-page{
+			.fullscreen(3);
 			background: #fff;
-			
 		}
+		
 	}
 	.sideslip-enter-active, .sideslip-leave-active {
         transition: all .4s;

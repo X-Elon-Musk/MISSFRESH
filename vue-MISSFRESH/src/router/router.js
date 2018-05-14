@@ -9,6 +9,8 @@ const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'car
 const cartDetail = r => require.ensure([], () => r(require('../page/cart/children/cartDetail')), 'cartDetail')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const safe = r => require.ensure([], () => r(require('../page/profile/children/safe')), 'safe')
+const feedback = r => require.ensure([], () => r(require('../page/profile/children/feedback')), 'feedback')
+const about_us = r => require.ensure([], () => r(require('../page/profile/children/about_us')), 'about_us')
 const frontend = r => require.ensure([], () => r(require('../page/profile/children/frontend')), 'frontend')
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
 const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
@@ -78,6 +80,12 @@ export default [{
             children: [{
                     path: 'safe',//账户与安全
                     component: safe,
+                },{
+                    path: 'feedback',//意见反馈
+                    component: feedback,
+                },{
+                    path: 'about_us',//关于我们
+                    component: about_us,
                 },{
                     path: 'frontend',//设置
                     component: frontend,
