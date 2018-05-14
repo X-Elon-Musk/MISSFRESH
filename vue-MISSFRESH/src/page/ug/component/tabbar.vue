@@ -162,7 +162,16 @@
 				        </div>
 			      	</div>
 			    </div>
-
+				<div class="swiper-slide slidepage">
+			      	<div class="swiper-container scroll" ref="scroll">
+				        <div class="swiper-wrapper">
+				          	<div class="swiper-slide slidescroll">
+								15
+				          		<img src="~src/images/carousel/0.jpg">
+				      		</div>
+				        </div>
+			      	</div>
+			    </div>
 
 
 		  	</div>
@@ -189,8 +198,6 @@
 				// bar: null,
 				//导航的transition-duration值
 				tSpeed: 300,
-				//导航中最后一个按钮的位置
-				navSum: 0,
 				//导航的可视宽度
 				clientWidth: 0,
 				//导航的宽度
@@ -215,6 +222,8 @@
 				products: [],
 				//loading组件状态
 				loading: false,
+				//导航移动的最大距离
+				maxLeft: 0
 			}
 		},
 
@@ -243,15 +252,13 @@
 
 							//设置transition-duration值
 							this.setTransition(_this.tSpeed);
-							//最后一个slide的位置
-				  			_this.navSum = this.slides[this.slides.length-1].offsetLeft;
-				  			//Nav的可视宽度
+							//Nav的可视宽度
 				  			_this.clientWidth = parseInt(this.$wrapperEl.css('width'));
 				  			_this.navWidth = 0;
 				  			for (var i = 0; i < this.slides.length; i++) {
-				  				_this.navWidth += parseInt(this.slides.eq(i).css('width'))
+				  				_this.navWidth += parseInt(this.slides[i].offsetWidth)
 				  			}
-				  			_this.navWidth+=40;
+				  			_this.maxLeft=_this.navWidth-_this.clientWidth;
 				  		}
 				  	},
 				});
@@ -268,10 +275,7 @@
 				  		transitionStart: function () {
 				  			var index=this.activeIndex;
 				  			_this.tabIndex=index;
-				  			// _this.navSlideWidth=_this.navSwiper.slides.eq(index).css('width'); 
-				  			_this.navSlideWidth=_this.navSwiper.slides[index].offsetWidth+'px'; 
-				  			console.log(_this.navSwiper);
-				  			console.log(_this.navSlideWidth);
+				  			_this.navSlideWidth=_this.navSwiper.slides[index].offsetWidth; 
 				  			_this.slideMove(index,_this.navSlideWidth);
 				  		}
 				  			
@@ -281,7 +285,7 @@
 			getData: function (callback) {
 				var _this=this;
 				this.loading=true;
-				this.axios.get('http://10.0.8.11:3390/index')
+				this.axios.get('http://localhost:3390/index')
 				.then(function (response) {
 					_this.categorylist=_this.categorylist.concat(response.data['category_list']);
 					_this.banner=_this.banner.concat(response.data.product_list.banner);
@@ -304,20 +308,15 @@
 			//导航移动
 			slideMove: function (index,navSlideWidth) {
 				var navSwiper=this.navSwiper,
-				clientWidth=this.clientWidth,
-				navWidth=this.navWidth;
+				clientWidth=this.clientWidth;
 				var navActiveSlideLeft=navSwiper.slides[index].offsetLeft;
-				console.log(index);
-				if (navActiveSlideLeft < (clientWidth-parseInt(navSlideWidth))/2) {
-					console.log(0);
-	  				navSwiper.setTranslate(0)
-	  			} else if (navActiveSlideLeft > navWidth-(parseInt(navSlideWidth) + clientWidth)/2) {
-	  				console.log(1111);
-	  				navSwiper.setTranslate(clientWidth-navWidth)
-	  			} else {
-	  				console.log(2222);
-	  				navSwiper.setTranslate((clientWidth-parseInt(navSlideWidth))/2-navActiveSlideLeft)
-	  			}
+				var left=navActiveSlideLeft-clientWidth/2;
+				if (left<=0) {
+					left=0;	
+				} else if(left>=this.maxLeft){
+					left=this.maxLeft;
+				} 
+				navSwiper.setTranslate(-left);
 			},
 	        //分类切换显示状态
 	        showClassify: function () {
