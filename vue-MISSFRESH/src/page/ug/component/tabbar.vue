@@ -5,7 +5,7 @@
         	<mheader></mheader>
         	<div class="swiper-container tab-nav" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
-        			<div class="swiper-slide" v-for="(item,index) in categorylist" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index">
+        			<div class="swiper-slide" v-for="(item,index) in categorylist" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index" :style="{backgroundImage:`url(${item.category_image})`}">
         				<span>{{item.name}}</span>
         			</div>
 					<!-- <div class="bar">
@@ -268,7 +268,10 @@
 				  		transitionStart: function () {
 				  			var index=this.activeIndex;
 				  			_this.tabIndex=index;
-				  			_this.navSlideWidth = _this.navSwiper.slides.eq(index).css('width'); 
+				  			// _this.navSlideWidth=_this.navSwiper.slides.eq(index).css('width'); 
+				  			_this.navSlideWidth=_this.navSwiper.slides[index].offsetWidth+'px'; 
+				  			console.log(_this.navSwiper);
+				  			console.log(_this.navSlideWidth);
 				  			_this.slideMove(index,_this.navSlideWidth);
 				  		}
 				  			
@@ -304,11 +307,15 @@
 				clientWidth=this.clientWidth,
 				navWidth=this.navWidth;
 				var navActiveSlideLeft=navSwiper.slides[index].offsetLeft;
+				console.log(index);
 				if (navActiveSlideLeft < (clientWidth-parseInt(navSlideWidth))/2) {
+					console.log(0);
 	  				navSwiper.setTranslate(0)
 	  			} else if (navActiveSlideLeft > navWidth-(parseInt(navSlideWidth) + clientWidth)/2) {
+	  				console.log(1111);
 	  				navSwiper.setTranslate(clientWidth-navWidth)
 	  			} else {
+	  				console.log(2222);
 	  				navSwiper.setTranslate((clientWidth-parseInt(navSlideWidth))/2-navActiveSlideLeft)
 	  			}
 			},
@@ -359,9 +366,11 @@
 			padding-right: 40px;
 			.swiper-slide{
 				text-align: center;
-				// width: auto!important;
 				width: auto;
 				padding: 0 0.8em;
+				background-repeat: no-repeat;
+				background-size: 100% 100%;
+				background-position: center center;
 				span {
 
 					text-align:center;
