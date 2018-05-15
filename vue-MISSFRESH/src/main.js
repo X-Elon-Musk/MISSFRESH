@@ -1,21 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import FastClick from 'fastclick'
+import axios from 'axios'
+import VueLazyload from 'vue-lazyload'
+
 import App from './App'
 import routes from './router/router'
-
-import FastClick from 'fastclick'
-
-import axios from 'axios'
-
 import {getValue} from 'src/config/mUtils'
+import store from './store'
+
+
+
+
+
 // import 'swiper/dist/css/swiper.min.css';
 // import Swiper from "swiper";
 
 // import MintUI from 'mint-ui'
 // import 'mint-ui/lib/style.css'
 
-import VueLazyload from 'vue-lazyload'
-const defaultImage=require('images/default-image-product.png');
+
+
 
 
 if ('addEventListener' in document) {
@@ -30,6 +35,7 @@ Vue.use(VueRouter)
 // Vue.use(MintUI)
 // Vue.use(Swiper)
 
+const defaultImage=require('images/default-image-product.png');
 Vue.use(VueLazyload, {
   	preLoad: 1.3,
   	error: defaultImage,
@@ -59,4 +65,5 @@ const router = new VueRouter({
 
 new Vue({
 	router,
+	store
 }).$mount('#app')

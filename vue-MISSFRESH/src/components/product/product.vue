@@ -20,7 +20,12 @@
 					会员专享价
 					<price :price="priceUp.price"></price>
 				</p>
-				<img src="~images/icon/shopping-cart.png" class="shopping-cart-img">
+				<img src="~images/icon/shopping-cart.png" class="shopping-cart-img" style="opacity: 0.3;">
+				<div class="cart-action">
+					<span class="minus-action"></span> 
+					<span class="count">1</span> 
+					<span class="add-action"></span>
+				</div>
 			</div>
 		</router-link>
 	</div> 
@@ -149,6 +154,30 @@
 				position: absolute;
 				right: 6px;
 				bottom: -16px;
+			}
+			.cart-action{
+				width: 5em;
+			    position: absolute;
+			    right: 6px;
+				bottom: -16px;
+				background: transparent;
+				.minus-action{
+				    .bg(1em,1em,transparent,'~images/icon/minus-action.png',100% 100%);
+				    vertical-align: middle;
+				    display: inline-block;
+				}
+				.count{
+					vertical-align: middle;
+				    display: inline-block;
+				    line-height: 1em;
+				    text-align: center;
+				    min-width: 3em; 
+				}
+				.add-action{
+					.bg(1em,1em,transparent,'~images/icon/add-action.png',100% 100%);
+				    vertical-align: middle;
+				    display: inline-block;
+				}
 			}
 		}
 	}
