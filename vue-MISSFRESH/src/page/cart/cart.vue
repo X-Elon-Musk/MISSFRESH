@@ -12,8 +12,8 @@
 			</div>
 			<!-- 商品 -->
 			<ul class="commodity-items products">
-				<li class="commodity-item clearfix" v-for="product in products">
-					<i class="marquee" @click="productCheck(product)" :class="{active:product.checked}"></i>
+				<li class="commodity-item clearfix" v-for="item in products">
+					<i class="marquee" @click="productCheck(item)" :class="{active:item.checked}"></i>
 					<div class="product">
 						<div class="product-img">
 							<span class="hot_0"></span>
@@ -39,6 +39,7 @@
 						<span class="count">{{product.number}}</span>
 						<span class="add-button"  v-on:click="add(product)"></span>
 					</div>
+					<!-- <product :product="item" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')"></product> -->
 				</li>
 			</ul>
 		</div>
@@ -121,6 +122,7 @@
 </template>
 <script>
 	import footGuide from 'src/components/footer/footGuide'
+	import product from 'src/components/product/product'
 	export default{
 		data(){
 		  	return {
@@ -306,7 +308,8 @@
 			}
 		},
 		components:{
-	        footGuide
+	        footGuide,
+	        product
 	    },
 	}
 </script>
