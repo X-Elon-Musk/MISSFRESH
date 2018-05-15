@@ -166,3 +166,20 @@ vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 1690},�
 		name:""
 		price:1690
 		show_type:2
+
+
+
+
+
+
+//点击购物车
+https:\\as-vip.missfresh.cn/v1/cart/add?
+	device_id=2eb26f8561925a51300844f37f8720db&
+	env=web&
+	platform=web&
+	uuid=2eb26f8561925a51300844f37f8720db&
+	access_token=THBMZmhybkgyNlNBRlNTWTFPV084ZDBJUXVBUy9JemFvb0ZhQ1hDcml5ND0%3D&
+	version=4.3.0.2&
+	fromSource=zhuye&
+	screen_height=320&
+	screen_width=568

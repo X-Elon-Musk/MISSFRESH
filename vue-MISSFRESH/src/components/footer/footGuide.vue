@@ -11,6 +11,7 @@
         	</li>
         	<li class="nav-item" @click="goAddress({path: '/cart'})">
         		<span class="nav-icon nav-cart" :style="{backgroundImage:$route.path.indexOf('cart')==-1?`url(${backgroundImage.cart})`:`url(${backgroundImage.cartActive})`}"></span>
+        		<span class="cart-count">{{cartCount}}</span>
         		<p class="nav-label">购物车</p>
         	</li>
         	<li class="nav-item" @click="goAddress({path: '/profile'})">
@@ -21,6 +22,7 @@
 	</div>
 </template>
 <script>
+	import {mapState} from 'vuex'
 	export default{
 		data(){
 			return {
@@ -35,6 +37,23 @@
 					mineActive: require('images/icon/mine-active.png')
 				}
 			}
+		},
+		computed: {
+			...mapState([
+                'cartList'
+            ]),
+            //shopCart变化的时候重新计算当前商品的数量
+            cartCount: function (){
+                if (this.cartList) {
+                    let num = 0;
+                    Object.values(this.cartList).forEach((item,index) => {
+                    	num += item.num;
+                    })
+                    return num;
+                }else {
+                    return 0;
+                }
+            },
 		},
 		methods: {
         	goAddress(path){
@@ -58,10 +77,11 @@
 	    	-webkit-flex: 1;
 	    	flex: 1;
 	    	padding: 5px 0 0;
-	    	font-size: 0;
+	    	// font-size: 0;
 	    	color: #999;
 	    	text-align: center;
 	    	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	    	position: relative;
 	    	.nav-icon{
 				display: block;
 			    width: 27px;
@@ -75,6 +95,21 @@
 			    color: #999;
 			    font-size: 10px;
 			    line-height: 1.8;
+	    	}
+	    	.cart-count{
+				position: absolute;
+			    top: 2px;
+			    right: 20%;
+			    background-color: #ff4891;
+			    color: #fff;
+			    height: 1em;
+			    min-width: 1em;
+			    line-height: 1;
+			    border-radius: 0.6em;
+			    font-size: 0.6em;
+			    border: 1px solid #fff;
+			    padding: 0.1em 0.2em;
+			    box-sizing: content-box;
 	    	}
 	    }
 	}
