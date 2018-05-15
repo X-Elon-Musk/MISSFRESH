@@ -24,15 +24,6 @@
 				<!-- 热卖 -->
 		      	<productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage>
 			    <div class="swiper-slide slidepage swiper-container gif-show">
-			        <!-- <pullRefresh :tabIndex="tabIndex" @getData="getData">
-			        	<gif></gif>
-		      			<carousel></carousel>
-						<guarantee></guarantee>
-						<card></card>
-						<div class="clearfix list-group-item ticket-item" v-for="(item,index) in products[1]" :key="index">
-							<product :product="item"></product>
-						</div>
-		      		</pullRefresh> -->
 		      		<div class="swiper-container scroll" ref="scroll">
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
