@@ -71,6 +71,7 @@
 	    z-index: 1;
 	    bottom: 0;
 	    width: 100%;
+	    box-shadow: 0 0 10px rgba(0,0,0,.1);
 	    .nav-item{
 	    	display: block;
 	    	-webkit-box-flex: 1;

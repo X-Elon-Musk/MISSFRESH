@@ -33,7 +33,7 @@ export default {
 		if (cart[id]) {
 			if (cart[id]['num']>0) {
 				cart[id]['num']--;	
-				cart[id]['total_price']=cart[id]['num']*parseFloat(price_down);	
+				cart[id]['total_price']=cart[id]['num']*parseFloat(cart[id]['price_down']['price']);	
 				state.cartList = {...cart};
 				setStore('buyCart', state.cartList);	
 			} else{
