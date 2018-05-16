@@ -12,34 +12,10 @@
 			</div>
 			<!-- 商品 -->
 			<ul class="commodity-items products">
+				<!-- {{products}} -->
 				<li class="commodity-item clearfix" v-for="item in products">
-					<i class="marquee" @click="productCheck(item)" :class="{active:item.checked}"></i>
-					<div class="product">
-						<div class="product-img">
-							<span class="hot_0"></span>
-							<img src="~src/images/product_0.jpg">
-						</div>
-						<div class="product-info">
-							<p class="name">{{product.name}}</p>
-							<ul class="preferential">
-								<li v-for="prefer in product.preferential">{{prefer}}</li>
-							</ul>
-							<p class="price">
-								黑五会员价 ¥
-								<span>{{product.vip}}</span>
-							</p>
-							<p class="vip">
-								黑五大促销 ¥
-								<span>{{product.price}}</span>
-							</p>
-						</div>
-					</div>
-					<div class="product-number">
-						<span class="reduce-button" v-on:click="reduce(product)"></span>
-						<span class="count">{{product.number}}</span>
-						<span class="add-button"  v-on:click="add(product)"></span>
-					</div>
-					<!-- <product :product="item" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')"></product> -->
+					<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
+					<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')"></product>
 				</li>
 			</ul>
 		</div>
@@ -47,31 +23,27 @@
 		<div class="total-price">
 	        <div class="count-total">
 	        	<span>商品总价</span>
-	        	<strong>¥ {{totalPrice}}</strong>
+	        	<!-- <strong>¥ {{totalPrice}}</strong> -->
+	        	<strong>¥ {{total_price}}</strong>
 		    </div>
 		    <div class="benefit-total">
 		    	<ul class="product-benefit">
-		    		<li class="benefit-item" v-for="product in products" v-show="product.benefit.orNot">
+		    		<!-- <li class="benefit-item" v-for="product in products" v-show="product.benefit.orNot">
 		    			<span>{{product.benefit.content}}</span>
 	        			<strong>-¥ {{product.benefit.text}}</strong>
-		    		</li>
+		    		</li> -->
 		    	</ul>
 		    	<div class="paid">
 		    		<span>商品实付</span>
-	        		<strong>¥{{paid<0?0:paid}}</strong>
+	        		<strong>¥{{total_price}}</strong>
 		    	</div>
 		    	<div class="freight">
 		    		<span>运费<i>实付满69元包邮</i></span>
-	        		<strong >
-	        			<i v-if="freight!='免邮'">¥</i>{{freight}}
-	        		</strong>
+	        		<strong >{{postage}}</strong>
 		    	</div>
 		    </div>
 		    <div class="total">
-	    		合计
-	    		<strong>
-	    			¥ {{total}}
-	    		</strong>
+	    		合计<strong>¥ {{products_total_price}}</strong>
 	    	</div>
 	    </div>
 	    <!-- 会员卡优惠 -->
@@ -102,10 +74,7 @@
 				全选
 	    	</div>
 	    	<div class="card-info">
-    			<span>
-    				合计
-    				<i>¥ {{total+cardMoney}}</i>
-    			</span>
+    			<span>合计<i>¥ {{total+cardMoney}}</i></span>
     			<span>
     				<i v-if="freight!='免邮'">¥</i>{{freight}}
     				<strong v-if="cardMoney!=0">
@@ -113,61 +82,24 @@
     				</strong>
     			</span>
     		</div>
-    		<div class="settlement-button">
-    			去结算
-    		</div>
+    		<div class="settlement-button">去结算</div>
 	    </div>
 		<foot-guide></foot-guide>
 	</div>
 </template>
 <script>
+	import {mapState, mapMutations} from 'vuex'
 	import footGuide from 'src/components/footer/footGuide'
 	import product from 'src/components/product/product'
 	export default{
 		data(){
 		  	return {
-		  		checkAll: false,
+		  		//选择购物车中所有商品
+		  		// checkAll: true,
 		  		totalPrice: 0,
 		  		paid: 0,
 		  		freight: 0,
 		  		total: 0,
-		  		products: [
-					{
-						checked: false,
-						number: 0,
-						hot: 0,
-						img: '',
-						name: '月盛斋牛肉500g',
-						preferential: [
-							'限每人1份',
-							'进口检验合格'
-						],
-						price: 29.8,
-						vip: 19.8,
-						benefit: {
-							orNot: true,
-							content: '促销优惠',
-							text: 2
-						}
-					},
-					{
-						checked: false,
-						number: 0,
-						hot: 1,
-						img: '',
-						name: '羔羊肉片300g',
-						preferential: [
-							'进口检验合格'
-						],
-						price: 29.7,
-						vip: 19.8,
-						benefit: {
-							orNot: false,
-							content: '限时优惠',
-							text: 3
-						}
-					}
-				],
 				cardTime: '',
 				cards: [
 					{
@@ -193,21 +125,118 @@
 		created (){
 	    	this.calculateTotal();
 	    },
+	    mounted: function () {
+	    	// this.initData();
+	    	// console.log('商品表');
+	    	/*console.log(this.products);
+	    	console.log(this.cartList);
+	    	Object.values(this.cartList).forEach((item)=>{
+		        // if (!item.status) {
+		        // 	console.log(333333333333333);
+		        //   	return 'false';
+		        // }
+		        console.log(item);
+		    }) */
+	    },
+	    computed: {
+	    	...mapState([
+                'cartList'
+            ]),
+            //商品列表
+            products: function () {
+            	var products=[];
+				// console.log(this.cartList);
+				Object.values(this.cartList).forEach(item => {
+                    products.push({
+                    	"num": item.num,
+						"id": item.id,
+						"image": item.image,
+						"name": item.name,
+						"product_tags": item.product_tags,
+						"subtitle": item.subtitle,
+						"price_up": item.price_up,
+						"price_down": item.price_down,
+						"total_price": item.total_price,
+						"status": item.status
+                    })
+                })
+                return products;
+            },
+           	//商品总价
+            total_price: function () {
+            	var total_price=0;
+				Object.values(this.cartList).forEach(item => {
+                    if (item.status) {
+                    	total_price+=item.total_price;	
+                    }
+                })
+                return total_price;
+            },
+            //是否选中购物车中所有商品
+            checkAll: function () {
+            	if (this.products) {
+			    	for (var i=0;i<this.products.length;i++) {
+				    	if (!this.products[i].status) {
+				    		return false;
+				        }		
+				    }
+				    return true;
+			    }else {
+			    	return true;
+			    }
+			},
+			//邮费
+			postage: function () {
+				/*let postage=this.total_price>=69?"免邮":"¥5";
+				return postage;*/
+				return this.total_price>=69?"免邮":5;
+			},
+			//商品合计
+			products_total_price: function () {
+				if (this.postage!=="免邮") {
+					return 	this.total_price-this.postage;	
+				} else{
+					return this.total_price;
+				}
+			}
+	    },
 		methods: {
-			/*商品总价计算*/
+			...mapMutations([
+                'SET_STATUS'
+            ]),
+			/*//初始化数据
+			async initData(){
+				var products=[];
+				// console.log(this.cartList);
+				Object.values(this.cartList).forEach(item => {
+                    products.push({
+                    	"num": item.num,
+						"id": item.id,
+						"image": item.image,
+						"name": item.name,
+						"product_tags": item.product_tags,
+						"subtitle": item.subtitle,
+						"price_up": item.price_up,
+						"price_down": item.price_down,
+						"status": item.status
+                    })
+                })
+                this.products=products;
+			},*/
+			//商品总价计算
 		    calculateTotal(){
-		      	var all=0;
-		      	this.products.forEach(function (item) {
-			        if (item.checked) {
-			          all+=item.price*item.number; 
-			        } 
-			    })  
-			    this.totalPrice=all;
-			    this.actuallyPaid();
+		     //  	var all=0;
+		     //  	this.products.forEach(function (item) {
+			    //     if (item.checked) {
+			    //       all+=item.price*item.number; 
+			    //     } 
+			    // })  
+			    // this.totalPrice=all;
+			    // this.actuallyPaid();
 		    },
-		    /*商品实付计算*/
+		    //商品实付计算
 		    actuallyPaid(){
-		    	var all=0;
+		    	/*var all=0;
 		      	this.products.forEach(function (item) {
 			        if (item.benefit.orNot) {
 			          all+=item.benefit.text; 
@@ -215,14 +244,14 @@
 			    })  
 			    this.paid=this.totalPrice-all;
 			    this.freightCharge();
-			    this.totalCount();
+			    this.totalCount();*/
 		    },
-		    /*运费计算*/
+		    //运费计算
 		    freightCharge(){
 		    	if (this.paid>=69) {
 		    		this.freight='免邮';		
 		    	} else{
-		    		console.log(this.paid);
+		    		// console.log(this.paid);
 		    		if (this.paid<=0) {
 		    			this.freight='免邮';			
 		    		}else{
@@ -230,7 +259,7 @@
 		    		}
 		    	}
 		    },
-		    /*商品合计计算*/
+		    //商品合计计算
 		    totalCount(){
 		    	this.total<0?0:this.total;
 		    	if (this.totalPrice==0) {
@@ -244,53 +273,44 @@
 		    	}
 		    		
 		    },
-		   	/*单个商品减少*/
+		   	//单个商品减少
 		    reduce(item){
 		      	if (item.number==0) return;
 		      	item.number--;
 		      	this.calculateTotal();
 		    },
-		    /*单个商品增加*/
+		    //单个商品增加
 		    add(item){
 		      	item.number++;
 		      	this.calculateTotal();
 		    },
-		    /*单个商品选择*/
-		    productCheck(item){
+		    //单个商品选择
+		    productCheck(id){
 		    	this.calculateTotal();
-		      	var this_=this;
-		      	var num=0;
-		      	item.checked=!item.checked;
-		      	this.products.forEach(function (item) {
-			        if (!item.checked) {
-			          	this_.checkAll=false;  
-			          	return;
-			        } else{
-			          	num++;  
-			        }
-			    }) 
-			    if (num==this.products.length) {
-			        this.checkAll=true;     
-			    }
+				this.SET_STATUS({id});
+		    	// this.initData();
 		    },
-		    /*商品全部选择*/
+		    //商品全部选择
 		    checkedAll(){
-			    this.checkAll=!this.checkAll;
-			    if (this.checkAll) {
-			        var total=0;
-			        this.products.forEach(function (item) {
-			          	item.checked=true;
-			          	total+=item.price*item.number; 
-			        }) 
-			        this.totalPrice=total;     
-			    } else{
-			        this.products.forEach(function (item) {
-			          	item.checked=false;
-			        }) 
-			        this.totalPrice=0;    
-			    }
+			    // this.checkAll=!this.checkAll;
+			    // if (this.checkAll) {
+			    //     var total=0;
+			    //     this.products.forEach(function (item) {
+			    //       	item.checked=true;
+			    //       	total+=item.price*item.number; 
+			    //     }) 
+			    //     this.totalPrice=total;     
+			    // } else{
+			    //     this.products.forEach(function (item) {
+			    //       	item.checked=false;
+			    //     }) 
+			    //     this.totalPrice=0;    
+			    // }
+			    Object.values(this.cartList).forEach(item => {
+			    	this.productCheck(item.id);
+			    })
 		    },
-		    /*会员卡选择*/
+		    //会员卡选择
 		    cardCheck(card){
 		    	var state=card.checked;
 		    	this.cards.forEach(function (item) {
@@ -399,7 +419,8 @@
 					}
 					.product{
 						float: right;
-						width: 87.8%;
+						width: 85%;
+						margin-left: 2%;
 						border: none;
 						font-size: 14px;
 						padding: 0;
@@ -409,6 +430,9 @@
 						}
 						.name{
 							padding-top: 0;
+						}
+						.cart-operate .cart-action {
+						    bottom: -33px;
 						}
 					}
 					.product-number{

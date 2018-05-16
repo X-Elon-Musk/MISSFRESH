@@ -1,6 +1,6 @@
 <template>
     <span class="price-component">
-    	¥ <strong>{{price}}</strong>
+    	¥<strong>{{price}}</strong>
     </span> 
 </template>
 <script>

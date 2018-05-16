@@ -8,27 +8,28 @@
 			<div class="f_r product-info">
 				<!-- <p class="name">{{product.name}}</p> -->
 				<p class="name">{{product.id}}</p>
-				<p class="point">{{product.subtitle}}</p>
+				<p class="point" v-if="subtitle">{{product.subtitle}}</p>
 				<ul class="preferential">
 					<li v-for="(item,index) in product.product_tags" :key="index">{{item.name}}</li>
 				</ul>
 				<p class="price">
-					商城价
-					<price :price="priceUp.price"></price>
+					<price :price="priceDown.price" class="price-now"></price>
+					<!-- 商城价 -->
+					<price :price="priceUp.price" class="price-original"></price>
 				</p>
 				<p class="vip">
-					会员价
-					<price :price="priceUp.price"></price>
+					<!-- 会员价 -->
+					<!-- <price :price="priceDown.price"></price> -->
 				</p>
 				
 			</div>
 		</router-link>
 		<div class="cart-operate">
-			<img src="~images/icon/shopping-cart.png" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,$event)">
+			<img src="~images/icon/shopping-cart.png" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
 			<div class="clearfix cart-action" v-if="productNum">
 				<span class="minus-action" @touchstart.stop="minusOutCart(product.id,$event)"></span> 
 				<span class="count">{{productNum}}</span> 
-				<span class="add-action" @touchstart.stop="addToCart(product.id,$event)"></span>
+				<span class="add-action" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"></span>
 			</div>
 		</div>
 		
@@ -45,7 +46,7 @@
 			}
 		},
 		mounted: function () {
-			console.log(this.productNum);
+			// console.log(this.productNum);
 		},
 		computed: {
 			...mapState([
@@ -54,14 +55,6 @@
             //shopCart变化的时候重新计算当前商品的数量
             productNum: function (){
                 if (this.cartList&&this.cartList[this.product.id]) {
-                    /*let num = 0;
-                    Object.values(this.cartList).forEach((item,index) => {
-                    	num += item.num;
-                    })
-                    for(var key in this.cartList[this.product.id]){
-                    	num+=
-                    }*/
-                    // console.log(num);
                     return this.cartList[this.product.id]['num'];
                 }else {
                     return 0;
@@ -75,11 +68,11 @@
             minusOutCart: function (id,event) {
 				this.REDUCE_CART({id});
 			},
-			addToCart: function (id,event) {
-				this.ADD_CART({id});
+			addToCart: function (id,image,name,product_tags,price_up,price_down,event) {
+				this.ADD_CART({id,image,name,product_tags,price_up,price_down});
 			}
 		},
-		props: ['product','priceUp','priceDown'],
+		props: ['product','subtitle','priceUp','priceDown'],
 		components: {
 			price
 		}
@@ -170,9 +163,9 @@
 						color: #d165e1;
 						background: #fff;
 						margin-right: 5px;
-						background-color: rgb(255, 255, 255);
-						border-color: rgb(198, 198, 198);
-						color: rgb(198, 198, 198);
+						border-color: @color_main;
+						color: @color_main;
+						opacity: 0.5;
 					}
 				}
 				.price{
@@ -180,17 +173,22 @@
 					font-size: 12px;
 					color: @color_main;
 					padding-top: 18px;
+					.price-original{
+						// margin-left: 0.2em;
+						text-decoration: line-through;
+						color: @color_gray;
+					}
 				}
-				.vip{
+				/* .vip{
 					line-height: 1.4;
 					font-size: 12px;
 					color: @color_assist;
-				}
+				} */
 			}
 		}
 		.cart-operate{
 			position: absolute;
-			bottom: 18px;
+			bottom: 32px;
 			right: 0;
 			.shopping-cart-img{
 				width: 46px;
@@ -200,7 +198,7 @@
 				bottom: -10px;
 			}
 			.cart-action{
-				.wh(1em,4em);
+				.wh(1.2em,4.8em);
 			    position: absolute;
 			    right: 6px;
 				bottom: 8px;
@@ -209,15 +207,15 @@
 					float: left;
 				}
 				.minus-action{
-				    .bg(1em,1em,transparent,'~images/icon/minus-action.png',100% 100%);
+				    .bg(1.2em,1.2em,transparent,'~images/icon/minus-action.png',100% 100%);
 				}
 				.count{
-					line-height: 1em;
+					line-height: 1.2em;
 				    text-align: center;
-				    min-width: 2em; 
+				    min-width: 2.4em; 
 				}
 				.add-action{
-					.bg(1em,1em,transparent,'~images/icon/add-action.png',100% 100%);
+					.bg(1.2em,1.2em,transparent,'~images/icon/add-action.png',100% 100%);
 				}
 			}
 		}
