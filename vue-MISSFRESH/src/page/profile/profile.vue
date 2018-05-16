@@ -54,11 +54,11 @@
 		<transition name="sideslip" mode="out-in">
 			<router-view v-if="!$route.meta.keepAlive"></router-view>
 		</transition>
-		<foot-guide></foot-guide>
+		<mfooter></mfooter>
 	</div>
 </template>
 <script>
-	import footGuide from 'src/components/footer/footGuide'
+	import mfooter from 'src/components/mfooter/mfooter'
 	import icons from 'src/components/icons/icons'
 	import profileItem from './component/profileItem'
 	export default{
@@ -127,7 +127,7 @@
 			}
 		},
 		components:{
-	        footGuide,
+	        mfooter,
 	        icons,
 	        profileItem
 	    },

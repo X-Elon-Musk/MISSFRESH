@@ -56,12 +56,12 @@
 				</div>
 			</pullRefresh>
 			<!-- <pullRefresh :tabIndex="1" @getData="getData"></pullRefresh> -->
-			<foot-guide></foot-guide>
+			<mfooter></mfooter>
 		<!-- </div> -->
 	</div>
 </template>
 <script>
-	import footGuide from 'src/components/footer/footGuide'
+	import mfooter from 'src/components/mfooter/mfooter'
 	import icons from 'src/components/icons/icons'
 	import pullRefresh from 'src/components/pullRefresh/pullRefresh'
 	import product from 'src/components/product/product'
@@ -140,7 +140,7 @@
 			}	
 		},
 		components:{
-	        footGuide,
+	        mfooter,
 	        icons,
 	        pullRefresh,
 	        product

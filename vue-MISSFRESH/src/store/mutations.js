@@ -32,7 +32,8 @@ export default {
 		let cart=state.cartList;
 		if (cart[id]) {
 			if (cart[id]['num']>0) {
-				cart[id]['num']--;	
+				cart[id]['num']--;
+				if (cart[id]['num']==0) state.mpromptStatus=true;	
 				cart[id]['total_price']=cart[id]['num']*parseFloat(cart[id]['price_down']['price']);	
 				state.cartList = {...cart};
 				setStore('buyCart', state.cartList);	
@@ -48,5 +49,9 @@ export default {
 			state.cartList = {...cart};
 			setStore('buyCart', state.cartList);	
 		}
+	},
+	SET_MPROMPT: (state,{status})=>{
+		state.mpromptStatus=status;
+		setStore('mpromptStatus', state.mpromptStatus);	
 	}
 }

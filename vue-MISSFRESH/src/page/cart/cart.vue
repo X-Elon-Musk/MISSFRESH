@@ -1,72 +1,74 @@
 <template>
 	<div class="shopping-cart">
-		<div class="address">
-			<span class="coordinate"></span>
-			<span class="address-text">北京市</span>
-			<span class="arrow"></span>
-		</div>
-		<div class="commodity">
-			<div class="commodity-header">
-				<i class="marquee" @click="checkedAll" :class="{active:checkAll}"></i>
-				全国送商品
+		<pull>
+			<div class="address">
+				<span class="coordinate"></span>
+				<span class="address-text">北京市</span>
+				<span class="arrow"></span>
 			</div>
-			<!-- 商品 -->
-			<ul class="commodity-items products">
-				<!-- {{products}} -->
-				<li class="commodity-item clearfix" v-for="item in products">
-					<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
-					<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')"></product>
-				</li>
-			</ul>
-		</div>
-		<!-- 商品总价 -->
-		<div class="total-price">
-	        <div class="count-total">
-	        	<span>商品总价</span>
-	        	<!-- <strong>¥ {{totalPrice}}</strong> -->
-	        	<strong>¥ {{total_price}}</strong>
+			<div class="commodity">
+				<div class="commodity-header">
+					<i class="marquee" @click="checkedAll" :class="{active:checkAll}"></i>
+					全国送商品
+				</div>
+				<!-- 商品 -->
+				<ul class="commodity-items products">
+					<!-- {{products}} -->
+					<li class="commodity-item clearfix" v-for="item in products">
+						<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
+						<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true"></product>
+					</li>
+				</ul>
+			</div>
+			<!-- 商品总价 -->
+			<div class="total-price">
+		        <div class="count-total">
+		        	<span>商品总价</span>
+		        	<!-- <strong>¥ {{totalPrice}}</strong> -->
+		        	<strong>¥ {{total_price}}</strong>
+			    </div>
+			    <div class="benefit-total">
+			    	<ul class="product-benefit">
+			    		<!-- <li class="benefit-item" v-for="product in products" v-show="product.benefit.orNot">
+			    			<span>{{product.benefit.content}}</span>
+		        			<strong>-¥ {{product.benefit.text}}</strong>
+			    		</li> -->
+			    	</ul>
+			    	<div class="paid">
+			    		<span>商品实付</span>
+		        		<strong>¥{{total_price}}</strong>
+			    	</div>
+			    	<div class="freight">
+			    		<span>运费<i>实付满69元包邮</i></span>
+		        		<strong >{{postage}}</strong>
+			    	</div>
+			    </div>
+			    <div class="total">
+		    		合计<strong>¥ {{products_total_price}}</strong>
+		    	</div>
 		    </div>
-		    <div class="benefit-total">
-		    	<ul class="product-benefit">
-		    		<!-- <li class="benefit-item" v-for="product in products" v-show="product.benefit.orNot">
-		    			<span>{{product.benefit.content}}</span>
-	        			<strong>-¥ {{product.benefit.text}}</strong>
-		    		</li> -->
+		    <!-- 会员卡优惠 -->
+		    <div class="vip-benefit">
+		    	<div class="vip-card clearfix">
+		    		<span class="card"></span>
+		    		<div class="card-info">
+		    			<span>
+		    				开通
+		    				<strong class="vip-time">{{cardTime}}</strong>
+		    				会员可得
+		    				<i>红包</i>
+		    			</span>
+		    			<span>本单更返<i>1.31</i>元</span>
+		    		</div>
+		    	</div>
+		    	<ul class="card-time">
+		    		<li v-for="card in cards">
+		    			<span :title="card.time"></span>
+		    			<i class="marquee" @click="cardCheck(card)" :class="{active:card.checked}"></i>
+		    		</li>
 		    	</ul>
-		    	<div class="paid">
-		    		<span>商品实付</span>
-	        		<strong>¥{{total_price}}</strong>
-		    	</div>
-		    	<div class="freight">
-		    		<span>运费<i>实付满69元包邮</i></span>
-	        		<strong >{{postage}}</strong>
-		    	</div>
 		    </div>
-		    <div class="total">
-	    		合计<strong>¥ {{products_total_price}}</strong>
-	    	</div>
-	    </div>
-	    <!-- 会员卡优惠 -->
-	    <div class="vip-benefit">
-	    	<div class="vip-card clearfix">
-	    		<span class="card"></span>
-	    		<div class="card-info">
-	    			<span>
-	    				开通
-	    				<strong class="vip-time">{{cardTime}}</strong>
-	    				会员可得
-	    				<i>红包</i>
-	    			</span>
-	    			<span>本单更返<i>1.31</i>元</span>
-	    		</div>
-	    	</div>
-	    	<ul class="card-time">
-	    		<li v-for="card in cards">
-	    			<span :title="card.time"></span>
-	    			<i class="marquee" @click="cardCheck(card)" :class="{active:card.checked}"></i>
-	    		</li>
-	    	</ul>
-	    </div>
+	    </pull>	
 	    <!-- 结算 -->
 	    <div class="clearfix settlement">
 	    	<div class="f_l check-all-button">
@@ -84,13 +86,16 @@
     		</div>
     		<div class="f_r settlement-button">去结算</div>
 	    </div>
-		<foot-guide></foot-guide>
+		<mfooter></mfooter>
+		<mprompt></mprompt>
 	</div>
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
-	import footGuide from 'src/components/footer/footGuide'
+	import pull from 'src/components/pull/pull'
+	import mfooter from 'src/components/mfooter/mfooter'
 	import product from 'src/components/product/product'
+	import mprompt from 'src/components/mprompt/mprompt'
 	export default{
 		data(){
 		  	return {
@@ -119,7 +124,8 @@
 					}
 				],
 				settlement: 0,
-				cardMoney: 0
+				cardMoney: 0,
+				mprompt: false
 		  	}
 	  	},
 		created (){
@@ -160,7 +166,8 @@
                     	total_price+=item.total_price;	
                     }
                 })
-                return parseFloat(total_price.toFixed(2));
+                // return parseFloat(total_price.toFixed(2));
+                return parseFloat(total_price);
             },
             //是否选中购物车中所有商品
             checkAll: function () {
@@ -177,9 +184,9 @@
 			},
 			//邮费
 			postage: function () {
-				/*let postage=this.total_price>=69?"免邮":"¥5";
+				/*let postage=this.total_price>=69||this.total_price==0?"免邮":5;
 				return postage;*/
-				return this.total_price>=69?"免邮":5;
+				return this.total_price>=69||this.total_price==0?"免邮":5;
 			},
 			//商品合计
 			products_total_price: function () {
@@ -194,6 +201,9 @@
 			...mapMutations([
                 'SET_STATUS'
             ]),
+			// mpromptAction: function () {
+			// 	this.mprompt=true;
+			// },
 			/*//初始化数据
 			async initData(){
 				var products=[];
@@ -318,17 +328,24 @@
 			}
 		},
 		components:{
-	        footGuide,
-	        product
+			pull,
+	        mfooter,
+	        product,
+	        mprompt
 	    },
 	}
 </script>
 <style lang="less">
 	@import '~src/style/mixin';
 	.shopping-cart{
-		padding-bottom: 145px;
+		// padding-bottom: 145px;
 		background-color: #f0f0f0;
 		font-size: 14px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
 		.address{
 			height: 49px;
 			text-align: center;
@@ -451,6 +468,8 @@
 		.vip-benefit{
 			background: #fff;
 	    	margin-top: 10px;
+	    	padding-bottom: 102px;
+	    	// margin-bottom: 102px;
 	    	.vip-card{
 	    		height: 49px;
 	    		text-align: left;
@@ -532,6 +551,7 @@
 			position: fixed;
 			left: 0;
 			bottom: 53px;
+			z-index: 2;
 			width: 100%;
 			height: 49px;
 			background-color: #fff;

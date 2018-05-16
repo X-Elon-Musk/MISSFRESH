@@ -2,7 +2,7 @@
 	<div class="ug">
 		<!-- <router-link :to="{path: '/ug/productDetail'}" tag="div" style="position: relative; z-index: 1000000000; padding: 3em; background: #fff;" class="product-link">dddddddd</router-link> -->
 		<tabbar></tabbar>
-		<foot-guide></foot-guide>
+		<mfooter></mfooter>
 
 		<transition name="router-fade" mode="out-in">
 			<router-view v-if="!$route.meta.keepAlive"></router-view>
@@ -10,7 +10,7 @@
 	</div>
 </template>
 <script>
-	import footGuide from 'src/components/footer/footGuide'
+	import mfooter from 'src/components/mfooter/mfooter'
 	import tabbar from './component/tabbar'
 
 	import {getValue} from 'src/config/mUtils'
@@ -48,7 +48,7 @@
 			// });
 		},
 		components: {
-	    	footGuide,
+	    	mfooter,
 	    	tabbar
 	    }
 	}

@@ -33,6 +33,7 @@
 	width: @width;
 	background: @color;
 }
+//全屏
 .fullscreen(@index: 1){
 	position: fixed;
 	left: 0;
@@ -40,4 +41,11 @@
 	right: 0;
 	bottom: 0;
 	z-index: @index;
+}
+//居中
+.positionCenter(@left: -50%,@right: -50%){
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }

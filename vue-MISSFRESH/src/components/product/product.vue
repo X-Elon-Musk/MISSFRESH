@@ -50,7 +50,7 @@
 		},
 		computed: {
 			...mapState([
-                'cartList'
+                'cartList','mpromptStatus'
             ]),
             //shopCart变化的时候重新计算当前商品的数量
             productNum: function (){
@@ -63,16 +63,21 @@
 		},
 		methods: {
 			...mapMutations([
-                'ADD_CART','REDUCE_CART'
+                'ADD_CART','REDUCE_CART','SET_MPROMPT'
             ]),
             minusOutCart: function (id,event) {
 				this.REDUCE_CART({id});
+				// console.log(mpromptStatus);
+				if (this.mpromptExist&&this.mpromptStatus) {
+					// this.$emit("mpromptAction");
+					this.SET_MPROMPT({status: true});			
+				}
 			},
 			addToCart: function (id,image,name,product_tags,price_up,price_down,event) {
 				this.ADD_CART({id,image,name,product_tags,price_up,price_down});
 			}
 		},
-		props: ['product','subtitle','priceUp','priceDown'],
+		props: ['product','subtitle','priceUp','priceDown','mpromptExist'],
 		components: {
 			price
 		}

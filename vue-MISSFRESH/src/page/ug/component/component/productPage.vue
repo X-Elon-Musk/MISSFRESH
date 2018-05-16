@@ -8,7 +8,7 @@
             <card :categoryareas="categoryareas"></card>
             <!-- 上滑加载、下拉刷新 -->
             <div class="clearfix list-group-item ticket-item" v-for="(item,index) in products.slice(productsStart,productsEnd)" :key="index">
-                <product :product="item" :subtitle="true" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')"></product>
+                <product :product="item" :subtitle="true" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="false"></product>
             </div>
         </pullRefresh>
     </div>
