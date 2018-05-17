@@ -1,13 +1,11 @@
 'use strict';
 
-import Location from './location.js'
+import r_page from './r_page.js'
+import r_position from './r_position.js'
 
-// export default app => {
-//     // app.get('/test',router.test);
-//     app.get('/sql',Location.sql);
-// }
 
-export.router=function (app) {
-    app.get('/sql',Location.sql);
+export default app=>{
+	app.use('/page', r_page);
+	app.use('/position', r_position);
 }
     

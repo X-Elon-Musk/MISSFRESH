@@ -1,10 +1,10 @@
 'use strict';
-import Mysql from '../model/sql-config.js'
+/*import Mysql from '../model/sql-config.js'
 import Sql_product from '../model/sql-product.js'
 import formidable from 'formidable'
 import md5 from '../model/md5.js'
 
-var mysql=Mysql.mysql_;
+var mysql=Mysql.mysql_;*/
 
 
 /*var Location=function () {};
