@@ -21,33 +21,16 @@
 	export default{
 		data(){
 			return {
-				// mprompt: true
+
 			}
 		},
-		// props: ['mprompt'],
 		computed: {
 	    	...mapState([
-                'mpromptStatus'
+                's_mpromptStatus'
             ]),
-            //商品列表
+            //提示信息的状态
             mprompt: function () {
-    //         	var products=[];
-				// // console.log(this.cartList);
-				// Object.values(this.cartList).forEach(item => {
-    //                 products.push({
-    //                 	"num": item.num,
-				// 		"id": item.id,
-				// 		"image": item.image,
-				// 		"name": item.name,
-				// 		"product_tags": item.product_tags,
-				// 		"subtitle": item.subtitle,
-				// 		"price_up": item.price_up,
-				// 		"price_down": item.price_down,
-				// 		"total_price": item.total_price,
-				// 		"status": item.status
-    //                 })
-    //             })
-                return this.mpromptStatus;
+                return this.s_mpromptStatus;
             }
         },
 		mounted (){

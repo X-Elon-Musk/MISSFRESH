@@ -50,12 +50,12 @@
 		},
 		computed: {
 			...mapState([
-                'cartList','mpromptStatus'
+                's_cartList','s_mpromptStatus'
             ]),
             //shopCart变化的时候重新计算当前商品的数量
             productNum: function (){
-                if (this.cartList&&this.cartList[this.product.id]) {
-                    return this.cartList[this.product.id]['num'];
+                if (this.s_cartList&&this.s_cartList[this.product.id]) {
+                    return this.s_cartList[this.product.id]['num'];
                 }else {
                     return 0;
                 }
@@ -67,9 +67,7 @@
             ]),
             minusOutCart: function (id,event) {
 				this.REDUCE_CART({id});
-				// console.log(mpromptStatus);
-				if (this.mpromptExist&&this.mpromptStatus) {
-					// this.$emit("mpromptAction");
+				if (this.mpromptExist&&this.s_mpromptStatus) {
 					this.SET_MPROMPT({status: true});			
 				}
 			},

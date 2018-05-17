@@ -40,13 +40,13 @@
 		},
 		computed: {
 			...mapState([
-                'cartList'
+                's_cartList'
             ]),
             //shopCart变化的时候重新计算当前商品的数量
             cartCount: function (){
-                if (this.cartList) {
+                if (this.s_cartList) {
                     let num = 0;
-                    Object.values(this.cartList).forEach((item,index) => {
+                    Object.values(this.s_cartList).forEach((item,index) => {
                     	num += item.num;
                     })
                     return num;

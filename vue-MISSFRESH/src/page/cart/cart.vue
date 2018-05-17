@@ -136,13 +136,13 @@
 	    },
 	    computed: {
 	    	...mapState([
-                'cartList'
+                's_cartList'
             ]),
             //商品列表
             products: function () {
             	var products=[];
-				// console.log(this.cartList);
-				Object.values(this.cartList).forEach(item => {
+				// console.log(this.s_cartList);
+				Object.values(this.s_cartList).forEach(item => {
                     products.push({
                     	"num": item.num,
 						"id": item.id,
@@ -161,7 +161,7 @@
            	//商品总价
             total_price: function () {
             	var total_price=0;
-				Object.values(this.cartList).forEach(item => {
+				Object.values(this.s_cartList).forEach(item => {
                     if (item.status) {
                     	total_price+=item.total_price;	
                     }
@@ -207,8 +207,8 @@
 			/*//初始化数据
 			async initData(){
 				var products=[];
-				// console.log(this.cartList);
-				Object.values(this.cartList).forEach(item => {
+				// console.log(this.s_cartList);
+				Object.values(this.s_cartList).forEach(item => {
                     products.push({
                     	"num": item.num,
 						"id": item.id,
@@ -306,7 +306,7 @@
 			    //     }) 
 			    //     this.totalPrice=0;    
 			    // }
-			    Object.values(this.cartList).forEach(item => {
+			    Object.values(this.s_cartList).forEach(item => {
 			    	this.productCheck(item.id);
 			    })
 		    },

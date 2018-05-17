@@ -2,7 +2,7 @@ import {setStore, getStore} from '../config/mUtils'
 
 export default {
 	ADD_CART: (state,{id,image,name,product_tags,price_up,price_down})=>{
-		let cart=state.cartList;
+		let cart=state.s_cartList;
 		if (cart[id]) {
 			cart[id]['num']++;		
 			cart[id]['total_price']=cart[id]['num']*parseFloat(price_down);		
@@ -24,34 +24,34 @@ export default {
 				"status": true
 			}
 		}
-		state.cartList = {...cart};
+		state.s_cartList = {...cart};
 		//存入localStorage
-		setStore('buyCart', state.cartList);
+		setStore('buyCart', state.s_cartList);
 	},
 	REDUCE_CART: (state,{id})=>{
-		let cart=state.cartList;
+		let cart=state.s_cartList;
 		if (cart[id]) {
 			if (cart[id]['num']>0) {
 				cart[id]['num']--;
-				if (cart[id]['num']==0) state.mpromptStatus=true;	
+				if (cart[id]['num']==0) state.s_mpromptStatus=true;	
 				cart[id]['total_price']=cart[id]['num']*parseFloat(cart[id]['price_down']['price']);	
-				state.cartList = {...cart};
-				setStore('buyCart', state.cartList);	
+				state.s_cartList = {...cart};
+				setStore('buyCart', state.s_cartList);	
 			} else{
 				cart[id]=null;
 			}
 		}
 	},
 	SET_STATUS: (state,{id})=>{
-		let cart=state.cartList;
+		let cart=state.s_cartList;
 		if (cart[id]) {
 			cart[id]['status']=!cart[id]['status'];	
-			state.cartList = {...cart};
-			setStore('buyCart', state.cartList);	
+			state.s_cartList = {...cart};
+			setStore('buyCart', state.s_cartList);	
 		}
 	},
 	SET_MPROMPT: (state,{status})=>{
-		state.mpromptStatus=status;
-		setStore('mpromptStatus', state.mpromptStatus);	
+		state.s_mpromptStatus=status;
+		setStore('s_mpromptStatus', state.s_mpromptStatus);	
 	}
 }
