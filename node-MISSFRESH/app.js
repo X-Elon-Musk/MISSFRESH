@@ -6,6 +6,8 @@ var app = express();
 var session =require('express-session');
 
 import MissFresh from './router/missfresh.js'
+const Index = new MissFresh();
+// import Location from './router/location.js'
 //使用session
 app.use(session({
     secret: 'keyboard cat',
@@ -33,9 +35,12 @@ app.all('*', function(req, res, next) {
     next();
 });
 
-
+// console.log(Location);
+// console.log(Location.location());
 //首页
-app.get('/index',MissFresh.getMissFresh);
+app.get('/index',Index.getMissFresh);
+//地址
+// app.get('/location',Location.location);
 
 
 

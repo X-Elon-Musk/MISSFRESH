@@ -1,5 +1,5 @@
 'use strict';
-import Mysql from '../model/sql-config.js'
+/*import Mysql from '../model/sql-config.js'
 var mysql=Mysql.mysql_;
 var dirname='http://localhost:3390/public/images/product/';
 
@@ -18,5 +18,27 @@ Banner.prototype={
 async function dataEach(data) {
   	
 }
+
+export default new Banner();*/
+
+
+import MissMysql from '../prototype/missmysql.js'
+
+
+class Banner extends MissMysql{
+	constructor(){
+		super()
+		this.getBanner=this.getBanner.bind(this);
+	}
+	async getBanner(){
+		var essentialInfor=await this.missMysql('banner', {
+			image: 'image'
+		},{
+			product_index: 0
+		});
+    	return essentialInfor;
+	}
+}
+
 
 export default new Banner();
