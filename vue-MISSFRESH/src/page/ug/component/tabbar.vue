@@ -2,10 +2,10 @@
 	<div class="tabbar">
         <div id="top">
         	<!-- <div class="addr"></div> -->
-        	<mheader></mheader>
+        	<ugHeader :currentCity="currentCity"></ugHeader>
         	<div class="swiper-container tab-nav" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
-        			<div class="swiper-slide" v-for="(item,index) in categorylist" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index" :style="{backgroundImage:`url(${item.category_image})`}">
+        			<div class="swiper-slide" v-for="(item,index) in categorylist" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index" :style="{backgroundImage:item.category_image.indexOf('icon')>0?`url(${item.category_image})`:'none'}">
         				<span>{{item.name}}</span>
         			</div>
 					<!-- <div class="bar">
@@ -16,7 +16,7 @@
 			<div class="ellipsis-icon" @click="showClassify"></div>
 		</div>
 		<!-- 分类 -->
-		<classify v-show="classifyState" :categorylist="categorylist" v-on:closeClassify="closeClassify"  v-on:tabMove="tabMove"></classify>
+		<!-- <classify v-show="classifyState" :categorylist="categorylist" v-on:closeClassify="closeClassify"  v-on:tabMove="tabMove"></classify> -->
 		<div class="swiper-container" id="page" ref="page">
 		  	<div class="swiper-wrapper">
 
@@ -173,10 +173,11 @@
 	</div>
 </template>
 <script>
+	import {mapState, mapMutations} from 'vuex'
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
     import qs from 'qs';
-  	import mheader from './component/mheader'
+  	import ugHeader from './component/ugHeader'
     import classify from './component/classify'
     import productPage from './component/productPage'
     import loading from 'src/components/loading/loading'
@@ -215,20 +216,41 @@
 				//loading组件状态
 				loading: false,
 				//导航移动的最大距离
-				maxLeft: 0
+				maxLeft: 0,
 			}
 		},
-
+		computed: {
+	    	...mapState([
+                's_currentRegion'
+            ]),
+            //当前城市
+            currentCity: function () {
+            	if (this.s_currentRegion['city']) {
+            		return this.s_currentRegion['city']['name'];			
+            	} else{
+            		return '';
+            	}
+            }
+        },
 		mounted (){
-			this.getData(() => {
+			this.getPageIndex(() => {
 				this.$nextTick(() => {
 					if (!this.navSwiper) this.tab();
 					if (!this.pageSwiper) this.page();
 				})
 			});
+			this.getPosition((data)=>{
+				let city_id=data.ad_info.adcode;
+				let city_name=data.ad_info.city;
+				let city_province=data.ad_info.province;
+				let city_district=data.ad_info.district;
+				this.setPosition(city_id,city_name,city_province,city_district);
+			});
 		},
 		methods: {
-			
+			...mapMutations([
+                'SET_POSITION'
+            ]),
 			//导航栏
 			tab: function () {
 				var _this=this;
@@ -274,7 +296,8 @@
 				  	}
 				});
 			},
-			getData: function (callback) {
+			//获取index数据
+			getPageIndex: function (callback) {
 				var _this=this;
 				this.loading=true;
 				this.axios.get('http://localhost:3390/page/index')
@@ -290,14 +313,23 @@
 				.catch(function (error) {
 					console.log(error);
 				});
+			},
+			//获取当前地址
+			getPosition: function (callback) {
+				this.axios.get('http://localhost:3390/position/location')
+				.then(function (response) {
+				  	/*console.log(typeof response.data);
+				  	console.log(response.data.ad_info);*/
+				  	// this.currentCity=response.data.ad_info.city.name;
+				  	callback&&callback(response.data);
+				})
+				.catch(function (error) {
+				  	console.log(error);
+				});	
 
 
-
-				/*this.axios.post('http://localhost:3390/position/locationsearch', qs.stringify({
-				    keyword:'知春路',
-					cityName:'北京'
-				}))*/
-				this.axios.post('http://localhost:3390/position/locationsearch', {
+				//post方法
+				/*this.axios.post('http://localhost:3390/position/locationsuggestion', {
 				    keyword:'知春路',
 					cityName:'北京'
 				}, {
@@ -305,27 +337,14 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 })
-				/*this.axios.post('http://localhost:3390/position/locationsearch', {
-				    keyword:'知春路',
-					cityName:'北京'
-				})*/
-				/*this.axios({
-					url:"http://localhost:3390/position/locationsearch",
-		            method:"POST",
-		            data:{
-					    keyword:'知春路',
-						cityName:'北京'
-					},
-		            headers:{
-		                "Content-Type":"application/x-www-form-urlencoded"
-		            }
-				})*/
 				.then(function (response) {
 				  	console.log(response.data);
 				})
 				.catch(function (error) {
 				  	console.log(error);
-				});	
+				});	*/
+
+				//get方法
 				/*this.axios.get('http://localhost:3390/position/locationsearch',{params:{
 				    keyword:'知春路',
 					cityName:'北京'
@@ -335,7 +354,11 @@
 				})
 				.catch(function (error) {
 				  	console.log(error);
-				});	*/
+				});	*/	
+			},
+			setPosition: function (city_id,city_name,city_province,city_district) {
+				this.SET_POSITION({city_id,city_name,city_province,city_district});
+				// this.SET_POSITION();
 			},
 			//点击导航	
 			tabClick: function(index,event) {
@@ -370,7 +393,7 @@
 	        	
         },
         components: {
-        	mheader,
+        	ugHeader,
 			classify,
 			productPage,
 			loading

@@ -7,8 +7,10 @@ export default class MissAddress{
 		this.getPosition=this.getPosition.bind(this);
 		this.getPositionIp=this.getPositionIp.bind(this);
 		this.getPositionAxios=this.getPositionAxios.bind(this);
-		this.searchPosition=this.searchPosition.bind(this);
-		this.searchPositionAxios=this.searchPositionAxios.bind(this);
+		/*this.searchPosition=this.searchPosition.bind(this);
+		this.searchPositionAxios=this.searchPositionAxios.bind(this);*/
+		this.suggestionPosition=this.suggestionPosition.bind(this);
+		this.suggestionPositionAxios=this.suggestionPositionAxios.bind(this);
 		this.analysisOptions=this.analysisOptions.bind(this);
 		this.tencentkey = '5VHBZ-WEEWK-HF7J4-AG2DQ-67WLS-BGBLD';
 	}
@@ -19,7 +21,7 @@ export default class MissAddress{
  			// ip = '61.148.16.170';
  			ip='113.44.129.183';
  		}
- 		let data=await this.getPosition({
+ 		let data=await this.getPositionAxios({
  			ip,
  			key:this.tencentkey
  		});
@@ -51,39 +53,38 @@ export default class MissAddress{
 	    })
 	    return data;
 	}
-	//搜索地址
+	/*//搜索地址
 	async searchPosition(req, res, next){
-		console.log('--------------');
-		console.log(req.query);
-		console.log(req.body);
-		console.log(req.url);
-		console.log(req.data);
-		// console.log(typeof req);
-		console.log('--------------');
-		var result="";
-                req.on("data",(chuck)=>{
-                    result+=chuck
-                })
-                console.log('******************');
-                console.log("result",result)
-                req.on("end",()=>{
-                    console.log("result",result)
-                    /*res.writeHead(200,{"Content-Type":"text/html;charset=utf8",
-                "Access-Control-Allow-Origin":"*"})*/
-                    res.end("收到了post参数"+result)
-                    console.log(result)
-                })
-                console.log("result",result)
-		// res.send(req.body);
-		/*let keyword='知春路';
-		let cityName='北京';
+		// let query='';
+  //       req.on("data",(chuck)=>{
+  //           query+=chuck
+  //       })
+  //       console.log('******************');
+  //       req.on("end",()=>{
+  //           console.log("query",query)
+  //           res.writeHead(200,{"Content-Type":"text/html;charset=utf8",
+  //       "Access-Control-Allow-Origin":"*"})
+  //           res.end("收到了post参数"+query)
+  //           console.log(query)
+  //       })
+
+
+        let query='';
+    	req.on("data",(chuck)=>{
+            query+=chuck
+        })
+        query=await new Promise((resolve, reject) =>{
+        	req.on("end",()=>{
+	            resolve(query)
+	        })
+	    })
  		let data=await this.searchPositionAxios({
  			key: this.tencentkey,
-			keyword: encodeURIComponent(keyword),
-			boundary: 'region('+ encodeURIComponent(cityName)+',0)',
+			keyword: encodeURIComponent(JSON.parse(query).keyword),
+			boundary: 'region('+ encodeURIComponent(JSON.parse(query).cityName)+',0)',
 			page_size: 10
- 		});
-		res.send(data);*/
+		});
+		res.send(data);
 	}
 	//搜索地址请求
 	async searchPositionAxios(options={}){
@@ -92,6 +93,42 @@ export default class MissAddress{
 			axios.get('http://apis.map.qq.com/ws/place/v1/search'+query)
 			.then(function (response) {
 				if (response.data.status==0) {
+					resolve(response.data)			
+				}
+			})
+			.catch(function (error) {
+				reject(error)
+			});
+	    })
+	    return data;
+	}*/
+	//关键字输入提示
+	async suggestionPosition(req, res, next){
+		let query='';
+    	req.on("data",(chuck)=>{
+            query+=chuck
+        })
+        query=await new Promise((resolve, reject) =>{
+        	req.on("end",()=>{
+	            resolve(query)
+	        })
+	    })
+ 		let data=await this.suggestionPositionAxios({
+ 			key: this.tencentkey,
+			keyword: encodeURIComponent(JSON.parse(query).keyword),
+			region: encodeURIComponent(JSON.parse(query).cityName),
+			region_fix: 1,
+			policy: 1
+		});
+		res.send(data);
+	}
+	//关键字输入提示请求
+	async suggestionPositionAxios(options={}){
+		let query=await this.analysisOptions(options);
+		let data=await new Promise((resolve, reject) =>{
+			axios.get('http://apis.map.qq.com/ws/place/v1/suggestion'+query)
+			.then(function (response) {
+				if (response.data.status===0) {
 					resolve(response.data)			
 				}
 			})

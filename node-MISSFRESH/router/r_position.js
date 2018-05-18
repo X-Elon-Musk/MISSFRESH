@@ -10,7 +10,9 @@ const router = express.Router();
 // router.get('/location',Location.location);
 
 router.get('/location',MissAddress.getPosition);
-router.post('/locationsearch',MissAddress.searchPosition);
-// router.get('/locationsearch',MissAddress.searchPosition);
+// router.post('/locationsearch',MissAddress.searchPosition);
+router.post('/locationsuggestion',MissAddress.suggestionPosition);
 
 export default router
+
+

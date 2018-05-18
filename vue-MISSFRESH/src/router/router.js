@@ -3,6 +3,7 @@ import App from '../App'
 const ug = r => require.ensure([], () => r(require('../page/ug/ug')), 'ug')
 const productDetail = r => require.ensure([], () => r(require('../page/ug/children/productDetail')), 'productDetail')
 const safeDetection = r => require.ensure([], () => r(require('../page/ug/children/safeDetection')), 'safeDetection')
+const addressChose = r => require.ensure([], () => r(require('../page/ug/children/addressChose')), 'addressChose')
 const city = r => require.ensure([], () => r(require('../page/city/city')), 'city')
 const member = r => require.ensure([], () => r(require('../page/member/member')), 'member')
 const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'cart')
@@ -47,6 +48,9 @@ export default [{
             },{
                 path: 'safeDetection',
                 component: safeDetection//安心指纹
+            },{
+                path: 'addressChose',
+                component: addressChose//地址选择页
             }]
 		},
         {

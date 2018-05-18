@@ -21,7 +21,6 @@
 </script>
 <style>
 	@import './style/common';
-	/*@import './style/mixin';*/
 	.app-content ::-webkit-scrollbar{
 		display: none;
 	}
