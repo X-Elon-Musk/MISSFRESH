@@ -1,6 +1,6 @@
 'use strict';
 
-/*class Location{
+class Location{
 	constructor(){
 		this.location=this.location.bind(this);
 		this.getIp=this.getIp.bind(this);
@@ -21,4 +21,4 @@
 	}
 }
 
-export default new Location()*/
+export default new Location()

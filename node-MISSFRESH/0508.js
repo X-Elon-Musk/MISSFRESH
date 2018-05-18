@@ -183,3 +183,18 @@ https:\\as-vip.missfresh.cn/v1/cart/add?
 	fromSource=zhuye&
 	screen_height=320&
 	screen_width=568
+
+
+
+
+{is_business: 1, business_hours: "", msg: "成功", code: 0,…}
+	business_hours:""
+	code:0
+	delivery_type:0
+	first_page_addr_text:"本城市支持会员1小时达，选择详细地址完成匹配"
+	img_url:"https://j-image.missfresh.cn/img_20161026155951214.png"
+	is_business:1
+	msg:"成功"
+	station_code:""
+	type:1
+	warning_msg:"下单次日送达"

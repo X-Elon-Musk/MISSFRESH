@@ -7,11 +7,11 @@ import Brands from './brands.js'
 import CategoryAreas from './category_areas.js'
 
 
-export default class MissIndex{
+export default class Page_Index{
     constructor(){
-        this.getMissIndex=this.getMissIndex.bind(this);
+        this.getPage_Index=this.getPage_Index.bind(this);
     }
-    async getMissIndex(req, res, next){
+    async getPage_Index(req, res, next){
         var category_list=await CategoryList.getCategoryList();
 
         var product_list={};
@@ -32,7 +32,7 @@ export default class MissIndex{
             'type': 1,
             'wx_app_new_img': '',
         }
-        var missindex={
+        var pageindex={
             'banner_bg_img': '',
             'category_list': category_list,
             'code': 0,
@@ -48,6 +48,6 @@ export default class MissIndex{
         }
 
         res.type('application/json');
-        res.jsonp(missindex);
+        res.jsonp(pageindex);
     }
 }
