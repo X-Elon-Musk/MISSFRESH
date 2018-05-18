@@ -74,3 +74,11 @@ app.get('/public/images/*', function (req, res) {
     console.log("Request for " + req.url + " received.");
 })
 ```
+- axios在node中的post使用
+```
+import qs from 'qs';(qs模块axios自带)
+axios.post('/test',qs.stringify(data))
+.then((res)=>{
+
+})
+```

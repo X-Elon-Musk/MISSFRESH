@@ -198,3 +198,38 @@ https:\\as-vip.missfresh.cn/v1/cart/add?
 	station_code:""
 	type:1
 	warning_msg:"下单次日送达"
+
+
+// 地址搜索
+https://apis.map.qq.com/ws/place/v1/suggestion?key=IBKBZ-EWKH4-AZZUL-DAOBQ-HBWP2-JJFD7&output=jsonp&timeout=3000&region=110108&region_fix=1&policy=1&keyword=ji&callback=__jp1
+
+count:10
+data:[,…]
+	0:{id: "15118116875483822966", title: "北京交通大学", address: "北京市海淀区上园村3号", category: "教育学校:大学", type: 0,…}
+	1:{id: "13779695775266821500", title: "建材城富力桃园", address: "北京市海淀区建材城东路", category: "房产小区:住宅区:住宅小区",…}
+	2:{id: "8568921060507006078", title: "北京交通大学(东校区)", address: "北京市海淀区高粱桥斜街44号", category: "教育学校:大学",…}
+	3:{id: "13275207650290756404", title: "锦秋家园", address: "北京市海淀区知春路6号", category: "房产小区:住宅区:住宅小区", type: 0,…}
+	4:{id: "4157544524204757596", title: "北京交通大学学苑学生公寓", address: "北京市海淀区交大东路18号", category: "房产小区:住宅区:住宅小区",…}
+	5:{id: "11045433542653309256", title: "今典花园", address: "北京市海淀区文慧园北路9号", category: "房产小区:住宅区:住宅小区",…}
+	6:{id: "16801036392005854320", title: "北京交通大学家属区", address: "北京市海淀区高粱桥斜街44", category: "房产小区:住宅区:住宅小区",…}
+	7:{id: "809062854200935312", title: "金和国际", address: "北京市海淀区海淀北二街8号", category: "房产小区:商务楼宇", type: 0,…}
+	8:{id: "7299961927472478792", title: "交大东路31号院", address: "北京市海淀区自如寓西直门店(北京交通大学)",…}
+	9:{id: "15502280405430668868", title: "今日家园", address: "北京市海淀区五棵松上品折扣(五棵松店)", category: "房产小区:住宅区:住宅小区",…}
+message:"query ok"
+request_id:"6794463714536129699"
+status:0
+
+
+0:{id: "15118116875483822966", title: "北京交通大学", address: "北京市海淀区上园村3号", category: "教育学校:大学", type: 0,…}
+	adcode:110108
+	address:"北京市海淀区上园村3号"
+	category:"教育学校:大学"
+	city:"北京市"
+	district:"海淀区"
+	id:"15118116875483822966"
+	location:{lat: 39.95092, lng: 116.34107}
+		lat:39.95092
+		lng:116.34107
+	province:"北京市"
+	title:"北京交通大学"
+	type:0

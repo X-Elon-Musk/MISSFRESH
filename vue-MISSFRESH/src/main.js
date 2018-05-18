@@ -21,7 +21,7 @@ import store from './store'
 
 
 
-
+axios.defaults.withCredentials=true;
 
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {

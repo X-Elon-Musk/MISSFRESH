@@ -175,6 +175,7 @@
 <script>
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
+    import qs from 'qs';
   	import mheader from './component/mheader'
     import classify from './component/classify'
     import productPage from './component/productPage'
@@ -276,7 +277,7 @@
 			getData: function (callback) {
 				var _this=this;
 				this.loading=true;
-				this.axios.get('http://localhost:3390/index')
+				this.axios.get('http://localhost:3390/page/index')
 				.then(function (response) {
 					_this.categorylist=_this.categorylist.concat(response.data['category_list']);
 					_this.banner=_this.banner.concat(response.data.product_list.banner);
@@ -289,6 +290,52 @@
 				.catch(function (error) {
 					console.log(error);
 				});
+
+
+
+				/*this.axios.post('http://localhost:3390/position/locationsearch', qs.stringify({
+				    keyword:'知春路',
+					cityName:'北京'
+				}))*/
+				this.axios.post('http://localhost:3390/position/locationsearch', {
+				    keyword:'知春路',
+					cityName:'北京'
+				}, {
+                    headers:{
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+				/*this.axios.post('http://localhost:3390/position/locationsearch', {
+				    keyword:'知春路',
+					cityName:'北京'
+				})*/
+				/*this.axios({
+					url:"http://localhost:3390/position/locationsearch",
+		            method:"POST",
+		            data:{
+					    keyword:'知春路',
+						cityName:'北京'
+					},
+		            headers:{
+		                "Content-Type":"application/x-www-form-urlencoded"
+		            }
+				})*/
+				.then(function (response) {
+				  	console.log(response.data);
+				})
+				.catch(function (error) {
+				  	console.log(error);
+				});	
+				/*this.axios.get('http://localhost:3390/position/locationsearch',{params:{
+				    keyword:'知春路',
+					cityName:'北京'
+				}})
+				.then(function (response) {
+				  	console.log(response.data);
+				})
+				.catch(function (error) {
+				  	console.log(error);
+				});	*/
 			},
 			//点击导航	
 			tabClick: function(index,event) {

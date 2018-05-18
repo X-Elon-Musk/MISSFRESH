@@ -18,7 +18,7 @@ export default class MissMysql{
 		sql+=await this.imageRequirment(imageRequirment);	
 		sql+=' from '+datasheet;
 		sql+=await this.whereRequirement(whereRequirement);	
-		console.log(sql);
+		// console.log(sql);
 		let result=await mysql(sql);
     	return result;
 	}
@@ -36,7 +36,8 @@ export default class MissMysql{
 		Object.keys(requirement).forEach(key => {
 			sql+= key+'='+requirement[key]+' and ';
 		})
-		return sql.slice(0,sql.length-5);
+		// return sql.slice(0,sql.length-5);
+		return sql.substr(0, sql.lastIndexOf(' and '));;
 	}
 	//价格处理
 	async priceChange(price) {

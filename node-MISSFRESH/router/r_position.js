@@ -8,7 +8,9 @@ const MissAddress = new missaddress();
 const router = express.Router();
 
 // router.get('/location',Location.location);
-// router.get('/location',MissAddress.guessPosition);
-router.get('/location',MissAddress.guessPosition);
+
+router.get('/location',MissAddress.getPosition);
+router.post('/locationsearch',MissAddress.searchPosition);
+// router.get('/locationsearch',MissAddress.searchPosition);
 
 export default router
