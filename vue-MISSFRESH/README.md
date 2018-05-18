@@ -82,3 +82,15 @@ axios.post('/test',qs.stringify(data))
 
 })
 ```
+- input输入文字后提交，请求数据
+```
+<form class="search-form" v-on:submit.prevent>
+    <i class="search-logo"></i> 
+    <input type="text" autofocus="autofocus" class="search-input" required v-model='inputVaule'>
+    <input type="submit" name="submit" class="search-submit" @click='suggestionLocation' value="提交">
+</form>
+```
+通过改变v-model值来进行提交。增加`form`和`input type="submit"`标签是为了在输入文字后，点击enter回车键后再进行提交，发送请求。
+```
+<input type="text" autofocus="autofocus" class="search-input" required @input='suggestionLocation'>//不合适
+```
