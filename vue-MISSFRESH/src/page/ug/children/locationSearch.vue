@@ -11,11 +11,8 @@
         	</div>
         </div>
 		<ul class="location-result">
-			<!-- <li class="location-list">
-				<div class="location-title">碧兴园</div> 
-				<div class="location-desc">北京市海淀区</div>
-			</li> -->
-			<li class="location-list" v-for="(item,index) in locationResult" :key="index">
+			<li class="location-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)">
+			<!-- <li class="location-list" v-for="(item,index) in searchResult" :key="index"> -->
 				<div class="location-title">{{item.title}}</div> 
 				<div class="location-desc">{{item.address}}</div>
 			</li>
@@ -23,20 +20,23 @@
     </div>  
 </template>
 <script>
+	import {mapState, mapMutations} from 'vuex'
 	export default{
 		data(){
 			return {
 				inputVaule: '',
-				location: []
+				searchResult: []
 			}
 		},
 		computed: {
-	    	//当前城市
-            locationResult: function () {
-            	if (this.location) return this.location;
-            }
+			...mapState([
+                's_currentRegion', 's_currentCity'
+            ])
         },
 		methods: {
+			...mapMutations([
+                'SET_POSITION'
+            ]),
 			//获取当前地址
 			// suggestionLocation: function (event,callback) {
 			suggestionLocation: function (callback) {
@@ -44,11 +44,12 @@
 				if (this.inputVaule) {
 					// let keyword=event.target.value;
 					let keyword=this.inputVaule;
+					let cityName=this.s_currentCity;
 					console.log(keyword);
 					//post方法
 					this.axios.post('http://localhost:3390/position/locationsuggestion', {
-					    keyword:'知春路',
-						cityName:'北京'
+					    keyword: keyword,
+						cityName: cityName
 					}, {
 	                    headers:{
 	                        'Content-Type': 'application/x-www-form-urlencoded'
@@ -57,7 +58,7 @@
 					.then(function (response) {
 						if (response.data.status==0) {
 							// resolve(response.data.result)
-							_this.location=[].concat(response.data.data);
+							_this.searchResult=[].concat(response.data.data);
 						}
 					  	console.log(response.data);
 					})
@@ -65,8 +66,63 @@
 					  	console.log(error);
 					});		
 				}
-			}
-				
+			},
+			//改变当前城市信息
+			changeCurrentRegion(city){
+				// console.log(city);
+				let currentcity={
+					id: city.adcode,
+					name: city.name,
+					province: city.province,
+					district: city.district
+				};
+				let building={
+					address: city.address,
+					distance: city.distance||'',
+					name: city.title
+				};
+				let location={
+					accuracy: city.type,
+					lat: city.location.lat,
+					lng: city.location.lng
+				};
+				let position={
+					accuracy: city.type,
+					lat: city.location.lat,
+					lng: city.location.lng
+				}
+				let station={
+					id: city.id,
+				};
+				/*this.SET_POSITION({
+					id: city.adcode,
+					name: city.name,
+					province: city.province,
+					district: city.district
+				}, {
+					address: city.address,
+					distance: city.distance,
+					name: city.name
+				}, {
+					accuracy: city.type,
+					lat: city.location.lat,
+					lng: city.location.lng
+				}, {
+					accuracy: city.type,
+					lat: city.location.lat,
+					lng: city.location.lng
+				}, {
+					id: city.id,
+				});*/
+				this.SET_POSITION({
+					city: currentcity, 
+					building, 
+					location, 
+					position, 
+					station
+				});
+				this.$router.push('/ug');
+			}	
 		}
 	}
 </script>
@@ -82,7 +138,7 @@
 		background: #fff;
 		overflow-y: auto;
 		color: @color_common;
-		background: @bg_color;
+		// background: @bg_color;
 		.search-box{
 			background-color: #fff;
 			color: #4b4b4b;

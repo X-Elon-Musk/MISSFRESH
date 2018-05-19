@@ -99,7 +99,7 @@ export default {
 		setStore('currentRegion', state.s_currentRegion);
 	},*/
 	// SET_POSITION: (state,{city={}, building={}, location={}, position={}, station={}})=>{
-	SET_POSITION: (state, city={}, building={}, location={}, position={}, station={})=>{
+	SET_POSITION: (state,{city={}, building={}, location={}, position={}, station={}})=>{
 		let region=state.s_currentRegion;
 		/*let keys=['city', 'building', 'location', 'position', 'station'];
 		console.log(arguments);
@@ -112,6 +112,11 @@ export default {
 				})
 			}
 		})*/
+		console.log('------------------------');
+		console.log(city);
+		console.log(building);
+		console.log('------------------------');
+		// return;
 		POSITION_ANALYSIS(region, 'city', city);
 		POSITION_ANALYSIS(region, 'building', building);
 		POSITION_ANALYSIS(region, 'location', location);
@@ -143,10 +148,16 @@ export default {
 		}*/
 		let currentcity=region['building']&&region['building']['name'] || region['city']&&region['city']['name'];
 		// console.log(currentcity);
+		// console.log(currentcity);
 		state.s_currentRegion = {...region};
 		state.s_currentCity = currentcity;
+		/*console.log('=====================');
+		console.log(region);
+		console.log(currentcity);
+		console.log('=====================');*/
 		//存入localStorage
 		setStore('currentRegion', state.s_currentRegion);
+		setStore('currentCity', state.s_currentCity);
 		// setStore('currentRegion', state.s_currentRegion);
 	}
 }

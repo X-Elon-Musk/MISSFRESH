@@ -29,6 +29,7 @@
 			...mapMutations([
                 'SET_POSITION'
             ]),
+            //获得城市列表
 			getCityList(){
 				var _this=this;
 				this.axios.get('http://localhost:3390/position/list')
@@ -39,6 +40,7 @@
 				  	console.log(error);
 				});
 			},
+			//改变当前城市信息
 			changeCurrentRegion(city){
 				this.SET_POSITION({
 					id: city.id,

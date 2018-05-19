@@ -314,15 +314,18 @@
 				let _this=this;
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
-					// console.log(response.data);
+					console.log(response.data);
 				  	let ad_info=response.data.ad_info
 					// _this.setPosition(ad_info.adcode, ad_info.city, ad_info.province, ad_info.district);
-
-					_this.SET_POSITION({
+					let city={
 						id: ad_info.adcode,
 						name: ad_info.city,
 						province: ad_info.province,
 						district: ad_info.district
+					}
+					// _this.SET_POSITION({city});
+					_this.SET_POSITION({
+						city: city
 					});
 
 				})
