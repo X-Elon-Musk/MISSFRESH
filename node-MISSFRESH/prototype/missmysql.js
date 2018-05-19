@@ -44,7 +44,7 @@ export default class MissMysql{
 	}
 	//处理顺序sql
 	async orderRequirement(requirement={}){
-		if (requirement) {
+		if (JSON.stringify(requirement)!=="{}") {
 			let sql=' order by ';
 			Object.keys(requirement).forEach(key => {
 				// sql+= key+'='+requirement[key]+',';

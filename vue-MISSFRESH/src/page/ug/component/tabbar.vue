@@ -226,22 +226,17 @@
 					if (!this.pageSwiper) this.page();
 				})
 			});
-			this.getPosition((data)=>{
-				let city_id=data.ad_info.adcode;
-				let city_name=data.ad_info.city;
-				let city_province=data.ad_info.province;
-				let city_district=data.ad_info.district;
-				this.setPosition(city_id,city_name,city_province,city_district);
-			});
+			this.getPosition();
 		},
 		computed: {
 	    	...mapState([
-                's_currentRegion'
+                's_currentRegion', 's_currentCity'
             ]),
             //当前城市
             currentCity: function () {
-            	if (this.s_currentRegion['city']) {
-            		return this.s_currentRegion['city']['name'];			
+            	if (this.s_currentCity) {
+            		// console.log(this.s_currentCity);
+            		return this.s_currentCity;
             	} else{
             		return '';
             	}
@@ -316,12 +311,20 @@
 			},
 			//获取当前地址
 			getPosition: function (callback) {
+				let _this=this;
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
-				  	/*console.log(typeof response.data);
-				  	console.log(response.data.ad_info);*/
-				  	// this.currentCity=response.data.ad_info.city.name;
-				  	callback&&callback(response.data);
+					// console.log(response.data);
+				  	let ad_info=response.data.ad_info
+					// _this.setPosition(ad_info.adcode, ad_info.city, ad_info.province, ad_info.district);
+
+					_this.SET_POSITION({
+						id: ad_info.adcode,
+						name: ad_info.city,
+						province: ad_info.province,
+						district: ad_info.district
+					});
+
 				})
 				.catch(function (error) {
 				  	console.log(error);
@@ -356,10 +359,16 @@
 				  	console.log(error);
 				});	*/	
 			},
-			setPosition: function (city_id,city_name,city_province,city_district) {
-				this.SET_POSITION({city_id,city_name,city_province,city_district});
-				// this.SET_POSITION();
-			},
+			// setPosition: function (city_id,city_name,city_province,city_district) {
+			// 	// this.SET_POSITION({city_id,city_name,city_province,city_district});
+			// 	this.SET_POSITION({
+			// 		id: city_id,
+			// 		name: city_name,
+			// 		province: city_province,
+			// 		district: city_district
+			// 	});
+			// 	// this.SET_POSITION();
+			// },
 			//点击导航	
 			tabClick: function(index,event) {
 				this.tabIndex=index;

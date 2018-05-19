@@ -2,7 +2,7 @@
     <div class="city-list">
     	<div class="list-item" v-for="(item, index) in citylist" :key="index">
     		<h4 class="area-list">{{item.name}}</h4>
-    		<span class="area-city" v-for="(city, city_index) in item.areas" :key="city_index" @click="changeCurrentRegion(city.name)">{{city.name}}</span>
+    		<span class="area-city" v-for="(city, city_index) in item.areas" :key="city_index" @click="changeCurrentRegion(city)">{{city.name}}</span>
     	</div>
     	<div class="area-tip">我们将为更多城市提供优质服务，敬请期待</div>
     </div>  
@@ -26,6 +26,9 @@
             ])
         },
 		methods: {
+			...mapMutations([
+                'SET_POSITION'
+            ]),
 			getCityList(){
 				var _this=this;
 				this.axios.get('http://localhost:3390/position/list')
@@ -36,8 +39,14 @@
 				  	console.log(error);
 				});
 			},
-			changeCurrentRegion(region){
-				this.s_currentRegion=region;
+			changeCurrentRegion(city){
+				this.SET_POSITION({
+					id: city.id,
+					name: city.name,
+					province: '',
+					district: city.description
+				});
+				this.$router.push('/ug/addressChose');
 			}
 		}
 	}

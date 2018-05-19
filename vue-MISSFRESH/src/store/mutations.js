@@ -1,6 +1,9 @@
 import {setStore, getStore} from '../config/mUtils'
 
 export default {
+	/*constructor(){
+		this.POSITION_ANALYSIS=this.POSITION_ANALYSIS.bind(this);
+	},*/
 	//添加购物车
 	ADD_CART: (state,{id,image,name,product_tags,price_up,price_down})=>{
 		let cart=state.s_cartList;
@@ -58,7 +61,7 @@ export default {
 		state.s_mpromptStatus=status;
 		setStore('s_mpromptStatus', state.s_mpromptStatus);	
 	},
-	SET_POSITION: (state,{city_id,city_name,city_province,city_district,building_name,building_address,location_lat,location_lan,position_lat,station_id})=>{
+	/*SET_POSITION: (state,{city_id,city_name,city_province,city_district,building_name,building_address,location_lat,location_lan,position_lat,station_id})=>{
 		let region=state.s_currentRegion;
 		// if (region[city]) {
 		// 	region[city]={
@@ -94,5 +97,66 @@ export default {
 		state.s_currentRegion = {...region};
 		//存入localStorage
 		setStore('currentRegion', state.s_currentRegion);
-	},
+	},*/
+	// SET_POSITION: (state,{city={}, building={}, location={}, position={}, station={}})=>{
+	SET_POSITION: (state, city={}, building={}, location={}, position={}, station={})=>{
+		let region=state.s_currentRegion;
+		/*let keys=['city', 'building', 'location', 'position', 'station'];
+		console.log(arguments);
+		console.log(city);
+		
+		Object.keys(arguments).forEach(key => {
+			if(JSON.stringify(arguments[key])!=="{}"){
+				Object.keys(arguments).forEach(argument_key => {
+					region[keys[key]][argument_key]=arguments[key][argument_key];
+				})
+			}
+		})*/
+		POSITION_ANALYSIS(region, 'city', city);
+		POSITION_ANALYSIS(region, 'building', building);
+		POSITION_ANALYSIS(region, 'location', location);
+		POSITION_ANALYSIS(region, 'position', position);
+		POSITION_ANALYSIS(region, 'station', station);
+
+		/*
+		region={
+			building:{
+				name: building_name||"", 
+				address: building_address||""
+			},
+			city:{
+				id: city_id||"", 
+				name: city_name||"", 
+				province: city_province||"", 
+				district: city_district||""
+			},
+			location:{
+				lat: location_lat||"",
+				lan: location_lan||""
+			},
+			position:{
+				lat: position_lat||""
+			},
+			station:{
+				id: station_id||""
+			},
+		}*/
+		let currentcity=region['building']&&region['building']['name'] || region['city']&&region['city']['name'];
+		// console.log(currentcity);
+		state.s_currentRegion = {...region};
+		state.s_currentCity = currentcity;
+		//存入localStorage
+		setStore('currentRegion', state.s_currentRegion);
+		// setStore('currentRegion', state.s_currentRegion);
+	}
+}
+//解析地址参数
+let POSITION_ANALYSIS=(region, region_key, parameters)=>{
+	// console.log(parameters);
+	if(parameters&&JSON.stringify(parameters)!=="{}"){
+		region[region_key]={};
+		Object.keys(parameters).forEach(key => {
+			region[region_key][key]=parameters[key];
+		})
+	}
 }

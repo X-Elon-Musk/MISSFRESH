@@ -7,7 +7,7 @@
     		<div class="address-input">
     			<!-- <div class="address-city">北京市</div> 
     			<div class="address-position">请输入要收货的小区/写字楼</div> -->
-    			<router-link :to="{path: '/ug/citylist'}" tag="div" class="address-position">北京市</router-link>
+    			<router-link :to="{path: '/ug/citylist'}" tag="div" class="address-position">{{currentCity}}</router-link>
     			<router-link :to="{path: '/ug/locationsearch'}" tag="div" class="address-position">请输入要收货的小区/写字楼</router-link>
     		</div>
     	</div>
@@ -22,12 +22,27 @@
     </div>  
 </template>
 <script>
+	import {mapState, mapMutations} from 'vuex'
 	export default{
 		data(){
 			return {
 				
 			}
 		},
+		computed: {
+	    	...mapState([
+                's_currentRegion'
+            ]),
+            //当前城市
+            currentCity: function () {
+            	if (this.s_currentRegion) {
+            		let region=this.s_currentRegion;
+            		return region['building']&&region['building']['name'] || region['city']&&region['city']['name'];
+            	} else{
+            		return '';
+            	}
+            }
+        },
 		methods: {
 			switchOver(index){
 				
