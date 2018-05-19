@@ -5,6 +5,7 @@ const productDetail = r => require.ensure([], () => r(require('../page/ug/childr
 const safeDetection = r => require.ensure([], () => r(require('../page/ug/children/safeDetection')), 'safeDetection')
 const addressChose = r => require.ensure([], () => r(require('../page/ug/children/addressChose')), 'addressChose')
 const locationSearch = r => require.ensure([], () => r(require('../page/ug/children/locationSearch')), 'locationSearch')
+const cityList = r => require.ensure([], () => r(require('../page/ug/children/cityList')), 'cityList')
 const city = r => require.ensure([], () => r(require('../page/city/city')), 'city')
 const member = r => require.ensure([], () => r(require('../page/member/member')), 'member')
 const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'cart')
@@ -55,6 +56,9 @@ export default [{
             },{
                 path: 'locationSearch',
                 component: locationSearch//地址搜索页
+            },{
+                path: 'cityList',
+                component: cityList//城市列表
             }]
 		},
         {
