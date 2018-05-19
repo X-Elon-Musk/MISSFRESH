@@ -1,24 +1,43 @@
 <template>
     <div class="city-list">
-    	<div class="list-item">
-    		<h4 class="area-list">极速达（配送时效以自动定位为准）</h4>
-    		<span class="area-city">北京</span>
-    		<span class="area-city">北京</span>
-    		<span class="area-city">北京</span>
-    		<span class="area-city">北京</span>
+    	<div class="list-item" v-for="(item, index) in citylist" :key="index">
+    		<h4 class="area-list">{{item.name}}</h4>
+    		<span class="area-city" v-for="(city, city_index) in item.areas" :key="city_index" @click="changeCurrentRegion(city.name)">{{city.name}}</span>
     	</div>
+    	<div class="area-tip">我们将为更多城市提供优质服务，敬请期待</div>
     </div>  
 </template>
 <script>
+	import {mapState, mapMutations} from 'vuex'
 	export default{
 		data(){
 			return {
-				
+				citylist: []
 			}
 		},
+		mounted (){
+			this.$nextTick(()=>{
+				this.getCityList();
+			})
+		},
+		computed: {
+	    	...mapState([
+                's_currentRegion'
+            ])
+        },
 		methods: {
-			switchOver(index){
-				
+			getCityList(){
+				var _this=this;
+				this.axios.get('http://localhost:3390/position/list')
+				.then(function (response) {
+				  	_this.citylist=_this.citylist.concat(response.data);
+				})
+				.catch(function (error) {
+				  	console.log(error);
+				});
+			},
+			changeCurrentRegion(region){
+				this.s_currentRegion=region;
 			}
 		}
 	}
@@ -41,7 +60,7 @@
 			box-sizing: border-box;
 			.area-list{
 				color: #000;
-				font-size: 0.875em;
+				font-size: 0.8em;
 				padding-left: 0.9375em;
 				position: relative;
 				padding-top: 1.25em;
@@ -73,9 +92,16 @@
 				font-size: 0.8125em;
 				line-height: 1.875em;
 				text-align: center;
-				margin-right: 1.25em;
+				margin-right: 1.4em;
 				background: #f1f4f4;
 			}
+		}
+		.area-tip{
+			font-size: 0.8em;
+			color: #b8b8b8;
+			clear: both;
+			text-align: center;
+			padding: 3em 0;
 		}
 	}
 </style>

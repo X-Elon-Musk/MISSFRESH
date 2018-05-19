@@ -10,14 +10,16 @@ export default class MissMysql{
 		this.missMysql=this.missMysql.bind(this);
 		this.imageRequirment=this.imageRequirment.bind(this);
 		this.whereRequirement=this.whereRequirement.bind(this);
+		this.orderRequirement=this.orderRequirement.bind(this);
 		this.priceChange=this.priceChange.bind(this);
 	}
 	//请求数据通用sql
-	async missMysql(datasheet='', imageRequirment={}, whereRequirement={}){
+	async missMysql(datasheet='', imageRequirment={}, whereRequirement={}, orderRequirement={}){
 		let sql='select *';
 		sql+=await this.imageRequirment(imageRequirment);	
 		sql+=' from '+datasheet;
 		sql+=await this.whereRequirement(whereRequirement);	
+		sql+=await this.orderRequirement(orderRequirement);	
 		// console.log(sql);
 		let result=await mysql(sql);
     	return result;
@@ -37,7 +39,22 @@ export default class MissMysql{
 			sql+= key+'='+requirement[key]+' and ';
 		})
 		// return sql.slice(0,sql.length-5);
-		return sql.substr(0, sql.lastIndexOf(' and '));;
+		sql=sql.substr(0, sql.lastIndexOf(' and '));
+		return sql;
+	}
+	//处理顺序sql
+	async orderRequirement(requirement={}){
+		if (requirement) {
+			let sql=' order by ';
+			Object.keys(requirement).forEach(key => {
+				// sql+= key+'='+requirement[key]+',';
+				sql+= key+',';
+			})
+			sql=sql.substr(0, sql.lastIndexOf(','))+' desc';
+			return sql;			
+		} else{
+			return '';
+		}
 	}
 	//价格处理
 	async priceChange(price) {

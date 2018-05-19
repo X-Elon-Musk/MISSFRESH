@@ -40,7 +40,7 @@
 			//获取当前地址
 			// suggestionLocation: function (event,callback) {
 			suggestionLocation: function (callback) {
-				let this_=this;
+				let _this=this;
 				if (this.inputVaule) {
 					// let keyword=event.target.value;
 					let keyword=this.inputVaule;
@@ -57,7 +57,7 @@
 					.then(function (response) {
 						if (response.data.status==0) {
 							// resolve(response.data.result)
-							this_.location=[].concat(response.data.data);
+							_this.location=[].concat(response.data.data);
 						}
 					  	console.log(response.data);
 					})

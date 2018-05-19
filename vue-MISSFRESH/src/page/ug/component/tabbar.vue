@@ -219,19 +219,6 @@
 				maxLeft: 0,
 			}
 		},
-		computed: {
-	    	...mapState([
-                's_currentRegion'
-            ]),
-            //当前城市
-            currentCity: function () {
-            	if (this.s_currentRegion['city']) {
-            		return this.s_currentRegion['city']['name'];			
-            	} else{
-            		return '';
-            	}
-            }
-        },
 		mounted (){
 			this.getPageIndex(() => {
 				this.$nextTick(() => {
@@ -247,6 +234,19 @@
 				this.setPosition(city_id,city_name,city_province,city_district);
 			});
 		},
+		computed: {
+	    	...mapState([
+                's_currentRegion'
+            ]),
+            //当前城市
+            currentCity: function () {
+            	if (this.s_currentRegion['city']) {
+            		return this.s_currentRegion['city']['name'];			
+            	} else{
+            		return '';
+            	}
+            }
+        },
 		methods: {
 			...mapMutations([
                 'SET_POSITION'
