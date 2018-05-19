@@ -2,7 +2,7 @@
 	<div class="tabbar">
         <div id="top">
         	<!-- <div class="addr"></div> -->
-        	<ugHeader :currentCity="currentCity"></ugHeader>
+        	<ugHeader :choseAddress="choseAddress"></ugHeader>
         	<div class="swiper-container tab-nav" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
         			<div class="swiper-slide" v-for="(item,index) in categorylist" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index" :style="{backgroundImage:item.category_image.indexOf('icon')>0?`url(${item.category_image})`:'none'}">
@@ -230,13 +230,12 @@
 		},
 		computed: {
 	    	...mapState([
-                's_currentRegion', 's_currentCity'
+                's_currentRegion', 's_choseAddress'
             ]),
-            //当前城市
-            currentCity: function () {
-            	if (this.s_currentCity) {
-            		// console.log(this.s_currentCity);
-            		return this.s_currentCity;
+            //选择的配送地址
+            choseAddress: function () {
+            	if (this.s_choseAddress) {
+            		return this.s_choseAddress;
             	} else{
             		return '';
             	}
@@ -315,17 +314,15 @@
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
 					console.log(response.data);
-				  	let ad_info=response.data.ad_info
-					// _this.setPosition(ad_info.adcode, ad_info.city, ad_info.province, ad_info.district);
-					let city={
+					let ad_info=response.data.ad_info
+					let chosecity={
 						id: ad_info.adcode,
 						name: ad_info.city,
 						province: ad_info.province,
 						district: ad_info.district
 					}
-					// _this.SET_POSITION({city});
 					_this.SET_POSITION({
-						city: city
+						city: chosecity
 					});
 
 				})
@@ -362,16 +359,6 @@
 				  	console.log(error);
 				});	*/	
 			},
-			// setPosition: function (city_id,city_name,city_province,city_district) {
-			// 	// this.SET_POSITION({city_id,city_name,city_province,city_district});
-			// 	this.SET_POSITION({
-			// 		id: city_id,
-			// 		name: city_name,
-			// 		province: city_province,
-			// 		district: city_district
-			// 	});
-			// 	// this.SET_POSITION();
-			// },
 			//点击导航	
 			tabClick: function(index,event) {
 				this.tabIndex=index;

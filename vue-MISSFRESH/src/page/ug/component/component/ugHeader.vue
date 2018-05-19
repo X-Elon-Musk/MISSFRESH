@@ -10,7 +10,7 @@
 	        </div>
 	        <div class="delivery-place">
 	        	<!-- 北京 -->
-	        	{{currentCity}}
+	        	{{choseAddress}}
 	        </div>
 	        <div class="short-tips" v-show="support" @click="closeTips">本城市支持会员1小时达，选择详细地址完成匹配</div>
         <!-- </div> -->
@@ -29,7 +29,7 @@
 				support: true
 			}
 		},
-		props: ['currentCity'],
+		props: ['choseAddress'],
 		methods: {
 			closeTips: function () {
 				this.support=false;

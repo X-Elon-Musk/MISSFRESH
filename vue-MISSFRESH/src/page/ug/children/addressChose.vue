@@ -5,17 +5,17 @@
     	</div>
     	<div class="address-bar">
     		<div class="address-input">
-    			<router-link :to="{path: '/ug/citylist'}" tag="div" class="address-position">{{currentCity}}</router-link>
+    			<router-link :to="{path: '/ug/citylist'}" tag="div" class="address-city">{{choseCity}}</router-link>
     			<router-link :to="{path: '/ug/locationsearch'}" tag="div" class="address-position">请输入要收货的小区/写字楼</router-link>
     		</div>
     	</div>
     	<div class="trans-tip">因各地区商品和配送服务不同，请您选择准确收货地址</div>
     	<div class="clearfix location-bar">
     		<span>
-    			<span class="location-success">北京市</span> 
+    			<span class="location-success">{{currentCity}}</span> 
     			<span class="location-info">当前位置</span>
     		</span> 
-    		<span class="location-refresh location-loading"></span>
+    		<span class="location-refresh location-loading" @click="locationRefresh"></span>
     	</div>
     </div>  
 </template>
@@ -25,7 +25,8 @@
 	export default{
 		data(){
 			return {
-				
+				// refreshtext: '正在获取'
+				refreshtext: ''
 			}
 		},
 		computed: {
@@ -34,12 +35,39 @@
             ]),
             //当前城市
             currentCity: function () {
-            	return getStore('currentCity');
+            	console.log(this.refreshtext||getStore('currentCity'));
+            	return this.refreshtext||getStore('currentCity');
+            },
+            //选择的城市
+            choseCity: function () {
+            	return getStore('choseCity');
             }
         },
 		methods: {
-			switchOver(index){
-				
+			...mapMutations([
+                'SET_POSITION'
+            ]),
+			//刷新当前位置
+			locationRefresh(){
+				this.refreshtext="正在获取";
+				let _this=this;
+				this.axios.get('http://localhost:3390/position/location')
+				.then(function (response) {
+					let ad_info=response.data.ad_info
+					let chosecity={
+						id: ad_info.adcode,
+						name: ad_info.city,
+						province: ad_info.province,
+						district: ad_info.district
+					}
+					_this.SET_POSITION({
+						city: chosecity
+					});
+					_this.refreshtext='';
+				})
+				.catch(function (error) {
+				  	console.log(error);
+				});	
 			}
 		}
 	}
@@ -94,13 +122,30 @@
 				height: 2em;
 				line-height: 2em;
 				.address-city{
-					width: auto;
-					padding: 0 0em;
+					width: 25%;
+					padding-left: 4%;
 					position: relative;
+					&:after{
+						content: '';
+						display: inline-block;
+						vertical-align: top;
+						margin-top: 0.6em;
+						margin-left: 6%;
+						.bg(0.8em,0.8em,transparent,'~images/icon/address-city.png',100% 100%);
+					}
 				}
 				.address-position{
+					width: 75%;
 					position: relative;
-					margin-left: 2em;
+					// margin-left: 1em;
+					&:before{
+						content: '';
+						display: inline-block;
+						vertical-align: top;
+						margin-top: 0.6em;
+						margin-right: 2%;
+						.bg(0.8em,0.8em,transparent,'~images/icon/address-position.png',100% 100%);
+					}
 				}
 			}
 		}
@@ -120,8 +165,11 @@
 			position: relative;
 			overflow: hidden;
 			white-space: nowrap;
-			.location-success{
-				margin-left: 1.6875rem;
+			&:before{
+				content: '';
+				display: inline-block;
+				vertical-align: top;
+				.bg(2.5em,2.5em,transparent,'~images/icon/location-bar.png',70% 70%);
 			}
 			.location-info{
 				color: #969696;
@@ -129,8 +177,9 @@
 			}
 			.location-refresh{
 				float: right;
-				width: 3.4375rem;
+				width: 2.5em;
 				height: 2.5em;
+				.bg(2.5em,2.5em,transparent,'~images/icon/location-refresh.png',70% 70%);
 			}
 		}
 	}

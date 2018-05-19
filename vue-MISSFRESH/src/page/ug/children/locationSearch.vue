@@ -30,7 +30,7 @@
 		},
 		computed: {
 			...mapState([
-                's_currentRegion', 's_currentCity'
+                's_currentRegion', 's_choseCity'
             ])
         },
 		methods: {
@@ -44,7 +44,7 @@
 				if (this.inputVaule) {
 					// let keyword=event.target.value;
 					let keyword=this.inputVaule;
-					let cityName=this.s_currentCity;
+					let cityName=this.s_choseCity;
 					console.log(keyword);
 					//post方法
 					this.axios.post('http://localhost:3390/position/locationsuggestion', {
@@ -69,10 +69,9 @@
 			},
 			//改变当前城市信息
 			changeCurrentRegion(city){
-				// console.log(city);
-				let currentcity={
+				let chosecity={
 					id: city.adcode,
-					name: city.name,
+					name: city.city,
 					province: city.province,
 					district: city.district
 				};
@@ -115,7 +114,7 @@
 					id: city.id,
 				});*/
 				this.SET_POSITION({
-					city: currentcity, 
+					city: chosecity, 
 					building, 
 					location, 
 					position, 
@@ -148,30 +147,24 @@
 			position: fixed;
 			border-top-width: 0;
 			width: 100%;
-			height: 36px;
-			padding: 0.3em 4%;
+			height: @header_height;
+			padding: 4px 4%;
 			box-sizing: border-box;
 			.search-bar{
-				height: 100%;
-				width: 100%;
+				.wh(100%,100%);
 				.search-form{
 					display: block;
-					height: 100%;
-					width: 100%;
+					.wh(100%,100%);
+					position: relative;
 					.search-logo{
-						color: transparent;
-						background-size: 100% 100%;
-						display: inline-block;
-						width: 1.25rem;
-						height: 1.25rem;
 						position: absolute;
-						left: 1.25rem;
-						top: 0.625rem;
+						left: 0;
+						top: 0;
+						.bg(28px,28px,transparent,'~images/icon/search-logo.png',76% 76%);
 					}
 					.search-input{
 						background-color: #f5f5f5;
-						width: 100%;
-						height: 100%;
+						.wh(100%,100%);
 						border-radius: 0.25rem;
 						font-size: 0.875rem;
 						text-indent: 1.875rem;

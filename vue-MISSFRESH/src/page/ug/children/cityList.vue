@@ -34,6 +34,7 @@
 				var _this=this;
 				this.axios.get('http://localhost:3390/position/list')
 				.then(function (response) {
+					console.log(response.data);
 				  	_this.citylist=_this.citylist.concat(response.data);
 				})
 				.catch(function (error) {
@@ -42,11 +43,15 @@
 			},
 			//改变当前城市信息
 			changeCurrentRegion(city){
-				this.SET_POSITION({
-					id: city.id,
+				let chosecity={
+					id: city.area_code,
 					name: city.name,
-					province: '',
-					district: city.description
+					province: city.province||'',
+					district: city.district||''
+				};
+				console.log(chosecity);
+				this.SET_POSITION({
+					city: chosecity
 				});
 				this.$router.push('/ug/addressChose');
 			}

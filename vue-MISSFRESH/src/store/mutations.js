@@ -61,46 +61,9 @@ export default {
 		state.s_mpromptStatus=status;
 		setStore('s_mpromptStatus', state.s_mpromptStatus);	
 	},
-	/*SET_POSITION: (state,{city_id,city_name,city_province,city_district,building_name,building_address,location_lat,location_lan,position_lat,station_id})=>{
-		let region=state.s_currentRegion;
-		// if (region[city]) {
-		// 	region[city]={
-		// 		id: city_id, 
-		// 		name: city_name, 
-		// 		province: city_province, 
-		// 		district: city_district
-		// 	}
-		// } else{
-			region={
-				building:{
-					name: building_name||"", 
-					address: building_address||""
-				},
-				city:{
-					id: city_id||"", 
-					name: city_name||"", 
-					province: city_province||"", 
-					district: city_district||""
-				},
-				location:{
-					lat: location_lat||"",
-					lan: location_lan||""
-				},
-				position:{
-					lat: position_lat||""
-				},
-				station:{
-					id: station_id||""
-				},
-			}
-		// }
-		state.s_currentRegion = {...region};
-		//存入localStorage
-		setStore('currentRegion', state.s_currentRegion);
-	},*/
-	// SET_POSITION: (state,{city={}, building={}, location={}, position={}, station={}})=>{
+	//设置城市信息，存入store和localStorage
 	SET_POSITION: (state,{city={}, building={}, location={}, position={}, station={}})=>{
-		let region=state.s_currentRegion;
+		let region=state.s_choseRegion;
 		/*let keys=['city', 'building', 'location', 'position', 'station'];
 		console.log(arguments);
 		console.log(city);
@@ -112,11 +75,6 @@ export default {
 				})
 			}
 		})*/
-		console.log('------------------------');
-		console.log(city);
-		console.log(building);
-		console.log('------------------------');
-		// return;
 		POSITION_ANALYSIS(region, 'city', city);
 		POSITION_ANALYSIS(region, 'building', building);
 		POSITION_ANALYSIS(region, 'location', location);
@@ -146,18 +104,17 @@ export default {
 				id: station_id||""
 			},
 		}*/
-		let currentcity=region['building']&&region['building']['name'] || region['city']&&region['city']['name'];
-		// console.log(currentcity);
-		// console.log(currentcity);
-		state.s_currentRegion = {...region};
-		state.s_currentCity = currentcity;
-		/*console.log('=====================');
-		console.log(region);
-		console.log(currentcity);
-		console.log('=====================');*/
+		let currentcity=region['city']&&region['city']['name'];
+		let choseaddress=region['building']&&region['building']['name'] || region['city']&&region['city']['name'];
+		state.s_choseRegion = {...region};
+		state.s_currentCity = state.s_currentCity||currentcity;
+		state.s_choseCity = currentcity;
+		state.s_choseAddress = choseaddress;
 		//存入localStorage
-		setStore('currentRegion', state.s_currentRegion);
+		setStore('choseRegion', state.s_choseRegion);
 		setStore('currentCity', state.s_currentCity);
+		setStore('choseCity', state.s_choseCity);
+		setStore('choseAddress', state.s_choseAddress);
 		// setStore('currentRegion', state.s_currentRegion);
 	}
 }
