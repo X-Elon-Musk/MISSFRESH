@@ -34,7 +34,7 @@
 				var _this=this;
 				this.axios.get('http://localhost:3390/position/list')
 				.then(function (response) {
-					console.log(response.data);
+					// console.log(response.data);
 				  	_this.citylist=_this.citylist.concat(response.data);
 				})
 				.catch(function (error) {

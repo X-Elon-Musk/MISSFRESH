@@ -64,17 +64,6 @@ export default {
 	//设置城市信息，存入store和localStorage
 	SET_POSITION: (state,{type, city={}, building={}, location={}, position={}, station={}})=>{
 		let region=state.s_choseRegion;
-		/*let keys=['city', 'building', 'location', 'position', 'station'];
-		console.log(arguments);
-		console.log(city);
-		
-		Object.keys(arguments).forEach(key => {
-			if(JSON.stringify(arguments[key])!=="{}"){
-				Object.keys(arguments).forEach(argument_key => {
-					region[keys[key]][argument_key]=arguments[key][argument_key];
-				})
-			}
-		})*/
 
 		/*
 		region={
@@ -107,28 +96,6 @@ export default {
 			position: position||{},
 			station: position||{}
 		}
-		/*if (type==0) {
-			
-			if(JSON.stringify(region)!=="{}"){
-				Object.keys(region).forEach(key => {
-					if(JSON.stringify(region[key])!=="{}"){
-						Object.keys(region[key]).forEach(region_key => {
-							region[key][region_key]='';
-						})			
-					}
-				})	
-			}
-						
-		} else if(type==1){
-			state.s_currentCity = state.s_currentCity||currentcity;	
-		}*/
-
-
-		/*console.log('=================');
-		console.log(type);
-		console.log(parameter);
-		console.log('=================');*/
-
 		Object.keys(parameter).forEach(key => {
 			if(JSON.stringify(parameter[key])!=="{}"){
 				region[key]=region[key]||{};
@@ -138,15 +105,13 @@ export default {
 			}
 		})
 		if (type==0&&JSON.stringify(region)!=="{}") {
-			// if(JSON.stringify(region)!=="{}"){
-				Object.keys(region).forEach(key => {
-					if(key!=='city'&&JSON.stringify(region[key])!=="{}"){
-						Object.keys(region[key]).forEach(region_key => {
-							region[key][region_key]='';
-						})			
-					}
-				})	
-			// }			
+			Object.keys(region).forEach(key => {
+				if(key!=='city'&&JSON.stringify(region[key])!=="{}"){
+					Object.keys(region[key]).forEach(region_key => {
+						region[key][region_key]='';
+					})			
+				}
+			})				
 		}
 		console.log(region);
 		let currentcity=parameter['city']&&parameter['city']['name'];
@@ -162,55 +127,7 @@ export default {
 		setStore('choseAddress', state.s_choseAddress);
 
 
-
-
-
-		/*let parameter={
-			city: city||{},
-			building: building||{},
-			location: location||{},
-			position: position||{},
-			station: position||{}
-		}
-		console.log(parameter);
-		// return;
-		Object.keys(parameter).forEach(key => {
-			if(JSON.stringify(parameter[key])!=="{}"){
-				region[key]=region[key]||{};
-				Object.keys(parameter[key]).forEach(parameter_key => {
-					// console.log(parameter_key);
-					region[key][parameter_key]=parameter[key][parameter_key];
-				})
-			}
-		})
-		console.log('=================');
-		console.log(region);
-		console.log('=================');
-
-
-
-		let currentcity=region['city']&&region['city']['name'];
-		let choseaddress=region['building']&&region['building']['name'] || region['city']&&region['city']['name'];
-		state.s_choseRegion = {...region};
-		if (type==0) {
-			state.s_currentCity = state.s_currentCity||currentcity;			
-		} else if(type==1){
-			state.s_currentCity = state.s_currentCity||currentcity;	
-		}
-			
-		state.s_currentCity = state.s_currentCity||currentcity;
-		state.s_choseCity = currentcity;
-		state.s_choseAddress = choseaddress;
-		//存入localStorage
-		setStore('choseRegion', state.s_choseRegion);
-		setStore('currentCity', state.s_currentCity);
-		setStore('choseCity', state.s_choseCity);
-		setStore('choseAddress', state.s_choseAddress);
-		return;
-
-
-
-		POSITION_ANALYSIS(region, 'city', city);
+		/*POSITION_ANALYSIS(region, 'city', city);
 		POSITION_ANALYSIS(region, 'building', building);
 		POSITION_ANALYSIS(region, 'location', location);
 		POSITION_ANALYSIS(region, 'position', position);
@@ -242,7 +159,7 @@ export default {
 		setStore('currentCity', currentCity);	
 	},
 }
-//解析地址参数
+/*//解析地址参数
 let POSITION_ANALYSIS=(region, region_key, parameters)=>{
 	// console.log(parameters);
 	if(parameters&&JSON.stringify(parameters)!=="{}"){
@@ -251,4 +168,4 @@ let POSITION_ANALYSIS=(region, region_key, parameters)=>{
 			region[region_key][key]=parameters[key];
 		})
 	}
-}
+}*/

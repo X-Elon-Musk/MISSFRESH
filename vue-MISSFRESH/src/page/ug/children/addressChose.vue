@@ -35,7 +35,6 @@
             ]),
             //当前城市
             currentCity: function () {
-            	// console.log(this.refreshtext||getStore('currentCity'));
             	return this.refreshtext||getStore('currentCity');
             },
             //选择的城市
