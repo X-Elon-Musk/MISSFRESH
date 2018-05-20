@@ -51,6 +51,7 @@
 				};
 				console.log(chosecity);
 				this.SET_POSITION({
+					type: 0,
 					city: chosecity
 				});
 				this.$router.push('/ug/addressChose');

@@ -62,7 +62,7 @@ export default {
 		setStore('s_mpromptStatus', state.s_mpromptStatus);	
 	},
 	//设置城市信息，存入store和localStorage
-	SET_POSITION: (state,{city={}, building={}, location={}, position={}, station={}})=>{
+	SET_POSITION: (state,{type, city={}, building={}, location={}, position={}, station={}})=>{
 		let region=state.s_choseRegion;
 		/*let keys=['city', 'building', 'location', 'position', 'station'];
 		console.log(arguments);
@@ -75,11 +75,6 @@ export default {
 				})
 			}
 		})*/
-		POSITION_ANALYSIS(region, 'city', city);
-		POSITION_ANALYSIS(region, 'building', building);
-		POSITION_ANALYSIS(region, 'location', location);
-		POSITION_ANALYSIS(region, 'position', position);
-		POSITION_ANALYSIS(region, 'station', station);
 
 		/*
 		region={
@@ -104,6 +99,124 @@ export default {
 				id: station_id||""
 			},
 		}*/
+
+		let parameter={
+			city: city||{},
+			building: building||{},
+			location: location||{},
+			position: position||{},
+			station: position||{}
+		}
+		/*if (type==0) {
+			
+			if(JSON.stringify(region)!=="{}"){
+				Object.keys(region).forEach(key => {
+					if(JSON.stringify(region[key])!=="{}"){
+						Object.keys(region[key]).forEach(region_key => {
+							region[key][region_key]='';
+						})			
+					}
+				})	
+			}
+						
+		} else if(type==1){
+			state.s_currentCity = state.s_currentCity||currentcity;	
+		}*/
+
+
+		/*console.log('=================');
+		console.log(type);
+		console.log(parameter);
+		console.log('=================');*/
+
+		Object.keys(parameter).forEach(key => {
+			if(JSON.stringify(parameter[key])!=="{}"){
+				region[key]=region[key]||{};
+				Object.keys(parameter[key]).forEach(parameter_key => {
+					region[key][parameter_key]=parameter[key][parameter_key];
+				})
+			}
+		})
+		if (type==0&&JSON.stringify(region)!=="{}") {
+			// if(JSON.stringify(region)!=="{}"){
+				Object.keys(region).forEach(key => {
+					if(key!=='city'&&JSON.stringify(region[key])!=="{}"){
+						Object.keys(region[key]).forEach(region_key => {
+							region[key][region_key]='';
+						})			
+					}
+				})	
+			// }			
+		}
+		console.log(region);
+		let currentcity=parameter['city']&&parameter['city']['name'];
+		let choseaddress=parameter['building']&&parameter['building']['name'] || parameter['city']&&parameter['city']['name'];
+		state.s_choseRegion = {...region};
+		state.s_currentCity = state.s_currentCity||currentcity;
+		state.s_choseCity = currentcity;
+		state.s_choseAddress = choseaddress;
+		//存入localStorage
+		setStore('choseRegion', state.s_choseRegion);
+		setStore('currentCity', state.s_currentCity);
+		setStore('choseCity', state.s_choseCity);
+		setStore('choseAddress', state.s_choseAddress);
+
+
+
+
+
+		/*let parameter={
+			city: city||{},
+			building: building||{},
+			location: location||{},
+			position: position||{},
+			station: position||{}
+		}
+		console.log(parameter);
+		// return;
+		Object.keys(parameter).forEach(key => {
+			if(JSON.stringify(parameter[key])!=="{}"){
+				region[key]=region[key]||{};
+				Object.keys(parameter[key]).forEach(parameter_key => {
+					// console.log(parameter_key);
+					region[key][parameter_key]=parameter[key][parameter_key];
+				})
+			}
+		})
+		console.log('=================');
+		console.log(region);
+		console.log('=================');
+
+
+
+		let currentcity=region['city']&&region['city']['name'];
+		let choseaddress=region['building']&&region['building']['name'] || region['city']&&region['city']['name'];
+		state.s_choseRegion = {...region};
+		if (type==0) {
+			state.s_currentCity = state.s_currentCity||currentcity;			
+		} else if(type==1){
+			state.s_currentCity = state.s_currentCity||currentcity;	
+		}
+			
+		state.s_currentCity = state.s_currentCity||currentcity;
+		state.s_choseCity = currentcity;
+		state.s_choseAddress = choseaddress;
+		//存入localStorage
+		setStore('choseRegion', state.s_choseRegion);
+		setStore('currentCity', state.s_currentCity);
+		setStore('choseCity', state.s_choseCity);
+		setStore('choseAddress', state.s_choseAddress);
+		return;
+
+
+
+		POSITION_ANALYSIS(region, 'city', city);
+		POSITION_ANALYSIS(region, 'building', building);
+		POSITION_ANALYSIS(region, 'location', location);
+		POSITION_ANALYSIS(region, 'position', position);
+		POSITION_ANALYSIS(region, 'station', station);
+
+		
 		let currentcity=region['city']&&region['city']['name'];
 		let choseaddress=region['building']&&region['building']['name'] || region['city']&&region['city']['name'];
 		state.s_choseRegion = {...region};
@@ -114,9 +227,20 @@ export default {
 		setStore('choseRegion', state.s_choseRegion);
 		setStore('currentCity', state.s_currentCity);
 		setStore('choseCity', state.s_choseCity);
-		setStore('choseAddress', state.s_choseAddress);
+		setStore('choseAddress', state.s_choseAddress);*/
 		// setStore('currentRegion', state.s_currentRegion);
-	}
+		// }
+	},
+	//设置选择的城市
+	SET_CHOSECITY: (state,{choseCity})=>{
+		state.s_choseCity=choseCity;
+		setStore('choseCity', choseCity);	
+	},
+	//设置当前城市
+	SET_CURRENTCITY: (state,{currentCity})=>{
+		state.s_currentCity=currentCity;
+		setStore('currentCity', currentCity);	
+	},
 }
 //解析地址参数
 let POSITION_ANALYSIS=(region, region_key, parameters)=>{

@@ -35,7 +35,7 @@
             ]),
             //当前城市
             currentCity: function () {
-            	console.log(this.refreshtext||getStore('currentCity'));
+            	// console.log(this.refreshtext||getStore('currentCity'));
             	return this.refreshtext||getStore('currentCity');
             },
             //选择的城市
@@ -45,7 +45,7 @@
         },
 		methods: {
 			...mapMutations([
-                'SET_POSITION'
+                'SET_CURRENTCITY'
             ]),
 			//刷新当前位置
 			locationRefresh(){
@@ -53,7 +53,7 @@
 				let _this=this;
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
-					let ad_info=response.data.ad_info
+					/*let ad_info=response.data.ad_info
 					let chosecity={
 						id: ad_info.adcode,
 						name: ad_info.city,
@@ -62,7 +62,10 @@
 					}
 					_this.SET_POSITION({
 						city: chosecity
-					});
+					});*/
+					_this.SET_CURRENTCITY({
+						currentCity: response.data.ad_info.city
+					})
 					_this.refreshtext='';
 				})
 				.catch(function (error) {

@@ -1,8 +1,8 @@
 <template>
     <div class="clearfix ug-header">
-    	<router-link :to="{path: '/ug/addressChose'}" tag="div" class="delivery-info">
+    	<!-- <router-link :to="{path: '/ug/addressChose'}" tag="div" class="delivery-info"> -->
 		
-    	<!-- <div class="delivery-info"> -->
+    	<div class="delivery-info" @click="goAddressChose">
 	        <div class="delivery-time">
 	        	<img src="~images/icon/delivery-time-0.png" alt="" v-if="deliveryTime=='tomorrow'">
 	        	<img src="~images/icon/delivery-time-0.png" alt="" v-else-if="deliveryTime=='hours'">
@@ -13,13 +13,14 @@
 	        	{{choseAddress}}
 	        </div>
 	        <div class="short-tips" v-show="support" @click="closeTips">本城市支持会员1小时达，选择详细地址完成匹配</div>
-        <!-- </div> -->
-        </router-link>
+        </div>
+        <!-- </router-link> -->
         <!-- <div class="f_r search-button"></div>    -->
         <router-link :to="{path: '/ug/search'}" tag="div" class="f_r search-button"></router-link>
     </div>  
 </template>
 <script>
+	import {mapState, mapMutations} from 'vuex'
 	export default{
 		data(){
 			return {
@@ -30,11 +31,25 @@
 			}
 		},
 		props: ['choseAddress'],
+		computed: {
+			...mapState([
+                's_currentCity', 's_choseCity'
+            ])
+        },
 		methods: {
+			...mapMutations([
+                'SET_CHOSECITY'
+            ]),
 			closeTips: function () {
 				this.support=false;
-			}
-				
+			},
+			goAddressChose: function () {
+				console.log("当前城市",this.s_currentCity);
+				this.SET_CHOSECITY({
+					choseCity: this.s_currentCity
+				});
+				this.$router.push('/ug/addressChose');
+			}			
 		}
 	}
 </script>

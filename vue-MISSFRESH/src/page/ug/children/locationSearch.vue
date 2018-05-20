@@ -114,6 +114,7 @@
 					id: city.id,
 				});*/
 				this.SET_POSITION({
+					type: 1,
 					city: chosecity, 
 					building, 
 					location, 
