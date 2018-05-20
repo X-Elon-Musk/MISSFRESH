@@ -52,16 +52,6 @@
 				let _this=this;
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
-					/*let ad_info=response.data.ad_info
-					let chosecity={
-						id: ad_info.adcode,
-						name: ad_info.city,
-						province: ad_info.province,
-						district: ad_info.district
-					}
-					_this.SET_POSITION({
-						city: chosecity
-					});*/
 					_this.SET_CURRENTCITY({
 						currentCity: response.data.ad_info.city
 					})

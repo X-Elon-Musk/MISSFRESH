@@ -38,14 +38,12 @@
                 'SET_POSITION'
             ]),
 			//获取当前地址
-			// suggestionLocation: function (event,callback) {
 			suggestionLocation: function (callback) {
 				let _this=this;
 				if (this.inputVaule) {
-					// let keyword=event.target.value;
 					let keyword=this.inputVaule;
 					let cityName=this.s_choseCity;
-					console.log(keyword);
+					// console.log(keyword);
 					//post方法
 					this.axios.post('http://localhost:3390/position/locationsuggestion', {
 					    keyword: keyword,
@@ -57,7 +55,6 @@
 	                })
 					.then(function (response) {
 						if (response.data.status==0) {
-							// resolve(response.data.result)
 							_this.searchResult=[].concat(response.data.data);
 						}
 					  	console.log(response.data);
