@@ -7,11 +7,11 @@ class CategoryAreas extends MissMysql{
 		super()
 		this.getCategoryAreas=this.getCategoryAreas.bind(this);
 	}
-	async getCategoryAreas(){
+	async getCategoryAreas(product_index){
 		var essentialInfor=await this.missMysql('category_areas', {
 			image: 'image'
 		},{
-			product_index: 0
+			product_index: product_index
 		});
     	return essentialInfor;
 	}

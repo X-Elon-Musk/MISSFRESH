@@ -5,7 +5,7 @@
         	<ugHeader :choseAddress="choseAddress"></ugHeader>
         	<div class="swiper-container tab-nav" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
-        			<div class="swiper-slide" v-for="(item,index) in categorylist" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index" :style="{backgroundImage:item.category_image.indexOf('icon')>0?`url(${item.category_image})`:'none'}">
+        			<div class="swiper-slide" v-for="(item,index) in categorylist[0]" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index" :style="{backgroundImage:item.category_image.indexOf('icon')>0?`url(${item.category_image})`:'none'}">
         				<span>{{item.name}}</span>
         			</div>
 					<!-- <div class="bar">
@@ -16,14 +16,19 @@
 			<div class="ellipsis-icon" @click="showClassify"></div>
 		</div>
 		<!-- 分类 -->
-		<classify v-show="classifyState" :categorylist="categorylist" v-on:closeClassify="closeClassify"  v-on:tabMove="tabMove"></classify>
+		<classify v-show="classifyState" :categorylist="categorylist[0]" v-on:closeClassify="closeClassify"  v-on:tabMove="tabMove"></classify>
 		<div class="swiper-container" id="page" ref="page">
 		  	<div class="swiper-wrapper">
 
 				<!-- nav对应页面 -->
 				<!-- 热卖 -->
-		      	<productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage>
-			    <div class="swiper-slide slidepage swiper-container gif-show">
+		      	<!-- <productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage> -->
+		      	<productPage :products="products[0]" :banner="banner[0]" class="product_index_0">
+		      		<guarantee :brands="brands[0]"></guarantee>
+            		<card :categoryareas="categoryareas[0]"></card>
+		      	</productPage>
+		      	<productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage>
+			    <!-- <div class="swiper-slide slidepage swiper-container gif-show">
 		      		<div class="swiper-container scroll" ref="scroll">
 				        <div class="swiper-wrapper">
 				          	<div class="swiper-slide slidescroll">
@@ -32,7 +37,7 @@
 				      		</div>
 				        </div>
 			      	</div>
-			    </div>
+			    </div> -->
 				<div class="swiper-slide slidepage">
 			      	<div class="swiper-container scroll" ref="scroll">
 				        <div class="swiper-wrapper">
@@ -177,9 +182,12 @@
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
     import qs from 'qs';
+
   	import ugHeader from './component/ugHeader'
     import classify from './component/classify'
     import productPage from './component/productPage'
+    import guarantee from './component/component/guarantee'
+    import card from './component/component/card'
     import loading from 'src/components/loading/loading'
 	export default{
 		data(){
@@ -204,28 +212,37 @@
 				//上滑加载滑动的位置
 				translate: 0,
 				//分类列表
-				categorylist: [],
+				// categorylist: [],
+				categorylist: {},
 				//banner
-				banner: [],
+				// banner: [],
+				banner: {},
 				//品牌
-				brands: [],
+				// brands: [],
+				brands: {},
 				//分类区域
-				categoryareas: [],
+				// categoryareas: [],
+				categoryareas: {},
 				//产品
-				products: [],
+				// products: [],
+				products: {},
 				//loading组件状态
 				loading: false,
 				//导航移动的最大距离
 				maxLeft: 0,
+				//种类数据加载情况
+				product_index: {}
 			}
 		},
 		mounted (){
-			this.getPageIndex(() => {
+			// this.$nextTick(() => {
+			this.getPageIndex(0, () => {
 				this.$nextTick(() => {
 					if (!this.navSwiper) this.tab();
 					if (!this.pageSwiper) this.page();
 				})
 			});
+			// })
 			this.getPosition();
 		},
 		computed: {
@@ -291,16 +308,24 @@
 				});
 			},
 			//获取index数据
-			getPageIndex: function (callback) {
+			getPageIndex: function (product_index,callback) {
 				var _this=this;
 				this.loading=true;
-				this.axios.get('http://localhost:3390/page/index')
+				this.axios.get('http://localhost:3390/page/index',{
+			    	params: {
+				      	product_index: product_index
+				    }
+				})
 				.then(function (response) {
-					_this.categorylist=_this.categorylist.concat(response.data['category_list']);
-					_this.banner=_this.banner.concat(response.data.product_list.banner);
-					_this.brands=_this.brands.concat(response.data.product_list.brands);
-					_this.categoryareas=_this.categoryareas.concat(response.data.product_list['category_areas']);
-					_this.products=_this.products.concat(response.data.product_list.products);
+					let product_list=response.data.product_list;
+					if (product_index==0) {
+						_this.categorylist[product_index]=(_this.categorylist[product_index]||[]).concat(response.data.category_list);	
+						_this.brands[product_index]=(_this.brands[product_index]||[]).concat(product_list.brands);
+						_this.categoryareas[product_index]=(_this.categoryareas[product_index]||[]).concat(product_list.category_areas);	
+					}
+					_this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
+					_this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);
+					_this.product_index[product_index]=_this.products[product_index]||true;
 					_this.loading=false;
 					callback&&callback();
 				})
@@ -313,7 +338,6 @@
 				let _this=this;
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
-					// console.log(response.data);
 					let ad_info=response.data.ad_info
 					let chosecity={
 						id: ad_info.adcode,
@@ -321,7 +345,6 @@
 						province: ad_info.province,
 						district: ad_info.district
 					}
-					console.log(chosecity);
 					_this.SET_POSITION({
 						type: 0,
 						city: chosecity
@@ -366,6 +389,12 @@
 				this.tabIndex=index;
 				//对应的内容显示
 				this.pageSwiper.slideTo(index, 0);
+				//请求对应种类的数据,没有加载过的话加载数据,已经加载过不再加载。
+				if (!this.products[index]) {
+					this.getPageIndex(index);		
+				}
+					
+				
 			},
 			//导航移动
 			slideMove: function (index,navSlideWidth) {
@@ -379,6 +408,7 @@
 					left=this.maxLeft;
 				} 
 				navSwiper.setTranslate(-left);
+				this.tabClick(index);
 			},
 	        //分类切换显示状态
 	        showClassify: function () {
@@ -397,6 +427,8 @@
         	ugHeader,
 			classify,
 			productPage,
+			guarantee,
+			card,
 			loading
 		},
 	}

@@ -6,8 +6,8 @@
 				<img src="" v-lazy="product.image" alt="">
 			</div>
 			<div class="f_r product-info">
-				<!-- <p class="name">{{product.name}}</p> -->
-				<p class="name">{{product.id}}</p>
+				<p class="name">{{product.name}}</p>
+				<!-- <p class="name">{{product.id}}</p> -->
 				<p class="point" v-if="subtitle">{{product.subtitle}}</p>
 				<ul class="preferential">
 					<li v-for="(item,index) in product.product_tags" :key="index">{{item.name}}</li>

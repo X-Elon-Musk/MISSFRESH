@@ -7,11 +7,11 @@ class Brands extends MissMysql{
 		super()
 		this.getBrands=this.getBrands.bind(this);
 	}
-	async getBrands(){
+	async getBrands(product_index){
 		var essentialInfor=await this.missMysql('brands', {
 			image: 'image'
 		},{
-			product_index: 0
+			product_index: product_index
 		});
     	return essentialInfor;
 	}

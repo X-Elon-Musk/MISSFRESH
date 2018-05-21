@@ -7,20 +7,20 @@ class Products extends MissMysql{
 		super()
 		this.getProducts=this.getProducts.bind(this);
 	}
-	async getProducts(){
+	async getProducts(product_index){
 		//商品基本信息
-		var essentialInfor=await this.missMysql('products', {
+		let essentialInfor=await this.missMysql('products', {
 			image: 'image'
-		},{});
+		},{product_index: product_index});
 		//添加价格信息和标签信息
 	  	await Promise.all(essentialInfor.map(async (item)=> {
-	  		var price_up=await this.missMysql('price_up', {},{
+	  		let price_up=await this.missMysql('price_up', {},{
 	  			product_id: item.product_id
 	  		});
-            var price_down=await this.missMysql('price_down', {},{
+            let price_down=await this.missMysql('price_down', {},{
 	  			product_id: item.product_id
 	  		});
-            var product_tags=await this.missMysql('product_tags', {},{
+            let product_tags=await this.missMysql('product_tags', {},{
 	  			product_id: item.product_id
 	  		});
             item.vip_price_pro={};

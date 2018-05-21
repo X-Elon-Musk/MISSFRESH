@@ -31,7 +31,11 @@
 			}
 		},
 		props: ['banner'],
+		// created(){
+		// 	console.log(this.banner);
+		// },
 		mounted(){
+			// console.log(this.banner);
 			var _this=this;
 			this.$nextTick(()=>{
 				var carousel = new Swiper('.banner', {

@@ -113,7 +113,7 @@ export default {
 				}
 			})				
 		}
-		console.log(region);
+		// console.log(region);
 		let currentcity=parameter['city']&&parameter['city']['name'];
 		let choseaddress=parameter['building']&&parameter['building']['name'] || parameter['city']&&parameter['city']['name'];
 		state.s_choseRegion = {...region};
@@ -125,28 +125,6 @@ export default {
 		setStore('currentCity', state.s_currentCity);
 		setStore('choseCity', state.s_choseCity);
 		setStore('choseAddress', state.s_choseAddress);
-
-
-		/*POSITION_ANALYSIS(region, 'city', city);
-		POSITION_ANALYSIS(region, 'building', building);
-		POSITION_ANALYSIS(region, 'location', location);
-		POSITION_ANALYSIS(region, 'position', position);
-		POSITION_ANALYSIS(region, 'station', station);
-
-		
-		let currentcity=region['city']&&region['city']['name'];
-		let choseaddress=region['building']&&region['building']['name'] || region['city']&&region['city']['name'];
-		state.s_choseRegion = {...region};
-		state.s_currentCity = state.s_currentCity||currentcity;
-		state.s_choseCity = currentcity;
-		state.s_choseAddress = choseaddress;
-		//存入localStorage
-		setStore('choseRegion', state.s_choseRegion);
-		setStore('currentCity', state.s_currentCity);
-		setStore('choseCity', state.s_choseCity);
-		setStore('choseAddress', state.s_choseAddress);*/
-		// setStore('currentRegion', state.s_currentRegion);
-		// }
 	},
 	//设置选择的城市
 	SET_CHOSECITY: (state,{choseCity})=>{

@@ -46,6 +46,7 @@ Vue.use(VueLazyload, {
 Vue.prototype.axios=axios
 Vue.prototype.getValue=getValue
 
+
 const router = new VueRouter({
 	routes,
 	mode: 'hash',
@@ -67,3 +68,4 @@ new Vue({
 	router,
 	store
 }).$mount('#app')
+Vue.config.devtools = false

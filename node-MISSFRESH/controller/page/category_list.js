@@ -7,12 +7,12 @@ class CategoryList extends MissMysql{
 		super()
 		this.getCategoryList=this.getCategoryList.bind(this);
 	}
-	async getCategoryList(){
+	async getCategoryList(product_index){
 		var essentialInfor=await this.missMysql('category_list', {
 			image: 'image',
 			category_image: 'category_image'
 		},{
-			product_index: 0
+			product_index: product_index
 		});
     	return essentialInfor;
 	}
