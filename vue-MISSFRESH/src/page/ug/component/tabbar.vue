@@ -16,7 +16,7 @@
 			<div class="ellipsis-icon" @click="showClassify"></div>
 		</div>
 		<!-- 分类 -->
-		<!-- <classify v-show="classifyState" :categorylist="categorylist" v-on:closeClassify="closeClassify"  v-on:tabMove="tabMove"></classify> -->
+		<classify v-show="classifyState" :categorylist="categorylist" v-on:closeClassify="closeClassify"  v-on:tabMove="tabMove"></classify>
 		<div class="swiper-container" id="page" ref="page">
 		  	<div class="swiper-wrapper">
 

@@ -159,13 +159,3 @@ export default {
 		setStore('currentCity', currentCity);	
 	},
 }
-/*//解析地址参数
-let POSITION_ANALYSIS=(region, region_key, parameters)=>{
-	// console.log(parameters);
-	if(parameters&&JSON.stringify(parameters)!=="{}"){
-		region[region_key]={};
-		Object.keys(parameters).forEach(key => {
-			region[region_key][key]=parameters[key];
-		})
-	}
-}*/

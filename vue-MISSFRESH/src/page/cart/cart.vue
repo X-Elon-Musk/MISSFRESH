@@ -566,7 +566,7 @@
 				.marquee{
 					vertical-align: top;
 					margin-top: 15px;
-					margin-right: 8px;
+					margin-right: 4px;
 				}
 			}
 			.card-info{
@@ -574,7 +574,7 @@
 				display: flex;
 				flex-direction: column;
 				// flex: 1;
-				border-top: .5px solid #e6e6e6;
+				// border-top: .5px solid #e6e6e6;
 				background: #fff;
 				color: #262626;
 				text-align: left;
