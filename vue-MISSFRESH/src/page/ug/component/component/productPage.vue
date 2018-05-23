@@ -1,6 +1,6 @@
 <template>
 	<div class="swiper-slide slidepage swiper-container gif-show">
-        <pullRefresh :tabIndex="tabIndex" @getData="getData">
+        <pullRefresh :tabIndex="tabIndex" @getData="getData" :pullEnd="pullEnd">
             <gif></gif>
             <!-- 内容部分 -->
             <carousel :banner="banner"></carousel>
@@ -28,16 +28,11 @@
 			return {
                 //当前导航栏所处位置
                 tabIndex: 0,
-				// productsShow:[],
-                productsStart: 0,
-                productsEnd: 8
+				productsStart: 0,
+                productsEnd: 8,
+                pullEnd: false
 			}
 		},
-        created(){
-            // console.log(this.banner);
-            // console.log(this.products);
-            // console.log(this.products.slice(0,8));
-        },
         /*watch: {
             products: function () {
                 this.productsShow=this.products.slice(this.productsStart,this.productsEnd);
@@ -51,8 +46,8 @@
                 this.productsEnd+=8;
                 if (this.productsEnd>=this.products.length) {
                     this.productsEnd=this.products.length;
+                    this.pullEnd=true;
                 }
-                // this.productsShow=this.products.slice(this.productsStart,this.productsEnd);
             },
         },
         components: {

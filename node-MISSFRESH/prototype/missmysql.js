@@ -1,7 +1,7 @@
 'use strict';
 import Mysql from '../model/sql-config.js'
-var mysql=Mysql.mysql_;
-var dirname='http://localhost:3390/public/images/';
+let mysql=Mysql.mysql_;
+let dirname='http://localhost:3390/public/images/';
 
 
 

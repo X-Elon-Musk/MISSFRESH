@@ -27,7 +27,9 @@
 		      		<guarantee :brands="brands[0]"></guarantee>
             		<card :categoryareas="categoryareas[0]"></card>
 		      	</productPage>
-		      	<productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage>
+		      	<productPage :products="products[1]||[]" :banner="banner[1]||[]" class="product_index_0"></productPage>
+		      	<productPage :products="products[2]||[]" :banner="banner[2]||[]" class="product_index_0"></productPage>
+		      	<!-- <productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage> -->
 			    <!-- <div class="swiper-slide slidepage swiper-container gif-show">
 		      		<div class="swiper-container scroll" ref="scroll">
 				        <div class="swiper-wrapper">
@@ -182,6 +184,7 @@
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
     import qs from 'qs';
+    // import {isArray} from 'src/config/mUtils'
 
   	import ugHeader from './component/ugHeader'
     import classify from './component/classify'
@@ -256,57 +259,12 @@
             	} else{
             		return '';
             	}
-            }
+            },
         },
 		methods: {
 			...mapMutations([
                 'SET_POSITION'
             ]),
-			//导航栏
-			tab: function () {
-				var _this=this;
-				//this.navSwiper=new Swiper(this.$refs.tabNav, {
-				this.navSwiper=new Swiper('.tab-nav', {
-					slidesPerView: 'auto',
-					freeMode: true,
-					observer:true,
-      				observeParents:true,
-      				// resistanceRatio : 0,
-					on: {
-						init: function() {
-
-							//设置transition-duration值
-							this.setTransition(_this.tSpeed);
-							//Nav的可视宽度
-				  			_this.clientWidth = parseInt(this.$wrapperEl.css('width'));
-				  			_this.navWidth = 0;
-				  			for (var i = 0; i < this.slides.length; i++) {
-				  				_this.navWidth += parseInt(this.slides[i].offsetWidth)
-				  			}
-				  			_this.maxLeft=_this.navWidth-_this.clientWidth;
-				  		}
-				  	},
-				});
-			},
-			//导航栏对应的page页面
-			page: function () {
-				var _this=this;
-				this.pageSwiper = new Swiper(this.$refs.page, {
-				  	watchSlidesProgress: true,
-				  	resistanceRatio: 0,
-				  	observer:true,
-      				observeParents:true,
-				  	on: {
-				  		transitionStart: function () {
-				  			var index=this.activeIndex;
-				  			_this.tabIndex=index;
-				  			_this.navSlideWidth=_this.navSwiper.slides[index].offsetWidth; 
-				  			_this.slideMove(index,_this.navSlideWidth);
-				  		}
-				  			
-				  	}
-				});
-			},
 			//获取index数据
 			getPageIndex: function (product_index,callback) {
 				var _this=this;
@@ -325,7 +283,11 @@
 					}
 					_this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
 					_this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);
-					_this.product_index[product_index]=_this.products[product_index]||true;
+					// _this.product_index[product_index]=_this.products[product_index]||true;
+					console.log('=====================');
+					console.log(_this.products);
+					console.log('=====================');	
+                  	
 					_this.loading=false;
 					callback&&callback();
 				})
@@ -384,17 +346,66 @@
 				  	console.log(error);
 				});	*/	
 			},
+			//导航栏
+			tab: function () {
+				var _this=this;
+				//this.navSwiper=new Swiper(this.$refs.tabNav, {
+				this.navSwiper=new Swiper('.tab-nav', {
+					slidesPerView: 'auto',
+					freeMode: true,
+					observer:true,
+      				observeParents:true,
+      				// resistanceRatio : 0,
+					on: {
+						init: function() {
+							//设置transition-duration值
+							this.setTransition(_this.tSpeed);
+							//Nav的可视宽度
+				  			_this.clientWidth = parseInt(this.$wrapperEl.css('width'));
+				  			_this.navWidth = 0;
+				  			for (var i = 0; i < this.slides.length; i++) {
+				  				_this.navWidth += parseInt(this.slides[i].offsetWidth)
+				  			}
+				  			_this.maxLeft=_this.navWidth-_this.clientWidth;
+				  		}
+				  	},
+				});
+			},
+			//导航栏对应的page页面
+			page: function () {
+				var _this=this;
+				this.pageSwiper = new Swiper(this.$refs.page, {
+				  	watchSlidesProgress: true,
+				  	resistanceRatio: 0,
+				  	observer:true,
+      				observeParents:true,
+				  	on: {
+				  		transitionStart: function () {
+				  			var index=this.activeIndex;
+				  			_this.tabIndex=index;
+				  			_this.navSlideWidth=_this.navSwiper.slides[index].offsetWidth; 
+				  			_this.slideMove(index,_this.navSlideWidth);
+				  		}
+				  	}
+				});
+			},
 			//点击导航	
 			tabClick: function(index,event) {
-				this.tabIndex=index;
+				console.log(1111);
+				/*this.tabIndex=index;
 				//对应的内容显示
-				this.pageSwiper.slideTo(index, 0);
+				this.pageSwiper.slideTo(index, 0);*/
+				this.pageShow(index);
 				//请求对应种类的数据,没有加载过的话加载数据,已经加载过不再加载。
 				if (!this.products[index]) {
 					this.getPageIndex(index);		
 				}
-					
-				
+			},
+			//对应内容显示
+			pageShow: function (index) {
+				this.tabIndex=index;
+				//对应的内容显示
+				this.pageSwiper.slideTo(index, 0);
 			},
 			//导航移动
 			slideMove: function (index,navSlideWidth) {
@@ -408,7 +419,7 @@
 					left=this.maxLeft;
 				} 
 				navSwiper.setTranslate(-left);
-				this.tabClick(index);
+				this.pageShow(index);
 			},
 	        //分类切换显示状态
 	        showClassify: function () {
@@ -502,6 +513,11 @@
 		overflow-y: auto;
 		.slidepage{
 			height: auto;
+			&:nth-of-type(1){
+				.slidescroll{
+					padding-bottom: 53px;
+				}
+			}
 		}
 	}
 	.scroll {
@@ -509,6 +525,7 @@
 	}
 	.slidescroll {
 		height:auto;
+		// padding-bottom: 53px; 
 	}
 	/*票*/
 	.ticket-item{

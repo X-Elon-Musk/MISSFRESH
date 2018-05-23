@@ -2,12 +2,10 @@
     <div class="swiper-container scroll pull-refresh">
         <div class="swiper-wrapper">
           	<div class="swiper-slide slidescroll list-group" ref="listGroup">
-				
 				<!-- 插槽 -->
 				<slot></slot>
 				<div class="swiper-scrollbar"></div>
-
-      		</div>
+			</div>
         </div>
 	</div>
 </template>
@@ -27,7 +25,7 @@
 				translate: 0
 			}
 		},
-		props: ['tabIndex'],
+		props: ['tabIndex', 'pullEnd'],
 		mounted (){
 			this.$nextTick(() => {
 				if (!this.pullRefresh) this.refresh();
@@ -66,9 +64,13 @@
 				if (this.translate<this.startPosition) {
 	                setTimeout(()=>{
 	                	//发送ajax请求
-	                	this.$emit('getData');
+	                	if(!this.pullEnd) {
+	                		this.$emit('getData');
+	                		// this.pullRefresh.update(); // 重新计算高度;
+	                	}
 	                	// 重新计算高度;
 	                  	if (isArray(this.pullRefresh)) {
+	                  		// console.log(1111);
 	                  		// this.pullRefresh[this.tabIndex].update(); 		
 	                  		this.pullRefresh.forEach((item,index)=>{
 	                  			this.pullRefresh[index].update();
