@@ -1,0 +1,4 @@
+- update price_down set price = price+rand()*100;
+- insert into price_down (product_id,color,name,price,show_type) select concat('1',product_id),color,name,price,show_type from price_down;
+- delete from banner where product_index>244;
+- update banner set product_index = replace(product_index,'111','5');
