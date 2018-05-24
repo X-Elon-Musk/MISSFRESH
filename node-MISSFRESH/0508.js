@@ -122,7 +122,7 @@ params:{image: "https://j-image.missfresh.cn/img_20180403101557574.jpg",…}
 	url:"https://as-vip.missfresh.cn/ug/new-enjoy.html?station_code=&address_code=110108"
 
 
-//单个产品
+//首页--->单个产品
 {image: "http://missfresh-fms.ufile.ucloud.cn/9a4caa8c7a7c4caf938fd24997757a24.jpg",…}
 buy_permission:0
 cart_btn_name:"加入购物车"
@@ -146,7 +146,7 @@ vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 5990},�
 vip_product:0
 
 
-//单个产品--->product_tags
+//首页--->单个产品--->product_tags
 product_tags:[{name: "红包不可用",…}]
 	0:{name: "红包不可用",…}
 	color:16097217
@@ -154,7 +154,7 @@ product_tags:[{name: "红包不可用",…}]
 	name:"红包不可用"
 	type:"property"
 
-//单个产品--->vip_price_pro
+//首页--->单个产品--->vip_price_pro
 vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 1690},…}
 	price_down:{name: "", show_type: 1, color: 16730257, price: 1290}
 		color:16730257
@@ -241,3 +241,70 @@ status:0
 	province:"北京市"
 	title:"北京交通大学"
 	type:0
+
+
+
+// 详情页
+{country: "海南",…}
+	brand:""
+	buy_permission:0
+	buyerDescription:"专注国内外水果9年，去新疆，海南，台湾实地考察，只选当季的新鲜水果给你。"
+	buyerName:"青松"
+	buyerUrl:"https://image.missfresh.cn/34d218758d714b95a0b0e75c5b1abba4.png"
+	can_use_voucher:1
+	cart_btn_name:"加入购物车"
+	cart_image:"https://image.missfresh.cn/97042f5ae1274a3aa21046bd6dd6f4d6.jpg"
+	country:"海南"
+	delivery_mode:1
+	delivery_mode_name:"2小时达"
+	delivery_style:"2小时达"
+	description:["阳光充足，水果甜度足，是荔枝较早成熟的地方", "妃子笑果皮偏绿色，甜中带点微酸口感，冰镇后更加清甜爽口", "皮薄核小肉多，一剥开就能看见晶莹的荔枝果肉，咬一口便能尝到多汁口感"]
+	enable_mrd:0
+	exchange_limit_day:0
+	exchange_times_per_day:0
+	exchange_times_per_period:0
+	free_shipping:0
+	group_info:{event_end_time: "", deliver_end_time: "", group_number_dec: "", owner_discount_price: 0,…}
+	id:2611
+	image:"https://image.missfresh.cn/9f5dead3717541e9a717f9edd76dd7bd.jpg"
+	images:["https://image.missfresh.cn/c87921e030654e63830f88801d323750.jpg"]
+	instruction:[,…]
+	integral_price:0
+	integral_product_type:0
+	is_exchange_product:0
+	is_present:0
+	is_vip:1
+	market_price:2990
+	material:""
+	member_level:1
+	name:"妃子笑荔枝500g*1盒"
+	nationwide:0
+	pack:"盒装"
+	presale_type:0
+	price:1990
+	productFingerprints:[{stationRegion: "MRYXBJN",…}, {securityTagName: "100%品控检测",…}]
+	product_chrome:1
+	product_created_at:"2016-05-11 20:05:06"
+	product_need_level:0
+	product_share_info_v2:{prodcut_share_bg_login_text: "登陆方可享受奖励,立即登陆", product_share_need_price: 1,…}
+	promote_tag:"https://j-image.missfresh.cn/img_20170605114117571.png"
+	promote_tag_new:""
+	promotion:["实付满39包邮"]
+	qa_info:[{stationRegion: "MRYXBJN",…}]
+	quantity:1
+	sales_volume:"268656"
+	seckill_limit:0
+	securityText:"经14项感官排查64项农残专检，100%可溯，点标签查看。"
+	securityTitle:"安心指纹"
+	share_info:{wx_share_type: 0, image_url: "https://image.missfresh.cn/97042f5ae1274a3aa21046bd6dd6f4d6.jpg",…}
+	sku:"p-HBfzxlz-1j"
+	stock:368
+	storage_code:"MRYXSZ,MRYXSH,"
+	storage_method:"冷藏"
+	storage_time:"到货即可食用"
+	subtitle:"哈哈哈 甜到拥有贵妃同款笑容"
+	unit:"1盒"
+	vip_card:{is_opened: 0, back_cash_text: "支付8元开会员↵购买本商品更返#_$0.49#_$元",…}
+	vip_price:990
+	vip_price_pro:{price_up: {show_type: 2, color: 9868950, price: 1990, name: ""},…}
+	weight:"500g*1盒"
