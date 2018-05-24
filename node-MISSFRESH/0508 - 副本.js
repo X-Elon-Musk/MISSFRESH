@@ -424,8 +424,7 @@ share_info:{wx_share_type: 0, image_url: "https://image.missfresh.cn/97042f5ae12
 	friend_share_type:1
 	friend_url:"https://as-vip.missfresh.cn/s/pd?a=p-HBfzxlz-1j&b=&t=867&v=&u=0"
 	image_url:"https://image.missfresh.cn/97042f5ae1274a3aa21046bd6dd6f4d6.jpg"
-	qqFriendShareType:0
-	qqFriendUrl:"https://s.missfresh.cn/s/2611/867"
+	qqFriendShareType:0qqFriendUrl:"https://s.missfresh.cn/s/2611/867"
 	sina_url:"https://s.missfresh.cn/s/2611/867"
 	title:"快来看好商品！「妃子笑荔枝500g*1盒」"
 	wx_share_type:0
