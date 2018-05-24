@@ -8,12 +8,12 @@ class Buyer extends MissMysql{
 		this.getBuyer=this.getBuyer.bind(this);
 	}
 	async getBuyer(product_index){
-		var essentialInfor=await this.missMysql('buyer', {
-			image: 'image'
+		let result=await this.missMysql('buyer', {
+			buyerUrl: 'buyerUrl'
 		},{
-			product_index: product_index
+			buyer_id: product_index
 		});
-    	return essentialInfor;
+    	return result;
 	}
 }
 

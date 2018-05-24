@@ -11,7 +11,7 @@ export default class MissMysql{
 		this.imageRequirment=this.imageRequirment.bind(this);
 		this.whereRequirement=this.whereRequirement.bind(this);
 		this.orderRequirement=this.orderRequirement.bind(this);
-		this.priceChange=this.priceChange.bind(this);
+		// this.priceChange=this.priceChange.bind(this);
 	}
 	//请求数据通用sql
 	async missMysql(datasheet='', imageRequirment={}, whereRequirement={}, orderRequirement={}){
@@ -56,9 +56,15 @@ export default class MissMysql{
 			return '';
 		}
 	}
-	//价格处理
+	/*//价格处理
 	async priceChange(price) {
 	  	return price.slice(0,price.length-2)+'.'+price.slice(price.length-2,price.length);
 	}
+	//添加属性
+	async addAttributes(object, attribute){
+        Object.keys(attribute).forEach(key => {
+            object[key]=attribute[key];
+        })
+    }*/
 }
 
