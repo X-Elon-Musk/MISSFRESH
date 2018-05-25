@@ -7,17 +7,9 @@
     	<div class="product-img-container">
     		<carousel :banner="product.images" :link="false"></carousel>
     	</div>
-    	<!-- <div class="padding_common product-name">2018升级版摩奇桃汁首发，出游全靠它</div> -->
     	<div class="padding_common product-name">{{product.subtitle}}</div>
-    	<!-- <p class="padding_common sub-title">【4盒】升级版摩奇桃汁饮料250ml*4</p> -->
     	<p class="padding_common sub-title">{{product.name}}</p>
-    	<!-- <div class="padding_common price-original">
-    		<price :price="13.9"></price>
-    	</div> -->
     	<div class="padding_common clearfix price-sales">
-    		<!-- <span class="price-vip">
-    			优享会员价<price :price="13.9"></price>
-    		</span> -->
     		<price :price="price_down" class="price-down"></price>
     		<price :price="price_up" class="price-up"></price>
     		<span class="f_r sales-volume">
@@ -32,7 +24,7 @@
     	<ul class="vip-share">
     		<li class="vip-info">
     			<div class="clearfix vip-share-item">
-    				<span class="f_l item-card"></span>
+    				<span class="f_l item-card" :style="{backgroundImage:`url(${vip_card.icon_img})`}"></span>
     				<div class="f_l item-text">
     					<span>支付8元开会员</span>
     					<span>购买本商品更省<i>0.4</i>元+返<i>0.67</i>元</span>
@@ -58,36 +50,33 @@
     			<router-link :to="{path: 'safeDetection'}" tag='span' class="f_r security-tit-see">
     				点击查看 >
     			</router-link>	
-    			<!-- <span class="f_r security-tit-see">点击查看 ></span> -->
     		</div>
     		<p class="security-txt">{{product.securityText}}</p>
     		<div class="scroll-box">
-    			<icons :icons="icons"></icons>
+    			<!-- <icons :icons="icons"></icons> -->
+    			<ul class="icons">
+			    	<li class="icon" v-for="(item,index) in product.productFingerprints" :key="index">
+						<img :src="item.securityTagUrl">
+						<span>{{item.securityTagName}}</span>
+					</li>
+				</ul> 
     		</div>
     	</div>
     	<div class="buyer-said">
     		<div class="buyer-area-person">
     			<div class="clearfix flexbox">
     				<div class="f_l buyer-area-person-icon">
-    					<!-- <img src="~src/images/person-icon.png" alt=""> -->
     					<img :src="product.buyerUrl" alt="">
     				</div>
-    				<!-- <span class="f_l buyer-name">摩奇复活核心团队</span> -->
     				<span class="f_l buyer-name">{{product.buyerName}}</span>
     				<i class="f_r buyer-area-person-tip"></i>
     			</div>
-    			<!-- <div class="buyer-person-des">
-    				由每日优鲜商品中心VP刘啸峰发起，得到摩奇董事长姜建民，摩奇饮料工艺师张昱的大力支持。
-    			</div> -->
     			<div class="buyer-person-des">
     				{{product.buyerDescription}}
     			</div>
     			<div class="buyer-description">
     				<div class="marks-left"></div>
     				<ul class="commodity-details">
-    					<!-- <li>2018升级版摩奇桃汁，桃汁UP，不添加色素，不添加防腐剂，不添加阿斯巴甜。</li>
-    					<li>摩奇复活核心团队于2018年1月25日联合复活国民饮料摩奇，一起守住老北京的味道。</li>
-    					<li>摩奇生于1984年，兴于1992年，于2018年1月重现人们视野中。80 90年的老北京四合院里，孩子们最爱的三大饮品就是老酸奶、北冰洋、摩奇了。</li> -->
     					<li v-for="(item, index) in product.description" :key="index">{{item.text}}</li>
     				</ul>
     			</div>
@@ -105,22 +94,6 @@
     	</div>
     	<ul class="padding_common instruction-list-container">
     		<li v-for="(item, index) in product.instruction" :key="index"><img :src="item.image" alt=""></li>
-    		<!-- <li><img src="~src/images/productdetail/1.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/2.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/3.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/4.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/5.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/6.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/7.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/8.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/9.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/10.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/11.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/12.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/13.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/14.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/15.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/16.jpg" alt=""></li> -->
     	</ul>
     	<div class="weui-mask" v-show="share">
     		<div class="mask-bg" @click="shareAction(false)"></div>
@@ -180,12 +153,14 @@
 				price_down: 0,
 				price_up: 0,
 				//分享信息
-				share_info: {}
+				share_info: {},
+				//会员卡
+				vip_card: {}
 			}
 		},
 		created(){
             // this.$route.query.geohash;
-            console.log(this.$route.query.product_id);
+            // console.log(this.$route.query.product_id);
             this.product_id=this.$route.query.product_id;
             this.product_index=this.$route.query.product_index;
         },
@@ -209,8 +184,8 @@
 						_this.product=data;	
 						_this.price_down=data.vip_price_pro.price_down.price;	
 						_this.price_up=data.vip_price_pro.price_up.price;
-						_this.share_info=data.share_info;
-						// console.log(_this.price_down,_this.price_up);	
+						_this.share_info=data.share_info;	
+						_this.vip_card=data.vip_card;	
 					}
 				})
 				.catch(function (error) {
@@ -289,10 +264,6 @@
 		.sub-title{
 			.font(1.2em);
 		}
-		/* .price-original{
-			padding-top: 1em;
-			.font(2.2em,0.8em,@color_main);
-		} */
 		.price-sales{
 			.font(1.4em,0.8em,@color_assist);
 			padding-bottom: 1em;
