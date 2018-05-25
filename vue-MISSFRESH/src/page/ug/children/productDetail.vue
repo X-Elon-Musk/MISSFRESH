@@ -2,7 +2,7 @@
     <div class="product-detail">
     	<div class="clearfix section-header">
     		<span class="header-text">商品详情</span>
-    		<strong class="share-icon" @click="shareAction(true)"></strong>
+    		<strong class="share-icon" @click="shareAction(true)"  :style="{backgroundImage:`url(${product_share_info_v2.show_share_img})`}"></strong>
     	</div>
     	<div class="product-img-container">
     		<carousel :banner="product.images" :link="false"></carousel>
@@ -13,7 +13,7 @@
     		<price :price="price_down" class="price-down"></price>
     		<price :price="price_up" class="price-up"></price>
     		<span class="f_r sales-volume">
-    			已售<i>9809</i>份
+    			已售<i>{{product.sales_volume}}</i>份
     		</span>
     	</div>
     	<ul class="padding_common clearfix product-attrs">
@@ -129,7 +129,7 @@
 	export default{
 		data(){
 			return {
-				icons: [
+				/*icons: [
 					{
 						src: require('images/icon/security_1_0.png'),
 						text: '优鲜安心检测'
@@ -138,7 +138,7 @@
 						src: require('images/icon/security_2_0.png'),
 						text: '100%品控检测'
 					}
-				],
+				],*/
 				share: false,
 				dialog: false,
 				doubt: false,
@@ -146,20 +146,20 @@
 				product_id: 0,
 				//商品分类
 				product_index: 0,
-				// //banner
-				// banner: [],
 				//商品
 				product: {},
+				//商品现价
 				price_down: 0,
+				//商品原价
 				price_up: 0,
 				//分享信息
 				share_info: {},
 				//会员卡
-				vip_card: {}
+				vip_card: {},
+				product_share_info_v2: {}
 			}
 		},
 		created(){
-            // this.$route.query.geohash;
             // console.log(this.$route.query.product_id);
             this.product_id=this.$route.query.product_id;
             this.product_index=this.$route.query.product_index;
@@ -186,6 +186,7 @@
 						_this.price_up=data.vip_price_pro.price_up.price;
 						_this.share_info=data.share_info;	
 						_this.vip_card=data.vip_card;	
+						_this.product_share_info_v2=data.product_share_info_v2;	
 					}
 				})
 				.catch(function (error) {
