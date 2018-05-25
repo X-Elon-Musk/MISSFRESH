@@ -13,10 +13,23 @@
 			<div class="swiper-slide">
 				<img src="~images/carousel/3.jpg">
 			</div> -->
+			
+			<template v-if="link">
+				<router-link  v-for="(item,index) in banner" :key="index" :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}" tag="div" class="swiper-slide">
+						<img :src="item.image" class="banner-img">
+				</router-link>
+			</template>
+			<template v-else>
+				<div class="swiper-slide product-detail-img" v-for="(item,index) in banner" :key="index">
+					<img :src="item" class="banner-img">
+				</div>
+			</template>
 
-			<router-link  v-for="(item,index) in banner" :key="index" :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}" tag="div" class="swiper-slide">
+			<!-- <router-link  v-for="(item,index) in banner" :key="index" :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}" tag="div" class="swiper-slide">
 					<img :src="item.image" class="banner-img">
-			</router-link>
+			</router-link> -->
+
+
 		</div>
 		<div class="swiper-pagination"></div>
 	</div>
@@ -30,7 +43,7 @@
 				
 			}
 		},
-		props: ['banner'],
+		props: ['banner', 'link'],
 		// created(){
 		// 	console.log(this.banner);
 		// },
@@ -39,7 +52,7 @@
 			var _this=this;
 			this.$nextTick(()=>{
 				var carousel = new Swiper('.banner', {
-					loop: true,
+					// loop: true,
 					observer:true,
       				observeParents:true,
 					pagination: {
@@ -60,10 +73,16 @@
 			width:100%;
 			display:block;
 		}
-		a{
-			display: inline-block;
-			width: 100%;
-			height: auto;	
+		// a{
+		// 	display: inline-block;
+		// 	width: 100%;
+		// 	height: auto;	
+		// }
+		.product-detail-img{
+			img{
+				width: 75%;
+				margin: 0 auto;
+			}
 		}
 		.swiper-pagination {
 			left:auto;

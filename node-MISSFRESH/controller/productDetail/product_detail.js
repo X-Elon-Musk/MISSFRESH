@@ -10,6 +10,8 @@ import ProductShareInfoV2 from './productshareinfov2.js'
 import Initial from './initial.js'
 import ShareInfo from './share_info.js'
 import Promotion from './promotion.js'
+import VipPricePro from '../index/vip_price_pro.js'
+import Description from './description.js'
 
 
 export default class ProductDetail{
@@ -30,7 +32,9 @@ export default class ProductDetail{
         productshareinfov2=await ProductShareInfoV2.getProductShareInfoV2(product_id),
         initial=await Initial.getInitial(product_id),
         shareinfo=await ShareInfo.getShareInfo(product_id),
-        promotion=await Promotion.getPromotion(product_id);
+        promotion=await Promotion.getPromotion(product_id),
+        vippricepro=await VipPricePro.getVipPricePro(product_id),
+        description=await Description.getDescription(product_id);
   
         productdetail={
             /*'banner_bg_img': '',
@@ -61,7 +65,7 @@ export default class ProductDetail{
             'delivery_mode': 1,
             'delivery_mode_name': "2小时达",
             'delivery_style': "2小时达",
-            'description': [],
+            'description': description,
             'enable_mrd': 0,
             'exchange_limit_day': 0,
             'exchange_times_per_day': 0,
@@ -114,14 +118,15 @@ export default class ProductDetail{
             'weight': "500g*1盒"-----------
             'unit': "1盒"-------------*/
             // 'vip_card': {is_opened: 0, back_cash_text: "支付8元开会员↵购买本商品更返#_$0.49#_$元",…}------------
-            'vip_card': vipcard[0]
-            // 'vip_price': 990
-            // 'vip_price_pro': {price_up: {show_type: 2, color: 9868950, price: 1990, name: ""},…}
+            'vip_card': vipcard[0],
+            // 'vip_price': 990--------------
+            // 'vip_price_pro': {price_up: {show_type: 2, color: 9868950, price: 1990, name: ""},…}----------
+            'vip_price_pro': vippricepro
             
         }   
         await MissMethods.addAttributes(productdetail, buyer[0]);
-        await MissMethods.addAttributes(productdetail, initial[0], ['name', 'subtitle', 'stock', 'sku', 'promote_tag', 'storage_code', 'storage_method', 'storage_time', 'weight', 'unit']);
-
+        await MissMethods.addAttributes(productdetail, initial[0], ['name', 'subtitle', 'stock', 'sku', 'promote_tag', 'storage_code', 'storage_method', 'storage_time', 'weight', 'unit', 'vip_price']);
+        productdetail.vip_price=await MissMethods.priceChange(productdetail.vip_price.toString());
         res.type('application/json');
         res.jsonp(productdetail);
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="product">
-    	<router-link :to="{path: '/ug/productDetail',query:{id: product.product_id,index: product.product_index}}" tag="div" class="clearfix product-link">
+    	<router-link :to="{path: '/ug/productDetail',query:{product_id: product.product_id,product_index: product.product_index}}" tag="div" class="clearfix product-link">
 			<div class="f_l product-item-img">
 				<!-- <span v-bind:class="{hot_0:product.hot==0,hot_1:product.hot==1,hot_2:product.hot==2}"></span> -->
 				<img src="" v-lazy="product.image" alt="" class="product-img">
@@ -14,9 +14,9 @@
 					<li v-for="(item,index) in product.product_tags" :key="index">{{item.name}}</li>
 				</ul>
 				<p class="price">
-					<price :price="priceDown.price" class="price-now"></price>
+					<price :price="priceDown.price" class="price-now price-down"></price>
 					<!-- 商城价 -->
-					<price :price="priceUp.price" class="price-original"></price>
+					<price :price="priceUp.price" class="price-original price-up"></price>
 				</p>
 				<p class="vip">
 					<!-- 会员价 -->
@@ -212,5 +212,12 @@
 				}
 			}
 		}
+	}
+	.price-down{
+		color: @color_main;
+	}
+	.price-up{
+		text-decoration: line-through;
+		color: @color_gray;
 	}
 </style>

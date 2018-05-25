@@ -5,25 +5,29 @@
     		<strong class="share-icon" @click="shareAction(true)"></strong>
     	</div>
     	<div class="product-img-container">
-    		<carousel></carousel>
+    		<carousel :banner="product.images" :link="false"></carousel>
     	</div>
-    	<div class="padding_common product-name">2018升级版摩奇桃汁首发，出游全靠它</div>
-    	<p class="padding_common sub-title">【4盒】升级版摩奇桃汁饮料250ml*4</p>
-    	<div class="padding_common price-original">
+    	<!-- <div class="padding_common product-name">2018升级版摩奇桃汁首发，出游全靠它</div> -->
+    	<div class="padding_common product-name">{{product.subtitle}}</div>
+    	<!-- <p class="padding_common sub-title">【4盒】升级版摩奇桃汁饮料250ml*4</p> -->
+    	<p class="padding_common sub-title">{{product.name}}</p>
+    	<!-- <div class="padding_common price-original">
     		<price :price="13.9"></price>
-    	</div>
+    	</div> -->
     	<div class="padding_common clearfix price-sales">
-    		<span class="price-vip">
+    		<!-- <span class="price-vip">
     			优享会员价<price :price="13.9"></price>
-    		</span>
+    		</span> -->
+    		<price :price="price_down" class="price-down"></price>
+    		<price :price="price_up" class="price-up"></price>
     		<span class="f_r sales-volume">
     			已售<i>9809</i>份
     		</span>
     	</div>
     	<ul class="padding_common clearfix product-attrs">
-    		<li class="f_l">产地<span>北京</span></li>
-    		<li class="f_l">次日达</li>
-    		<li class="f_l">实付满<span>69</span>包邮</li>
+    		<li class="f_l">产地<span>{{product.country}}</span></li>
+    		<li class="f_l">{{product.delivery_style}}</li>
+    		<li class="f_l" v-for="(item, index) in product.promotion" :key="index">{{item}}</li>
     	</ul>
     	<ul class="vip-share">
     		<li class="vip-info">
@@ -50,13 +54,13 @@
     	</ul>
     	<div class="padding_common product-safe-area">
     		<div class="clearfix security-tit">
-    			<span class="security-tit-title">安心指纹</span>
+    			<span class="security-tit-title">{{product.securityTitle}}</span>
     			<router-link :to="{path: 'safeDetection'}" tag='span' class="f_r security-tit-see">
     				点击查看 >
     			</router-link>	
     			<!-- <span class="f_r security-tit-see">点击查看 ></span> -->
     		</div>
-    		<p class="security-txt">经14项感官排查64项农残专检，100%可溯，点标签查看。</p>
+    		<p class="security-txt">{{product.securityText}}</p>
     		<div class="scroll-box">
     			<icons :icons="icons"></icons>
     		</div>
@@ -65,20 +69,26 @@
     		<div class="buyer-area-person">
     			<div class="clearfix flexbox">
     				<div class="f_l buyer-area-person-icon">
-    					<img src="~src/images/person-icon.png" alt="">
+    					<!-- <img src="~src/images/person-icon.png" alt=""> -->
+    					<img :src="product.buyerUrl" alt="">
     				</div>
-    				<span class="f_l buyer-name">摩奇复活核心团队</span>
+    				<!-- <span class="f_l buyer-name">摩奇复活核心团队</span> -->
+    				<span class="f_l buyer-name">{{product.buyerName}}</span>
     				<i class="f_r buyer-area-person-tip"></i>
     			</div>
-    			<div class="buyer-person-des">
+    			<!-- <div class="buyer-person-des">
     				由每日优鲜商品中心VP刘啸峰发起，得到摩奇董事长姜建民，摩奇饮料工艺师张昱的大力支持。
+    			</div> -->
+    			<div class="buyer-person-des">
+    				{{product.buyerDescription}}
     			</div>
     			<div class="buyer-description">
     				<div class="marks-left"></div>
     				<ul class="commodity-details">
-    					<li>2018升级版摩奇桃汁，桃汁UP，不添加色素，不添加防腐剂，不添加阿斯巴甜。</li>
+    					<!-- <li>2018升级版摩奇桃汁，桃汁UP，不添加色素，不添加防腐剂，不添加阿斯巴甜。</li>
     					<li>摩奇复活核心团队于2018年1月25日联合复活国民饮料摩奇，一起守住老北京的味道。</li>
-    					<li>摩奇生于1984年，兴于1992年，于2018年1月重现人们视野中。80 90年的老北京四合院里，孩子们最爱的三大饮品就是老酸奶、北冰洋、摩奇了。</li>
+    					<li>摩奇生于1984年，兴于1992年，于2018年1月重现人们视野中。80 90年的老北京四合院里，孩子们最爱的三大饮品就是老酸奶、北冰洋、摩奇了。</li> -->
+    					<li v-for="(item, index) in product.description" :key="index">{{item.text}}</li>
     				</ul>
     			</div>
     		</div>
@@ -86,14 +96,16 @@
     	<div class="padding_common graphic-list-container">
     		<h3 class="image-text">商品详情</h3>
     		<ul class="list-container">
-    			<li class="list-item">规格: <span>6</span><i>盒</i></li>
-    			<li class="list-item">重量: <span>250</span><span>ml</span>*<span>1</span><i>盒</i></li>
-    			<li class="list-item">包装: 盒装</li>
-    			<li class="list-item">保质期: 330天</li>
-    			<li class="list-item">贮存方法: 室温</li></ul>
+    			<li class="list-item">规格: {{product.unit}}</li>
+    			<li class="list-item">重量: {{product.weight}}</li>
+    			<li class="list-item">包装: {{product.pack}}</li>
+    			<li class="list-item">保质期: {{product.storage_time}}</li>
+    			<li class="list-item">贮存方法: {{product.storage_method}}</li>
+    		</ul>
     	</div>
     	<ul class="padding_common instruction-list-container">
-    		<li><img src="~src/images/productdetail/1.jpg" alt=""></li>
+    		<li v-for="(item, index) in product.instruction" :key="index"><img :src="item.image" alt=""></li>
+    		<!-- <li><img src="~src/images/productdetail/1.jpg" alt=""></li>
     		<li><img src="~src/images/productdetail/2.jpg" alt=""></li>
     		<li><img src="~src/images/productdetail/3.jpg" alt=""></li>
     		<li><img src="~src/images/productdetail/4.jpg" alt=""></li>
@@ -108,7 +120,7 @@
     		<li><img src="~src/images/productdetail/13.jpg" alt=""></li>
     		<li><img src="~src/images/productdetail/14.jpg" alt=""></li>
     		<li><img src="~src/images/productdetail/15.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/16.jpg" alt=""></li>
+    		<li><img src="~src/images/productdetail/16.jpg" alt=""></li> -->
     	</ul>
     	<div class="weui-mask" v-show="share">
     		<div class="mask-bg" @click="shareAction(false)"></div>
@@ -123,7 +135,7 @@
     	<div class="weui-mask" v-show="dialog">
     		<div class="mask-bg" @click="dialogAction(false)"></div>
     		<div class="weui-mask-dialog">
-    			<div class="share-name">快来看好商品！<span>「千禧圣女果500g*1盒」</span></div>
+    			<div class="share-name">{{share_info.title}}<span>「{{product.name}}」</span></div>
     			<div class="share-link">长按文字及链接复制 分享给好友</div>
     			<div class="share-cancle" @click="dialogAction(false)">取消</div>
     		</div>
@@ -156,10 +168,55 @@
 				],
 				share: false,
 				dialog: false,
-				doubt: false
+				doubt: false,
+				//商品id
+				product_id: 0,
+				//商品分类
+				product_index: 0,
+				// //banner
+				// banner: [],
+				//商品
+				product: {},
+				price_down: 0,
+				price_up: 0,
+				//分享信息
+				share_info: {}
 			}
 		},
+		created(){
+            // this.$route.query.geohash;
+            console.log(this.$route.query.product_id);
+            this.product_id=this.$route.query.product_id;
+            this.product_index=this.$route.query.product_index;
+        },
+        mounted(){
+            this.getDataProductDetail();
+        },
 		methods: {
+			getDataProductDetail(){
+				let _this=this;
+				this.axios.get('http://localhost:3390/page/productdetail',{
+					params:{
+						product_id: _this.product_id,
+						product_index: _this.product_index
+					}
+				})
+				.then(function (response) {
+					if (response.status==200) {
+						// console.log(response.data);	
+						let data=response.data;
+						// _this.banner=(_this.banner||[]).concat(data.images);	
+						_this.product=data;	
+						_this.price_down=data.vip_price_pro.price_down.price;	
+						_this.price_up=data.vip_price_pro.price_up.price;
+						_this.share_info=data.share_info;
+						// console.log(_this.price_down,_this.price_up);	
+					}
+				})
+				.catch(function (error) {
+				  	console.log(error);
+				});	
+			},
 			shareAction(state){
 				this.share=state;
 			},
@@ -232,13 +289,14 @@
 		.sub-title{
 			.font(1.2em);
 		}
-		.price-original{
+		/* .price-original{
 			padding-top: 1em;
 			.font(2.2em,0.8em,@color_main);
-		}
+		} */
 		.price-sales{
 			.font(1.4em,0.8em,@color_assist);
 			padding-bottom: 1em;
+			padding-top: 1em;
 			.price-vip{
 				
 			}

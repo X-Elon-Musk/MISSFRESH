@@ -14,7 +14,7 @@ class MissMethods extends MissMysql{
 	//添加属性
 	async addAttributes(object, attribute, parameter=[]){
         Object.keys(attribute).forEach(key => {
-			if (parameter) {
+			if (parameter&&parameter.length!==0) {
         		if (parameter.indexOf(key)>=0) object[key]=attribute[key];	
         	} else{
         		object[key]=attribute[key];

@@ -3,7 +3,7 @@
         <pullRefresh :tabIndex="tabIndex" @getData="getData" :pullEnd="pullEnd">
             <gif></gif>
             <!-- 内容部分 -->
-            <carousel :banner="banner"></carousel>
+            <carousel :banner="banner" :link="true"></carousel>
             <!-- <guarantee :brands="brands"></guarantee>
             <card :categoryareas="categoryareas"></card> -->
             <slot></slot>

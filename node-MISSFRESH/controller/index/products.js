@@ -2,7 +2,10 @@
 
 import MissMysql from '../../prototype/missmysql.js'
 import MissMethods from '../../prototype/missMethods.js'
+import VipPricePro from './vip_price_pro.js'
 let dirname='http://localhost:3390/public/images/';
+
+
 
 class Products extends MissMysql{
 	constructor(){
@@ -22,23 +25,14 @@ class Products extends MissMysql{
 	  	await Promise.all(result.map(async (item)=> {
 	  		//没有product_tag，设置为空
 	  		item.promote_tag=item.promote_tag===dirname?'':item.promote_tag;
-	  		let price_up=await this.missMysql('price_up', {},{
+	  		let product_tags=await this.missMysql('product_tags', {},{
 	  			product_id: item.product_id
 	  		});
-            let price_down=await this.missMysql('price_down', {},{
-	  			product_id: item.product_id
-	  		});
-            let product_tags=await this.missMysql('product_tags', {},{
-	  			product_id: item.product_id
-	  		});
-	  		item.vip_price_pro={};
-            item.product_tags=[];
-            item.vip_price_pro.price_up=price_up[0];
-            // console.log(this);
-            item.vip_price_pro.price_up.price=await MissMethods.priceChange(price_up[0].price);
-            item.vip_price_pro.price_down=price_down[0];
+	  		item.product_tags=[];
             item.product_tags=item.product_tags.concat(product_tags);
-            item.vip_price_pro.price_down.price=await MissMethods.priceChange(price_down[0].price);
+            let vippricepro=await VipPricePro.getVipPricePro(item.product_id);
+            item.vip_price_pro={};
+            item.vip_price_pro=vippricepro;
 	  	}));
     	return result;
 	}

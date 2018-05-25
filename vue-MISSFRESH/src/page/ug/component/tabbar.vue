@@ -239,14 +239,14 @@
 		},
 		mounted (){
 			// this.$nextTick(() => {
-			this.getPageIndex(0, () => {
+			this.getDataPageIndex(0, () => {
 				this.$nextTick(() => {
 					if (!this.navSwiper) this.tab();
 					if (!this.pageSwiper) this.page();
 				})
 			});
 			// })
-			this.getPosition();
+			this.getDataPosition();
 		},
 		computed: {
 	    	...mapState([
@@ -266,7 +266,7 @@
                 'SET_POSITION'
             ]),
 			//获取index数据
-			getPageIndex: function (product_index,callback) {
+			getDataPageIndex(product_index,callback) {
 				var _this=this;
 				this.loading=true;
 				this.axios.get('http://localhost:3390/page/index',{
@@ -296,7 +296,7 @@
 				});
 			},
 			//获取当前地址
-			getPosition: function (callback) {
+			getDataPosition(callback) {
 				let _this=this;
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
@@ -347,7 +347,7 @@
 				});	*/	
 			},
 			//导航栏
-			tab: function () {
+			tab() {
 				var _this=this;
 				//this.navSwiper=new Swiper(this.$refs.tabNav, {
 				this.navSwiper=new Swiper('.tab-nav', {
@@ -372,7 +372,7 @@
 				});
 			},
 			//导航栏对应的page页面
-			page: function () {
+			page() {
 				var _this=this;
 				this.pageSwiper = new Swiper(this.$refs.page, {
 				  	watchSlidesProgress: true,
@@ -390,7 +390,7 @@
 				});
 			},
 			//点击导航	
-			tabClick: function(index,event) {
+			tabClick(index,event) {
 				console.log(1111);
 				/*this.tabIndex=index;
 				//对应的内容显示
@@ -398,17 +398,17 @@
 				this.pageShow(index);
 				//请求对应种类的数据,没有加载过的话加载数据,已经加载过不再加载。
 				if (!this.products[index]) {
-					this.getPageIndex(index);		
+					this.getDataPageIndex(index);		
 				}
 			},
 			//对应内容显示
-			pageShow: function (index) {
+			pageShow(index) {
 				this.tabIndex=index;
 				//对应的内容显示
 				this.pageSwiper.slideTo(index, 0);
 			},
 			//导航移动
-			slideMove: function (index,navSlideWidth) {
+			slideMove(index,navSlideWidth) {
 				var navSwiper=this.navSwiper,
 				clientWidth=this.clientWidth;
 				var navActiveSlideLeft=navSwiper.slides[index].offsetLeft;
@@ -422,14 +422,14 @@
 				this.pageShow(index);
 			},
 	        //分类切换显示状态
-	        showClassify: function () {
+	        showClassify() {
 	        	this.classifyState=true;
 	        },
-	        closeClassify: function () {
+	        closeClassify() {
 	        	this.classifyState=false;
 	        },
 	        //导航移动、导航对应的page显示
-	        tabMove: function (index) {
+	        tabMove(index) {
 	        	this.tabClick(index);
 	        }
 	        	
