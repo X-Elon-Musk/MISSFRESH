@@ -103,16 +103,16 @@ export default class ProductDetail{
             'seckill_limit': 0,
             'securityText': "经14项感官排查64项农残专检，100%可溯，点标签查看。",
             'securityTitle': "安心指纹",
-            // 'share_info': {wx_share_type: 0, image_url: "https://image.missfresh.cn/97042f5ae1274a3aa21046bd6dd6f4d6.jpg",…}
+            // 'share_info': {wx_share_type: 0, image_url: "https://image.missfresh.cn/97042f5ae1274a3aa21046bd6dd6f4d6.jpg",…}------------
             'share_info': shareinfo[0],
             /*'sku': "p-HBfzxlz-1j",----------
             'stock': 368,--------------
-            'storage_code': "MRYXSZ,MRYXSH,",
-            'storage_method': "冷藏"
-            'storage_time': "到货即可食用"
+            'storage_code': "MRYXSZ,MRYXSH,",----------
+            'storage_method': "冷藏"-----------
+            'storage_time': "到货即可食用"--------
             'subtitle': "哈哈哈 甜到拥有贵妃同款笑容"-------------
-            'weight': "500g*1盒"
-            'unit': "1盒"*/
+            'weight': "500g*1盒"-----------
+            'unit': "1盒"-------------*/
             // 'vip_card': {is_opened: 0, back_cash_text: "支付8元开会员↵购买本商品更返#_$0.49#_$元",…}------------
             'vip_card': vipcard[0]
             // 'vip_price': 990
@@ -120,7 +120,7 @@ export default class ProductDetail{
             
         }   
         await MissMethods.addAttributes(productdetail, buyer[0]);
-        await MissMethods.addAttributes(productdetail, initial[0], ['name', 'subtitle', 'stock', 'sku', 'promote_tag']);
+        await MissMethods.addAttributes(productdetail, initial[0], ['name', 'subtitle', 'stock', 'sku', 'promote_tag', 'storage_code', 'storage_method', 'storage_time', 'weight', 'unit']);
 
         res.type('application/json');
         res.jsonp(productdetail);
