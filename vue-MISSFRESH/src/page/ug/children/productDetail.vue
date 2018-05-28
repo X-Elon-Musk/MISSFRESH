@@ -53,13 +53,13 @@
     		</div>
     		<p class="security-txt">{{product.securityText}}</p>
     		<div class="scroll-box">
-    			<!-- <icons :icons="icons"></icons> -->
-    			<ul class="icons">
+    			<icons :icons="product.productFingerprints"></icons>
+    			<!-- <ul class="icons">
 			    	<li class="icon" v-for="(item,index) in product.productFingerprints" :key="index">
 						<img :src="item.securityTagUrl">
 						<span>{{item.securityTagName}}</span>
 					</li>
-				</ul> 
+				</ul>  -->
     		</div>
     	</div>
     	<div class="buyer-said">

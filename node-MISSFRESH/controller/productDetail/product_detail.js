@@ -96,7 +96,7 @@ export default class ProductDetail{
             'product_created_at': "2016-05-11 20:05:06",
             'product_need_level': 0,
             // 'product_share_info_v2': {prodcut_share_bg_login_text: "登陆方可享受奖励,立即登陆", product_share_need_price: 1,…}----------------
-            'product_share_info_v2': productshareinfov2,
+            'product_share_info_v2': productshareinfov2[0],
             // 'promote_tag': "https://j-image.missfresh.cn/img_20170605114117571.png"---------
             'promote_tag_new': "",
             // 'promotion': ["实付满39包邮"]-----------

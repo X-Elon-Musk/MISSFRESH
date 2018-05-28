@@ -4,26 +4,6 @@
 			<img :src="item.src">
 			<span>{{item.text}}</span>
 		</li>
-		<!-- <li class="icon" v-for="(item,index) in items" :key="index">
-			<img src="~images/icon/privilege_0.png">
-			<span>会员专享价</span>
-		</li>
-		<li class="icon">
-			<img src="~images/icon/privilege_1.png">
-			<span>购物返现</span>
-		</li>
-		<li class="icon">
-			<img src="~images/icon/privilege_2.png">
-			<span>1小时送达</span>
-		</li>
-		<li class="icon">
-			<img src="~images/icon/privilege_3.png">
-			<span>会员商品</span>
-		</li>
-		<li class="icon">
-			<img src="~images/icon/privilege_4.png">
-			<span>专享客服</span>
-		</li> -->
 	</ul> 
 </template>
 <script>
