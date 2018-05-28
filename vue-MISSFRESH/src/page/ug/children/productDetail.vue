@@ -47,7 +47,7 @@
     	<div class="padding_common product-safe-area">
     		<div class="clearfix security-tit">
     			<span class="security-tit-title">{{product.securityTitle}}</span>
-    			<router-link :to="{path: 'safeDetection'}" tag='span' class="f_r security-tit-see">
+    			<router-link :to="{path: 'safeDetection',query:{product_id: product_id}}" tag='span' class="f_r security-tit-see">
     				点击查看 >
     			</router-link>	
     		</div>
@@ -129,16 +129,6 @@
 	export default{
 		data(){
 			return {
-				/*icons: [
-					{
-						src: require('images/icon/security_1_0.png'),
-						text: '优鲜安心检测'
-					},
-					{
-						src: require('images/icon/security_2_0.png'),
-						text: '100%品控检测'
-					}
-				],*/
 				share: false,
 				dialog: false,
 				doubt: false,
@@ -156,6 +146,7 @@
 				share_info: {},
 				//会员卡
 				vip_card: {},
+				//商品分享信息
 				product_share_info_v2: {}
 			}
 		},

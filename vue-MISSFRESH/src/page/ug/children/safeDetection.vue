@@ -1,23 +1,24 @@
 <template>
     <div class="safe-detection">
+    	<!-- aaa -->
         <ul class="tab-nav">
 			<li @click="switchOver(0)" :class="{active:show==0}" class="safe-list">
-				<img src="~images/icon/security_1_0.png" alt="" v-if="show==0">
-     	        <img src="~images/icon/security_1_1.png" alt="" v-else-if="show==1">
-				<span class="list-text test-report">优鲜安心检测</span>
+				<img :src="detectionResult_0.securityTagUrl" alt="" v-if="show==0">
+     	        <img :src="detectionResult_0.securityUnselectedTagUrl" alt="" v-else-if="show==1">
+				<span class="list-text test-report">{{detectionResult_0.securityTagName}}</span>
 			</li>
 			<li @click="switchOver(1)" :class="{active:show==1}" class="safe-list">
-				<img src="~images/icon/security_2_0.png" alt="" v-if="show==1">
-     	        <img src="~images/icon/security_2_1.png" alt="" v-else-if="show==0">
-				<span class="list-text test-question">100%品控检测</span>
+				<img :src="detectionResult_1.securityTagUrl" alt="" v-if="show==1">
+     	        <img :src="detectionResult_1.securityUnselectedTagUrl" alt="" v-else-if="show==0">
+				<span class="list-text test-report">{{detectionResult_1.securityTagName}}</span>
 			</li>
 		</ul>
 		<ul class="tab-content">
 			<li v-show="show==0">
-				<img src="~src/images/section1.jpg" alt="">
+				<img :src="detectionResult_0.securityDetailUrl" alt="">
 			</li>
 			<li v-show="show==1">
-				<img src="~src/images/section2.jpg" alt="">
+				<img :src="detectionResult_1.securityDetailUrl" alt="">
 			</li>
 		</ul>
     </div>  
@@ -27,9 +28,36 @@
 		data(){
 			return {
 				show: 0,
+				product_id: 0,
+				detectionResult_0: {},
+				detectionResult_1: {}
 			}
 		},
+		created(){
+            this.product_id=this.$route.query.product_id;
+        },
+        mounted(){
+            this.getSafeDetection();
+        },
 		methods: {
+			getSafeDetection(){
+				let _this=this;
+				this.axios.get('http://localhost:3390/page/safedetection',{
+					params:{
+						product_id: _this.product_id
+					}
+				})
+				.then(function (response) {
+					if (response.data.code==0) {
+						let data=response.data;
+						_this.detectionResult_0=data.result[0];	
+						_this.detectionResult_1=data.result[1];	
+					}
+				})
+				.catch(function (error) {
+				  	console.log(error);
+				});	
+			},
 			switchOver(index){
 				this.show=index;
 			}
