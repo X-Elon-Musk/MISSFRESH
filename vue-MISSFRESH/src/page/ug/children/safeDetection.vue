@@ -1,7 +1,6 @@
 <template>
     <div class="safe-detection">
-    	<!-- aaa -->
-        <ul class="tab-nav">
+    	<ul class="tab-nav">
 			<li @click="switchOver(0)" :class="{active:show==0}" class="safe-list">
 				<img :src="detectionResult_0.securityTagUrl" alt="" v-if="show==0">
      	        <img :src="detectionResult_0.securityUnselectedTagUrl" alt="" v-else-if="show==1">

@@ -238,14 +238,12 @@
 			}
 		},
 		mounted (){
-			// this.$nextTick(() => {
 			this.getDataPageIndex(0, () => {
 				this.$nextTick(() => {
 					if (!this.navSwiper) this.tab();
 					if (!this.pageSwiper) this.page();
 				})
 			});
-			// })
 			this.getDataPosition();
 		},
 		computed: {
@@ -283,7 +281,6 @@
 					}
 					_this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
 					_this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);
-					// _this.product_index[product_index]=_this.products[product_index]||true;
 					console.log('=====================');
 					console.log(_this.products);
 					console.log('=====================');	
