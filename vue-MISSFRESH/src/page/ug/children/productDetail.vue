@@ -120,6 +120,21 @@
     			<div class="share-text">分享商品，邀请新用户点击链接并下单，可得59减30元红包。会员分享商品，非会员下单签收后，会员得5%返现。</div>
     		</div>
     	</div>
+    	<div class="clearfix address-bar-container">
+    		<div class="clearfix f_l delivery-range">
+    			<img src="" alt="" class="f_l position-icon">
+    			<span class="f_l">送至</span>
+    			<span class="f_l delivery-place">{{choseAddress}}</span>
+    			<img src="" alt="" class="f_l delivery-icon">
+    		</div>
+    		<img src="" alt="" class="f_r address-choose-arrow">
+    	</div>
+    	<div class="clearfix product-bar-footer-container">
+    		<div class="f_l image-spot-container">
+    			<span class="image-spot-dot">1</span>
+    		</div>
+    		<div class="f_r add-cart-btn">加入购物车</div>
+    	</div>
     </div>  
 </template>
 <script>
@@ -157,6 +172,19 @@
         },
         mounted(){
             this.getDataProductDetail();
+        },
+        computed: {
+	    	...mapState([
+                's_currentRegion', 's_choseAddress'
+            ]),
+            //选择的配送地址
+            choseAddress: function () {
+            	if (this.s_choseAddress) {
+            		return this.s_choseAddress;
+            	} else{
+            		return '';
+            	}
+            },
         },
 		methods: {
 			getDataProductDetail(){
@@ -214,9 +242,7 @@
 		top: 0;
 		bottom: 0;
 		z-index: 3; 
-		// padding: 3em; 
 		background: #fff;
-		// font-size: 30px;
 		overflow-y: auto;
 		color: @color_common;
 		.section-header{
@@ -518,6 +544,53 @@
 					.font(1.4em,0.8em,@color_gray);
 				}
 			}
+		}
+		.address-bar-container{
+			position: fixed;
+			left: 0;
+			bottom: 36px;
+			.wh(2em);
+			background: rgba(255, 244, 226, 0.9);
+			padding: 0 4%;
+			box-sizing: border-box;
+			.delivery-range{
+				line-height: 2em;
+				color: #262626;
+				.position-icon{
+					.wh(1em,1em);
+					margin-top: 0.5em;
+				}
+				.delivery-place{
+					
+				}
+				.delivery-icon{
+
+				}
+			}
+			.address-choose-arrow{
+				.wh(1.2em,1.2em);
+				margin-top: 0.4em;
+			}
+		}
+		.product-bar-footer-container{
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			.wh(36px); 
+			.image-spot-container{
+				// .wh(100%,36px);
+				.bg(36px,36px,transparent,'~src/images/icon/shopping_cart.png',80% 80%);
+				.image-spot-dot{
+					
+				}
+			}
+			.add-cart-btn{
+				height: 100%;
+				width: calc(100% - 36px);
+				background: @color_main;
+				color: #fff;
+				text-align: center;
+			}	
 		}
 	}
 </style>

@@ -2,13 +2,11 @@
     <div class="product">
     	<router-link :to="{path: '/ug/productDetail',query:{product_id: product.product_id,product_index: product.product_index}}" tag="div" class="clearfix product-link">
 			<div class="f_l product-item-img">
-				<!-- <span v-bind:class="{hot_0:product.hot==0,hot_1:product.hot==1,hot_2:product.hot==2}"></span> -->
 				<img src="" v-lazy="product.image" alt="" class="product-img">
 				<img :src="product.promote_tag" alt="" class="product-tag">
 			</div>
 			<div class="f_r product-info">
 				<p class="name">{{product.name}}</p>
-				<!-- <p class="name">{{product.id}}</p> -->
 				<p class="point" v-if="subtitle">{{product.subtitle}}</p>
 				<ul class="preferential">
 					<li v-for="(item,index) in product.product_tags" :key="index">{{item.name}}</li>
@@ -18,15 +16,14 @@
 					<!-- 商城价 -->
 					<price :price="priceUp.price" class="price-original price-up"></price>
 				</p>
-				<p class="vip">
-					<!-- 会员价 -->
-					<!-- <price :price="priceDown.price"></price> -->
-				</p>
+				<!-- <p class="vip">
+					会员价
+					<price :price="priceDown.price"></price>
+				</p> -->
 				
 			</div>
 		</router-link>
 		<div class="cart-operate">
-			<!-- <img src="~images/icon/shopping-cart.png" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"> -->
 			<img :src="product.cart_image" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
 			<div class="clearfix cart-action" v-if="productNum">
 				<span class="minus-action" @touchstart.stop="minusOutCart(product.id,$event)"></span> 
@@ -34,7 +31,6 @@
 				<span class="add-action" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"></span>
 			</div>
 		</div>
-		
 	</div> 
 </template>
 <script>
@@ -43,7 +39,6 @@
 	export default{
 		data(){
 			return {
-				// img: require('images/product_0.jpg'),
 				cartStatus: true
 			}
 		},
@@ -109,7 +104,6 @@
 					border-radius: 0;
 					width: 120px;
 					height: 120px;
-					// border-radius: 100%;
 				}
 				.product-tag{
 					position: absolute;
@@ -167,16 +161,10 @@
 					color: @color_main;
 					padding-top: 18px;
 					.price-original{
-						// margin-left: 0.2em;
 						text-decoration: line-through;
 						color: @color_gray;
 					}
 				}
-				/* .vip{
-					line-height: 1.4;
-					font-size: 12px;
-					color: @color_assist;
-				} */
 			}
 		}
 		.cart-operate{
