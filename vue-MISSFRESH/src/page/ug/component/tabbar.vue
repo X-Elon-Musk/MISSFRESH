@@ -23,7 +23,7 @@
 				<!-- nav对应页面 -->
 				<!-- 热卖 -->
 		      	<!-- <productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage> -->
-		      	<productPage :products="products[0]" :banner="banner[0]" class="product_index_0">
+		      	<productPage :products="products[0]||[]" :banner="banner[0]||[]" class="product_index_0">
 		      		<guarantee :brands="brands[0]"></guarantee>
             		<card :categoryareas="categoryareas[0]"></card>
 		      	</productPage>
