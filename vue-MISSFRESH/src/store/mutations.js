@@ -1,9 +1,9 @@
 import {setStore, getStore} from '../config/mUtils'
 
 export default {
-	/*constructor(){
-		this.POSITION_ANALYSIS=this.POSITION_ANALYSIS.bind(this);
-	},*/
+	// constructor(){
+	// 	this.ADD_CART=this.ADD_CART.bind(this);
+	// },
 	//添加购物车
 	ADD_CART: (state,{id,image,name,product_tags,price_up,price_down})=>{
 		let cart=state.s_cartList;
@@ -28,18 +28,11 @@ export default {
 				"status": true
 			}
 		}
-		let num = 0;
-        Object.values(cart).forEach((item,index) => {
-        	num += item.num;
-        })
-        state.s_cartCount = num;
-        console.log(num);
-		//存入localStorage
-		setStore('cartCount', state.s_cartCount);
-
 		state.s_cartList = {...cart};
 		//存入localStorage
 		setStore('buyCart', state.s_cartList);
+		// console.log(this);
+		this.a.SET_CARTNUMBER(state,state.s_cartList);
 	},
 	//减少购物车
 	REDUCE_CART: (state,{id})=>{
@@ -49,25 +42,14 @@ export default {
 				cart[id]['num']--;
 				if (cart[id]['num']==0) state.s_mpromptStatus=true;	
 				cart[id]['total_price']=cart[id]['num']*parseFloat(cart[id]['price_down']['price']);	
-				let num = 0;
-		        Object.values(cart).forEach((item,index) => {
-		        	num += item.num;
-		        })
-		        state.s_cartCount = num;
-				//存入localStorage
-				setStore('cartCount', state.s_cartCount);
 				state.s_cartList = {...cart};
 				setStore('buyCart', state.s_cartList);	
+				this.a.SET_CARTNUMBER(state,state.s_cartList);
 			} else{
 				cart[id]=null;
 			}
 		}
 	},
-	// //设置当前城市
-	// SET_CARTNUMBER: (state,{currentCity})=>{
-	// 	state.s_currentCity=currentCity;
-	// 	setStore('currentCity', currentCity);	
-	// },
 	//设置单个商品在购物车中状态，是否被选中
 	SET_STATUS: (state,{id})=>{
 		let cart=state.s_cartList;
@@ -76,6 +58,15 @@ export default {
 			state.s_cartList = {...cart};
 			setStore('buyCart', state.s_cartList);	
 		}
+	},
+	//设置购物车商品总数量
+	SET_CARTNUMBER: (state,cartList)=>{
+		let num = 0;
+		Object.values(cartList).forEach((item,index) => {
+	    	num += item.num;
+	    })
+	    state.s_cartCount = num;
+		setStore('cartCount', state.s_cartCount);
 	},
 	//设置提示内容的状态
 	SET_MPROMPT: (state,{status})=>{
@@ -157,4 +148,15 @@ export default {
 		state.s_currentCity=currentCity;
 		setStore('currentCity', currentCity);	
 	},
+
 }
+
+//设置购物车商品总数量
+let	SET_CARTNUMBER=(state, {cartList})=>{
+	let num = 0;
+    Object.values(cartList).forEach((item,index) => {
+    	num += item.num;
+    })
+    state.s_cartCount = num;
+	setStore('cartCount', state.s_cartCount);
+};
