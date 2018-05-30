@@ -10,6 +10,7 @@ var state={
 	s_choseCity: '',//选择的城市
 	s_choseAddress: '',//选择的地址
 	s_cartList: {},//购物车商品列表
+	s_cartCount: 0,//购物车商品总数
 	s_mpromptStatus: false,//提示信息的状态
 }
 

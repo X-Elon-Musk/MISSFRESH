@@ -11,7 +11,8 @@
         	</li>
         	<li class="nav-item" @click="goAddress({path: '/cart'})">
         		<span class="nav-icon nav-cart" :style="{backgroundImage:$route.path.indexOf('cart')==-1?`url(${backgroundImage.cart})`:`url(${backgroundImage.cartActive})`}"></span>
-        		<span class="cart-count">{{cartCount}}</span>
+        		<!-- <span class="cart-count">{{cartCount}}</span> -->
+        		<span class="cart-count">{{s_cartCount}}</span>
         		<p class="nav-label">购物车</p>
         	</li>
         	<li class="nav-item" @click="goAddress({path: '/profile'})">
@@ -35,25 +36,26 @@
 					newvpActive: require('images/icon/newvp-active.png'),
 					cartActive: require('images/icon/cart-active.png'),
 					mineActive: require('images/icon/mine-active.png')
-				}
+				},
+				/*// 购物车商品总数
+				cartCount: 0*/
 			}
 		},
+		/*mounted(){
+			this.cartCount=this.s_cartCount;
+		},*/
 		computed: {
 			...mapState([
-                's_cartList'
+                's_cartCount'
             ]),
-            //shopCart变化的时候重新计算当前商品的数量
+            /*//shopCart变化的时候重新计算当前商品的数量
             cartCount: function (){
-                if (this.s_cartList) {
-                    let num = 0;
-                    Object.values(this.s_cartList).forEach((item,index) => {
-                    	num += item.num;
-                    })
-                    return num;
+                if (this.s_cartCount) {
+                    return this.s_cartCount;
                 }else {
                     return 0;
                 }
-            },
+            },*/
 		},
 		methods: {
         	goAddress(path){

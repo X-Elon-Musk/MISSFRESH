@@ -28,6 +28,15 @@ export default {
 				"status": true
 			}
 		}
+		let num = 0;
+        Object.values(cart).forEach((item,index) => {
+        	num += item.num;
+        })
+        state.s_cartCount = num;
+        console.log(num);
+		//存入localStorage
+		setStore('cartCount', state.s_cartCount);
+
 		state.s_cartList = {...cart};
 		//存入localStorage
 		setStore('buyCart', state.s_cartList);
@@ -40,6 +49,13 @@ export default {
 				cart[id]['num']--;
 				if (cart[id]['num']==0) state.s_mpromptStatus=true;	
 				cart[id]['total_price']=cart[id]['num']*parseFloat(cart[id]['price_down']['price']);	
+				let num = 0;
+		        Object.values(cart).forEach((item,index) => {
+		        	num += item.num;
+		        })
+		        state.s_cartCount = num;
+				//存入localStorage
+				setStore('cartCount', state.s_cartCount);
 				state.s_cartList = {...cart};
 				setStore('buyCart', state.s_cartList);	
 			} else{
@@ -47,6 +63,11 @@ export default {
 			}
 		}
 	},
+	// //设置当前城市
+	// SET_CARTNUMBER: (state,{currentCity})=>{
+	// 	state.s_currentCity=currentCity;
+	// 	setStore('currentCity', currentCity);	
+	// },
 	//设置单个商品在购物车中状态，是否被选中
 	SET_STATUS: (state,{id})=>{
 		let cart=state.s_cartList;
