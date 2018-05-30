@@ -114,15 +114,24 @@
     			<div class="share-text">分享商品，邀请新用户点击链接并下单，可得59减30元红包。会员分享商品，非会员下单签收后，会员得5%返现。</div>
     		</div>
     	</div>
-    	<div class="clearfix address-bar-container">
+    	<router-link :to="{path: '/ug/addressChose'}" tag='div' class="clearfix address-bar-container">
+			<div class="clearfix f_l delivery-range">
+    			<img src="~images/icon/location.png" alt="" class="f_l position-icon">
+    			<span class="f_l"> 送至 </span>
+    			<span class="f_l delivery-place">{{choseAddress}}</span>
+    			<img src="" alt="" class="f_l delivery-icon">
+    		</div>
+    		<img src="~images/icon/right-jiantou.png" alt="" class="f_r address-choose-arrow">
+		</router-link>
+    	<!-- <div class="clearfix address-bar-container">
     		<div class="clearfix f_l delivery-range">
-    			<img src="" alt="" class="f_l position-icon">
-    			<span class="f_l">送至</span>
+    			<img src="~images/icon/location.png" alt="" class="f_l position-icon">
+    			<span class="f_l"> 送至 </span>
     			<span class="f_l delivery-place">{{choseAddress}}</span>
     			<img src="" alt="" class="f_l delivery-icon">
     		</div>
     		<img src="" alt="" class="f_r address-choose-arrow">
-    	</div>
+    	</div> -->
     	<div class="clearfix product-bar-footer-container">
     		<router-link :to="{path: '/cart'}" tag='div' class="f_l image-spot-container">
 				<span class="cart-count image-spot-dot">{{s_cartCount}}</span>
@@ -566,11 +575,17 @@
 			font-size: 0.9em;
 			line-height: 2em;
 			.delivery-range{
-				line-height: 2em;
-				color: #262626;
+				// line-height: 2em;
+				// color: #262626;
+				// font-size: 0.8em;
 				.position-icon{
 					.wh(1em,1em);
 					margin-top: 0.5em;
+				}
+				span{
+					// .font(2em,0.8em,#262626);
+					font-size: 0.8em;
+					margin-left: 0.5em;
 				}
 				.delivery-place{
 					
