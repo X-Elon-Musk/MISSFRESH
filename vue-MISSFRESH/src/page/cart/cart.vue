@@ -413,8 +413,9 @@
 						font-size: 14px;
 						padding: 0;
 						img{
-							width: 70px;
-	    					height: 70px;
+							// width: 70px;
+	    		// 			height: 70px;
+	    					.wh(70px,70px);
 						}
 						.name{
 							padding-top: 0;
@@ -471,11 +472,12 @@
 	    	padding-bottom: 102px;
 	    	// margin-bottom: 102px;
 	    	.vip-card{
-	    		height: 49px;
+	    		// height: 49px;
 	    		text-align: left;
 	    		padding: 0 15px;
 	    		border-bottom: 1px solid #f5f5f5;
-	    		width: 100%;
+	    		// width: 100%;
+	    		.wh(49px,100%);
 	    		display: table;
 	    		box-sizing: border-box;
 	    		.card{
@@ -495,15 +497,17 @@
 	    		}
 	    		.card-info{
 	    			float: left;
-	    			height: 100%;
-	    			width: auto;
+	    			// height: 100%;
+	    			// width: auto;
+	    			.wh(100%,auto);
 	    			i{
 						color: #FF4891;
 					}
 	    			span{
 	    				display: block;
-	    				width: 100%;
-	    				height: 50%;
+	    				// width: 100%;
+	    				// height: 50%;
+	    				.wh(50%);
 	    				line-height: 25px;
 	    			}
 	    		}
@@ -519,8 +523,9 @@
 	    			box-sizing: border-box;
 	    			span{
 	    				float: left;
-	    				width: 66%;
-	    				height: 50px;
+	    				// width: 66%;
+	    				// height: 50px;
+	    				.wh(50px,66%);
 	    			}
 	    			.marquee{
 	    				float: right;
@@ -552,12 +557,14 @@
 			left: 0;
 			bottom: 53px;
 			z-index: 2;
-			width: 100%;
-			height: 49px;
+			// width: 100%;
+			// height: 49px;
+			.wh(49px);
 			background-color: #fff;
 			.check-all-button{
-				width: 24%;
-				height: 100%;
+				// width: 24%;
+				// height: 100%;
+				.wh(100%,24%);
 				line-height: 49px;
 				position: static;
 				margin-top: 0;
@@ -600,11 +607,12 @@
 			}
 			.settlement-button{
 				// float: right;
-				width: 26%;
+				// width: 26%;
 				font-size: 1.1em;
 				background: #ff4891;
-				height: 100%;
+				// height: 100%;
 				// width: 130px;
+				.wh(100%,26%);
 				line-height: 49px;
 				text-align: center;
 				color: #fff;

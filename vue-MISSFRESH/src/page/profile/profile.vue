@@ -136,11 +136,12 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.my-center{
-		position: fixed;
-		left: 0;
-		top: 0;
-		bottom: 0;
-		right: 0;
+		// position: fixed;
+		// left: 0;
+		// top: 0;
+		// bottom: 0;
+		// right: 0;
+		.fullscreen();
 		overflow-y: scroll;
 		.my-center-content{
 			padding-bottom: 47px;
@@ -155,9 +156,10 @@
 					background: 0 0;
 					min-width: 83px;
 					min-height: 36px;
-					line-height: 36px;
-					font-size: 14px;
-					color: #ff4891;
+					// line-height: 36px;
+					// font-size: 14px;
+					// color: #ff4891;
+					.font(36px,14px,#ff4891);
 					text-align: center;
 					border: 1px solid #ff4891;
 					border-radius: 4px;
@@ -180,9 +182,10 @@
 						display: block;
 						text-align: center;
 						display: block;
-		    			color: #4d4d4d;
-		    			font-size: 12px;
-		    			line-height: 2;
+		    			// color: #4d4d4d;
+		    			// font-size: 12px;
+		    			// line-height: 2;
+		    			.font(2,12px,#4d4d4d);
 		    			i{
 		    				font-size: 18px;
 		    			}
@@ -200,22 +203,25 @@
 		    	// height: 45px;
 		    	span{
 		    		&:nth-of-type(1){
-		    			line-height: 30px;
-		    			font-size: 20px;
-		    			color: #474245;
+		    			// line-height: 30px;
+		    			// font-size: 20px;
+		    			// color: #474245;
+		    			.font(30px,20px,#474245);
 		    		}
 		    	}
 		    	.open-membership{
 		    		float: right;
-		    		line-height: 30px;
-		    		color: #969696;
-		    		font-size: 12px;
+		    		// line-height: 30px;
+		    		// color: #969696;
+		    		// font-size: 12px;
+		    		.font(30px,12px,#969696);
 		    	}
 			}
 			.rights-detail{
-				font-size: 12px;
-				color: #969696;
-				line-height: 18px;
+				// font-size: 12px;
+				// color: #969696;
+				// line-height: 18px;
+				.font(18px,12px,#969696);
 				padding-left: 15px;
 				padding-bottom: 20px;
 				span{

@@ -45,8 +45,9 @@
 	.category-nav-wrap{
 		position: fixed;
 		top: 2em;
-	    width: 100%;
-	    height: 26px;
+	    // width: 100%;
+	    // height: 26px;
+	    .wh(26px);
 	    z-index: 100;
 	    background-color: #fff;
 	    border-bottom: 1px solid #e6e6e6;
@@ -70,7 +71,8 @@
 	    }
 	}
 	.ug ::-webkit-scrollbar {
-	    width: 0;
-	    height: 0;
+	    // width: 0;
+	    // height: 0;
+	    .wh(0,0);
 	}
 </style>

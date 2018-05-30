@@ -49,10 +49,12 @@
 	}
 </script>
 <style lang="less">
+	@import '~src/style/mixin';
 	.pull{
 		overflow: visible;
-		width: 100%;
-		height: 100%;
+		// width: 100%;
+		// height: 100%;
+		.wh(100%);
 		.swiper-slide{
 			height: auto;
 			.swiper-scrollbar{

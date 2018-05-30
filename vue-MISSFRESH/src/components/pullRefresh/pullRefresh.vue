@@ -86,7 +86,8 @@
 	}
 </script>
 <style lang="less">
-	/*上滑加载、下拉刷新*/
+	@import '~src/style/mixin';
+	// 上滑加载、下拉刷新
 	.swiper-container.pull-refresh{
 		// position: absolute;
 		// left: 0;
@@ -94,8 +95,9 @@
 		// bottom: 0;
 		overflow: visible;
 		margin-bottom: 53px;
-		width: 100%;
-		height: 100%;
+		// width: 100%;
+		// height: 100%;
+		.wh(100%);
 		.list-group-item{    
 			position: relative; 
 			display: block;

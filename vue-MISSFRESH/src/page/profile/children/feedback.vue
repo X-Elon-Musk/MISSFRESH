@@ -41,18 +41,21 @@
 			    box-sizing: border-box;
 			}
 			.tip{
-				color: initial;
-				font-size: 0.8em;
-				line-height: 1.6em;
+				// color: initial;
+				// font-size: 0.8em;
+				// line-height: 1.6em;
+				.font(1.6em,0.8em,initial);
 				padding-bottom: 1em;
 			}
 			.submit-btn{
-			    width: 100%;
-			    height: 44px;
-			    font-size: 16px;
-			    line-height: 44px;
+			    // width: 100%;
+			    // height: 44px;
+			    .wh(44px);
+			    // font-size: 16px;
+			    // line-height: 44px;
 			    text-align: center;
-			    color: #fff;
+			    // color: #fff;
+			    .font(44px,16px,#fff);
 			    background: #ff4891;
 			}
 		}

@@ -20,11 +20,12 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.profile-item{
-		line-height: 60px;
+		// line-height: 60px;
 		width: 90%;
 		display: block;
-		color: #000;
-		font-size: 15px;
+		// color: #000;
+		// font-size: 15px;
+		.font(60px,15px,#000);
 		background: #fff;
 		margin-left: 16px;
 		border-bottom: 1px solid #f0f0f0;

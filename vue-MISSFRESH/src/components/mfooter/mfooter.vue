@@ -65,6 +65,7 @@
 	}
 </script>
 <style lang='less'>
+	@import '~src/style/mixin';
 	.foot-nav{
 		position: fixed;
 	    background-color: #fff;
@@ -76,8 +77,6 @@
 	    box-shadow: 0 0 10px rgba(0,0,0,.1);
 	    .nav-item{
 	    	display: block;
-	    	-webkit-box-flex: 1;
-	    	-webkit-flex: 1;
 	    	flex: 1;
 	    	padding: 5px 0 0;
 	    	// font-size: 0;
@@ -87,8 +86,9 @@
 	    	position: relative;
 	    	.nav-icon{
 				display: block;
-			    width: 27px;
-			    height: 27px;
+			    // width: 27px;
+			    // height: 27px;
+			    .wh(27px,27px);
 			    margin: 0 auto;
 			    background-size: 100% 100%; 
 			    background-repeat: no-repeat;
@@ -106,12 +106,13 @@
 	    top: 2px;
 	    right: 20%;
 	    background-color: #ff4891;
-	    color: #fff;
+	    // color: #fff;
 	    height: 1em;
 	    min-width: 1em;
-	    line-height: 1;
+	    // line-height: 1;
 	    border-radius: 0.6em;
-	    font-size: 0.6em;
+	    // font-size: 0.6em;
+	    .font(1,0.6em,#fff);
 	    border: 1px solid #fff;
 	    padding: 0.1em 0.2em;
 	    box-sizing: content-box;

@@ -20,6 +20,7 @@
 	}
 </script>
 <style lang="less">
+	@import '~src/style/mixin';
 	.guarantee{
 		flex:1;
 		font-size: 12px;
@@ -28,8 +29,9 @@
 		.guarantee-icon{
 			vertical-align: top;
 			display: inline-block;
-			width: 16px;
-			height: 16px;
+			// width: 16px;
+			// height: 16px;
+			.wh(16px,16px);
 			margin-top: 16px;
 			background-repeat: no-repeat;
 			background-size: 100% 100%;

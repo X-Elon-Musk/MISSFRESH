@@ -148,19 +148,22 @@
 	}
 </script>
 <style lang="less">
-	/*会员页面*/
+	@import '~src/style/mixin';
+	// 会员页面
 	.member{
 		position: absolute;
 		left: 0;
 		top: 0;
 		bottom: 0;
-		width: 100%;
-		height: 100%;
+		// width: 100%;
+		// height: 100%;
+		.wh(100%);
 		.vip-card{
 			width: 100%;
 			.card-bg{
-				width: 100%;
-	    		height: 8.4375rem;
+				// width: 100%;
+	   //  		height: 8.4375rem;
+	    		.wh(8.4375rem);
 	    		background: #FFB53E;
 			}
 			.card-container{
@@ -191,9 +194,10 @@
 	    			color: #B9AF91;
 					span{
 						display: inline-block;
-	    				ontent: '';
-	    				width: 1.25rem;
-	    				height: 1.375rem;
+	    				content: '';
+	    				// width: 1.25rem;
+	    				// height: 1.375rem;
+	    				.wh(1.375rem,1.25rem);
 	    				background: url(~images/icon/calculator.png) no-repeat;
 	    				background-size: 100% 100%;
 	    				margin-top: -2px;
@@ -277,7 +281,8 @@
 		}
 	}
 	.member ::-webkit-scrollbar {
-	    width: 0;
-	    height: 0;
+	    // width: 0;
+	    // height: 0;
+	    .wh(0,0);
 	}
 </style>

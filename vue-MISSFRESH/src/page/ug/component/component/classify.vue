@@ -50,6 +50,7 @@
 	}
 </script>
 <style lang="less">
+    @import '~src/style/mixin';
 	.section-classify{
         position: fixed;
         left: 0;
@@ -61,8 +62,9 @@
         color: #4d4d4d;
         .header{
             background: #fff;
-            width: 100%;
-            height: 40px;
+            // width: 100%;
+            // height: 40px;
+            .wh(40px);
             position: relative;
             text-align: center;
             line-height: 40px;
@@ -71,10 +73,11 @@
                 position: absolute;
                 right: 0;
                 bottom: 0;
-                width: 40px;
-                height: 40px;
-                background: #fff url(~images/icon/close.png) no-repeat center center;
-                background-size: 1.2rem;
+                // width: 40px;
+                // height: 40px;
+                // background: #fff url(~images/icon/close.png) no-repeat center center;
+                // background-size: 1.2rem;
+                .bg(40px,40px,#fff,'~images/icon/close.png',1.2rem);
                 // z-index: 15;
             }
         }
@@ -87,8 +90,9 @@
             padding-top: 1em;
             li{
                 float: left;
-                width: 33.33%;
-                height: 60px;
+                // width: 33.33%;
+                // height: 60px;
+                .wh(60px,33.33%);
                 padding-bottom: 1em;
                 span{
                     display: inline-block;
@@ -183,7 +187,8 @@
         }
     }
     .section-classify ::-webkit-scrollbar {
-        width: 0;
-        height: 0;
+        // width: 0;
+        // height: 0;
+        .wh(0,0);
     }
 </style>

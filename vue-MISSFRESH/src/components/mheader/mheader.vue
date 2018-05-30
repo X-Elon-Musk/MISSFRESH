@@ -21,10 +21,12 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.header-component{
-		height: 42px;
-	    width: 100%;
-	    line-height: 42px;
-	    color: @color_common;
+		// height: 42px;
+	 //    width: 100%;
+	    .wh(42px);
+	    // line-height: 42px;
+	    // color: @color_common;
+	    .font(42px);
 	    text-align: center;
 	    background: #fff;
 	    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.06);

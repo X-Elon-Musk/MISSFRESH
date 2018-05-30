@@ -166,7 +166,6 @@
 			}
 		},
 		created(){
-            // console.log(this.$route.query.product_id);
             this.product_id=this.$route.query.product_id;
             this.product_index=this.$route.query.product_index;
         },
@@ -216,9 +215,11 @@
 				  	console.log(error);
 				});	
 			},
+			// 分享
 			shareAction(state){
 				this.share=state;
 			},
+			// 分享方式
 			shareMode(mode){
 				this.share=false;
 				this.dialog=true;
@@ -229,6 +230,7 @@
 			doubtAction(state){
 				this.doubt=state;
 			},
+			// 添加到购物车
 			addToCart: function (id,image,name,product_tags,price_up,price_down,event) {
 				this.ADD_CART({id,image,name,product_tags,price_up,price_down});
 			}
@@ -263,7 +265,7 @@
 			text-align: center;
 			background: #fff;
 			box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.06);
-    		border-bottom: 1PX solid #eee;
+    		border-bottom: 1px solid #eee;
 			.header-text{
 				position: relative;
 				display: inline-block;
@@ -379,8 +381,9 @@
 			.font(1.4em,0.8em,@color_gray);
 			.security-tit{
 				.security-tit-title{
-					line-height: 2.2em;
-					color: @color_common;
+					// line-height: 2.2em;
+					// color: @color_common;
+					.font(2.2em,1em);
 					font-weight: 700;
 
 				}
