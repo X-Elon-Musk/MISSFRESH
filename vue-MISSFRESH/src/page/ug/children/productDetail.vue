@@ -10,8 +10,8 @@
     	<div class="padding_common product-name">{{product.subtitle}}</div>
     	<p class="padding_common sub-title">{{product.name}}</p>
     	<div class="padding_common clearfix price-sales">
-    		<price :price="price_down" class="price-down"></price>
-    		<price :price="price_up" class="price-up"></price>
+    		<price :price="priceDown.price" class="price-down"></price>
+    		<price :price="priceUp.price" class="price-up"></price>
     		<span class="f_r sales-volume">
     			已售<i>{{product.sales_volume}}</i>份
     		</span>
@@ -125,13 +125,14 @@
     	</div>
     	<div class="clearfix product-bar-footer-container">
     		<div class="f_l image-spot-container">
-    			<span class="image-spot-dot">1</span>
+    			<span class="cart-count image-spot-dot">1</span>
     		</div>
-    		<div class="f_r add-cart-btn">加入购物车</div>
+    		<div class="f_r add-cart-btn" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">加入购物车</div>
     	</div>
     </div>  
 </template>
 <script>
+	import {mapState, mapMutations} from 'vuex'
 	import carousel from 'src/components/carousel/carousel'
 	import price from 'src/components/price/price'
 	import icons from 'src/components/icons/icons'
@@ -148,9 +149,9 @@
 				//商品
 				product: {},
 				//商品现价
-				price_down: 0,
+				priceDown: {},
 				//商品原价
-				price_up: 0,
+				priceUp: {},
 				//分享信息
 				share_info: {},
 				//会员卡
@@ -169,7 +170,7 @@
         },
         computed: {
 	    	...mapState([
-                's_currentRegion', 's_choseAddress'
+                's_choseAddress'
             ]),
             //选择的配送地址
             choseAddress: function () {
@@ -181,6 +182,9 @@
             },
         },
 		methods: {
+			...mapMutations([
+                'ADD_CART','REDUCE_CART','SET_MPROMPT'
+            ]),
 			getDataProductDetail(){
 				let _this=this;
 				this.axios.get('http://localhost:3390/page/productdetail',{
@@ -195,8 +199,9 @@
 						let data=response.data;
 						// _this.banner=(_this.banner||[]).concat(data.images);	
 						_this.product=data;	
-						_this.price_down=data.vip_price_pro.price_down.price;	
-						_this.price_up=data.vip_price_pro.price_up.price;
+						console.log(_this.product);
+						_this.priceDown=data.vip_price_pro.price_down;	
+						_this.priceUp=data.vip_price_pro.price_up;
 						_this.share_info=data.share_info;	
 						_this.vip_card=data.vip_card;	
 						_this.product_share_info_v2=data.product_share_info_v2;	
@@ -218,6 +223,9 @@
 			},
 			doubtAction(state){
 				this.doubt=state;
+			},
+			addToCart: function (id,image,name,product_tags,price_up,price_down,event) {
+				this.ADD_CART({id,image,name,product_tags,price_up,price_down});
 			}
 		},
 		components: {
@@ -547,6 +555,8 @@
 			background: rgba(255, 244, 226, 0.9);
 			padding: 0 4%;
 			box-sizing: border-box;
+			font-size: 0.9em;
+			line-height: 2em;
 			.delivery-range{
 				line-height: 2em;
 				color: #262626;
@@ -571,16 +581,20 @@
 			left: 0;
 			bottom: 0;
 			.wh(36px); 
+			line-height: 36px;
+			background: #fff;
+			font-size: 0.9em;
 			.image-spot-container{
 				// .wh(100%,36px);
-				.bg(36px,36px,transparent,'~src/images/icon/shopping_cart.png',80% 80%);
+				position: relative;
+				.bg(46px,100%,transparent,'~src/images/icon/shopping_cart.png',52% 60%);
 				.image-spot-dot{
-					
+					right: 8%;
 				}
 			}
 			.add-cart-btn{
 				height: 100%;
-				width: calc(100% - 36px);
+				width: calc(100% - 46px);
 				background: @color_main;
 				color: #fff;
 				text-align: center;

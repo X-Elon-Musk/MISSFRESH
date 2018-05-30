@@ -97,21 +97,22 @@
 			    font-size: 10px;
 			    line-height: 1.8;
 	    	}
-	    	.cart-count{
-				position: absolute;
-			    top: 2px;
-			    right: 20%;
-			    background-color: #ff4891;
-			    color: #fff;
-			    height: 1em;
-			    min-width: 1em;
-			    line-height: 1;
-			    border-radius: 0.6em;
-			    font-size: 0.6em;
-			    border: 1px solid #fff;
-			    padding: 0.1em 0.2em;
-			    box-sizing: content-box;
-	    	}
 	    }
+	}
+	.cart-count{
+		position: absolute;
+	    top: 2px;
+	    right: 20%;
+	    background-color: #ff4891;
+	    color: #fff;
+	    height: 1em;
+	    min-width: 1em;
+	    line-height: 1;
+	    border-radius: 0.6em;
+	    font-size: 0.6em;
+	    border: 1px solid #fff;
+	    padding: 0.1em 0.2em;
+	    box-sizing: content-box;
+	    text-align: center;
 	}
 </style>
