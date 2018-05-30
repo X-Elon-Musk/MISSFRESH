@@ -124,9 +124,12 @@
     		<img src="" alt="" class="f_r address-choose-arrow">
     	</div>
     	<div class="clearfix product-bar-footer-container">
-    		<div class="f_l image-spot-container">
+    		<router-link :to="{path: '/cart'}" tag='div' class="f_l image-spot-container">
+				<span class="cart-count image-spot-dot">{{s_cartCount}}</span>
+			</router-link>
+    		<!-- <div class="f_l image-spot-container">
     			<span class="cart-count image-spot-dot">{{s_cartCount}}</span>
-    		</div>
+    		</div> -->
     		<div class="f_r add-cart-btn" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
     			加入购物车
     		</div>
@@ -201,7 +204,7 @@
 						let data=response.data;
 						// _this.banner=(_this.banner||[]).concat(data.images);	
 						_this.product=data;	
-						console.log(_this.product);
+						// console.log(_this.product);
 						_this.priceDown=data.vip_price_pro.price_down;	
 						_this.priceUp=data.vip_price_pro.price_up;
 						_this.share_info=data.share_info;	
