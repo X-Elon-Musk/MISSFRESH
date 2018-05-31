@@ -123,15 +123,6 @@
     		</div>
     		<img src="~images/icon/right-jiantou.png" alt="" class="f_r address-choose-arrow">
 		</router-link>
-    	<!-- <div class="clearfix address-bar-container">
-    		<div class="clearfix f_l delivery-range">
-    			<img src="~images/icon/location.png" alt="" class="f_l position-icon">
-    			<span class="f_l"> 送至 </span>
-    			<span class="f_l delivery-place">{{choseAddress}}</span>
-    			<img src="" alt="" class="f_l delivery-icon">
-    		</div>
-    		<img src="" alt="" class="f_r address-choose-arrow">
-    	</div> -->
     	<div class="clearfix product-bar-footer-container">
     		<router-link :to="{path: '/cart'}" tag='div' class="f_l image-spot-container">
 				<span class="cart-count image-spot-dot">{{s_cartCount}}</span>
