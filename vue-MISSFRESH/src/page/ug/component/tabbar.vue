@@ -264,13 +264,26 @@
 				.then(function (response) {
 					let product_list=response.data.product_list;
 					if (product_index==0) {
-						_this.categorylist[product_index]=(_this.categorylist[product_index]||[]).concat(response.data.category_list);	
+						/*_this.categorylist[product_index]=(_this.categorylist[product_index]||[]).concat(response.data.category_list);	
 						_this.brands[product_index]=(_this.brands[product_index]||[]).concat(product_list.brands);
-						_this.categoryareas[product_index]=(_this.categoryareas[product_index]||[]).concat(product_list.category_areas);	
+						_this.categoryareas[product_index]=(_this.categoryareas[product_index]||[]).concat(product_list.category_areas);*/
+
+
+
+
+						_this.categorylist[product_index]=[].concat(response.data.category_list);	
+						_this.brands[product_index]=[].concat(product_list.brands);
+						_this.categoryareas[product_index]=[].concat(product_list.category_areas);
 						_this.$emit('hideLoading');
 					}
-					_this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
-					_this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);
+					/*_this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
+					_this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);*/
+					_this.banner[product_index]=[].concat(product_list.banner);
+					_this.products[product_index]=[].concat(product_list.products);
+
+
+
+
 					// console.log('=====================');
 					// console.log(_this.products);
 					// console.log('=====================');	
