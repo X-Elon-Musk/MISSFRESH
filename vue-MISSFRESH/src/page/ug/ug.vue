@@ -1,15 +1,17 @@
 <template>
 	<div class="ug">
-		<tabbar></tabbar>
+		<tabbar v-on:hideLoading="hideLoading"></tabbar>
 		<mfooter></mfooter>
 		<transition name="router-fade" mode="out-in">
 			<router-view v-if="!$route.meta.keepAlive"></router-view>
 		</transition>
+		<loading :loading="loading" zIndex="2"></loading>
 	</div>
 </template>
 <script>
 	import mfooter from 'src/components/mfooter/mfooter'
 	import tabbar from './component/tabbar'
+	import loading from 'src/components/loading/loading'
 
 	import {getValue} from 'src/config/mUtils'
 	export default{
@@ -29,14 +31,21 @@
 							color:"9868950"
 						}
 					}
-				}
+				},
+				loading: true
 			}
 		},
 		mounted: function () {
 		},
+		methods: {
+			hideLoading(){
+				this.loading=!this.loading;
+			}
+		},
 		components: {
 	    	mfooter,
-	    	tabbar
+	    	tabbar,
+	    	loading
 	    }
 	}
 </script>

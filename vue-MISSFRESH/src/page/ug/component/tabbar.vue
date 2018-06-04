@@ -176,7 +176,7 @@
 		</div>
 		<!-- <div class="img" id="footer"><img src="../../images/carousel/0.jpg"></div> -->
 	
-		<loading :loading="loading"></loading>
+		<loading :loading="loading" zIndex="1"></loading>
 	</div>
 </template>
 <script>
@@ -267,6 +267,7 @@
 						_this.categorylist[product_index]=(_this.categorylist[product_index]||[]).concat(response.data.category_list);	
 						_this.brands[product_index]=(_this.brands[product_index]||[]).concat(product_list.brands);
 						_this.categoryareas[product_index]=(_this.categoryareas[product_index]||[]).concat(product_list.category_areas);	
+						_this.$emit('hideLoading');
 					}
 					_this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
 					_this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);
@@ -274,6 +275,7 @@
 					// console.log(_this.products);
 					// console.log('=====================');	
 					_this.loading=false;
+
 					callback&&callback();
 				})
 				.catch(function (error) {
