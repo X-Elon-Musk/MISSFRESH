@@ -41,8 +41,8 @@
 			suggestionLocation: function (callback) {
 				let _this=this;
 				if (this.inputVaule) {
-					let keyword=this.inputVaule;
-					let cityName=this.s_choseCity;
+					let keyword=this.inputVaule,
+					cityName=this.s_choseCity;
 					// console.log(keyword);
 					//post方法
 					this.axios.post('http://localhost:3390/position/locationsuggestion', {
@@ -57,7 +57,6 @@
 						if (response.data.status==0) {
 							_this.searchResult=[].concat(response.data.data);
 						}
-					  	console.log(response.data);
 					})
 					.catch(function (error) {
 					  	console.log(error);

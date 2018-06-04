@@ -27,7 +27,7 @@
         },
 		methods: {
 			...mapMutations([
-                'SET_POSITION'
+                'SET_POSITION', 'SET_VIEWTYPE'
             ]),
             //获得城市列表
 			getCityList(){
@@ -48,10 +48,13 @@
 					province: city.province||'',
 					district: city.district||''
 				};
-				console.log(chosecity);
 				this.SET_POSITION({
 					type: 0,
 					city: chosecity
+				});
+				this.SET_VIEWTYPE({
+					is_chrome_city: city.is_chrome_city,
+					ordering: city.ordering
 				});
 				this.$router.push('/ug/addressChose');
 			}

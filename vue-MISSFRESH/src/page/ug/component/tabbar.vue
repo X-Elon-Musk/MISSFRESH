@@ -2,7 +2,7 @@
 	<div class="tabbar">
         <div id="top">
         	<!-- <div class="addr"></div> -->
-        	<ugHeader :choseAddress="choseAddress"></ugHeader>
+        	<ugHeader :view="view"></ugHeader>
         	<div class="swiper-container tab-nav" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
         			<div class="swiper-slide" v-for="(item,index) in categorylist[0]" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index" :style="{backgroundImage:item.category_image.indexOf('icon')>0?`url(${item.category_image})`:'none'}">
@@ -184,7 +184,6 @@
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
     import qs from 'qs';
-    // import {isArray} from 'src/config/mUtils'
 
   	import ugHeader from './component/ugHeader'
     import classify from './component/classify'
@@ -215,26 +214,23 @@
 				//上滑加载滑动的位置
 				translate: 0,
 				//分类列表
-				// categorylist: [],
 				categorylist: {},
 				//banner
-				// banner: [],
 				banner: {},
 				//品牌
-				// brands: [],
 				brands: {},
 				//分类区域
-				// categoryareas: [],
 				categoryareas: {},
 				//产品
-				// products: [],
 				products: {},
 				//loading组件状态
 				loading: false,
 				//导航移动的最大距离
 				maxLeft: 0,
 				//种类数据加载情况
-				product_index: {}
+				product_index: {},
+				// 配送的信息
+				view: {}
 			}
 		},
 		mounted (){
@@ -245,19 +241,12 @@
 				})
 			});
 			this.getDataPosition();
+			this.getView();
 		},
 		computed: {
 	    	...mapState([
-                's_currentRegion', 's_choseAddress'
+                's_viewType'
             ]),
-            //选择的配送地址
-            choseAddress: function () {
-            	if (this.s_choseAddress) {
-            		return this.s_choseAddress;
-            	} else{
-            		return '';
-            	}
-            },
         },
 		methods: {
 			...mapMutations([
@@ -281,9 +270,9 @@
 					}
 					_this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
 					_this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);
-					console.log('=====================');
-					console.log(_this.products);
-					console.log('=====================');	
+					// console.log('=====================');
+					// console.log(_this.products);
+					// console.log('=====================');	
                   	
 					_this.loading=false;
 					callback&&callback();
@@ -343,6 +332,21 @@
 				  	console.log(error);
 				});	*/	
 			},
+			//获取配送的类型信息
+			getView() {
+				var _this=this;
+				this.axios.get('http://localhost:3390/position/view',{
+			    	params: {
+				      	type: _this.s_viewType
+				    }
+				})
+				.then(function (response) {
+					_this.view=response.data;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			},
 			//导航栏
 			tab() {
 				var _this=this;
@@ -388,7 +392,6 @@
 			},
 			//点击导航	
 			tabClick(index,event) {
-				console.log(1111);
 				/*this.tabIndex=index;
 				//对应的内容显示
 				this.pageSwiper.slideTo(index, 0);*/

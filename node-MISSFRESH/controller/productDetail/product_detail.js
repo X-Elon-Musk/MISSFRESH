@@ -19,7 +19,6 @@ export default class ProductDetail{
         this.getProductDetail=this.getProductDetail.bind(this);
     }
     async getProductDetail(req, res, next){
-        // console.log(req.query);
         let product_id=parseInt(req.query.product_id),
         product_index=parseInt(req.query.product_index);
 

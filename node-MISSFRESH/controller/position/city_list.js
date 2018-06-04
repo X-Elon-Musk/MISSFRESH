@@ -15,8 +15,6 @@ export default class CityList extends MissMysql{
 		await this.cityAnalysis(10, '华北');
 		await this.cityAnalysis(9, '华南');
 		await this.cityAnalysis(8, '华东');
-		
-    	// return cityList;
     	res.send(this.cityList);
 	}
 	//分析城市信息
@@ -35,7 +33,6 @@ export default class CityList extends MissMysql{
 			}			
 		}
 		this.cityList.push(city_list);
-		// return this.cityList;
 	}
 }
 

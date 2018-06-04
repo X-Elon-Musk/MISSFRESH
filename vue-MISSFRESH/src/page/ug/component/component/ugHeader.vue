@@ -1,50 +1,45 @@
 <template>
     <div class="clearfix ug-header">
-    	<div class="delivery-info" @click="goAddressChose">
+    	<!-- <div class="delivery-info" @click="goAddressChose"> -->
+    	<router-link :to="{path: '/ug/addressChose'}" tag="div" class="delivery-info">
 	        <div class="delivery-time">
-	        	<img src="~images/icon/delivery-time-0.png" alt="" v-if="deliveryTime=='tomorrow'">
-	        	<img src="~images/icon/delivery-time-0.png" alt="" v-else-if="deliveryTime=='hours'">
-	        	
+	        	<img :src="view.img_url" alt="">
 	        </div>
 	        <div class="delivery-place">
 	        	{{choseAddress}}
 	        </div>
-	        <div class="short-tips" v-show="support" @click.stop="closeTips">本城市支持会员1小时达，选择详细地址完成匹配</div>
-        </div>
-        <!-- <div class="f_r search-button"></div>    -->
+	        <div class="short-tips" v-show="tips" @click.stop="closeTips">{{view.first_page_addr_text}}</div>
+        <!-- </div> -->
+        </router-link>
         <router-link :to="{path: '/ug/search'}" tag="div" class="f_r search-button"></router-link>
     </div>  
 </template>
 <script>
-	import {mapState, mapMutations} from 'vuex'
+	import {mapState} from 'vuex'
 	export default{
 		data(){
 			return {
-				//送货到家时间
-				deliveryTime: 'tomorrow',
-				//本城市是否支持会员1小时达
-				support: true
+				//提示信息显示
+				tips: true
 			}
 		},
-		props: ['choseAddress'],
-		computed: {
-			...mapState([
-                's_currentCity', 's_choseCity'
-            ])
+		props: ['view'],
+        computed: {
+	    	...mapState([
+                's_choseAddress'
+            ]),
+            //选择的配送地址
+            choseAddress: function () {
+            	return this.s_choseAddress ? this.s_choseAddress : '';
+            },
         },
 		methods: {
-			...mapMutations([
-                'SET_CHOSECITY'
-            ]),
 			closeTips: function () {
-				this.support=false;
+				this.tips=false;
 			},
-			goAddressChose: function () {
-				this.SET_CHOSECITY({
-					choseCity: this.s_currentCity
-				});
-				this.$router.push('/ug/addressChose');
-			}			
+			// goAddressChose: function () {
+			// 	this.$router.push('/ug/addressChose');
+			// }			
 		}
 	}
 </script>
