@@ -8,7 +8,7 @@
 	        <div class="delivery-place">
 	        	{{choseAddress}}
 	        </div>
-	        <div class="short-tips" v-show="tips" @click.stop="closeTips">{{view.first_page_addr_text}}</div>
+	        <div class="short-tips" v-show="tips&&view.first_page_addr_text" @click.stop="closeTips">{{view.first_page_addr_text}}</div>
         <!-- </div> -->
         </router-link>
         <router-link :to="{path: '/ug/search'}" tag="div" class="f_r search-button"></router-link>
@@ -118,6 +118,70 @@
 			// background: url(~images/icon/search.png) no-repeat center;
 			// background-size: 1.2rem;
 			.bg(24px,100%,transparent,'~images/icon/search.png',1.2rem);
+		}
+	}
+	.page-search{
+		position: absolute; 
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: 4; 
+		background: #fff;
+		overflow-y: auto;
+		color: @color_common;
+		.search-box{
+			background-color: #fff;
+			color: #4b4b4b;
+			box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.1);
+			border-bottom: none;
+			top: 0;
+			position: fixed;
+			border-top-width: 0;
+			width: 100%;
+			height: @header_height;
+			padding: 6px 4%;
+			box-sizing: border-box;
+			.search-bar{
+				.wh(100%,100%);
+				.search-form{
+					display: block;
+					.wh(100%,100%);
+					position: relative;
+					.search-logo{
+						position: absolute;
+						left: 0;
+						top: 1px;
+						.bg(24px,24px,transparent,'~images/icon/search-logo.png',66% 66%);
+					}
+					.search-input{
+						background-color: #f5f5f5;
+						.wh(100%,100%);
+						border-radius: 0.25rem;
+						font-size: 0.875rem;
+						text-indent: 1.875rem;
+						border: none;
+						outline: none;
+					}
+					.search-submit{
+						display: none;
+					}
+				}
+			}
+		}
+		.search-result{
+			.wh(auto, 100%);
+			padding: 42px 4% 0;
+			box-sizing: border-box;
+			background: #fff;
+			.search-list{
+				color: #4C4440;
+				border-bottom: 1px solid #f5f5f5;
+				line-height: 1.6em;
+				font-size: 0.7em;
+				padding: 0.35em 0;
+				
+			}
 		}
 	}
 </style>

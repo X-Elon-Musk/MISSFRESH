@@ -122,7 +122,6 @@ export default {
 				}
 			})				
 		}
-		// console.log(region);
 		let currentcity = parameter['city']&&parameter['city']['name'],
 		choseaddress = parameter['building']&&parameter['building']['name'] || parameter['city']&&parameter['city']['name'];
 		state.s_choseRegion = {...region};

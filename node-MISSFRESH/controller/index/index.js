@@ -12,7 +12,6 @@ export default class MissIndex{
         this.getMissIndex=this.getMissIndex.bind(this);
     }
     async getMissIndex(req, res, next){
-        // console.log(req.query);
         let product_index=parseInt(req.query.product_index);
 
         let product_list,missindex;

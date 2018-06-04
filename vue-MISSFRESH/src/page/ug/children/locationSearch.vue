@@ -1,5 +1,5 @@
 <template>
-    <div class="location-search">
+    <div class="location-search page-search">
         <div class="search-box">
         	<div class="search-bar">
         		<form class="search-form" v-on:submit.prevent>
@@ -10,9 +10,9 @@
 	        	</form>
         	</div>
         </div>
-		<ul class="location-result">
-			<li class="location-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)">
-			<!-- <li class="location-list" v-for="(item,index) in searchResult" :key="index"> -->
+		<ul class="search-result">
+			<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)">
+			<!-- <li class="search-list" v-for="(item,index) in searchResult" :key="index"> -->
 				<div class="location-title">{{item.title}}</div> 
 				<div class="location-desc">{{item.address}}</div>
 			</li>
@@ -125,70 +125,8 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.location-search{
-		position: absolute; 
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		z-index: 4; 
-		background: #fff;
-		overflow-y: auto;
-		color: @color_common;
-		// background: @bg_color;
-		.search-box{
-			background-color: #fff;
-			color: #4b4b4b;
-			box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.1);
-			border-bottom: none;
-			top: 0;
-			position: fixed;
-			border-top-width: 0;
-			width: 100%;
-			height: @header_height;
-			padding: 4px 4%;
-			box-sizing: border-box;
-			.search-bar{
-				.wh(100%,100%);
-				.search-form{
-					display: block;
-					.wh(100%,100%);
-					position: relative;
-					.search-logo{
-						position: absolute;
-						left: 0;
-						top: 0;
-						.bg(28px,28px,transparent,'~images/icon/search-logo.png',76% 76%);
-					}
-					.search-input{
-						background-color: #f5f5f5;
-						.wh(100%,100%);
-						border-radius: 0.25rem;
-						font-size: 0.875rem;
-						text-indent: 1.875rem;
-						border: none;
-						outline: none;
-					}
-					.search-submit{
-						display: none;
-					}
-				}
-			}
-		}
-		.location-result{
-			.wh(auto, 100%);
-			padding: 42px 4% 0;
-			box-sizing: border-box;
-			background: #fff;
-			.location-list{
-				color: #4C4440;
-				border-bottom: 1px solid #f5f5f5;
-				line-height: 1.6em;
-				font-size: 0.7em;
-				padding: 0.35em 0;
-				.location-title{
-					font-weight: 700;
-				}
-			}
+		.location-title{
+			font-weight: 700;
 		}
 	}
 </style>

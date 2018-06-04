@@ -2,7 +2,7 @@
 
 import MissMethods from '../../prototype/missMethods.js'
 
-import ProductFingerprints from '../productDetail/product_finger_prints.js'
+import ProductFingerprints from '../productdetail/product_finger_prints.js'
 
 export default class SafeDetection{
     constructor(){

@@ -451,3 +451,30 @@ vip_price_pro:{price_up: {show_type: 2, color: 9868950, price: 1990, name: ""},�
 		name:""
 		price:1990
 		show_type:2
+
+
+// 商品搜索
+{msg: "成功", code: 0, data: [,…], success: true}
+	code:0
+	data:[,…]
+		0:{trans_title: "以下为次日达商品", trans_type_image: "https://j-image.missfresh.cn/img_20170228112712281.png",…}
+			active_item:[{score: 551.9273071289062, nationwide: 0, sku: "p-xrhb-jsd-p-TJjhszq138g*2", stock: 2009,…},…]
+				0:{score: 551.9273071289062, nationwide: 0, sku: "p-xrhb-jsd-p-TJjhszq138g*2", stock: 2009,…}
+					displayName:"金晔原味山楂球138g"
+					nationwide:0
+					score:551.9273071289062
+					sku:"p-xrhb-jsd-p-TJjhszq138g*2"
+					stock:2009
+				1:{score: 551.9273071289062, nationwide: 0, sku: "p-HBjyszq138g", stock: 4018,…}
+				2:{score: 551.9273071289062, nationwide: 0, sku: "p-szbbszt*128g", stock: 2615,…}
+				3:{score: 427.3393249511719, nationwide: 0, sku: "p-sykxsz90g", stock: 685, displayName: "素颜空心山楂90g"}
+				4:{score: 406.29217529296875, nationwide: 0, sku: "p-ssszt100g", stock: 712, displayName: "桑葚山楂条100g"}
+				5:{score: 326.0097351074219, nationwide: 0, sku: "p-TJjhszq138g*2", stock: 2009,…}
+				6:{score: 271.0546417236328, nationwide: 0, sku: "p-zmgszgt-700g", stock: 644,…}
+				7:{score: 237.5965087890625, nationwide: 0, sku: "p-trfwszlal-2d", stock: 370,…}
+			inactive_item:[]
+			trans_title:"以下为次日达商品"
+			trans_type:"nextday"
+			trans_type_image:"https://j-image.missfresh.cn/img_20170228112712281.png"
+		msg:"成功"
+		success:true

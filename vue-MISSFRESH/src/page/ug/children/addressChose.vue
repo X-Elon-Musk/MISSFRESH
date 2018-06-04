@@ -20,22 +20,18 @@
     </div>  
 </template>
 <script>
-	import {mapState, mapMutations} from 'vuex'
+	import {mapMutations} from 'vuex'
 	import {getStore} from 'src/config/mUtils.js'
 	export default{
 		data(){
 			return {
-				// refreshtext: '正在获取'
 				refreshtext: ''
 			}
 		},
 		computed: {
-	    	...mapState([
-                's_currentRegion'
-            ]),
-            //当前城市
+	    	//当前城市
             currentCity: function () {
-            	return this.refreshtext||getStore('currentCity');
+            	return this.refreshtext || getStore('currentCity');
             },
             //选择的城市
             choseCity: function () {
@@ -48,8 +44,8 @@
             ]),
 			//刷新当前位置
 			locationRefresh(){
-				this.refreshtext="正在获取";
 				let _this=this;
+				this.refreshtext="正在获取";
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
 					_this.SET_CURRENTCITY({
