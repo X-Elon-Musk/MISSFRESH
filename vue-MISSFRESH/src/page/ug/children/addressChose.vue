@@ -5,8 +5,8 @@
     	</div>
     	<div class="address-bar">
     		<div class="address-input">
-    			<router-link :to="{path: '/ug/citylist'}" tag="div" class="address-city">{{choseCity}}</router-link>
-    			<router-link :to="{path: '/ug/locationsearch'}" tag="div" class="address-position">请输入要收货的小区/写字楼</router-link>
+    			<router-link :to="{path: '/ug/citylist'}" replace tag="div" class="address-city">{{choseCity}}</router-link>
+    			<router-link :to="{path: '/ug/locationsearch'}" replace tag="div" class="address-position">请输入要收货的小区/写字楼</router-link>
     		</div>
     	</div>
     	<div class="trans-tip">因各地区商品和配送服务不同，请您选择准确收货地址</div>
@@ -37,6 +37,22 @@
             choseCity: function () {
             	return getStore('choseCity');
             }
+        },
+        beforeRouteLeave(to, from, next){
+        	console.log(to);
+        	// if (to.name=='http://localhost:8080/#/ug') {
+        	if (to.fullPath=='/ug/') {
+        		from.meta.keepAlive=true;
+        		to.meta.keepAlive=true;
+        		console.log(1);
+        	} else{
+        		from.meta.keepAlive=false;
+        		// to.meta.keepAlive=true;
+        		// this.$route.meta.keepAlive=true;
+        		console.log(this.$route.meta.keepAlive);
+        		console.log(2);
+        	}
+        	next();
         },
 		methods: {
 			...mapMutations([

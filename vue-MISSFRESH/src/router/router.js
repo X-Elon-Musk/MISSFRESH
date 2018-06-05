@@ -45,6 +45,8 @@ export default [{
 		{
 			path: '/ug',
 			component: ug,
+            // meta: {keepAlive: true},
+            meta: {keepAlive: false},
             children: [{
                 path: 'productDetail', //商品详情页
                 component: productDetail,

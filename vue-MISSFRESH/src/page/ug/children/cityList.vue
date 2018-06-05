@@ -2,8 +2,8 @@
     <div class="city-list">
     	<div class="list-item" v-for="(item, index) in citylist" :key="index">
     		<h4 class="area-list">{{item.name}}</h4>
-    		<!-- <span class="area-city" v-for="(city, city_index) in item.areas" :key="city_index" @click="changeCurrentRegion(city)">{{city.name}}</span> -->
-    		<router-link :to="{path: '/ug/addressChose'}" tag="span" v-for="(city, city_index) in item.areas" :key="city_index" @click="changeCurrentRegion(city)" class="area-city">{{city.name}}</router-link>
+    		<span class="area-city" v-for="(city, city_index) in item.areas" :key="city_index" @click="changeCurrentRegion(city)">{{city.name}}</span>
+    		<!-- <router-link :to="{path: '/ug/addressChose'}" tag="span" v-for="(city, city_index) in item.areas" :key="city_index" @click="changeCurrentRegion(city)" class="area-city">{{city.name}}</router-link> -->
     	</div>
     	<div class="area-tip">我们将为更多城市提供优质服务，敬请期待</div>
     </div>  
@@ -57,7 +57,8 @@
 					is_chrome_city: city.is_chrome_city,
 					ordering: city.ordering
 				});
-				this.$router.push('/ug/addressChose');
+				// this.$router.push('/ug/addressChose');
+				this.$router.replace('/ug/addressChose');
 			}
 		}
 	}

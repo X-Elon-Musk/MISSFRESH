@@ -243,6 +243,9 @@
 			this.getDataPosition();
 			this.getView();
 		},
+		activated(){
+			console.log(444444);
+		},
 		computed: {
 	    	...mapState([
                 's_viewType'

@@ -35,6 +35,9 @@
 				loading: true
 			}
 		},
+		activated(){
+			console.log(333333);
+		},
 		mounted: function () {
 		},
 		methods: {
