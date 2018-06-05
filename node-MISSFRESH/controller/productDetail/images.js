@@ -9,7 +9,7 @@ class Images extends MissMysql{
 	}
 	async getImages(product_id){
 		let sqlresult,result=[];
-		sqlresult=await this.missMysql('images', {
+		sqlresult=await this.missSelectMysql('images', {
 			image: 'image'
 		},{
 			product_id: product_id

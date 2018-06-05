@@ -205,8 +205,8 @@
 				clientWidth: 0,
 				//导航的宽度
 				navWidth: 0,
-				//计数，后面需要去除
-				num: 0,
+				// //计数，后面需要去除
+				// num: 0,
 				//“分类”显示状态
 				classifyState: false,
 				//上滑加载初始的位置
@@ -234,6 +234,7 @@
 			}
 		},
 		mounted (){
+			console.log(1234567);
 			this.getDataPageIndex(0, () => {
 				this.$nextTick(() => {
 					if (!this.navSwiper) this.tab();
@@ -245,6 +246,13 @@
 		},
 		activated(){
 			console.log(444444);
+			this.getDataPageIndex(0, () => {
+				this.$nextTick(() => {
+					if (!this.navSwiper) this.tab();
+					if (!this.pageSwiper) this.page();
+				})
+			});
+			this.getView();
 		},
 		computed: {
 	    	...mapState([

@@ -9,7 +9,7 @@ class ActiveItem extends MissMysql{
 	}
 	async getActiveItem(name){
 		let sqlresult,result=[];
-		sqlresult=await this.missMysql('products', {}, {
+		sqlresult=await this.missSelectMysql('products', {}, {
 			name: name
 		}, {}, true);
 		sqlresult.forEach((item) => {

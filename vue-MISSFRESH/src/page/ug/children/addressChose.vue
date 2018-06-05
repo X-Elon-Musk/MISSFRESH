@@ -40,10 +40,11 @@
         },
         beforeRouteLeave(to, from, next){
         	console.log(to);
+        	console.log(from);
         	// if (to.name=='http://localhost:8080/#/ug') {
         	if (to.fullPath=='/ug/') {
         		from.meta.keepAlive=true;
-        		to.meta.keepAlive=true;
+        		// to.meta.keepAlive=true;
         		console.log(1);
         	} else{
         		from.meta.keepAlive=false;
@@ -154,11 +155,12 @@
 			}
 		}
 		.trans-tip{
-			font-size: 0.7em;
-			color: #f4a22d;
+			// font-size: 0.7em;
+			// color: #f4a22d;
 			padding-left: 0.9em;
 			height: 2em;
-			line-height: 2em;
+			// line-height: 2em;
+			.font(2em,0.7em,#f4a22d);
 		}
 		.location-bar{
 			font-size: 0.8em;
@@ -181,8 +183,8 @@
 			}
 			.location-refresh{
 				float: right;
-				width: 2.5em;
-				height: 2.5em;
+				// width: 2.5em;
+				// height: 2.5em;
 				.bg(2.5em,2.5em,transparent,'~images/icon/location-refresh.png',70% 70%);
 			}
 		}

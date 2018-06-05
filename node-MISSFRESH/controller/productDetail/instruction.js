@@ -8,7 +8,7 @@ class Instruction extends MissMysql{
 		this.getInstruction=this.getInstruction.bind(this);
 	}
 	async getInstruction(product_id){
-		let result=await this.missMysql('instruction', {
+		let result=await this.missSelectMysql('instruction', {
 			image: 'image'
 		},{
 			product_id: product_id

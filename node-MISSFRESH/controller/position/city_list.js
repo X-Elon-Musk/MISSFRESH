@@ -20,7 +20,7 @@ export default class CityList extends MissMysql{
 	//分析城市信息
 	async cityAnalysis(area_ordering,name){
 		let city_list={};
-		let cities=await this.missMysql('areas', {}, {
+		let cities=await this.missSelectMysql('areas', {}, {
 			area_ordering: area_ordering
 		}, {
 			ordering: 'ordering'

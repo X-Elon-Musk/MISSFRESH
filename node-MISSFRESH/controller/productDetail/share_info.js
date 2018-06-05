@@ -8,7 +8,7 @@ class ShareInfo extends MissMysql{
 		this.getShareInfo=this.getShareInfo.bind(this);
 	}
 	async getShareInfo(product_id){
-		let result=await this.missMysql('share_info', {
+		let result=await this.missSelectMysql('share_info', {
 			image_url: 'image_url'
 		},{
 			product_id: product_id

@@ -10,10 +10,10 @@ class VipPricePro extends MissMysql{
 	}
 	async getVipPricePro(product_id){
 		let result={};
-		let price_up=await this.missMysql('price_up', {},{
+		let price_up=await this.missSelectMysql('price_up', {},{
   			product_id: product_id
   		});
-        let price_down=await this.missMysql('price_down', {},{
+        let price_down=await this.missSelectMysql('price_down', {},{
   			product_id: product_id
   		});
   		price_up[0].price=await MissMethods.priceChange(price_up[0].price);

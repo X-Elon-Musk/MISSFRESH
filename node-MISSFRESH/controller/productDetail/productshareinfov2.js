@@ -8,7 +8,7 @@ class ProductShareInfoV2 extends MissMysql{
 		this.getProductShareInfoV2=this.getProductShareInfoV2.bind(this);
 	}
 	async getProductShareInfoV2(product_id){
-		let result=await this.missMysql('product_share_info_v2', {
+		let result=await this.missSelectMysql('product_share_info_v2', {
 			prodcut_share_bg_img: 'prodcut_share_bg_img',
 			product_integarl_icon: 'product_integarl_icon',
 			share_bt_bg_img: 'share_bt_bg_img',

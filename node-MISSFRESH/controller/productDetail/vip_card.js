@@ -8,7 +8,7 @@ class VipCard extends MissMysql{
 		this.getVipCard=this.getVipCard.bind(this);
 	}
 	async getVipCard(product_id){
-		let result=await this.missMysql('vip_card', {
+		let result=await this.missSelectMysql('vip_card', {
 			icon_img: 'icon_img'
 		},{
 			product_id: product_id

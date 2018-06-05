@@ -8,7 +8,7 @@ class Description extends MissMysql{
 		this.getDescription=this.getDescription.bind(this);
 	}
 	async getDescription(product_id){
-		let result=await this.missMysql('description', {},{
+		let result=await this.missSelectMysql('description', {},{
 			product_id: product_id
 		});
     	return result;

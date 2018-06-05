@@ -14,7 +14,7 @@ class Products extends MissMysql{
 	}
 	async getProducts(product_index){
 		//商品基本信息
-		let result=await this.missMysql('products', {
+		let result=await this.missSelectMysql('products', {
 			image: 'image',
 			cart_image: 'cart_image',
 			promote_tag: 'promote_tag',
@@ -25,7 +25,7 @@ class Products extends MissMysql{
 	  	await Promise.all(result.map(async (item)=> {
 	  		//没有product_tag，设置为空
 	  		item.promote_tag=item.promote_tag===dirname?'':item.promote_tag;
-	  		let product_tags=await this.missMysql('product_tags', {},{
+	  		let product_tags=await this.missSelectMysql('product_tags', {},{
 	  			product_id: item.product_id
 	  		});
 	  		item.product_tags=[];

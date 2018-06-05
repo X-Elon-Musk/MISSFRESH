@@ -1,5 +1,9 @@
 'use strict';
 import MissMysql from './missmysql.js'
+const SMSClient = require('@alicloud/sms-sdk')
+// ACCESS_KEY_ID/ACCESS_KEY_SECRET 根据实际申请的账号信息进行替换
+const accessKeyId = 'LTAINkfU7xNmo0qb'
+const secretAccessKey = 'WNce8J1x0TQFkb57jYOnXW2xyM8pD7'
 
 class MissMethods extends MissMysql{
 	constructor(){
@@ -21,6 +25,44 @@ class MissMethods extends MissMysql{
         	}
         })
     }
+    //发送短信
+    async smsClient(telephone,message) {
+	    let result=await new Promise((resolve, reject) =>{
+			//初始化sms_client
+		    let smsClient = new SMSClient({accessKeyId, secretAccessKey});
+		    //发送短信
+		    smsClient.sendSMS({
+		        PhoneNumbers: telephone,
+		        SignName: '李超',
+		        TemplateCode: 'SMS_121165464',
+		        TemplateParam: '{"code":'+message+'}'
+		    }).then(function (result) {
+		        let {Code}=result;
+		        if (Code === 'OK') {
+		            //处理返回参数
+		            resolve(true);	
+		        }
+		    }, function (err) {
+		        console.log('获取手机验证码错误:'+err);
+		        if(err){
+	              	reject(err)
+	            }
+		    })
+		})
+	    return result;
+	} 
+	//生成随机短信验证码
+	async createParam() {
+	    let param='';
+	    for (let i=0;i<6;i++) {
+	        param+=Math.floor(Math.random()*10);
+	    }  
+	    return param;
+	}
+	//判断是否是string
+	async isString(obj){
+		return Object.prototype.toString.call(obj)=='[object String]';
+	} 
 }
 
 export default new MissMethods();

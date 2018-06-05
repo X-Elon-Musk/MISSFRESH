@@ -8,7 +8,7 @@ class Banner extends MissMysql{
 		this.getBanner=this.getBanner.bind(this);
 	}
 	async getBanner(product_index){
-		let result=await this.missMysql('banner', {
+		let result=await this.missSelectMysql('banner', {
 			image: 'image'
 		},{
 			product_index: product_index

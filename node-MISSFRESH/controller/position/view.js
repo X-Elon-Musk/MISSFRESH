@@ -9,7 +9,7 @@ export default class View extends MissMysql{
     async getView(req, res, next){
         let type = parseInt(req.query.type);
 
-        let view=await this.missMysql('view', {
+        let view=await this.missSelectMysql('view', {
             img_url: 'img_url'
         },{
             type: type

@@ -1,6 +1,6 @@
-var crypto = require("crypto");
+let crypto = require("crypto");
 module.exports = function(mingma){
-    var md5 = crypto.createHash('md5');
-    var password = md5.update(mingma).digest('base64');
+    let md5 = crypto.createHash('md5');
+    let password = md5.update(mingma).digest('base64');
     return password;
 }

@@ -1,9 +1,9 @@
 'use strict';
 
 
-var express = require("express");
-var app = express();
-var session =require('express-session');
+let express = require("express");
+let app = express();
+let session =require('express-session');
 
 
 import router from './router/index.js';

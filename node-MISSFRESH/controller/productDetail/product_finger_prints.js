@@ -8,7 +8,7 @@ class ProductFingerprints extends MissMysql{
 		this.getProductFingerprints=this.getProductFingerprints.bind(this);
 	}
 	async getProductFingerprints(product_id){
-		let result=await this.missMysql('productFingerprints', {
+		let result=await this.missSelectMysql('productFingerprints', {
 			picUrl: 'picUrl',
 			src: 'src',
 			securityUnselectedTagUrl: 'securityUnselectedTagUrl'

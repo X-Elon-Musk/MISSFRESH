@@ -8,7 +8,7 @@ class Initial extends MissMysql{
 		this.getInitial=this.getInitial.bind(this);
 	}
 	async getInitial(product_id){
-		let result=await this.missMysql('products', {
+		let result=await this.missSelectMysql('products', {
 			image: 'image',
 			cart_image: 'cart_image',
 			promote_tag: 'promote_tag',

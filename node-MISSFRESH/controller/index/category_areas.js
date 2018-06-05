@@ -8,7 +8,7 @@ class CategoryAreas extends MissMysql{
 		this.getCategoryAreas=this.getCategoryAreas.bind(this);
 	}
 	async getCategoryAreas(product_index){
-		let result=await this.missMysql('category_areas', {
+		let result=await this.missSelectMysql('category_areas', {
 			image: 'image'
 		},{
 			product_index: product_index
