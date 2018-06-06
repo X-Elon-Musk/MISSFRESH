@@ -478,3 +478,13 @@ vip_price_pro:{price_up: {show_type: 2, color: 9868950, price: 1990, name: ""},�
 			trans_type_image:"https://j-image.missfresh.cn/img_20170228112712281.png"
 		msg:"成功"
 		success:true
+
+
+// verify-captcha
+{msg: "ok", access_token: "QVM4TGJpM25EdmFQRC8rMHdUa1ZDd0Vwdk4vM0FvNjhFMC9sKzhxa0hRRT0=",…}
+	access_token: "QVM4TGJpM25EdmFQRC8rMHdUa1ZDd0Vwdk4vM0FvNjhFMC9sKzhxa0hRRT0="
+	alert_info: ""
+	code: 0
+	has_bind_weixin: 0
+	msg: "ok"
+	user_id: 49931351

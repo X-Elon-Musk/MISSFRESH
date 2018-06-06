@@ -60,9 +60,32 @@ class MissMethods extends MissMysql{
 	    return param;
 	}
 	//判断是否是string
-	async isString(obj){
+	async isString(obj) {
 		return Object.prototype.toString.call(obj)=='[object String]';
 	} 
+	// 返回数据基本内容
+	async basicContent(code_key, msg_key, object) {
+		let code={
+			0: 0,
+			1: -1
+		},
+		msg={
+			0: 'ok',
+			1: '成功',
+			2: '失败'
+		};
+		let basiccontent={
+			code: code[code_key],
+			msg: msg[msg_key]
+		}
+		if (object) {
+			Object.keys(basiccontent).forEach(key => {
+				object[key]=basiccontent[key];
+			})	
+			basiccontent=object;		
+		}
+		return basiccontent;
+	}
 }
 
 export default new MissMethods();

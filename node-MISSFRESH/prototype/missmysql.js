@@ -16,12 +16,12 @@ export default class MissMysql{
 		this.missInsertMysql=this.missInsertMysql.bind(this);
 	}
 	//请求数据通用sql
-	async missSelectMysql(datasheet='', imageRequirment={}, whereRequirement={}, orderRequirement={}, fuzzy){
+	async missSelectMysql(datasheet='', image_requirment={}, where_requirement={}, order_requirement={}, fuzzy){
 		let sql='select *';
-		sql+=await this.imageRequirment(imageRequirment);	
+		sql+=await this.imageRequirment(image_requirment);	
 		sql+=' from '+datasheet;
-		sql+=await this.whereRequirement(whereRequirement, fuzzy);	
-		sql+=await this.orderRequirement(orderRequirement);	
+		sql+=await this.whereRequirement(where_requirement, fuzzy);	
+		sql+=await this.orderRequirement(order_requirement);	
 		// console.log(sql);
 		// return;
 		let result=await mysql(sql);
@@ -73,14 +73,7 @@ export default class MissMysql{
 			}
 		})
 		value=value.substr(0, value.lastIndexOf(','));
-
 		sql+=datasheet+' ('+column+') values ('+value+')';
-
-
-		// sql+=await this.imageRequirment(imageRequirment);	
-		// sql+=' from '+datasheet;
-		// sql+=await this.whereRequirement(whereRequirement, fuzzy);	
-		// sql+=await this.orderRequirement(orderRequirement);	
 		console.log(sql);
 		// return;
 		let result=await mysql(sql);
