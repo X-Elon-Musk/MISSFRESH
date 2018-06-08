@@ -59,8 +59,9 @@
 		mounted: function () {
 		},
 		methods: {
-			hideLoading(){
-				this.loading=!this.loading;
+			hideLoading(status){
+				this.loading=status;
+				console.log(this.loading);
 			}
 		},
 		components: {

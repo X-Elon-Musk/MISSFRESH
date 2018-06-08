@@ -42,16 +42,18 @@
         	console.log(to);
         	console.log(from);
         	// if (to.name=='http://localhost:8080/#/ug') {
-        	if (to.fullPath=='/ug/') {
-        		from.meta.keepAlive=true;
-        		// to.meta.keepAlive=true;
+        	if (to.fullPath=='/ug') {
+        		// from.meta.keepAlive=false;
+        		to.meta.keepAlive=true;
         		console.log(1);
+        		
         	} else{
-        		from.meta.keepAlive=false;
+        		// from.meta.keepAlive=false;
         		// to.meta.keepAlive=true;
         		// this.$route.meta.keepAlive=true;
-        		console.log(this.$route.meta.keepAlive);
+        		// console.log(this.$route.meta.keepAlive);
         		console.log(2);
+        		// this.$router.push({path: '/ug/citylist'})
         	}
         	next();
         },

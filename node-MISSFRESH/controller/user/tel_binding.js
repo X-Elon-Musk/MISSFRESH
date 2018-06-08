@@ -60,7 +60,9 @@ class TelBinding extends MissMysql{
     async telBinding(req, res, next){
         let telephone=parseInt(req.query.telephone),
         message=parseInt(req.query.message);
-        let sessionTel=req.session.telephone,insertStatus=false;
+        let sessionTel=req.session.telephone,
+        insertStatus=false,
+        basiccontent;
         Object.keys(sessionTel).forEach(key => {
             if (telephone==key&&message==sessionTel[key]) {
                 insertStatus=true;           
@@ -72,9 +74,13 @@ class TelBinding extends MissMysql{
                 message: message
             });   
             result?res.send('1'):res.send('-1');
+            basiccontent = result ? await MissMethods.basicContent(0, 0) : await MissMethods.basicContent(1, 1);
         } else{
-            res.send('-1');//注册成功  
+            basiccontent = await MissMethods.basicContent(1, 1);
         }
+
+        res.type('application/json');
+        res.jsonp(req.session);
 
         /*console.log('短信：',message);
         let smsStatus=await MissMethods.smsClient(telephone,message);

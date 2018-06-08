@@ -71,8 +71,8 @@ class MissMethods extends MissMysql{
 		},
 		msg={
 			0: 'ok',
-			1: '成功',
-			2: '失败'
+			1: '失败',
+			2: '成功'
 		};
 		let basiccontent={
 			code: code[code_key],

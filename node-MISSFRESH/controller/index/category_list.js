@@ -8,7 +8,7 @@ class CategoryList extends MissMysql{
 		this.getCategoryList=this.getCategoryList.bind(this);
 	}
 	async getCategoryList(product_index){
-		let result=await this.missMysql('category_list', {
+		let result=await this.missSelectMysql('category_list', {
 			image: 'image',
 			category_image: 'category_image'
 		},{

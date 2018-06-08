@@ -246,17 +246,53 @@
 		},
 		activated(){
 			console.log(444444);
-			this.getDataPageIndex(0, () => {
-				this.$nextTick(() => {
-					if (!this.navSwiper) this.tab();
-					if (!this.pageSwiper) this.page();
-				})
-			});
-			this.getView();
+			// this.getDataPageIndex(0, () => {
+			// 	this.$nextTick(() => {
+			// 		if (!this.navSwiper) this.tab();
+			// 		if (!this.pageSwiper) this.page();
+			// 	})
+			// });
+			// this.getView();
 		},
+		beforeRouteEnter(to, from, next){
+        	console.log(to);
+        	console.log(from);
+        	/*// if (to.name=='http://localhost:8080/#/ug') {
+        	if (to.fullPath=='/ug/') {
+        		from.meta.keepAlive=true;
+        		// to.meta.keepAlive=true;
+        		console.log(1);
+        	} else{
+        		from.meta.keepAlive=false;
+        		// to.meta.keepAlive=true;
+        		// this.$route.meta.keepAlive=true;
+        		console.log(this.$route.meta.keepAlive);
+        		console.log(2);
+        	}
+        	from.meta.keepAlive=false;*/
+        	next();
+        },
+        watch: {
+        	s_choseAddress: function () {
+        		console.log('============');
+        		console.log(this.s_choseAddress);
+        		console.log('============');
+        		console.log(this.$route);
+        		// if (this.s_choseAddress!=='') {
+        			this.getDataPageIndex(0, () => {
+						this.$nextTick(() => {
+							if (!this.navSwiper) this.tab();
+							if (!this.pageSwiper) this.page();
+						})
+					});
+					this.getView();			
+        		// }
+        		
+        	}
+        },
 		computed: {
 	    	...mapState([
-                's_viewType'
+                's_viewType', 's_choseAddress'
             ]),
         },
 		methods: {
@@ -285,7 +321,7 @@
 						_this.categorylist[product_index]=[].concat(response.data.category_list);	
 						_this.brands[product_index]=[].concat(product_list.brands);
 						_this.categoryareas[product_index]=[].concat(product_list.category_areas);
-						_this.$emit('hideLoading');
+						_this.$emit('hideLoading', false);
 					}
 					/*_this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
 					_this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);*/
