@@ -44,7 +44,7 @@
         	// if (to.name=='http://localhost:8080/#/ug') {
         	if (to.fullPath=='/ug') {
         		// from.meta.keepAlive=false;
-        		to.meta.keepAlive=true;
+        		// to.meta.keepAlive=true;
         		console.log(1);
         		
         	} else{

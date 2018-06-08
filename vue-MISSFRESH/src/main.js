@@ -8,7 +8,7 @@ import App from './App'
 import routes from './router/router'
 import {getValue} from 'src/config/mUtils'
 import store from './store'
-import './config/rem'
+// import './config/rem'
 
 
 
