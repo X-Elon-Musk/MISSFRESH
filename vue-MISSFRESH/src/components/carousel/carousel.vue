@@ -1,18 +1,6 @@
 <template>
 	<div class="swiper-container banner">
 		<div class="swiper-wrapper">
-			<!-- <div class="swiper-slide">
-				<img src="~images/carousel/0.jpg">
-			</div> -->
-			<!-- <div class="swiper-slide">
-				<img src="~images/carousel/1.jpg">
-			</div>
-			<div class="swiper-slide">
-				<img src="~images/carousel/2.jpg">
-			</div>
-			<div class="swiper-slide">
-				<img src="~images/carousel/3.jpg">
-			</div> -->
 			
 			<template v-if="link">
 				<router-link  v-for="(item,index) in banner" :key="index" :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}" tag="div" class="swiper-slide">
