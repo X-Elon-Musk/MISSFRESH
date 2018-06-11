@@ -1,6 +1,6 @@
 <template>
     <div class="header-component">
-        <span class="title">账户与安全</span>
+        <span class="title">{{title}}</span>
         <span class="back" @click="goBack"></span>
     </div>  
 </template>
@@ -15,7 +15,8 @@
 			goBack(){
 				this.$router.go(-1);
 			}
-		}
+		},
+		props: ['title']
 	}
 </script>
 <style lang="less">

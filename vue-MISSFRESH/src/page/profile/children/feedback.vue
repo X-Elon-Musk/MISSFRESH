@@ -1,6 +1,6 @@
 <template>
     <div class="profile-item-page feedback">
-    	<mheader></mheader>	
+    	<mheader :title="意见反馈"></mheader>	
         <div class="feedback-form">
         	<textarea class="feedback-text" placeholder="请写下您的意见或建议"></textarea>
         	<p class="tip">每一条反馈小鲜都会认真对待。我们将定期选出优秀反馈意见，发送积分奖励哦~</p>

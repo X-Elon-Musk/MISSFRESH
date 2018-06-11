@@ -48,3 +48,13 @@ export const removeStore=name=>{
     if (!name) return;
     window.localStorage.removeItem(name);
 }
+
+//正则匹配手机号
+export const testTele=(telephone)=>{
+    let myreg=/^[1][3,4,5,7,8][0-9]{9}$/;  
+    if (!myreg.test(telephone)) {  
+        return false;  
+    } else{  
+        return true;  
+    } 
+}

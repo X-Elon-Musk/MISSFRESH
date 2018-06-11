@@ -13,9 +13,10 @@ const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'car
 const cartDetail = r => require.ensure([], () => r(require('../page/cart/children/cartDetail')), 'cartDetail')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const safe = r => require.ensure([], () => r(require('../page/profile/children/safe')), 'safe')
+const phone = r => require.ensure([], () => r(require('../page/profile/children/phone')), 'phone')
 const feedback = r => require.ensure([], () => r(require('../page/profile/children/feedback')), 'feedback')
 const about_us = r => require.ensure([], () => r(require('../page/profile/children/about_us')), 'about_us')
-const frontend = r => require.ensure([], () => r(require('../page/profile/children/frontend')), 'frontend')
+const setting = r => require.ensure([], () => r(require('../page/profile/children/setting')), 'setting')
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
 const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
 const setusername = r => require.ensure([], () => r(require('../page/profile/children/children/setusername')), 'setusername')
@@ -98,6 +99,10 @@ export default [{
             children: [{
                     path: 'safe',//账户与安全
                     component: safe,
+                },
+                {
+                    path: 'phone',//绑定手机
+                    component: phone,
                 },{
                     path: 'feedback',//意见反馈
                     component: feedback,
@@ -105,8 +110,8 @@ export default [{
                     path: 'about_us',//关于我们
                     component: about_us,
                 },{
-                    path: 'frontend',//设置
-                    component: frontend,
+                    path: 'setting',//设置
+                    component: setting,
                 },{
                     path: 'info', //个人信息详情页
                     component: info,
