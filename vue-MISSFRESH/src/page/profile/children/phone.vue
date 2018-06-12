@@ -6,14 +6,14 @@
         		<li class="list-item">
         			<input v-model="telephone" type="tel" autofocus="autofocus" maxlength="11" placeholder="请输入手机号" class="panel-input panel-phone">
         			<i class="button-clear" v-show="telephone" @click="clear"></i>
-        			<button class="item-right" :disabled="disabled" @click="getCode">获取验证码</button>
+        			<button class="item-right" :disabled="disabled" @click="getCode" :class="{active:disabled}">{{!disabled?'获取验证码':'验证码发送'}}</button>
         		</li>
         		<li class="list-item">
-        			<input type="tel" maxlength="6" placeholder="输入验证码" class="panel-input panel-code">
+        			<input v-model="message" type="tel" maxlength="6" placeholder="输入验证码" class="panel-input panel-code">
         		</li>
         	</ul>
         	<div class="button-login">
-        		<div class="button-login-block">绑定</div>
+        		<div class="button-login-block" @click="submitMessage">绑定</div>
         		<h2 class="tip">绑定手机号有助于向您及时同步订单的最新进展</h2>
         	</div>
         </div>
@@ -27,8 +27,9 @@
 	export default{
 		data(){
 			return {
-				disabled: true,
-				telephone: ''
+				disabled: false,
+				telephone: '',
+				message: ''
 			}
 		},
 		methods: {
@@ -38,25 +39,20 @@
 			},
 			//点击“获取验证码”按钮，获取验证码
 	        getCode(){
-	            let _this=this;
-	            $('.get-code').click(function (event) {
-	                event.stopPropagation();
-	                _this.teleCode();
-	                $('.get-code').unbind().attr('disabled','disabled').css({
-	                    color: '#ccc'
-	                });
+	        	let _this=this;
+	        	if (!this.disabled) {
+	        		this.teleCode();
+		            this.disabled=true;
 	                let timer=setTimeout(function () {
-	                    $('.get-code').removeAttr('disabled').css({
-	                        color: '#34495e'
-	                    });
+	                    _this.disabled=false;
 	                    clearTimeout(timer);
-	                },120000)
-	            })
-	            // return 1;
+	                },120000)				
+	        	}
 	        },
 	        //ajax获取手机验证码
-	        teleCode: function () {
-	        	this.axios.get('http://localhost:3390/customer/telBinding',{
+	        teleCode(){
+	        	let _this=this;
+	        	this.axios.get('http://localhost:3390/customer/getBindingInfo',{
 			    	params: {
 				      	telephone: _this.telephone
 				    }
@@ -68,6 +64,40 @@
 				.catch(function (error) {
 				  	console.log(error);
 				});	
+	        },
+	        //短信登录
+	        submitMessage(){
+	            let _this=this;
+	            this.axios.get('http://localhost:3390/customer/telBinding',{
+			    	params: {
+				      	telephone: _this.telephone,
+				      	message: _this.message
+				    }
+				})
+				.then(function (response) {
+					console.log(response.data);
+
+				})
+				.catch(function (error) {
+				  	console.log(error);
+				});
+
+
+
+
+	            /*$.post('/login',{
+	                'mode': 'message',
+	                'telephone': this.telephone,
+	                'message': $('#identifying-code').val()
+	            },function (result) {
+	                if (result=='1') {
+	                    window.location='/notePages';
+	                } else if(result=='-1'){
+	                    _this.promptDom('手机号未绑定');
+	                } else if(result=='-2'){
+	                    _this.promptDom('验证码不正确');
+	                }
+	            })*/
 	        },
 		},
 		components: {
@@ -117,6 +147,11 @@
 					    border-radius: 5px;
 					    background: #fff;
 					}
+					.item-right.active{
+						color: @color_gray;
+						border-color: @color_gray;
+						// background: @color_gray;
+					}
 				}
 			}
 			.button-login{
@@ -132,7 +167,7 @@
 				}
 				.tip{
 					text-align: center;
-					color: #969696;
+					color: @color_gray;
 					font-size: 12px;
 				}
 			}
