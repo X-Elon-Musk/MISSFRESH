@@ -138,6 +138,14 @@ app.use(express.static("./public",{
 .
 
 ```
+#### 问题解决:
 
+- `req.session`存储必须配合res.send使用;
+```
+req.session.telephone[telephone]=message;
+let basiccontent = await MissMethods.basicContent(0, 0);
+res.type('application/json');
+res.jsonp(basiccontent);
+```
 
 
