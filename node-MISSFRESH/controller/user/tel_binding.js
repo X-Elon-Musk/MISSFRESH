@@ -34,7 +34,7 @@ class TelBinding extends MissMysql{
         message=parseInt(req.query.message);
         let sessionTel=req.session.telephone,
         mysqlStatus=false,
-        basiccontent,selectResult,insertResult;
+        basiccontent,selectResult,insertResult,userId;
         console.log(req.session);
         // console.log(req);
         // return;
@@ -51,14 +51,22 @@ class TelBinding extends MissMysql{
             });       
             if (selectResult.length>0) {
                 console.log('已经存在');  
-                insertResult=true;    
+                insertResult=true;   
+                // userId=selectResult[0].id;
             } else{
                 insertResult=await this.missInsertMysql('user', {
                     telephone: telephone,
                     message: message
                 }); 
+                selectResult=await this.missSelectMysql('user', {},{
+                    telephone: telephone
+                });
             }  
-            basiccontent = insertResult ? await MissMethods.basicContent(0, 0) : await MissMethods.basicContent(1, 1);
+            basiccontent = await MissMethods.basicContent(0, 0, {
+                userId: selectResult[0].id,
+                telephone: telephone
+            });
+            // basiccontent = insertResult ? await MissMethods.basicContent(0, 0) : await MissMethods.basicContent(1, 1);
         } else{
             basiccontent = await MissMethods.basicContent(1, 3);
         }

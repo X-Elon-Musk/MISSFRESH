@@ -21,6 +21,7 @@
 </template>
 <script>
 	import {testTele} from 'src/config/mUtils'
+	import {mapState, mapMutations} from 'vuex'
 
 	import mheader from 'src/components/mheader/mheader'
 	import profileItem from '../component/profileItem'
@@ -33,6 +34,9 @@
 			}
 		},
 		methods: {
+			...mapMutations([
+           		'SET_USERINFO'
+            ]),
 			//清除输入内容
 			clear(){
 				this.telephone='';
@@ -76,7 +80,14 @@
 				})
 				.then(function (response) {
 					console.log(response.data);
-
+					if (response.data.code==0) {
+						_this.SET_USERINFO({
+							info: {
+								userId: response.data.userId
+							}
+						})
+						_this.$router.replace('/profile');
+					}
 				})
 				.catch(function (error) {
 				  	console.log(error);

@@ -155,6 +155,18 @@ export default {
 		}
 
 	},
+	//设置用户信息和登录情况
+	SET_USERINFO: (state,{info})=>{
+		// state.s_userInfo=info;
+		state.s_userInfo={...info};
+		state.s_login=true;
+		setStore('userId', info.userId);
+	},
+	//退出登录
+	OUT_LOGIN: (state)=>{
+		state.s_userInfo={};
+		state.s_login=false;
+	},
 }
 
 // //设置购物车商品总数量
