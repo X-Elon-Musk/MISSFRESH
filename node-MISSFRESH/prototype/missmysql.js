@@ -40,7 +40,11 @@ export default class MissMysql{
 	async whereRequirement(requirement={}, fuzzy){
 		let sql=' where ';
 		Object.keys(requirement).forEach(key => {
-			!fuzzy ? sql+= key+'='+requirement[key]+' and ' : sql+= key+' like "%'+requirement[key]+'%"';
+			if (Object.prototype.toString.call(requirement[key])=='[object String]') {
+				!fuzzy ? sql+= key+'="'+requirement[key]+'" and ' : sql+= key+' like "%'+requirement[key]+'%"';
+			} else {
+				!fuzzy ? sql+= key+'='+requirement[key]+' and ' : sql+= key+' like "%'+requirement[key]+'%"';
+			}
 		})
 		sql= !fuzzy ? sql.substr(0, sql.lastIndexOf(' and ')) : sql;
 		return sql;

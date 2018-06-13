@@ -81,11 +81,9 @@
 				.then(function (response) {
 					console.log(response.data);
 					if (response.data.code==0) {
+						console.log(response.data);
 						_this.SET_USERINFO({
-							info: {
-								userId: response.data.userId,
-								telephone: response.data.telephone
-							}
+							info: {...response.data}
 						})
 						_this.$router.replace('/profile');
 					}

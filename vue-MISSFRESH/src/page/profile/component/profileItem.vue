@@ -30,13 +30,25 @@
 		margin-left: 16px;
 		border-bottom: 1px solid #f0f0f0;
 		position: relative;
-		&:after{
+		/* &:after{
 			content: "";
 			.bg(17px,17px,transparent,'~images/icon/right-jiantou.png',100% 100%);
 			background-size: 100% 100%;
 			position: absolute;
 			right: 0;
-			top: 21px;
+			// top: 21px;
+			top: 50%;
+			transform: translate(0, -50%);
+		} */
+		.arrow{
+			content: "";
+			.bg(17px,17px,transparent,'~images/icon/right-jiantou.png',100% 100%);
+			background-size: 100% 100%;
+			position: absolute;
+			right: 0;
+			// top: 21px;
+			top: 50%;
+			transform: translate(0, -50%);
 		}
 		a{
 			display: inline-block;

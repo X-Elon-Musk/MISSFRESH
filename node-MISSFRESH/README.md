@@ -11,7 +11,9 @@ cd node-note
 
 npm install
 
-node app.js
+set NODE_ENV=development
+
+node --harmony index.js
 ```
 nginx反向代理部署nodejs后，在Xshell中开启node服务
 ```

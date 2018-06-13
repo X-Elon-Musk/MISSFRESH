@@ -1,37 +1,33 @@
 'use strict';
+import MissMethods from '../../prototype/missMethods.js'
+import MissMysql from '../../prototype/missmysql.js'
 
-
-export default class User{
+class User extends MissMysql{
     constructor(){
+        super()
         this.getUser=this.getUser.bind(this);
     }
     async getUser(req, res, next){
-        // console.log(req.query.product_id);
-        // return;
-        let product_id=parseInt(req.query.product_id);
-
-        let safedetection;
-        let productfingerprints=await ProductFingerprints.getProductFingerprints(product_id);
-        safedetection={
-            code: 0,
-            result: [
-                {
-                    'missfreshAnalytica': true,
-                    'securityDetailUrl': productfingerprints[0].picUrl,
-                    'securityTagName': "优鲜安心检测",
-                    'securityTagUrl': productfingerprints[0].src,
-                    'securityUnselectedTagUrl': productfingerprints[0].securityUnselectedTagUrl 
-                },
-                {
-                    'securityDetailUrl': productfingerprints[1].picUrl,
-                    'securityTagName': "100%品控检测",
-                    'securityTagUrl': productfingerprints[1].src,
-                    'securityUnselectedTagUrl': productfingerprints[1].securityUnselectedTagUrl
-                }
-            ],
-            success: true
-        }  
+        let accessToken=req.query.accessToken;
+        let basiccontent;
+        if (accessToken&&accessToken!=='undefined') {
+            let selectResult=await this.missSelectMysql('user', {
+                portrait: 'portrait'
+            },{
+                accessToken: accessToken
+            });
+            basiccontent = await MissMethods.basicContent(0, 0, {
+                telephone: selectResult[0].telephone,
+                accessToken: selectResult[0].accessToken,
+                nick_name: selectResult[0].nick_name,
+                portrait: selectResult[0].portrait,
+                userId: selectResult[0].id
+            });     
+        } else{
+            basiccontent = await MissMethods.basicContent(1, 1);
+        }
         res.type('application/json');
-        res.jsonp(safedetection);
+        res.jsonp(basiccontent);      
     }
 }
+export default new User();

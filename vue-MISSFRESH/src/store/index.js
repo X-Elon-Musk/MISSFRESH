@@ -14,7 +14,7 @@ var state={
 	s_cartCount: 0,//购物车商品总数
 	s_mpromptStatus: false,//提示信息的状态
 	s_userInfo: {}, //用户信息
-	s_login: true,//是否登录
+	s_login: false,//是否登录
 }
 
 export default new Vuex.Store({

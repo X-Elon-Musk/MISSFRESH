@@ -1,4 +1,4 @@
-import {setStore, getStore} from '../config/mUtils'
+import {setStore, getStore, removeStore} from '../config/mUtils'
 
 export default {
 	//添加购物车
@@ -161,12 +161,16 @@ export default {
 		state.s_userInfo={...info};
 		state.s_login=true;
 		setStore('userId', info.userId);
+		setStore('accessToken', info.accessToken);
+		// setStore('accessToken', info.userId);
 		console.log(state);
 	},
 	//退出登录
 	OUT_LOGIN: (state)=>{
 		state.s_userInfo={};
 		state.s_login=false;
+		// removeStore('userId');
+		removeStore('accessToken');
 	},
 }
 
