@@ -161,6 +161,7 @@ export default {
 		state.s_userInfo={...info};
 		state.s_login=true;
 		setStore('userId', info.userId);
+		console.log(state);
 	},
 	//退出登录
 	OUT_LOGIN: (state)=>{

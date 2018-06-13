@@ -2,7 +2,16 @@
 	<div class="my-center">
 		<div class="my-center-content">
 			<div class="sign-in">
-				<span>用户登录</span>
+				<span class="login-button" v-show="!s_login">用户登录</span>
+				<div class="home-header-user" v-show="s_login">
+					<div class="home-head-user-icon">
+						<img src="https://j-image.missfresh.cn/img_20170601002437822.png" alt="" class="home-head">
+					</div>
+					<div class="home-des-detail">
+						<span class="home-name">小鲜</span>
+						<img src="https://j-image.missfresh.cn/img_20171028220456485.png" alt="" class="home-img">
+					</div>
+				</div>
 			</div>
 			<ul class="wallet">
 				<li>
@@ -58,6 +67,8 @@
 	</div>
 </template>
 <script>
+	import {mapState, mapMutations} from 'vuex'
+
 	import mfooter from 'src/components/mfooter/mfooter'
 	import icons from 'src/components/icons/icons'
 	import profileItem from './component/profileItem'
@@ -126,6 +137,11 @@
 				]
 			}
 		},
+		computed: {
+            ...mapState([
+                's_userInfo', 's_login'
+            ]),
+        },
 		components:{
 	        mfooter,
 	        icons,
@@ -150,7 +166,7 @@
 				text-align: center;
 				padding-top: 17px;
 				box-sizing: border-box;
-				span{
+				.login-button{
 					display: inline-block;
 					margin-top: 36px;
 					background: 0 0;
@@ -166,6 +182,41 @@
 					position: relative;
 					padding: 0 12px;
 					box-sizing: border-box;
+				}
+				.home-header-user{
+					padding-top: 20px;
+					padding-left: 4%; 
+					.wh(100%);
+					box-sizing: border-box;
+					text-align: left;
+					.home-head-user-icon{
+						display: inline-block;
+						vertical-align: middle;
+							.wh(100%,auto);
+						.home-head{
+							.wh(100%,auto);
+						}
+					}
+					.home-des-detail{
+						display: inline-block;
+						vertical-align: middle;
+						.home-name{
+							display: inline-block;
+							max-width: 100px;
+							font-size: 16px;
+							color: #474245;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+							vertical-align: middle;
+						}
+						.home-img{
+							margin-left: 6px;
+							min-width: 50px;
+							height: 15px;
+							vertical-align: middle;
+						}
+					}
 				}
 			}
 			.wallet{

@@ -21,7 +21,7 @@
 </template>
 <script>
 	import {testTele} from 'src/config/mUtils'
-	import {mapState, mapMutations} from 'vuex'
+	import {mapMutations} from 'vuex'
 
 	import mheader from 'src/components/mheader/mheader'
 	import profileItem from '../component/profileItem'
@@ -83,7 +83,8 @@
 					if (response.data.code==0) {
 						_this.SET_USERINFO({
 							info: {
-								userId: response.data.userId
+								userId: response.data.userId,
+								telephone: response.data.telephone
 							}
 						})
 						_this.$router.replace('/profile');
@@ -92,23 +93,6 @@
 				.catch(function (error) {
 				  	console.log(error);
 				});
-
-
-
-
-	            /*$.post('/login',{
-	                'mode': 'message',
-	                'telephone': this.telephone,
-	                'message': $('#identifying-code').val()
-	            },function (result) {
-	                if (result=='1') {
-	                    window.location='/notePages';
-	                } else if(result=='-1'){
-	                    _this.promptDom('手机号未绑定');
-	                } else if(result=='-2'){
-	                    _this.promptDom('验证码不正确');
-	                }
-	            })*/
 	        },
 		},
 		components: {
