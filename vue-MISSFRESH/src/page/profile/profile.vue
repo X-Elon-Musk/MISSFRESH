@@ -69,6 +69,7 @@
 <script>
 	import {mapState, mapMutations} from 'vuex'
 	import {getStore} from 'config/mUtils'
+	import {getUser} from 'src/service/getData'
 
 	import mfooter from 'src/components/mfooter/mfooter'
 	import icons from 'src/components/icons/icons'
@@ -145,14 +146,20 @@
         },
         mounted (){
 			this.$nextTick(() => {
-				this.getUser();
+				let response= await getUser();
+				if (response.data.code==0) {
+					console.log(response.data);
+					this.SET_USERINFO({
+						info: {...response.data}
+					})
+				}
 			})
 		},
         methods: {
 			...mapMutations([
            		'SET_USERINFO'
             ]),
-			//获取用户信息
+			/*//获取用户信息
 			getUser(){
 				let _this=this;
 	        	this.axios.get('http://localhost:3390/customer/getUser',{
@@ -172,7 +179,7 @@
 				.catch(function (error) {
 				  	console.log(error);
 				});	
-			},
+			},*/
 		},
 		components:{
 	        mfooter,
