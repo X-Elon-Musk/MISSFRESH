@@ -6,9 +6,11 @@ export default async(url='', parameter={}, type='get')=>{
 	if (type=='get') {
 		let result=await new Promise((resolve, reject) =>{
 			let params={};
-			Object.keys(parameter).forEach(key => {
-				params[key]=parameter[key];
-			})
+			if (parameter) {
+				Object.keys(parameter).forEach(key => {
+					params[key]=parameter[key];
+				})			
+			}
 			axios.get(baseUrl+url,{
 				params: {...params}
 			})
@@ -20,8 +22,9 @@ export default async(url='', parameter={}, type='get')=>{
 			});	
 
 	    })	
-	    console.log(result.data);
+	    // console.log(result.data);
 	    return result.data;	
+	    // return result;	
 	} else{
 		console.log(222);
 	}

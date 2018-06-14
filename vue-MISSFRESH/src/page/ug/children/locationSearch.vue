@@ -21,6 +21,7 @@
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
+	// import {getUserAxios} from 'src/service/getData'
 	export default{
 		data(){
 			return {

@@ -23,7 +23,9 @@
 				<!-- nav对应页面 -->
 				<!-- 热卖 -->
 		      	<!-- <productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage> -->
-		      	<productPage :products="products[0]||[]" :banner="banner[0]||[]" class="product_index_0">
+		      	<!-- <productPage :products="products[0]||[]" :banner="banner[0]||[]" class="product_index_0"> -->
+	      		<span class="AAAAAAAAAAAAAA">{{banner[0]}}</span>
+		      	<productPage :products="products[0]||[]" :banner="banner[0]" class="product_index_0">
 		      		<guarantee :brands="brands[0]"></guarantee>
             		<card :categoryareas="categoryareas[0]"></card>
 		      	</productPage>
@@ -184,6 +186,7 @@
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
     import qs from 'qs';
+    import {getDataPageIndexAxios, getDataPositionAxios, getViewAxios} from 'src/service/getData'
 
   	import ugHeader from './component/ugHeader'
     import classify from './component/classify'
@@ -234,13 +237,15 @@
 			}
 		},
 		mounted (){
-			console.log(1234567);
+			console.log('----------------');
 			this.getDataPageIndex(0, () => {
+				console.log(1111111111111111111);
 				this.$nextTick(() => {
 					if (!this.navSwiper) this.tab();
 					if (!this.pageSwiper) this.page();
 				})
 			});
+			console.log('----------------');
 			this.getDataPosition();
 			this.getView();
 		},
@@ -299,7 +304,7 @@
 			...mapMutations([
                 'SET_POSITION'
             ]),
-			//获取index数据
+			/*//获取index数据
 			getDataPageIndex(product_index,callback) {
 				var _this=this;
 				this.loading=true;
@@ -311,9 +316,9 @@
 				.then(function (response) {
 					let product_list=response.data.product_list;
 					if (product_index==0) {
-						/*_this.categorylist[product_index]=(_this.categorylist[product_index]||[]).concat(response.data.category_list);	
-						_this.brands[product_index]=(_this.brands[product_index]||[]).concat(product_list.brands);
-						_this.categoryareas[product_index]=(_this.categoryareas[product_index]||[]).concat(product_list.category_areas);*/
+						// _this.categorylist[product_index]=(_this.categorylist[product_index]||[]).concat(response.data.category_list);	
+						// _this.brands[product_index]=(_this.brands[product_index]||[]).concat(product_list.brands);
+						// _this.categoryareas[product_index]=(_this.categoryareas[product_index]||[]).concat(product_list.category_areas);
 
 
 
@@ -323,8 +328,8 @@
 						_this.categoryareas[product_index]=[].concat(product_list.category_areas);
 						_this.$emit('hideLoading', false);
 					}
-					/*_this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
-					_this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);*/
+					// _this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
+					// _this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);
 					_this.banner[product_index]=[].concat(product_list.banner);
 					_this.products[product_index]=[].concat(product_list.products);
 
@@ -341,10 +346,40 @@
 				.catch(function (error) {
 					console.log(error);
 				});
+			},*/
+			//获取index数据
+			getDataPageIndex(product_index,callback) {
+				getDataPageIndexAxios(product_index).then(response=>{
+					console.log(response);
+					let product_list=response.product_list;
+					if (product_index==0) {
+						this.categorylist[product_index]=[].concat(response.category_list);	
+						this.brands[product_index]=[].concat(product_list.brands);
+						this.categoryareas[product_index]=[].concat(product_list.category_areas);
+						this.$emit('hideLoading', false);
+					}
+					this.banner[product_index]=[].concat(product_list.banner);
+					this.products[product_index]=[].concat(product_list.products);
+					console.log(this.categorylist[product_index]);
+					this.loading=false;
+					callback&&callback();
+				});
 			},
 			//获取当前地址
-			getDataPosition(callback) {
-				let _this=this;
+			async getDataPosition(callback) {
+				let response=await getDataPositionAxios();
+				let ad_info=response.ad_info
+				let chosecity={
+					id: ad_info.adcode,
+					name: ad_info.city,
+					province: ad_info.province,
+					district: ad_info.district
+				}
+				this.SET_POSITION({
+					type: 0,
+					city: chosecity
+				});
+				/*let _this=this;
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
 					let ad_info=response.data.ad_info
@@ -362,7 +397,9 @@
 				})
 				.catch(function (error) {
 				  	console.log(error);
-				});	
+				});*/	
+
+				
 
 
 				//post方法
@@ -395,7 +432,7 @@
 			},
 			//获取配送的类型信息
 			getView() {
-				var _this=this;
+				/*var _this=this;
 				this.axios.get('http://localhost:3390/position/view',{
 			    	params: {
 				      	type: _this.s_viewType
@@ -406,7 +443,11 @@
 				})
 				.catch(function (error) {
 					console.log(error);
-				});
+				});*/
+
+				getViewAxios().then(response=>{
+					this.view=response.data;
+				})
 			},
 			//导航栏
 			tab() {

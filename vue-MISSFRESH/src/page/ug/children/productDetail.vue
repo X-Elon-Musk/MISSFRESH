@@ -138,6 +138,8 @@
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
+	import {getDataProductDetailAxios} from 'src/service/getData'
+
 	import carousel from 'src/components/carousel/carousel'
 	import price from 'src/components/price/price'
 	import icons from 'src/components/icons/icons'
@@ -189,8 +191,9 @@
 			...mapMutations([
                 'ADD_CART','REDUCE_CART','SET_MPROMPT'
             ]),
-			getDataProductDetail(){
-				let _this=this;
+            // 商品详情
+			async getDataProductDetail(){
+				/*let _this=this;
 				this.axios.get('http://localhost:3390/page/productdetail',{
 					params:{
 						product_id: _this.product_id,
@@ -213,7 +216,18 @@
 				})
 				.catch(function (error) {
 				  	console.log(error);
-				});	
+				});*/	
+
+				let response=await getUserAxios(this.product_id, this.product_index);
+				if (response.status==200) {
+					let data=response.data;
+					this.product=data;	
+					this.priceDown=data.vip_price_pro.price_down;	
+					this.priceUp=data.vip_price_pro.price_up;
+					this.share_info=data.share_info;	
+					this.vip_card=data.vip_card;	
+					this.product_share_info_v2=data.product_share_info_v2;	
+				}
 			},
 			// 分享
 			shareAction(state){

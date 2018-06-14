@@ -23,6 +23,7 @@
     </div>  
 </template>
 <script>
+	import {getSafeDetectionAxios} from 'src/service/getData'
 	export default{
 		data(){
 			return {
@@ -39,8 +40,9 @@
             this.getSafeDetection();
         },
 		methods: {
-			getSafeDetection(){
-				let _this=this;
+			//获取品质认证
+			async getSafeDetection(){
+				/*let _this=this;
 				this.axios.get('http://localhost:3390/page/safedetection',{
 					params:{
 						product_id: _this.product_id
@@ -55,7 +57,13 @@
 				})
 				.catch(function (error) {
 				  	console.log(error);
-				});	
+				});*/
+
+				let response=await getSafeDetectionAxios();
+				if (response.data.code==0==0) {
+					this.detectionResult_0=response.data.result[0];	
+					this.detectionResult_1=response.data.result[1];	
+				}	
 			},
 			switchOver(index){
 				this.show=index;

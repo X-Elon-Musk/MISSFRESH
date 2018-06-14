@@ -10,6 +10,7 @@
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
+	import {getCityListAxios} from 'src/service/getData'
 	export default{
 		data(){
 			return {
@@ -32,14 +33,19 @@
             ]),
             //获得城市列表
 			getCityList(){
-				var _this=this;
+				/*var _this=this;
 				this.axios.get('http://localhost:3390/position/list')
 				.then(function (response) {
 					_this.citylist=_this.citylist.concat(response.data);
 				})
 				.catch(function (error) {
 				  	console.log(error);
-				});
+				});*/
+
+				getCityListAxios().then(response=>{
+					this.citylist=this.citylist.concat(response.data);
+				})
+
 			},
 			//改变当前城市信息
 			changeCurrentRegion(city){

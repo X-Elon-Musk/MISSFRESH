@@ -22,6 +22,7 @@
 <script>
 	import {mapMutations} from 'vuex'
 	import {getStore} from 'src/config/mUtils.js'
+	import {locationRefreshAxios} from 'src/service/getData'
 	export default{
 		data(){
 			return {
@@ -62,8 +63,8 @@
                 'SET_CURRENTCITY'
             ]),
 			//刷新当前位置
-			locationRefresh(){
-				let _this=this;
+			async locationRefresh(){
+				/*let _this=this;
 				this.refreshtext="正在获取";
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
@@ -74,7 +75,13 @@
 				})
 				.catch(function (error) {
 				  	console.log(error);
-				});	
+				});	*/
+
+				let response=await locationRefreshAxios();
+				this.SET_CURRENTCITY({
+					currentCity: response.data.ad_info.city
+				})
+				this.refreshtext='';
 			}
 		}
 	}
