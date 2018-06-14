@@ -69,7 +69,7 @@
 <script>
 	import {mapState, mapMutations} from 'vuex'
 	import {getStore} from 'config/mUtils'
-	import {getUser} from 'src/service/getData'
+	import {getUserAxios} from 'src/service/getData'
 
 	import mfooter from 'src/components/mfooter/mfooter'
 	import icons from 'src/components/icons/icons'
@@ -146,40 +146,34 @@
         },
         mounted (){
 			this.$nextTick(() => {
-				let response= await getUser();
-				if (response.data.code==0) {
-					console.log(response.data);
-					this.SET_USERINFO({
-						info: {...response.data}
-					})
-				}
+				this.getUser();
+				/*
+				//第二种写法
+				getUserAxios().then(response=>{
+					if (response.code==0) {
+						console.log(typeof response);
+						console.log(response);
+						this.SET_USERINFO({
+							info: {...response}
+						})
+					}
+				})*/
+				
 			})
 		},
         methods: {
 			...mapMutations([
            		'SET_USERINFO'
             ]),
-			/*//获取用户信息
-			getUser(){
-				let _this=this;
-	        	this.axios.get('http://localhost:3390/customer/getUser',{
-			    	params: {
-				      	accessToken: getStore('accessToken')
-				    }
-				})
-				.then(function (response) {
-					console.log(response.data);
-					if (response.data.code==0) {
-						console.log(response.data);
-						_this.SET_USERINFO({
-							info: {...response.data}
-						})
-					}
-				})
-				.catch(function (error) {
-				  	console.log(error);
-				});	
-			},*/
+			//获取用户信息
+			async getUser(){
+				let response=await getUserAxios();
+				if (response.code==0) {
+					this.SET_USERINFO({
+						info: {...response}
+					})
+				}
+			},
 		},
 		components:{
 	        mfooter,

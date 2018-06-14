@@ -22,6 +22,7 @@
 <script>
 	import {testTele} from 'src/config/mUtils'
 	import {mapMutations} from 'vuex'
+	import {teleCodeAxios, submitMessageAxios} from 'src/service/getData'
 
 	import mheader from 'src/components/mheader/mheader'
 	import profileItem from '../component/profileItem'
@@ -55,7 +56,7 @@
 	        },
 	        //ajax获取手机验证码
 	        teleCode(){
-	        	let _this=this;
+	        	/*let _this=this;
 	        	this.axios.get('http://localhost:3390/customer/getBindingInfo',{
 			    	params: {
 				      	telephone: _this.telephone
@@ -67,11 +68,12 @@
 				})
 				.catch(function (error) {
 				  	console.log(error);
-				});	
+				});*/	
+				getUserAxios(this.telephone);
 	        },
 	        //短信登录
-	        submitMessage(){
-	            let _this=this;
+	        async submitMessage(){
+	            /*let _this=this;
 	            this.axios.get('http://localhost:3390/customer/telBinding',{
 			    	params: {
 				      	telephone: _this.telephone,
@@ -90,7 +92,15 @@
 				})
 				.catch(function (error) {
 				  	console.log(error);
-				});
+				});*/
+
+				let response=await submitMessageAxios(this.telephone, this.message);
+				if (response.code==0) {
+					this.SET_USERINFO({
+						info: {...response}
+					})
+					this.$router.replace('/profile');
+				}
 	        },
 		},
 		components: {
