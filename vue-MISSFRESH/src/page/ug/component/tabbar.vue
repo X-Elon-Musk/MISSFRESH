@@ -24,7 +24,7 @@
 				<!-- 热卖 -->
 		      	<!-- <productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage> -->
 		      	<!-- <productPage :products="products[0]||[]" :banner="banner[0]||[]" class="product_index_0"> -->
-	      		<span class="AAAAAAAAAAAAAA">{{banner[0]}}</span>
+	      		<span class="AAAAAAAAAAAAAA">{{banner}}</span>
 		      	<productPage :products="products[0]||[]" :banner="banner[0]" class="product_index_0">
 		      		<guarantee :brands="brands[0]"></guarantee>
             		<card :categoryareas="categoryareas[0]"></card>
@@ -350,7 +350,7 @@
 			//获取index数据
 			getDataPageIndex(product_index,callback) {
 				getDataPageIndexAxios(product_index).then(response=>{
-					console.log(response);
+					// console.log(response);
 					let product_list=response.product_list;
 					if (product_index==0) {
 						this.categorylist[product_index]=[].concat(response.category_list);	
@@ -445,8 +445,11 @@
 					console.log(error);
 				});*/
 
-				getViewAxios().then(response=>{
-					this.view=response.data;
+				getViewAxios(this.s_viewType).then(response=>{
+					console.log(response);
+					this.view=response;
+					// console.log(this);
+					console.log(this.view);
 				})
 			},
 			//导航栏
