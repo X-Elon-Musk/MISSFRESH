@@ -54,46 +54,12 @@
 	                },120000)				
 	        	}
 	        },
-	        //ajax获取手机验证码
+	        //获取手机验证码
 	        teleCode(){
-	        	/*let _this=this;
-	        	this.axios.get('http://localhost:3390/customer/getBindingInfo',{
-			    	params: {
-				      	telephone: _this.telephone
-				    }
-				})
-				.then(function (response) {
-					console.log(response.data);
-
-				})
-				.catch(function (error) {
-				  	console.log(error);
-				});*/	
 				getUserAxios(this.telephone);
 	        },
 	        //短信登录
 	        async submitMessage(){
-	            /*let _this=this;
-	            this.axios.get('http://localhost:3390/customer/telBinding',{
-			    	params: {
-				      	telephone: _this.telephone,
-				      	message: _this.message
-				    }
-				})
-				.then(function (response) {
-					console.log(response.data);
-					if (response.data.code==0) {
-						console.log(response.data);
-						_this.SET_USERINFO({
-							info: {...response.data}
-						})
-						_this.$router.replace('/profile');
-					}
-				})
-				.catch(function (error) {
-				  	console.log(error);
-				});*/
-
 				let response=await submitMessageAxios(this.telephone, this.message);
 				if (response.code==0) {
 					this.SET_USERINFO({

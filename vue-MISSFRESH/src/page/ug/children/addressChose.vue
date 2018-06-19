@@ -64,22 +64,10 @@
             ]),
 			//刷新当前位置
 			async locationRefresh(){
-				/*let _this=this;
 				this.refreshtext="正在获取";
-				this.axios.get('http://localhost:3390/position/location')
-				.then(function (response) {
-					_this.SET_CURRENTCITY({
-						currentCity: response.data.ad_info.city
-					})
-					_this.refreshtext='';
-				})
-				.catch(function (error) {
-				  	console.log(error);
-				});	*/
-
 				let response=await locationRefreshAxios();
 				this.SET_CURRENTCITY({
-					currentCity: response.data.ad_info.city
+					currentCity: response.ad_info.city
 				})
 				this.refreshtext='';
 			}

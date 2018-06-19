@@ -33,24 +33,6 @@
 				let _this=this;
 				if (this.inputVaule) {
 					let name=this.inputVaule;
-					//post方法
-					/*this.axios.post('http://localhost:3390/page/device_id', {
-					    name: name
-					}, {
-	                    headers:{
-	                        'Content-Type': 'application/x-www-form-urlencoded'
-	                    }
-	                })
-					.then(function (response) {
-						let data=response.data;
-						if (data.code==0) {
-							_this.searchResult=data.data[0];
-						}
-					})
-					.catch(function (error) {
-					  	console.log(error);
-					});*/
-
 					suggestionProductsAxios(name).then(response=>{
 						if (response.code==0) {
 							this.searchResult=response.data[0];
@@ -58,6 +40,7 @@
 					})		
 				}
 			},
+			// 回到上一页
 			goBack(){
 				this.$router.go(-1);
 			},

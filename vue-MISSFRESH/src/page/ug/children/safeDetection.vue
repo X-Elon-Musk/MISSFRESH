@@ -42,27 +42,10 @@
 		methods: {
 			//获取品质认证
 			async getSafeDetection(){
-				/*let _this=this;
-				this.axios.get('http://localhost:3390/page/safedetection',{
-					params:{
-						product_id: _this.product_id
-					}
-				})
-				.then(function (response) {
-					if (response.data.code==0) {
-						let data=response.data;
-						_this.detectionResult_0=data.result[0];	
-						_this.detectionResult_1=data.result[1];	
-					}
-				})
-				.catch(function (error) {
-				  	console.log(error);
-				});*/
-
-				let response=await getSafeDetectionAxios();
-				if (response.data.code==0==0) {
-					this.detectionResult_0=response.data.result[0];	
-					this.detectionResult_1=response.data.result[1];	
+				let response=await getSafeDetectionAxios(this.product_id);
+				if (response.code==0) {
+					this.detectionResult_0=response.result[0];	
+					this.detectionResult_1=response.result[1];	
 				}	
 			},
 			switchOver(index){

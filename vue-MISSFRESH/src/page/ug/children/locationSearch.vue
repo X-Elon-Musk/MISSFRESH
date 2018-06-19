@@ -44,26 +44,8 @@
 				if (this.inputVaule) {
 					let keyword=this.inputVaule,
 					cityName=this.s_choseCity;
-					// console.log(keyword);
-					//post方法
-					/*this.axios.post('http://localhost:3390/position/locationsuggestion', {
-					    keyword: keyword,
-						cityName: cityName
-					}, {
-	                    headers:{
-	                        'Content-Type': 'application/x-www-form-urlencoded'
-	                    }
-	                })
-					.then(function (response) {
-						if (response.data.status==0) {
-							_this.searchResult=[].concat(response.data.data);
-						}
-					})
-					.catch(function (error) {
-					  	console.log(error);
-					});		*/
 					suggestionLocationAxios(keyword, cityName).then(response=>{
-						this.searchResult=[].concat(response.data);
+						this.searchResult=response.data;
 					})
 				}
 			},
