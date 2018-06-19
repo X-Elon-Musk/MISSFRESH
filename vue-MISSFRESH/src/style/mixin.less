@@ -47,9 +47,15 @@
 	z-index: @index;
 }
 //居中
-.positionCenter(@left: -50%,@right: -50%){
+.positionCenter(@left: 50%,@right: 50%){
 	position: absolute;
-	left: 50%;
-	top: 50%;
+	left: @left;
+	top: @right;
 	transform: translate(-50%, -50%);
+}
+//上下居中
+.positionY(@top: 50%){
+	position: absolute;
+	top: @top;
+	transform: translate(0, -50%);
 }

@@ -15,6 +15,7 @@ const profile = r => require.ensure([], () => r(require('../page/profile/profile
 const safe = r => require.ensure([], () => r(require('../page/profile/children/safe')), 'safe')
 const address = r => require.ensure([], () => r(require('../page/profile/children/address')), 'address')
 const addressNew = r => require.ensure([], () => r(require('../page/profile/children/addressNew')), 'addressNew')
+const addressDelivery = r => require.ensure([], () => r(require('../page/profile/children/addressDelivery')), 'addressDelivery')
 const phone = r => require.ensure([], () => r(require('../page/profile/children/phone')), 'phone')
 const feedback = r => require.ensure([], () => r(require('../page/profile/children/feedback')), 'feedback')
 const about_us = r => require.ensure([], () => r(require('../page/profile/children/about_us')), 'about_us')
@@ -109,6 +110,10 @@ export default [{
                 {
                     path: 'addressNew',//新增收货地址
                     component: addressNew,
+                },
+                {
+                    path: 'addressDelivery',//收货地址
+                    component: addressDelivery,
                 },
                 {
                     path: 'phone',//绑定手机

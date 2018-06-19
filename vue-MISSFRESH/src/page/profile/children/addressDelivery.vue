@@ -1,14 +1,13 @@
 <template>
-    <div class="profile-item-page profile-item-page-address">
-    	<mheader title="收货地址">
-    		<router-link :to="{path: '/profile/addressNew'}" tag="div" class="f_r add-address">添加</router-link>
-    	</mheader>
+    <div class="profile-item-page profile-item-page-addressDelivery">
+    	<mheader title="收货地址"></mheader>
 
     </div>  
 </template>
 <script>
 	import {mapState} from 'vuex'
 	import mheader from 'src/components/mheader/mheader'
+	// import profileItem from '../component/profileItem'
 	export default{
 		data(){
 			return {
@@ -17,7 +16,7 @@
 		},
 		computed: {
 	    	...mapState([
-                // 's_userInfo'
+                's_userInfo'
             ]),
         },
         methods: {
@@ -32,11 +31,7 @@
 </script>
 <style lang="less">
 	@import '~src/style/mixin';
-	.profile-item-page-address{
-		a{
-			.text-prompt.active{
-				color: @color_gray;
-			}
-		}
+	.profile-item-page-addressDelivery{
+		
 	}
 </style>
