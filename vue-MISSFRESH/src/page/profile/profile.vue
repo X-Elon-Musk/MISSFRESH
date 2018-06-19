@@ -185,11 +185,6 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.my-center{
-		// position: fixed;
-		// left: 0;
-		// top: 0;
-		// bottom: 0;
-		// right: 0;
 		.fullscreen();
 		overflow-y: scroll;
 		.my-center-content{

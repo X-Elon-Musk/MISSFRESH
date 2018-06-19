@@ -33,7 +33,6 @@
 			background-size: 100% 100%;
 			position: absolute;
 			right: 0;
-			// top: 21px;
 			top: 50%;
 			transform: translate(0, -50%);
 		}

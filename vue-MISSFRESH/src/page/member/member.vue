@@ -155,14 +155,10 @@
 		left: 0;
 		top: 0;
 		bottom: 0;
-		// width: 100%;
-		// height: 100%;
 		.wh(100%);
 		.vip-card{
 			width: 100%;
 			.card-bg{
-				// width: 100%;
-	   //  		height: 8.4375rem;
 	    		.wh(8.4375rem);
 	    		background: #FFB53E;
 			}
@@ -186,7 +182,6 @@
 	    		.calculator-header{
 	    			height: 3.375rem;
 	    			line-height: 3.375rem;
-	    			// margin: 0 0.9375rem;
 	    			border-bottom: 0.0625rem dashed #ECE7D8;
 	    			overflow: hidden;
 	    			white-space: nowrap;
@@ -195,11 +190,7 @@
 					span{
 						display: inline-block;
 	    				content: '';
-	    				// width: 1.25rem;
-	    				// height: 1.375rem;
-	    				.wh(1.375rem,1.25rem);
-	    				background: url(~images/icon/calculator.png) no-repeat;
-	    				background-size: 100% 100%;
+	    				.bg(1.25rem,1.375rem,transparent,'~images/icon/calculator.png',100% 100%);
 	    				margin-top: -2px;
 	    				margin-right: 4px;
 	    				vertical-align: middle;
@@ -219,26 +210,21 @@
 	    			}
 				}
 				.basis{
-					font-size: 0.75rem;
 					padding: 0 0 0.625rem;
-					color: #969696;
 					white-space: nowrap;
 					text-overflow: ellipsis;
 					overflow: hidden;
-					line-height: 1.6;
+					.font(1.6,0.75rem,#969696);
 				}
 				.specific{
 					padding: 0 0.9375rem;
 	    			background: white;
 	    			li{
 	    				padding: 0.375rem 0;
-	    				font-size: 0.875rem;
-	    				color: #443E42;
 	    				position: relative;
 	    				border-bottom: 0.0625rem dashed #ECE7D8;
 	    				padding-top: 0.6875rem;
-	    				color: rgb(150, 150, 150);
-	    				line-height: 1.4;
+	    				.font(1.4,0.875rem,rgb(150, 150, 150));
 	    				div{
 	    					white-space: nowrap;
 	    					text-overflow: ellipsis;
@@ -264,25 +250,19 @@
 					overflow: hidden;
 					white-space: nowrap;
 					text-overflow: ellipsis;
-					font-size: 1.25rem;
-					color: #474245;
-					line-height: 1.4;
+					.font(1.4,1.25rem,#474245);
 				}
 				.area-introduce{
-					font-size: 0.75rem;
-					color: #969696;
 					overflow: hidden;
 					white-space: nowrap;
 					text-overflow: ellipsis;
-					line-height: 1.4;
+					.font(1.4,0.75rem,#969696);
 				}
 			}
 			
 		}
 	}
 	.member ::-webkit-scrollbar {
-	    // width: 0;
-	    // height: 0;
 	    .wh(0,0);
 	}
 </style>

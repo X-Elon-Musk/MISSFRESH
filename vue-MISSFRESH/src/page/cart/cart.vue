@@ -184,8 +184,6 @@
 			},
 			//邮费
 			postage: function () {
-				/*let postage=this.total_price>=69||this.total_price==0?"免邮":5;
-				return postage;*/
 				return this.total_price>=69||this.total_price==0?"免邮":5;
 			},
 			//商品合计
