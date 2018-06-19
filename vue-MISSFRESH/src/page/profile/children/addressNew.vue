@@ -9,8 +9,8 @@
     		</li>
     		<li class="item-block">
     			<span class="input-label">手机号码</span>
-    			<input v-model="telephone" type="text" placeholder="配送员联系您的电话" class="item-input">
-    			<img src="~images/icon/close.png" alt="" class="clear-button" v-show="telephone" @click="clear('telephone')">
+    			<input v-model="phone_number" type="text" placeholder="配送员联系您的电话" class="item-input">
+    			<img src="~images/icon/close.png" alt="" class="clear-button" v-show="phone_number" @click="clear('phone_number')">
     		</li>
     		<li class="clearfix item-block">
     			<span class="input-label">收货地址</span>
@@ -32,35 +32,47 @@
     				<li>公司</li>
     				<li>学校</li>
     				<li>其他</li> -->
-    				<li v-for="(item,index) in tags" @click="radioSwitch(index)" :class="{active:index==radioIndex}">{{item.text}}</li>
+    				<li v-for="(item,index) in tags" @click="radioSwitch(index,item.tag)" :class="{active:index==radioIndex}">{{item.text}}</li>
     			</ul>
     		</li>
-    	</ul>	
+
+    	</ul>
+    	<div class="button-common save-address" @click="saveAddress">保存收货地址</div>	
     </div>  
 </template>
 <script>
 	import {mapState} from 'vuex'
+	import {saveAddressAxios} from 'src/service/getData'
+
 	import mheader from 'src/components/mheader/mheader'
 
 	export default{
 		data(){
 			return {
-				name: '',
-				telephone: '',
+				address_1: '',
+				area: '',
+				city: '',
+				code: '',
+				full_address: '',
+				lat_lng: '',
+				province: '',
+
+				phone_number: '',
 				address_2: '',
 				tags: [{
-					tag: '',
+					tag: 'HOME',
 					text: '住宅'
 				},{
-					tag: '',
+					tag: 'COMPANY',
 					text: '公司'
 				},{
-					tag: '',
+					tag: 'SCHOOL',
 					text: '学校'
 				},{
-					tag: '',
+					tag: 'OTHER',
 					text: '其他'
 				}],
+				tag: '',
 				radioIndex: 9999
 			}
 		},
@@ -74,11 +86,14 @@
 			clear(type){
 				this[type]='';
 			},
-			radioSwitch(index){
+			//选择地址类型
+			radioSwitch(index, itemtag){
 				this.radioIndex=index;
+				this.tag=itemtag;
 			},
-			addAddress(){
-				this.$router.go(-1);
+			//保存收货地址
+			async saveAddress(){
+				let response=await saveAddressAxios(this.address_1, this.address_2, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
 			}
 		},
 		components: {
@@ -88,10 +103,12 @@
 </script>
 <style lang="less">
 	@import '~src/style/mixin';
-	.profile-item-page-addressNew{
+	.profile-item-page.profile-item-page-addressNew{
+		background: #f0f0f0;
 		.list{
 			padding: 0 4%;
 			box-sizing: border-box;
+			background: #fff;
 			.item-block{
 				border-bottom: 1px solid #eee;
 				padding: 8px 0;
@@ -164,6 +181,10 @@
 					}
 				}
 			}
+		}
+		.save-address{
+			width: 92%;
+			margin: 1em auto 0;
 		}
 	}
 </style>

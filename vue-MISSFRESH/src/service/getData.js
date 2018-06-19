@@ -65,3 +65,18 @@ export const submitMessageAxios=(telephone, message) => axios('/customer/telBind
     telephone: telephone,
     message: message
 });
+
+//新增收货地址
+export const saveAddressAxios=(address_1, address_2, area, city, code, full_address, lat_lng, name, phone_number, province, tag) => axios('/page/device_id', {
+    address_1,
+    address_2,
+    area,
+    city,
+    code,
+    full_address,
+    lat_lng,
+    name,
+    phone_number,
+    province,
+    tag
+}, 'post');
