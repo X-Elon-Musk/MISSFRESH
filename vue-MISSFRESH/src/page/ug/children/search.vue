@@ -19,6 +19,7 @@
     </div>  
 </template>
 <script>
+	import {suggestionProductsAxios} from 'src/service/getData'
 	export default{
 		data(){
 			return {
@@ -27,13 +28,13 @@
 			}
 		},
 		methods: {
-			//获取当前地址
-			suggestionProducts: function (callback) {
+			// 商品搜索
+			suggestionProducts: function () {
 				let _this=this;
 				if (this.inputVaule) {
 					let name=this.inputVaule;
 					//post方法
-					this.axios.post('http://localhost:3390/page/device_id', {
+					/*this.axios.post('http://localhost:3390/page/device_id', {
 					    name: name
 					}, {
 	                    headers:{
@@ -48,7 +49,13 @@
 					})
 					.catch(function (error) {
 					  	console.log(error);
-					});		
+					});*/
+
+					suggestionProductsAxios(name).then(response=>{
+						if (response.code==0) {
+							this.searchResult=response.data[0];
+						}
+					})		
 				}
 			},
 			goBack(){

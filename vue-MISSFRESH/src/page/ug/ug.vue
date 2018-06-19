@@ -61,7 +61,7 @@
 		methods: {
 			hideLoading(status){
 				this.loading=status;
-				console.log(this.loading);
+				// console.log(this.loading);
 			}
 		},
 		components: {

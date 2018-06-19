@@ -41,7 +41,7 @@
                 this.$emit("closeClassify");
             },
             iconClick: function (index) {
-                console.log(index);
+                // console.log(index);
                 this.closeButton();
                 this.$emit("tabMove",index);
             }

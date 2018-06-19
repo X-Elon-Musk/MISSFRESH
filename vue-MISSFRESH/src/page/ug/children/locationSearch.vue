@@ -21,7 +21,7 @@
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
-	// import {getUserAxios} from 'src/service/getData'
+	import {suggestionLocationAxios} from 'src/service/getData'
 	export default{
 		data(){
 			return {
@@ -38,15 +38,15 @@
 			...mapMutations([
                 'SET_POSITION'
             ]),
-			//获取当前地址
-			suggestionLocation: function (callback) {
+			// 搜索地址推荐
+			suggestionLocation: function () {
 				let _this=this;
 				if (this.inputVaule) {
 					let keyword=this.inputVaule,
 					cityName=this.s_choseCity;
 					// console.log(keyword);
 					//post方法
-					this.axios.post('http://localhost:3390/position/locationsuggestion', {
+					/*this.axios.post('http://localhost:3390/position/locationsuggestion', {
 					    keyword: keyword,
 						cityName: cityName
 					}, {
@@ -61,7 +61,10 @@
 					})
 					.catch(function (error) {
 					  	console.log(error);
-					});		
+					});		*/
+					suggestionLocationAxios(keyword, cityName).then(response=>{
+						this.searchResult=[].concat(response.data);
+					})
 				}
 			},
 			//改变当前城市信息

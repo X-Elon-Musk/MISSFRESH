@@ -18,8 +18,19 @@ export const getViewAxios=(type) => axios('/position/view', {
 //刷新当前位置
 export const locationRefreshAxios=() => axios('/position/location');
 
-//刷新当前位置
+//获得城市列表
 export const getCityListAxios=() => axios('/position/list');
+
+//搜索地址推荐
+export const suggestionLocationAxios=(keyword, cityName) => axios('/position/locationsuggestion', {
+    keyword: keyword,
+    cityName: cityName
+}, 'post');
+
+//商品搜索
+export const suggestionProductsAxios=(name) => axios('/page/device_id', {
+    name: name
+}, 'post');
 
 //商品详情
 export const getDataProductDetailAxios=(product_id, product_index) => axios('/page/productdetail', {

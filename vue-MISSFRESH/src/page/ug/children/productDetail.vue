@@ -173,6 +173,9 @@
         },
         mounted(){
             this.getDataProductDetail();
+   //          this.$nextTick(()=>{
+			// 	this.getDataProductDetail();
+			// })
         },
         computed: {
 	    	...mapState([
@@ -193,41 +196,34 @@
             ]),
             // 商品详情
 			async getDataProductDetail(){
-				/*let _this=this;
-				this.axios.get('http://localhost:3390/page/productdetail',{
-					params:{
-						product_id: _this.product_id,
-						product_index: _this.product_index
-					}
-				})
-				.then(function (response) {
-					if (response.status==200) {
-						// console.log(response.data);	
-						let data=response.data;
-						// _this.banner=(_this.banner||[]).concat(data.images);	
-						_this.product=data;	
-						// console.log(_this.product);
-						_this.priceDown=data.vip_price_pro.price_down;	
-						_this.priceUp=data.vip_price_pro.price_up;
-						_this.share_info=data.share_info;	
-						_this.vip_card=data.vip_card;	
-						_this.product_share_info_v2=data.product_share_info_v2;	
-					}
-				})
-				.catch(function (error) {
-				  	console.log(error);
-				});*/	
-
-				let response=await getUserAxios(this.product_id, this.product_index);
-				if (response.status==200) {
+			// getDataProductDetail(){	
+				let response=await getDataProductDetailAxios(this.product_id, this.product_index);
+				/*console.log('0619');
+				console.log(response);
+				console.log('0619');*/
+				// if (response.status==200) {
 					let data=response.data;
-					this.product=data;	
-					this.priceDown=data.vip_price_pro.price_down;	
-					this.priceUp=data.vip_price_pro.price_up;
-					this.share_info=data.share_info;	
-					this.vip_card=data.vip_card;	
-					this.product_share_info_v2=data.product_share_info_v2;	
-				}
+					this.product=response;	
+					this.priceDown=response.vip_price_pro.price_down;	
+					this.priceUp=response.vip_price_pro.price_up;
+					this.share_info=response.share_info;	
+					this.vip_card=response.vip_card;	
+					this.product_share_info_v2=response.product_share_info_v2;	
+				// }
+
+				/*getDataProductDetailAxios(this.product_id, this.product_index).then(response=>{
+					console.log('0619');
+					console.log(response);
+					console.log('0619');
+						this.product=response;	
+						console.log(this.product);
+						this.priceDown=response.vip_price_pro.price_down;	
+						this.priceUp=response.vip_price_pro.price_up;
+						this.share_info=response.share_info;	
+						this.vip_card=response.vip_card;	
+						this.product_share_info_v2=response.product_share_info_v2;	
+				})*/
+				
 			},
 			// 分享
 			shareAction(state){

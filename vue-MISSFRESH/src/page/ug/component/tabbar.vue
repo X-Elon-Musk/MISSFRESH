@@ -17,6 +17,7 @@
 		</div>
 		<!-- 分类 -->
 		<classify v-show="classifyState" :categorylist="categorylist[0]" v-on:closeClassify="closeClassify"  v-on:tabMove="tabMove"></classify>
+		
 		<div class="swiper-container" id="page" ref="page">
 		  	<div class="swiper-wrapper">
 
@@ -24,13 +25,13 @@
 				<!-- 热卖 -->
 		      	<!-- <productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage> -->
 		      	<!-- <productPage :products="products[0]||[]" :banner="banner[0]||[]" class="product_index_0"> -->
-	      		<span class="AAAAAAAAAAAAAA">{{banner}}</span>
-		      	<productPage :products="products[0]||[]" :banner="banner[0]" class="product_index_0">
+		      	<productPage :products="products[0]" :banner="banner[0]" class="product_index_0">
 		      		<guarantee :brands="brands[0]"></guarantee>
             		<card :categoryareas="categoryareas[0]"></card>
 		      	</productPage>
-		      	<productPage :products="products[1]||[]" :banner="banner[1]||[]" class="product_index_0"></productPage>
-		      	<productPage :products="products[2]||[]" :banner="banner[2]||[]" class="product_index_0"></productPage>
+		      	<!-- <productPage :products="products[1]||[]" :banner="banner[1]||[]" class="product_index_0"></productPage> -->
+		      	<productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage>
+		      	<productPage :products="products[2]" :banner="banner[2]" class="product_index_0"></productPage>
 		      	<!-- <productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage> -->
 			    <!-- <div class="swiper-slide slidepage swiper-container gif-show">
 		      		<div class="swiper-container scroll" ref="scroll">
@@ -237,15 +238,7 @@
 			}
 		},
 		mounted (){
-			console.log('----------------');
-			this.getDataPageIndex(0, () => {
-				console.log(1111111111111111111);
-				this.$nextTick(() => {
-					if (!this.navSwiper) this.tab();
-					if (!this.pageSwiper) this.page();
-				})
-			});
-			console.log('----------------');
+			this.getDataPageIndex(0);
 			this.getDataPosition();
 			this.getView();
 		},
@@ -260,8 +253,8 @@
 			// this.getView();
 		},
 		beforeRouteEnter(to, from, next){
-        	console.log(to);
-        	console.log(from);
+        	// console.log(to);
+        	// console.log(from);
         	/*// if (to.name=='http://localhost:8080/#/ug') {
         	if (to.fullPath=='/ug/') {
         		from.meta.keepAlive=true;
@@ -279,20 +272,8 @@
         },
         watch: {
         	s_choseAddress: function () {
-        		console.log('============');
-        		console.log(this.s_choseAddress);
-        		console.log('============');
-        		console.log(this.$route);
-        		// if (this.s_choseAddress!=='') {
-        			this.getDataPageIndex(0, () => {
-						this.$nextTick(() => {
-							if (!this.navSwiper) this.tab();
-							if (!this.pageSwiper) this.page();
-						})
-					});
-					this.getView();			
-        		// }
-        		
+    			this.getDataPageIndex(0);
+				this.getView();			
         	}
         },
 		computed: {
@@ -304,66 +285,24 @@
 			...mapMutations([
                 'SET_POSITION'
             ]),
-			/*//获取index数据
-			getDataPageIndex(product_index,callback) {
-				var _this=this;
-				this.loading=true;
-				this.axios.get('http://localhost:3390/page/index',{
-			    	params: {
-				      	product_index: product_index
-				    }
-				})
-				.then(function (response) {
-					let product_list=response.data.product_list;
-					if (product_index==0) {
-						// _this.categorylist[product_index]=(_this.categorylist[product_index]||[]).concat(response.data.category_list);	
-						// _this.brands[product_index]=(_this.brands[product_index]||[]).concat(product_list.brands);
-						// _this.categoryareas[product_index]=(_this.categoryareas[product_index]||[]).concat(product_list.category_areas);
-
-
-
-
-						_this.categorylist[product_index]=[].concat(response.data.category_list);	
-						_this.brands[product_index]=[].concat(product_list.brands);
-						_this.categoryareas[product_index]=[].concat(product_list.category_areas);
-						_this.$emit('hideLoading', false);
-					}
-					// _this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
-					// _this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);
-					_this.banner[product_index]=[].concat(product_list.banner);
-					_this.products[product_index]=[].concat(product_list.products);
-
-
-
-
-					// console.log('=====================');
-					// console.log(_this.products);
-					// console.log('=====================');	
-					_this.loading=false;
-
-					callback&&callback();
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
-			},*/
 			//获取index数据
-			getDataPageIndex(product_index,callback) {
-				getDataPageIndexAxios(product_index).then(response=>{
-					// console.log(response);
-					let product_list=response.product_list;
-					if (product_index==0) {
-						this.categorylist[product_index]=[].concat(response.category_list);	
-						this.brands[product_index]=[].concat(product_list.brands);
-						this.categoryareas[product_index]=[].concat(product_list.category_areas);
-						this.$emit('hideLoading', false);
-					}
-					this.banner[product_index]=[].concat(product_list.banner);
-					this.products[product_index]=[].concat(product_list.products);
-					console.log(this.categorylist[product_index]);
-					this.loading=false;
-					callback&&callback();
-				});
+			async getDataPageIndex(product_index) {
+				let response=await getDataPageIndexAxios(product_index);
+				let product_list=response.product_list;
+				if (product_index==0) {
+					// this.categorylist[product_index]=[].concat(response.category_list);	
+					this.$set(this.categorylist, product_index, response.category_list);
+					this.$set(this.brands, product_index, product_list.brands);
+					this.$set(this.categoryareas, product_index, product_list.category_areas);
+					this.$emit('hideLoading', false);
+				}
+				this.$set(this.banner, product_index, product_list.banner);
+				this.$set(this.products, product_index, product_list.products);
+				this.loading=false;
+				this.$nextTick(() => {
+					if (!this.navSwiper) this.tab();
+					if (!this.pageSwiper) this.page();
+				})
 			},
 			//获取当前地址
 			async getDataPosition(callback) {
@@ -432,24 +371,8 @@
 			},
 			//获取配送的类型信息
 			getView() {
-				/*var _this=this;
-				this.axios.get('http://localhost:3390/position/view',{
-			    	params: {
-				      	type: _this.s_viewType
-				    }
-				})
-				.then(function (response) {
-					_this.view=response.data;
-				})
-				.catch(function (error) {
-					console.log(error);
-				});*/
-
 				getViewAxios(this.s_viewType).then(response=>{
-					console.log(response);
 					this.view=response;
-					// console.log(this);
-					console.log(this.view);
 				})
 			},
 			//导航栏
