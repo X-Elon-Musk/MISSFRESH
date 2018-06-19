@@ -1,8 +1,5 @@
 import axios from '../config/axios'
-/*import Axios from '../config/axios'
-let axios_=Axios.axios_;
-console.log(axios_);
-console.log(Axios);*/
+
 import {getStore} from '../config/mUtils'
 
 //获取index数据
