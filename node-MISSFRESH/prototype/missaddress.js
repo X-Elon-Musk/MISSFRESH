@@ -1,5 +1,6 @@
 'use strict';
 import axios from 'axios'
+import MissMethods from './missMethods.js'
 
 
 export default class MissAddress{
@@ -53,7 +54,7 @@ export default class MissAddress{
 	}
 	//关键字输入提示
 	async suggestionPosition(req, res, next){
-		let query='';
+		/*let query='';
     	req.on("data",(chuck)=>{
             query+=chuck
         })
@@ -61,11 +62,14 @@ export default class MissAddress{
         	req.on("end",()=>{
 	            resolve(query)
 	        })
-	    })
+	    })*/
+	    let query=await MissMethods.getQuery(req);
  		let data=await this.suggestionPositionAxios({
  			key: this.tencentkey,
-			keyword: encodeURIComponent(JSON.parse(query).keyword),
-			region: encodeURIComponent(JSON.parse(query).cityName),
+			// keyword: encodeURIComponent(JSON.parse(query).keyword),
+			keyword: encodeURIComponent(query.keyword),
+			// region: encodeURIComponent(JSON.parse(query).cityName),
+			region: encodeURIComponent(query.cityName),
 			region_fix: 1,
 			policy: 1
 		});

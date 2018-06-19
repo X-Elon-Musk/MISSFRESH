@@ -488,3 +488,24 @@ vip_price_pro:{price_up: {show_type: 2, color: 9868950, price: 1990, name: ""},�
 	has_bind_weixin: 0
 	msg: "ok"
 	user_id: 49931351
+
+// 收货地址
+[{area: "海淀区", code: "110108", city: "北京市", address_1: "九章大厦", address_2: "B座",…},…]
+	0:{area: "海淀区", code: "110108", city: "北京市", address_1: "九章大厦", address_2: "B座",…}
+	1:{area: "海淀区", code: "110108", city: "北京市", address_1: "九章大厦", address_2: "B座",…}
+		address_1:"九章大厦"
+		address_2:"B座"
+		address_detail:"九章大厦B座"
+		area:"海淀区"
+		city:"北京市"
+		code:"110108"
+		default:false
+		full_address:"北京市海淀区中关村南二条一号"
+		id:20498692
+		is_valid:true
+		lat_lng:"39.982099074,116.337098479"
+		name:"李超"
+		phone_number:"15538254335"
+		province:"北京"
+		tag:"COMPANY"
+		transport:true

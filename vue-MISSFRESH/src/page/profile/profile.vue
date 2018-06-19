@@ -87,7 +87,7 @@
 		  				text: '我的订单'
 		  			},
 		  			{
-		  				to: '/',
+		  				to: '/profile/address',
 		  				text: '我的地址'
 		  			},
 		  			{

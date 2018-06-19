@@ -3,14 +3,20 @@ import axios from 'axios'
 
 export default async(url='', parameter={}, type='get')=>{
 	type=type.toLowerCase();
+	let params={},result;
+	if (parameter) {
+		Object.keys(parameter).forEach(key => {
+			params[key]=parameter[key];
+		})			
+	}
 	if (type=='get') {
-		let result=await new Promise((resolve, reject) =>{
-			let params={};
+		result=await new Promise((resolve, reject) =>{
+			/*let params={};
 			if (parameter) {
 				Object.keys(parameter).forEach(key => {
 					params[key]=parameter[key];
 				})			
-			}
+			}*/
 			axios.get(baseUrl+url,{
 				params: {...params}
 			})
@@ -24,13 +30,13 @@ export default async(url='', parameter={}, type='get')=>{
 	    })	
 	    return result.data;	
 	} else if(type=='post'){
-		let result=await new Promise((resolve, reject) =>{
-			let params={};
+		result=await new Promise((resolve, reject) =>{
+			/*let params={};
 			if (parameter) {
 				Object.keys(parameter).forEach(key => {
 					params[key]=parameter[key];
 				})			
-			}
+			}*/
 			axios.post(baseUrl+url,{
 				...params
 			}, {

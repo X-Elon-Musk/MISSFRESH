@@ -10,6 +10,11 @@ class MissMethods extends MissMysql{
 		super()
 		this.priceChange=this.priceChange.bind(this);
 		this.addAttributes=this.addAttributes.bind(this);
+		this.smsClient=this.smsClient.bind(this);
+		this.createParam=this.createParam.bind(this);
+		this.isString=this.isString.bind(this);
+		this.basicContent=this.basicContent.bind(this);
+		this.getQuery=this.getQuery.bind(this);
 	}
 	//价格处理
 	async priceChange(price) {
@@ -87,6 +92,19 @@ class MissMethods extends MissMysql{
 		}
 		return basiccontent;
 	}
+	//解析post请求中的参数
+	async getQuery(req) {
+		let query='';
+        req.on("data",(chuck)=>{
+            query+=chuck
+        })
+        query=await new Promise((resolve, reject) =>{
+            req.on("end",()=>{
+                resolve(query)
+            })
+        })
+        return JSON.parse(query);
+	} 
 }
 
 export default new MissMethods();

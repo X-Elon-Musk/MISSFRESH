@@ -1,7 +1,8 @@
 <template>
-    <div class="header-component">
+    <div class="clearfix header-component">
         <span class="title">{{title}}</span>
         <span class="back" @click="goBack"></span>
+        <slot class="slot"></slot>
     </div>  
 </template>
 <script>
