@@ -1,6 +1,6 @@
 export const CITY_DATA=[{
     "id": "110000",
-    "name": "北京市",
+    "name": "北京",
     "child": [{
         "id": "110101",
         "name": "东城区",
@@ -84,7 +84,7 @@ export const CITY_DATA=[{
 },
 {
     "id": "120000",
-    "name": "天津市",
+    "name": "天津",
     "child": [{
         "id": "120101",
         "name": "和平区",
@@ -9562,7 +9562,7 @@ export const CITY_DATA=[{
     },
     {
         "id": "440300",
-        "name": "深圳市",
+        "name": "深圳",
         "child": [{
             "id": "440303",
             "name": "罗湖区",
@@ -10897,7 +10897,7 @@ export const CITY_DATA=[{
 },
 {
     "id": "500000",
-    "name": "重庆市",
+    "name": "重庆",
     "child": [{
         "id": "500101",
         "name": "万州区",

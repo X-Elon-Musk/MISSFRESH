@@ -1,7 +1,15 @@
 <template>
     <div class="profile-item-page profile-item-page-address">
-    	<mt-picker :slots="slots" value-key="name" ref="picker" @change="onValuesChange"></mt-picker> 
-
+    	<div class="region-picker-backdrop">
+    		<div class="mt-picker">
+	    		<div class="clearfix picker-header">
+	    			<span class="f_l picker-header-button picker-cancle">取消</span>
+	    			<span class="">请选择城市</span>
+	    			<span class="f_r picker-header-button picker-sure">确定</span>
+	    		</div>
+	    		<mt-picker :slots="slots" value-key="name" ref="picker" @change="onValuesChange"></mt-picker> 
+	    	</div>
+    	</div>
     </div>  
 </template>
 <script>
@@ -53,8 +61,44 @@
 </script>
 <style lang="less">
 	@import '~src/style/mixin';
-	.picker {
-	    overflow: hidden;
-
+	.region-picker-backdrop{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 10;
+		background-color: #000;
+		opacity: .6;
+		.mt-picker{
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			.wh(216px);
+			.picker-header{
+				text-align: center;
+				background-color: #F9F9F9;
+				line-height: 36px;
+				font-size: 14px;
+				span{
+					padding: 10px;
+				}
+				.picker-header-button{
+					line-height: 1;
+					color: @color_main;
+				}
+			}
+			.picker-center-highlight{
+				background: linear-gradient(180deg,rgba(105,94,107,.2),rgba(105,94,107,.2) 50%,transparent 50%) top left/100% 1px no-repeat,linear-gradient(0deg,rgba(105,94,107,.2),rgba(105,94,107,.2) 50%,transparent 50%) bottom left/100% 1px no-repeat;
+			}
+			.picker {
+			    overflow: hidden;
+				font-size: 14px;
+				background: #fff;
+				.picker-item{
+					font-size: 14px;
+				}
+			}
+		}
 	}
 </style>

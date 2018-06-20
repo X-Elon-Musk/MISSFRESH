@@ -1,16 +1,21 @@
 <template>
     <div class="profile-item-page profile-item-page-addressDelivery">
     	<mheader title="收货地址"></mheader>
-		<div class="search-box">
-        	<div class="search-bar">
-        		<form class="search-form" v-on:submit.prevent>
-	        		<i class="search-logo"></i> 
-	        		<!-- <input type="text" autofocus="autofocus" class="search-input" @input="suggestionLocation($event)"> -->
-	        		<input type="text" autofocus="autofocus" class="search-input" required v-model='inputVaule'>
-	        		<input type="submit" name="submit" class="search-submit" @click='suggestionLocation' value="提交">
-	        	</form>
-        	</div>
-        </div>
+		<div class="address-bar">
+    		<div class="address-input">
+    			<div class="address-city" @click='pickerAction(true)'>北京市</div>
+    			<!-- <div class="address-position">请输入要收货的小区/写字楼</div> -->
+    			<div class="search-box">
+		        	<div class="search-bar">
+		        		<form class="search-form" v-on:submit.prevent>
+			        		<i class="search-logo"></i> 
+			        		<input type="text" placeholder="请搜索您收货的写字楼/小区" autofocus="autofocus" class="search-input" required v-model='inputVaule'>
+			        		<input type="submit" name="submit" class="search-submit" @click='suggestionLocation' value="提交">
+			        	</form>
+		        	</div>
+		        </div>
+    		</div>
+    	</div>
 		<ul class="search-result">
 			<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)">
 			<!-- <li class="search-list" v-for="(item,index) in searchResult" :key="index"> -->
@@ -18,16 +23,41 @@
 				<div class="location-desc">{{item.address}}</div>
 			</li>
 		</ul>
+		<div class="region-picker-backdrop" v-show="pickerShow">
+    		<div class="mt-picker">
+	    		<div class="clearfix picker-header">
+	    			<span class="f_l picker-header-button picker-cancle" @click='pickerAction(false)'>取消</span>
+	    			<span class="">请选择城市</span>
+	    			<span class="f_r picker-header-button picker-sure">确定</span>
+	    		</div>
+	    		<mt-picker :slots="slots" value-key="name" ref="picker" @change="onValuesChange"></mt-picker> 
+	    	</div>
+    	</div>
     </div>  
 </template>
 <script>
 	import {mapState} from 'vuex'
+	import {CITY_DATA} from 'src/api/cityData'  
 	import mheader from 'src/components/mheader/mheader'
 	// import profileItem from '../component/profileItem'
 	export default{
 		data(){
 			return {
-				
+				myAdress:null,
+				slots: [{
+					flex: 1,
+					values: CITY_DATA,
+					defaultIndex: 0,
+					className: 'province',
+					textAlign: 'center'
+				}, {
+					flex: 1,
+					values: CITY_DATA[0].child,
+					defaultIndex: 0,
+					className: 'district',
+					textAlign: 'center'
+				}],
+				pickerShow: false
 			}
 		},
 		computed: {
@@ -36,9 +66,41 @@
             ]),
         },
         methods: {
-			/*addAddress(){
-				this.$router.go(-1);
-			}*/
+			onValuesChange(picker, values) {
+				if(!values[0]){
+					console.log(1);
+					this.$nextTick(()=>{
+						if(this.myAdress){
+	                        // 赋默认值
+	                    }else{
+	                     	picker.setValues([CITY_DATA[0],CITY_DATA[0].child[0]])
+	                    }
+	                });
+				}else{
+					picker.setSlotValues(1, values[0].child);
+					let town = [];
+					if(values[1]){
+						town = values[1].child;
+					}
+					picker.setSlotValues(2,town);
+					console.log(values[0].name, values[1].name);
+				}
+			},
+			pickerAction(status){
+				console.log(222);
+				this.pickerShow=status;
+			},
+			// 搜索地址推荐
+			suggestionLocation: function () {
+				let _this=this;
+				if (this.inputVaule) {
+					let keyword=this.inputVaule,
+					cityName=this.s_choseCity;
+					suggestionLocationAxios(keyword, cityName).then(response=>{
+						this.searchResult=response.data;
+					})
+				}
+			},
 		},
 		components: {
 			mheader
@@ -48,6 +110,152 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.profile-item-page-addressDelivery{
-		
+		.address-bar{
+			background-color: #fff;
+			padding: 0.625rem 0.9375rem 0.625rem 0.9375rem;
+			height: auto;
+			font-size: 0.8em;
+			.address-input{
+				display: flex;
+				flex-direction: row;
+				flex-wrap: nowrap;
+				overflow: hidden;
+				white-space: nowrap;
+				background-color: #f5f5f5;
+				border-radius: 0.25em;
+				height: 2em;
+				line-height: 2em;
+				.address-city{
+					width: 25%;
+					padding-left: 4%;
+					position: relative;
+					&:after{
+						content: '';
+						display: inline-block;
+						vertical-align: top;
+						margin-top: 0.6em;
+						margin-left: 6%;
+						.bg(0.8em,0.8em,transparent,'~images/icon/address-city.png',100% 100%);
+					}
+				}
+				.address-position{
+					width: 75%;
+					position: relative;
+					// margin-left: 1em;
+					&:before{
+						content: '';
+						display: inline-block;
+						vertical-align: top;
+						margin-top: 0.6em;
+						margin-right: 2%;
+						.bg(0.8em,0.8em,transparent,'~images/icon/address-position.png',100% 100%);
+					}
+				}
+			}
+		}
+		.search-box{
+			background-color: #fff;
+			color: #4b4b4b;
+			// box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.1);
+			border-bottom: none;
+			border-top-width: 0;
+			width: 75%;
+    		position: relative;
+			// padding: 6px 4%;
+			box-sizing: border-box;
+			position: relative;
+			&:before{
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 15%;
+				height: 70%;
+				width: 1px;
+				background: #C6C6C6;
+				z-index: 1;
+			}
+			.search-bar{
+				.wh(100%,100%);
+				.search-form{
+					display: block;
+					.wh(100%,100%);
+					position: relative;
+					line-height: 2em;
+					.search-logo{
+						position: absolute;
+						left: 0.5em;
+						top: 1px;
+						.bg(24px,24px,transparent,'~images/icon/search-logo.png',66% 66%);
+					}
+					.search-input{
+						background-color: #f5f5f5;
+						.wh(100%,100%);
+						border-radius: 0.25rem;
+						// font-size: 0.875rem;
+						text-indent: 1.875rem;
+						border: none;
+						outline: none;
+						line-height: 2em;
+					}
+					.search-submit{
+						display: none;
+					}
+				}
+			}
+		}
+		.search-result{
+			.wh(auto, 100%);
+			padding: 42px 4% 0;
+			box-sizing: border-box;
+			background: #fff;
+			.search-list{
+				color: #4C4440;
+				border-bottom: 1px solid #f5f5f5;
+				line-height: 1.6em;
+				font-size: 0.7em;
+				padding: 0.35em 0;
+				
+			}
+		}
+		.region-picker-backdrop{
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 10;
+			background-color: rgba(0,0,0,0.6);
+			// opacity: .6;
+			.mt-picker{
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				.wh(216px);
+				.picker-header{
+					text-align: center;
+					background-color: #F9F9F9;
+					line-height: 36px;
+					font-size: 14px;
+					span{
+						padding: 10px;
+					}
+					.picker-header-button{
+						line-height: 1;
+						color: @color_main;
+					}
+				}
+				.picker-center-highlight{
+					background: linear-gradient(180deg,rgba(105,94,107,.2),rgba(105,94,107,.2) 50%,transparent 50%) top left/100% 1px no-repeat,linear-gradient(0deg,rgba(105,94,107,.2),rgba(105,94,107,.2) 50%,transparent 50%) bottom left/100% 1px no-repeat;
+				}
+				.picker {
+				    overflow: hidden;
+					font-size: 14px;
+					background: #fff;
+					.picker-item{
+						font-size: 14px;
+					}
+				}
+			}
+		}
 	}
 </style>
