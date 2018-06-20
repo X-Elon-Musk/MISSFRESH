@@ -14,6 +14,7 @@ const cartDetail = r => require.ensure([], () => r(require('../page/cart/childre
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const safe = r => require.ensure([], () => r(require('../page/profile/children/safe')), 'safe')
 const address = r => require.ensure([], () => r(require('../page/profile/children/address')), 'address')
+const picker = r => require.ensure([], () => r(require('../page/profile/children/picker')), 'picker')
 const addressNew = r => require.ensure([], () => r(require('../page/profile/children/addressNew')), 'addressNew')
 const addressDelivery = r => require.ensure([], () => r(require('../page/profile/children/addressDelivery')), 'addressDelivery')
 const phone = r => require.ensure([], () => r(require('../page/profile/children/phone')), 'phone')
@@ -106,6 +107,10 @@ export default [{
                 {
                     path: 'address',//我的地址
                     component: address,
+                },
+                {
+                    path: 'picker',//我的地址
+                    component: picker,
                 },
                 {
                     path: 'addressNew',//新增收货地址

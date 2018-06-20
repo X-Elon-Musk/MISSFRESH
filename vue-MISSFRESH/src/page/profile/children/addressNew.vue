@@ -57,8 +57,10 @@
 				lat_lng: '',
 				province: '',
 
+				name: '',
 				phone_number: '',
 				address_2: '',
+				tag: '',
 				tags: [{
 					tag: 'HOME',
 					text: '住宅'
@@ -72,8 +74,9 @@
 					tag: 'OTHER',
 					text: '其他'
 				}],
-				tag: '',
 				radioIndex: 9999
+				
+				
 			}
 		},
 		computed: {

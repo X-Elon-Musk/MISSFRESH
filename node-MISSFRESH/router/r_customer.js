@@ -17,6 +17,6 @@ import Address from '../controller/user/address.js'
 router.get('/getUser',User.getUser);//获取用户信息
 router.get('/getBindingInfo',TelBinding.getTelBindingInfo);//获取验证码
 router.get('/telBinding',TelBinding.telBinding);//绑定手机号
-router.get('/getaddresslist',Address.getaddresslist);//获取用户收件地址列表
+router.get('/getaddresslist',Address.getAddressList);//获取用户收件地址列表
 
 export default router
