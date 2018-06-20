@@ -16,12 +16,13 @@
 		        </div>
     		</div>
     	</div>
-		<!-- <ul class="search-result">
-			<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)">
+		<ul class="search-result">
+			<!-- <li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)"> -->
+			<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="">
 				<div class="location-title">{{item.title}}</div> 
 				<div class="location-desc">{{item.address}}</div>
 			</li>
-		</ul> -->
+		</ul>
 		<div class="region-picker-backdrop" v-show="pickerShow"></div>
 		<transition name="sideslip" mode="out-in">
 			<div class="region-picker" v-show="pickerShow">
@@ -41,6 +42,7 @@
 	import {mapState} from 'vuex'
 	import {CITY_DATA} from 'src/api/cityData'  
 	import {getStore} from 'src/config/mUtils.js'
+	import {suggestionLocationAxios} from 'src/service/getData'
 	import mheader from 'src/components/mheader/mheader'
 	// import profileItem from '../component/profileItem'
 	export default{
@@ -48,6 +50,7 @@
 			return {
 				inputVaule: '',
 				city: '',
+				searchResult: [],
 				pickerCity: '',
 				myAdress:null,
 				slots: [{
@@ -105,7 +108,7 @@
 				let _this=this;
 				if (this.inputVaule) {
 					let keyword=this.inputVaule,
-					cityName=this.s_choseCity;
+					cityName=this.city;
 					suggestionLocationAxios(keyword, cityName).then(response=>{
 						this.searchResult=response.data;
 					})
@@ -130,6 +133,7 @@
 			padding: 0.625rem 0.9375rem 0.625rem 0.9375rem;
 			height: auto;
 			font-size: 0.8em;
+		    box-shadow: 0 0 0.625rem rgba(0,0,0,.06);
 			.address-input{
 				display: flex;
 				flex-direction: row;
@@ -220,7 +224,7 @@
 		}
 		.search-result{
 			.wh(auto, 100%);
-			padding: 42px 4% 0;
+			padding: 0 4%;
 			box-sizing: border-box;
 			background: #fff;
 			.search-list{
@@ -228,8 +232,18 @@
 				border-bottom: 1px solid #f5f5f5;
 				line-height: 1.6em;
 				font-size: 0.7em;
-				padding: 0.35em 0;
-				
+				padding: 0.35em 0 0.35em 23px;
+				position: relative;
+				&:before{
+					content: '';
+					.positionY();
+					left: 0;
+					.bg(14px,16px,transparent,'~images/icon/location.png',100% 100%);
+				}
+				.location-title{
+					color: #4C4440;
+					font-weight: 700;
+				}
 			}
 		}
 		.region-picker-backdrop{
