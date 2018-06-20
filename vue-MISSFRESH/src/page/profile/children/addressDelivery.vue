@@ -3,7 +3,7 @@
     	<mheader title="收货地址"></mheader>
 		<div class="address-bar">
     		<div class="address-input">
-    			<div class="address-city" @click='pickerAction(true)'>北京市</div>
+    			<div class="address-city" @click='pickerAction(true)'>{{city||choseCity}}</div>
     			<!-- <div class="address-position">请输入要收货的小区/写字楼</div> -->
     			<div class="search-box">
 		        	<div class="search-bar">
@@ -16,33 +16,39 @@
 		        </div>
     		</div>
     	</div>
-		<ul class="search-result">
+		<!-- <ul class="search-result">
 			<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)">
-			<!-- <li class="search-list" v-for="(item,index) in searchResult" :key="index"> -->
 				<div class="location-title">{{item.title}}</div> 
 				<div class="location-desc">{{item.address}}</div>
 			</li>
-		</ul>
-		<div class="region-picker-backdrop" v-show="pickerShow">
-    		<div class="mt-picker">
-	    		<div class="clearfix picker-header">
-	    			<span class="f_l picker-header-button picker-cancle" @click='pickerAction(false)'>取消</span>
-	    			<span class="">请选择城市</span>
-	    			<span class="f_r picker-header-button picker-sure">确定</span>
-	    		</div>
-	    		<mt-picker :slots="slots" value-key="name" ref="picker" @change="onValuesChange"></mt-picker> 
+		</ul> -->
+		<div class="region-picker-backdrop" v-show="pickerShow"></div>
+		<transition name="sideslip" mode="out-in">
+			<div class="region-picker" v-show="pickerShow">
+				<div class="mt-picker">
+		    		<div class="clearfix picker-header">
+		    			<span class="f_l picker-header-button picker-cancle" @click='pickerAction(false)'>取消</span>
+		    			<span class="">请选择城市</span>
+		    			<span class="f_r picker-header-button picker-sure" @click='cityChose'>确定</span>
+		    		</div>
+		    		<mt-picker :slots="slots" value-key="name" ref="picker" @change="onValuesChange"></mt-picker>
+		    	</div>
 	    	</div>
-    	</div>
+    	</transition>
     </div>  
 </template>
 <script>
 	import {mapState} from 'vuex'
 	import {CITY_DATA} from 'src/api/cityData'  
+	import {getStore} from 'src/config/mUtils.js'
 	import mheader from 'src/components/mheader/mheader'
 	// import profileItem from '../component/profileItem'
 	export default{
 		data(){
 			return {
+				inputVaule: '',
+				city: '',
+				pickerCity: '',
 				myAdress:null,
 				slots: [{
 					flex: 1,
@@ -61,11 +67,13 @@
 			}
 		},
 		computed: {
-	    	...mapState([
-                's_userInfo'
-            ]),
+            //选择的城市
+            choseCity: function () {
+            	return getStore('choseCity');
+            }
         },
         methods: {
+        	// 滚动选择城市列表
 			onValuesChange(picker, values) {
 				if(!values[0]){
 					console.log(1);
@@ -84,8 +92,10 @@
 					}
 					picker.setSlotValues(2,town);
 					console.log(values[0].name, values[1].name);
+					this.pickerCity=values[1].name;
 				}
 			},
+			// 操作选择城市列表出现或消失
 			pickerAction(status){
 				console.log(222);
 				this.pickerShow=status;
@@ -101,6 +111,11 @@
 					})
 				}
 			},
+			// 确定选择城市
+			cityChose(){
+				this.pickerShow=false;
+				this.city=this.pickerCity;
+			}
 		},
 		components: {
 			mheader
@@ -225,7 +240,14 @@
 			right: 0;
 			z-index: 10;
 			background-color: rgba(0,0,0,0.6);
-			// opacity: .6;
+		}
+		.region-picker{
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 10;
 			.mt-picker{
 				position: absolute;
 				left: 0;
@@ -257,5 +279,12 @@
 				}
 			}
 		}
+		.sideslip-enter-active, .sideslip-leave-active {
+	        transition: all .4s;
+	    }
+	    .sideslip-enter, .sideslip-leave-active {
+	        transform: translate3d(0, 216px, 0);
+	        // opacity: 0;
+	    }
 	}
 </style>
