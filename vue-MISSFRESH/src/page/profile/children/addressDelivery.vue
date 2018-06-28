@@ -19,7 +19,7 @@
 	    	</div>
 			<ul class="search-result">
 				<!-- <li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)"> -->
-				<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="">
+				<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="locationChose(item)">
 					<div class="location-title">{{item.title}}</div> 
 					<div class="location-desc">{{item.address}}</div>
 				</li>
@@ -119,6 +119,10 @@
 			cityChose(){
 				this.pickerShow=false;
 				this.city=this.pickerCity;
+			},
+			locationChose(item){
+				console.log(11111111111);
+				this.$emit("locationSure",item);
 			}
 		},
 		components: {

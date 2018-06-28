@@ -22,15 +22,19 @@ class Address extends MissMysql{
     }
     // 新增收货地址
     async addAddress(req, res, next){
+        // console.log('开始');
         let query=await MissMethods.getQuery(req);
+        console.log(query.full_address);
+        // console.log('++++++++++++');
         let address_item={
+            user_id: query.user_id,
             address_1: query.address_1,
             address_2: query.address_2,
             address_detail: query.address_detail,
             area: query.area,  
             city: query.city,  
             code: parseInt(query.code),  
-            default: 0,  
+            default_: 0,  
             full_address: query.full_address,  
             is_valid: 1,  
             lat_lng: query.lat_lng,
@@ -46,11 +50,8 @@ class Address extends MissMysql{
         let insertResult=await this.missInsertMysql('address_list', {
             ...address_item
         }); 
-        // let sqlresult,result=[];
-        // sqlresult=await this.missSelectMysql('address_list', {}, {
-        //     user_id: user_id
-        // });
 
+        console.log('成功');
         res.type('application/json');
         res.jsonp(insertResult);
     }

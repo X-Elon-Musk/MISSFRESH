@@ -24,12 +24,13 @@ export default async(url='', parameter={}, type='get')=>{
 				resolve(response)	
 			})
 			.catch(function (error) {
-				reject(err)
+				reject(error)
 			});	
 
 	    })	
 	    return result.data;	
 	} else if(type=='post'){
+		// console.log(params);
 		result=await new Promise((resolve, reject) =>{
 			/*let params={};
 			if (parameter) {
@@ -45,10 +46,12 @@ export default async(url='', parameter={}, type='get')=>{
                 }
             })
 			.then(function (response) {
+				// console.log('正确');
 				resolve(response)	
 			})
 			.catch(function (error) {
-				reject(err)
+				// console.log('错误');
+				reject(error)
 			});	
 
 	    })	

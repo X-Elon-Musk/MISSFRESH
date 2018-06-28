@@ -12,7 +12,7 @@
     			<input v-model="phone_number" type="text" placeholder="配送员联系您的电话" class="item-input">
     			<img src="~images/icon/close.png" alt="" class="clear-button" v-show="phone_number" @click="clear('phone_number')">
     		</li>
-    		<li class="clearfix item-block">
+    		<li class="clearfix item-block item-block-location">
     			<span class="input-label">收货地址</span>
     			<!-- <router-link :to="{path: '/profile/addressDelivery'}" tag="div" class="f_r go-right">
     				<span class="address-icon"></span>
@@ -21,7 +21,7 @@
     			</router-link> -->
     			<div class="f_r go-right" @click="deliveryAction(true)">
     				<span class="address-icon"></span>
-	    			<span v-show="1" class="item-placeholder">{{'小区/写字楼'}}</span>
+	    			<span v-show="1" class="item-placeholder">{{location||'小区/写字楼'}}</span>
 	    			<span class="go-right-icon"></span>
     			</div>
     		</li>
@@ -46,55 +46,14 @@
 
 
     	<transition name="delivery" mode="out-in">
-    		<addressDelivery v-show="deliveryShow"></addressDelivery>
-			<!-- <div class="addressDelivery">
-				<mheader title="收货地址"></mheader>
-				<div class="address-bar">
-					    		<div class="address-input">
-					    			<div class="address-city" @click='pickerAction(true)'>{{city||choseCity}}</div>
-					    			<div class="address-position">请输入要收货的小区/写字楼</div>
-					    			<div class="search-box">
-				        	<div class="search-bar">
-				        		<form class="search-form" v-on:submit.prevent>
-					        		<i class="search-logo"></i> 
-					        		<input type="text" placeholder="请搜索您收货的写字楼/小区" autofocus="autofocus" class="search-input" required v-model='inputVaule'>
-					        		<input type="submit" name="submit" class="search-submit" @click='suggestionLocation' value="提交">
-					        	</form>
-				        	</div>
-				        </div>
-					    		</div>
-					    	</div>
-				<ul class="search-result">
-					<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)">
-					<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="">
-						<div class="location-title">{{item.title}}</div> 
-						<div class="location-desc">{{item.address}}</div>
-					</li>
-				</ul>
-				<div class="region-picker-backdrop" v-show="pickerShow"></div>
-			</div> -->
+    		<addressDelivery v-show="deliveryShow" v-on:locationSure="locationSure"></addressDelivery>
 		</transition>
 
-		<!-- <transition name="sideslip" mode="out-in">
-			<div class="region-picker" v-show="pickerShow">
-				<div class="mt-picker">
-		    		<div class="clearfix picker-header">
-		    			<span class="f_l picker-header-button picker-cancle" @click='pickerAction(false)'>取消</span>
-		    			<span class="">请选择城市</span>
-		    			<span class="f_r picker-header-button picker-sure" @click='cityChose'>确定</span>
-		    		</div>
-		    		<mt-picker :slots="slots" value-key="name" ref="picker" @change="onValuesChange"></mt-picker>
-		    	</div>
-	    	</div>
-    	</transition> -->
     </div>  
 </template>
 <script>
 	import {mapState} from 'vuex'
 	import {saveAddressAxios} from 'src/service/getData'
-	/*import {CITY_DATA} from 'src/api/cityData'  
-	import {getStore} from 'src/config/mUtils.js'
-	import {suggestionLocationAxios} from 'src/service/getData'*/
 
 	import mheader from 'src/components/mheader/mheader'
 	import addressDelivery from './addressDelivery'
@@ -106,10 +65,12 @@
 				area: '',
 				city: '',
 				code: '',
+				address: '',
 				full_address: '',
 				lat_lng: '',
 				province: '',
 
+				location: '',
 				name: '',
 				phone_number: '',
 				address_2: '',
@@ -129,38 +90,12 @@
 				}],
 				radioIndex: 9999,
 				deliveryShow: false
-
-				/*inputVaule: '',
-				city: '',
-				searchResult: [],
-				pickerCity: '',
-				myAdress:null,
-				slots: [{
-					flex: 1,
-					values: CITY_DATA,
-					defaultIndex: 0,
-					className: 'province',
-					textAlign: 'center'
-				}, {
-					flex: 1,
-					values: CITY_DATA[0].child,
-					defaultIndex: 0,
-					className: 'district',
-					textAlign: 'center'
-				}],
-				pickerShow: false*/
-				
-				
 			}
 		},
 		computed: {
 	    	...mapState([
                 's_userInfo'
             ]),
-            /*//选择的城市
-            choseCity: function () {
-            	return getStore('choseCity');
-            }*/
         },
         methods: {
         	//清除输入内容
@@ -174,13 +109,29 @@
 			},
 			//保存收货地址
 			async saveAddress(){
-				let response=await saveAddressAxios(this.address_1, this.address_2, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
+				this.address_detail=this.address_1+this.address_2;
+				// this.full_address=this.address_1+this.address_2;
+				console.log(this.s_userInfo);
+				let response=await saveAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
 			},
 			// 操作选择收货地址出现或消失
 			deliveryAction(status){
 				console.log(222);
 				this.deliveryShow=status;
 			},
+			locationSure(item){
+				console.log(this.s_userInfo);
+				this.deliveryShow=false;
+				this.location=item.province+item.city+item.district+item.title;
+				this.address_1=item.title;
+				this.area=item.district;
+				this.city=item.city;
+				this.code=item.adcode;
+				this.full_address=item.address;
+				this.lat_lng=item.location.lat+','+item.location.lng;
+				this.province=item.province;
+				// this.full_address=item.province;
+			}
 		},
 		components: {
 			mheader,
@@ -266,6 +217,15 @@
 						background: @color_main;
 						color: #fff;
 					}
+				}
+			}
+			.item-block-location{
+				height: auto;
+				line-height: 20px;
+				padding: 14px 0;
+				.input-label{
+					.positionY();
+					left: 0;
 				}
 			}
 		}
