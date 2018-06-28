@@ -1,7 +1,7 @@
 <template>
     <div class="profile-item-page profile-item-page-address">
     	<mheader title="收货地址">
-    		<router-link :to="{path: '/profile/addressNew'}" tag="div" class="f_r add-address">添加</router-link>
+    		<router-link :to="{path: '/profile/addressNew'}" tag="div" class="add-address">添加</router-link>
     	</mheader>
 
     </div>  
@@ -36,6 +36,16 @@
 		a{
 			.text-prompt.active{
 				color: @color_gray;
+			}
+		}
+		.header-component{
+			text-align: center;
+			.add-address{
+				position: absolute;
+				right: 0;
+				top: 0;
+				height: 100%;
+				padding: 0 1em;
 			}
 		}
 	}

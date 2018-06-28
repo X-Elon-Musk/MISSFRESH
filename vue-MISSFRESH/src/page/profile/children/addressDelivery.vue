@@ -1,28 +1,30 @@
 <template>
     <div class="profile-item-page profile-item-page-addressDelivery">
     	<mheader title="收货地址"></mheader>
-		<div class="address-bar">
-    		<div class="address-input">
-    			<div class="address-city" @click='pickerAction(true)'>{{city||choseCity}}</div>
-    			<!-- <div class="address-position">请输入要收货的小区/写字楼</div> -->
-    			<div class="search-box">
-		        	<div class="search-bar">
-		        		<form class="search-form" v-on:submit.prevent>
-			        		<i class="search-logo"></i> 
-			        		<input type="text" placeholder="请搜索您收货的写字楼/小区" autofocus="autofocus" class="search-input" required v-model='inputVaule'>
-			        		<input type="submit" name="submit" class="search-submit" @click='suggestionLocation' value="提交">
-			        	</form>
-		        	</div>
-		        </div>
-    		</div>
-    	</div>
-		<ul class="search-result">
-			<!-- <li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)"> -->
-			<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="">
-				<div class="location-title">{{item.title}}</div> 
-				<div class="location-desc">{{item.address}}</div>
-			</li>
-		</ul>
+    	<div class="addressDelivery-content">
+    		<div class="address-bar">
+	    		<div class="address-input">
+	    			<div class="address-city" @click='pickerAction(true)'>{{city||choseCity}}</div>
+	    			<!-- <div class="address-position">请输入要收货的小区/写字楼</div> -->
+	    			<div class="search-box">
+			        	<div class="search-bar">
+			        		<form class="search-form" v-on:submit.prevent>
+				        		<i class="search-logo"></i> 
+				        		<input type="text" placeholder="请搜索您收货的写字楼/小区" autofocus="autofocus" class="search-input" required v-model='inputVaule'>
+				        		<input type="submit" name="submit" class="search-submit" @click='suggestionLocation' value="提交">
+				        	</form>
+			        	</div>
+			        </div>
+	    		</div>
+	    	</div>
+			<ul class="search-result">
+				<!-- <li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)"> -->
+				<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="">
+					<div class="location-title">{{item.title}}</div> 
+					<div class="location-desc">{{item.address}}</div>
+				</li>
+			</ul>
+		</div>
 		<div class="region-picker-backdrop" v-show="pickerShow"></div>
 		<transition name="sideslip" mode="out-in">
 			<div class="region-picker" v-show="pickerShow">
@@ -44,7 +46,6 @@
 	import {getStore} from 'src/config/mUtils.js'
 	import {suggestionLocationAxios} from 'src/service/getData'
 	import mheader from 'src/components/mheader/mheader'
-	// import profileItem from '../component/profileItem'
 	export default{
 		data(){
 			return {
@@ -128,6 +129,22 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.profile-item-page-addressDelivery{
+		padding-top: 42px;
+		box-sizing: border-box;
+		.header-component{
+			position: fixed;
+			left: 0;
+			top: 0;
+		}
+		.addressDelivery-content{
+			// height: calc(100% - 42px);
+			position: absolute;
+			left: 0;
+			top: 42px;
+			right: 0;
+			bottom: 0;
+			overflow-y: auto;
+		}
 		.address-bar{
 			background-color: #fff;
 			padding: 0.625rem 0.9375rem 0.625rem 0.9375rem;

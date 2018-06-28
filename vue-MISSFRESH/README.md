@@ -6,42 +6,26 @@ vue2 + vuex + vue-router + webpack + ES6/7 + axios + less
 ```
 git clone https://github.com/792884274/node-note.git
 
-cd node-note
+cd vue-MISSFRESH
 
 npm install
 
-node app.js
-```
-nginx反向代理部署nodejs后，在Xshell中开启node服务
-```
-关闭应用
-[root@izhp37e37j73ghn6yfwf7qz node-note]# sudo forever stop 0
-
-检视运行中的应用
-[root@izhp37e37j73ghn6yfwf7qz node-note]# sudo forever list
-
-开启应用
-[root@izhp37e37j73ghn6yfwf7qz node-note]# sudo forever start app.js
-
+npm run dev
 ```
 
 ### 项目完成功能
-用户注册
-验证码输入验证
-短信登录
-密码登录
-QQ登录
-用户名修改
-手机号绑定
-上传头像
-密码修改
-备忘录显示
-备忘录搜索
-删除单条备忘录
-备忘录编辑
-发布备忘录
+定位功能
+城市选择
+地点检索
+商品列表
+商品详情
+商品搜索
+添加购物车
+商品结算
+手机号短信登录
+地址添加
 
-#### 问题解决:
+### 问题解决:
 
 - 跨域解决方法：jsonp只能解决get请求的跨域，xmlhttprequest可以实现post跨域
 - backgroundImage中url的使用
