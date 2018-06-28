@@ -16,19 +16,6 @@ import 'mint-ui/lib/style.css';
 Vue.component(Picker.name, Picker);
 
 
-/*import MintUI from 'mint-ui'
-Vue.use(MintUI)*/
-
-
-
-// import 'swiper/dist/css/swiper.min.css';
-// import Swiper from "swiper";
-
-// import MintUI from 'mint-ui'
-// import 'mint-ui/lib/style.css'
-
-
-
 axios.defaults.withCredentials=true;
 
 if ('addEventListener' in document) {
@@ -40,8 +27,6 @@ if ('addEventListener' in document) {
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
-// Vue.use(MintUI)
-// Vue.use(Swiper)
 
 const defaultImage=require('images/default-image-product.png');
 Vue.use(VueLazyload, {
