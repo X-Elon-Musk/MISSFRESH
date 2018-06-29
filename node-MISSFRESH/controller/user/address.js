@@ -54,14 +54,17 @@ class Address extends MissMysql{
     // 删除收货地址
     async deleteAddress(req, res, next){
         let id=parseInt(req.query.id);
-        let sqlresult,result=[];
+        let sqlresult,result=[],basiccontent;
         console.log(req.query.id);
-        sqlresult=await this.missSelectMysql('address_list', {}, {
+        sqlresult=await this.missDeleteMysql('address_list', {
             id: id
         });
-
+        // console.log(sqlresult.warningCount);
+        // return;
+        if (sqlresult.warningCount==0) basiccontent = await MissMethods.basicContent(1, 3);
+        // console.log(sqlresult);
         res.type('application/json');
-        res.jsonp(sqlresult);
+        res.jsonp(basiccontent);
     }
 }
 

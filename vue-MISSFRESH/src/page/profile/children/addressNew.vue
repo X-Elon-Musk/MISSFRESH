@@ -39,7 +39,7 @@
     				<li>公司</li>
     				<li>学校</li>
     				<li>其他</li> -->
-    				<li v-for="(item,index) in tags" @click="radioSwitch(index,item.tag)" :class="{active:item.tag==radioTag}">{{item.text}}</li>
+    				<li v-for="(item,index) in tags" @click="radioSwitch(item.tag)" :class="{active:item.tag==radioTag}">{{item.text}}</li>
     			</ul>
     		</li>
 
@@ -58,7 +58,7 @@
 </template>
 <script>
 	import {mapState} from 'vuex'
-	import {saveAddressAxios} from 'src/service/getData'
+	import {saveAddressAxios,deleteAddressAxios} from 'src/service/getData'
 
 	import mheader from 'src/components/mheader/mheader'
 	import mprompt1 from 'src/components/mprompt1/mprompt1'
@@ -117,7 +117,7 @@
             	return this.defaultAddress?this.defaultAddress.province+this.defaultAddress.city+this.defaultAddress.area+this.defaultAddress.address_1:'';
             },
             radioTag: function () {
-            	return this.defaultAddress?this.defaultAddress.tag:'';
+            	return this.defaultAddress?this.defaultAddress.tag:this.tag;
             },
         },
         methods: {
@@ -126,8 +126,8 @@
 				this[type]='';
 			},
 			//选择地址类型
-			radioSwitch(index, itemtag){
-				this.radioIndex=index;
+			radioSwitch(itemtag){
+				// this.radioIndex=index;
 				this.tag=itemtag;
 			},
 			//保存收货地址
@@ -170,8 +170,9 @@
 				this.mpromptShow=false;
 			},*/
 			// 点击确定按钮，删除地址
-			confirmActionFunction(){
-
+			async confirmActionFunction(){
+				let response=await deleteAddressAxios(this.defaultAddress.id);
+				console.log(response);
 			}
 		},
 		props: ['defaultAddress'],

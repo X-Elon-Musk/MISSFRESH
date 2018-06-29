@@ -67,7 +67,7 @@ export const submitMessageAxios=(telephone, message) => axios('/customer/telBind
 });
 
 //获取用户收件地址列表
-export const getAddressListAxios=(user_id) => axios('/customer/getaddresslist', {
+export const getAddressListAxios=user_id => axios('/customer/getaddresslist', {
     user_id: user_id
 });
 
@@ -87,3 +87,8 @@ export const saveAddressAxios=(user_id, address_1, address_2, address_detail, ar
     province,
     tag
 }, 'post');
+
+//删除收货地址
+export const deleteAddressAxios=id => axios('/customer/deleteAddress', {
+    id: id
+});
