@@ -128,5 +128,47 @@ export default class MissMysql{
 		let result=await mysql(sql);
     	return result;*/
 	}
+	//更新数据通用sql
+	async missUpdateMysql(datasheet='', column_value={}, where_requirement={}){
+		if (JSON.stringify(column_value)!=="{}") {
+			let sql='update ';
+			sql+=datasheet+' set ';
+			Object.keys(column_value).forEach(key => {
+				sql+= key+'='+column_value[key]+',';
+			})
+			sql=sql.substr(0, sql.lastIndexOf(','));
+			if (where_requirement&&JSON.stringify(where_requirement)!=="{}") {
+				sql+=await this.whereRequirement(where_requirement);				
+			}
+			// return sql;	
+			console.log('--------');
+			console.log(sql);
+			console.log('--------');	
+			return;	
+			let result=await mysql(sql);
+    		return result;
+		} else{
+			return '';
+		}
+
+		/*let column='',value='';
+		Object.keys(column_value).forEach(key => {
+			column+=key+',';
+		})
+		column=column.substr(0, column.lastIndexOf(','));
+		Object.keys(column_value).forEach(key => {
+			if (Object.prototype.toString.call(column_value[key])=='[object String]') {
+				value+='"'+column_value[key]+'",';		
+			} else{
+				value+=column_value[key]+',';
+			}
+		})
+		value=value.substr(0, value.lastIndexOf(','));
+		sql+=datasheet+' ('+column+') values ('+value+')';
+		console.log(sql);
+		// return;
+		let result=await mysql(sql);
+    	return result;*/
+	}
 }
 

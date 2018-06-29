@@ -1,7 +1,8 @@
 <template>
     <div class="clearfix header-component">
         <span class="title">{{title}}</span>
-        <span class="back" @click="goBack"></span>
+        <span class="back" v-if="!functionOrLink" @click="goBack"></span>
+        <span class="back" v-else @click="backAction"></span>
         <slot class="slot"></slot>
     </div>  
 </template>
@@ -15,19 +16,18 @@
 		methods: {
 			goBack(){
 				this.$router.go(-1);
+			},
+			backAction(){
+				this.$emit("backFunction");
 			}
 		},
-		props: ['title']
+		props: ['title', 'functionOrLink']
 	}
 </script>
 <style lang="less">
 	@import '~src/style/mixin';
 	.header-component{
-		// height: 42px;
-	 //    width: 100%;
 	    .wh(42px);
-	    // line-height: 42px;
-	    // color: @color_common;
 	    .font(42px);
 	    text-align: center;
 	    background: #fff;
@@ -43,6 +43,13 @@
 			position: absolute;
 			left: 18px;
 			top: 0;
+		}
+		.header-right-buttom{
+			position: absolute;
+			right: 0;
+			top: 0;
+			height: 100%;
+			padding: 0 1em;
 		}
 	}
 </style>

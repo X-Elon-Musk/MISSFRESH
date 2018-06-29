@@ -8,11 +8,13 @@ class Address extends MissMysql{
         super()
         this.getAddressList=this.getAddressList.bind(this);
         this.addAddress=this.addAddress.bind(this);
+        this.deleteAddress=this.deleteAddress.bind(this);
     }
     // 获取用户收件地址列表
     async getAddressList(req, res, next){
         let user_id=parseInt(req.query.user_id);
         let sqlresult,result=[];
+        console.log(req.query.user_id);
         sqlresult=await this.missSelectMysql('address_list', {}, {
             user_id: user_id
         });
@@ -48,6 +50,18 @@ class Address extends MissMysql{
         console.log('成功');
         res.type('application/json');
         res.jsonp(insertResult);
+    }
+    // 删除收货地址
+    async deleteAddress(req, res, next){
+        let id=parseInt(req.query.id);
+        let sqlresult,result=[];
+        console.log(req.query.id);
+        sqlresult=await this.missSelectMysql('address_list', {}, {
+            id: id
+        });
+
+        res.type('application/json');
+        res.jsonp(sqlresult);
     }
 }
 

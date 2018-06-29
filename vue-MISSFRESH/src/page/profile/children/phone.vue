@@ -56,7 +56,7 @@
 	        },
 	        //获取手机验证码
 	        teleCode(){
-				getUserAxios(this.telephone);
+				teleCodeAxios(this.telephone);
 	        },
 	        //短信登录
 	        async submitMessage(){

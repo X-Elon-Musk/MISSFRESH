@@ -1,6 +1,6 @@
 <template>
     <div class="profile-item-page profile-item-page-addressDelivery">
-    	<mheader title="收货地址"></mheader>
+    	<mheader title="收货地址" :functionOrLink="true" v-on:backFunction="deliveryBackFunction"></mheader>
     	<div class="addressDelivery-content">
     		<div class="address-bar">
 	    		<div class="address-input">
@@ -120,9 +120,15 @@
 				this.pickerShow=false;
 				this.city=this.pickerCity;
 			},
+			//详细地址选择
 			locationChose(item){
 				console.log(11111111111);
 				this.$emit("locationSure",item);
+			},
+			//页面显示或者隐藏
+			deliveryBackFunction(){
+				console.log('fanfanfan');
+				this.$emit("deliveryAction", false);
 			}
 		},
 		components: {
@@ -132,9 +138,10 @@
 </script>
 <style lang="less">
 	@import '~src/style/mixin';
-	.profile-item-page-addressDelivery{
+	.profile-item-page.profile-item-page-addressDelivery{
 		padding-top: 42px;
 		box-sizing: border-box;
+		z-index: 5;
 		.header-component{
 			position: fixed;
 			left: 0;

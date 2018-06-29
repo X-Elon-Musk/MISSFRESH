@@ -190,3 +190,10 @@ ul,li{
     border-radius: 5px;
     margin-bottom: 1em;
 }
+.bottom-enter-active, .bottom-leave-active {
+    transition: all .4s;
+}
+.bottom-enter, .bottom-leave-active {
+    transform: translate3d(0, 100%, 0);
+    // opacity: 0;
+}

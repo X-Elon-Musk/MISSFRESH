@@ -1,6 +1,8 @@
 <template>
     <div class="profile-item-page profile-item-page-addressNew">
-    	<mheader title="新增收货地址"></mheader>
+    	<mheader :title="defaultAddress?'编辑收货地址':'新增收货地址'" :functionOrLink="true" v-on:backFunction="newBackFunction">
+    		<div class="header-right-buttom" v-show="defaultAddress" @click="deleteAddress(true)">删除</div>
+    	</mheader>
     	<ul class="list">
     		<li class="item-block">
     			<span class="input-label">收件人</span>
@@ -37,7 +39,7 @@
     				<li>公司</li>
     				<li>学校</li>
     				<li>其他</li> -->
-    				<li v-for="(item,index) in tags" @click="radioSwitch(index,item.tag)" :class="{active:index==radioIndex}">{{item.text}}</li>
+    				<li v-for="(item,index) in tags" @click="radioSwitch(index,item.tag)" :class="{active:item.tag==radioTag}">{{item.text}}</li>
     			</ul>
     		</li>
 
@@ -45,10 +47,13 @@
     	<div class="button-common save-address" @click="saveAddress">保存收货地址</div>	
 
 
-    	<transition name="delivery" mode="out-in">
-    		<addressDelivery v-show="deliveryShow" v-on:locationSure="locationSure"></addressDelivery>
+    	<transition name="bottom" mode="out-in">
+    		<addressDelivery v-show="deliveryShow" v-on:locationSure="locationSure" v-on:deliveryAction="deliveryAction"></addressDelivery>
 		</transition>
-
+		
+		<transition name="" mode="out-in">
+    		<mprompt1 promptTitle="提示" promptText="确认删除此收货地址信息么!" v-show="mpromptShow" v-on:cancelActionFunction="deleteAddress(false)" v-on:confirmActionFunction="confirmActionFunction"></mprompt1>
+		</transition>
     </div>  
 </template>
 <script>
@@ -56,6 +61,7 @@
 	import {saveAddressAxios} from 'src/service/getData'
 
 	import mheader from 'src/components/mheader/mheader'
+	import mprompt1 from 'src/components/mprompt1/mprompt1'
 	import addressDelivery from './addressDelivery'
 
 	export default{
@@ -70,10 +76,11 @@
 				lat_lng: '',
 				province: '',
 
-				location: '',
+				/*location: '',
 				name: '',
 				phone_number: '',
 				address_2: '',
+				radioTag: '',*/
 				tag: '',
 				tags: [{
 					tag: 'HOME',
@@ -88,14 +95,30 @@
 					tag: 'OTHER',
 					text: '其他'
 				}],
-				radioIndex: 9999,
-				deliveryShow: false
+				
+				deliveryShow: false,
+				mpromptShow: false
 			}
 		},
 		computed: {
 	    	...mapState([
                 's_userInfo'
             ]),
+            name: function () {
+            	return this.defaultAddress?this.defaultAddress.name:'';
+            },
+            phone_number: function () {
+            	return this.defaultAddress?this.defaultAddress.phone_number:'';
+            },
+            address_2: function () {
+            	return this.defaultAddress?this.defaultAddress.address_2:'';
+            },
+            location: function () {
+            	return this.defaultAddress?this.defaultAddress.province+this.defaultAddress.city+this.defaultAddress.area+this.defaultAddress.address_1:'';
+            },
+            radioTag: function () {
+            	return this.defaultAddress?this.defaultAddress.tag:'';
+            },
         },
         methods: {
         	//清除输入内容
@@ -114,7 +137,7 @@
 				console.log(this.s_userInfo);
 				let response=await saveAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
 			},
-			// 操作选择收货地址出现或消失
+			// 操作选择收货地址页面出现或消失
 			deliveryAction(status){
 				console.log(222);
 				this.deliveryShow=status;
@@ -131,11 +154,31 @@
 				this.lat_lng=item.location.lat+','+item.location.lng;
 				this.province=item.province;
 				// this.full_address=item.province;
+			},
+			//页面显示或者隐藏
+			newBackFunction(){
+				console.log(111111111111);
+				this.$emit("newAction", false);
+			},
+			// 显示或隐藏提示
+			deleteAddress(status){
+				console.log(555555555555);
+				this.mpromptShow=status;
+			},
+			/*// 关闭删除提示
+			cancelActionFunction(){
+				this.mpromptShow=false;
+			},*/
+			// 点击确定按钮，删除地址
+			confirmActionFunction(){
+
 			}
 		},
+		props: ['defaultAddress'],
 		components: {
 			mheader,
-			addressDelivery
+			addressDelivery,
+			mprompt1
 		}
 	}
 </script>
@@ -143,6 +186,9 @@
 	@import '~src/style/mixin';
 	.profile-item-page.profile-item-page-addressNew{
 		background: #f0f0f0;
+		.header-right-buttom{
+			color: #b2b2b2;
+		}
 		.list{
 			padding: 0 4%;
 			box-sizing: border-box;
@@ -238,11 +284,4 @@
 
 		}
 	}
-	.delivery-enter-active, .delivery-leave-active {
-        transition: all .4s;
-    }
-    .delivery-enter, .delivery-leave-active {
-        transform: translate3d(0, 100%, 0);
-        // opacity: 0;
-    }
 </style>
