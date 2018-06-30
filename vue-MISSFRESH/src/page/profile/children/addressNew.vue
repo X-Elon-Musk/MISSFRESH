@@ -152,39 +152,6 @@
 	    	...mapState([
                 's_userInfo'
             ]),
-	    	/*name: {
-	    		get: function () {
-	    			console.log('getter')
-	    			// return this.defaultAddress?this.defaultAddress.name:'';
-	    			
-	    			return this.name;
-	    		},
-		        // setter
-			    set: function () {
-			      	console.log('setter');
-			      	console.log(this.name);
-			      	console.log(this.$refs.name);
-			      	console.log(this.$refs.name.value);
-			      	return this.$refs.name.value;
-			      	// this.
-			      	// this.message = newValue
-			    }
-			},*/
-            /*name: function () {
-            	return this.defaultAddress?this.defaultAddress.name:'';
-            },
-            phone_number: function () {
-            	return this.defaultAddress?this.defaultAddress.phone_number:'';
-            },
-            address_2: function () {
-            	return this.defaultAddress?this.defaultAddress.address_2:'';
-            },
-            location: function () {
-            	return this.defaultAddress?this.defaultAddress.province+this.defaultAddress.city+this.defaultAddress.area+this.defaultAddress.address_1:'';
-            },
-            tag: function () {
-            	return this.defaultAddress?this.defaultAddress.tag:'';
-            },*/
         },
         methods: {
         	//清除输入内容
@@ -193,7 +160,6 @@
 			},
 			//选择地址类型
 			radioSwitch(itemtag){
-				// this.radioIndex=index;
 				this.tag=itemtag;
 			},
 			//保存收货地址
@@ -211,6 +177,7 @@
 			deliveryAction(status){
 				this.deliveryShow=status;
 			},
+			// 赋值，item为来自子级的参数
 			locationSure(item){
 				this.deliveryShow=false;
 				this.location=item.province+item.city+item.district+item.title;
@@ -221,7 +188,6 @@
 				this.full_address=item.address;
 				this.lat_lng=item.location.lat+','+item.location.lng;
 				this.province=item.province;
-				// this.full_address=item.province;
 			},
 			// 页面显示或者隐藏
 			newBackFunction(){
