@@ -25,6 +25,7 @@ class Address extends MissMysql{
     // 新增收货地址
     async addAddress(req, res, next){
         let query=await MissMethods.getQuery(req);
+        let basiccontent;
         let address_item={
             user_id: query.user_id,
             address_1: query.address_1,
@@ -46,10 +47,10 @@ class Address extends MissMysql{
         let insertResult=await this.missInsertMysql('address_list', {
             ...address_item
         }); 
-
+        if (insertResult.warningCount==0) basiccontent = await MissMethods.basicContent(0, 2);
         console.log('成功');
         res.type('application/json');
-        res.jsonp(insertResult);
+        res.jsonp(basiccontent);
     }
     // 删除收货地址
     async deleteAddress(req, res, next){

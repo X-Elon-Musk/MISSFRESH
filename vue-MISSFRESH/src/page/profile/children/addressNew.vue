@@ -116,7 +116,7 @@
 				deliveryShow: false,
 				mpromptShow: false,
 				// 当前为0-“添加”状态，还是为1-“编辑”状态
-				mode: 0
+				newMode: 0
 			}
 		},
 		mounted (){
@@ -125,7 +125,7 @@
 		},
 		watch: {
 			defaultAddress: function () {
-				this.mode=this.defaultAddress ? 1 : 0;
+				this.newMode=this.defaultAddress ? 1 : 0;
 				this.name=this.defaultAddress ? this.defaultAddress.name : '';
 				this.phone_number=this.defaultAddress ? this.defaultAddress.phone_number : '';
 	            this.address_2=this.defaultAddress ? this.defaultAddress.address_2 : '';
@@ -186,7 +186,13 @@
 				this.address_detail=this.address_1+this.address_2;
 				// this.full_address=this.address_1+this.address_2;
 				console.log(this.s_userInfo);
-				let response=await addAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
+				if (this.newMode==0) {
+					let response=await addAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
+					if (response.code==0) this.addressActionComplete();		
+				} else if(this.newMode==1){
+
+				}
+				
 			},
 			// 操作选择收货地址页面出现或消失
 			deliveryAction(status){
@@ -206,7 +212,7 @@
 				this.province=item.province;
 				// this.full_address=item.province;
 			},
-			//页面显示或者隐藏
+			// 页面显示或者隐藏
 			newBackFunction(){
 				console.log(111111111111);
 				this.$emit("newAction", false);
@@ -224,6 +230,12 @@
 			async confirmActionFunction(){
 				let response=await deleteAddressAxios(this.defaultAddress.id);
 				console.log(response);
+				if (response.code==0) this.addressActionComplete();
+			},
+			// 地址添加或修改完成
+			addressActionComplete(){
+				this.$emit("getAddressList");
+				this.$emit("newAction", false);
 			}
 		},
 		props: ['defaultAddress'],

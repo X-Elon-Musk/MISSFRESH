@@ -71,7 +71,7 @@
 	    background-color: #fff;
 	    line-height: 1;
 	    display: flex;
-	    z-index: 1;
+	    z-index: 4;
 	    bottom: 0;
 	    width: 100%;
 	    box-shadow: 0 0 10px rgba(0,0,0,.1);

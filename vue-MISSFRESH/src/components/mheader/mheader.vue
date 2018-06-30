@@ -33,7 +33,11 @@
 	    background: #fff;
 	    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.06);
 	    border-bottom: 1px solid #eee;
-	    position: relative;
+	    // position: relative;
+	    position: fixed;
+	    left: 0;
+	    top: 0;
+	    z-index: 1;
 		.title{
 			display: inline-block;
     		height: 100%;

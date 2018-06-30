@@ -307,6 +307,8 @@
 		.profile-item-page{
 			.fullscreen(3);
 			background: #fff;
+			padding-top: 42px;
+			box-sizing: border-box;
 		}
 		
 	}

@@ -1,5 +1,5 @@
 <template>
-    <div class="profile-item-page profile-item-page-address">
+    <div class="profile-item-page profile-item-page-address" :style="{zIndex:addressIndex}">
     	<mheader title="收货地址">
     		<!-- <router-link :to="{path: '/profile/addressNew'}" tag="div" class="add-address">添加</router-link> -->
     		<div class="header-right-buttom" @click="newAction(true)">添加</div>
@@ -20,8 +20,9 @@
     			<div class="address-write" @click="writeAddress(item)">编辑</div>
     		</li>
     	</ul>
+    	<div class="add-address-button" @click="newAction(true)">新增收货地址</div>
 		<transition name="bottom" mode="out-in">
-    		<addressNew v-show="newShow" v-on:newAction="newAction" :defaultAddress="defaultAddress"></addressNew>
+    		<addressNew v-show="newShow" v-on:newAction="newAction" :defaultAddress="defaultAddress" :getAddressList="getAddressList"></addressNew>
 		</transition>
 		<!-- <transition name="bottom" mode="out-in">
     		<addressNew v-show="writeAddressShow" v-on:newAction="newAction" :defaultAddress="defaultAddress"></addressNew>
@@ -37,7 +38,6 @@
 		data(){
 			return {
 				newShow: false,
-				writeAddressShow: false,
 				addressList: [],
 				defaultAddress: ''
 			}
@@ -49,6 +49,9 @@
 	    	...mapState([
                 's_userInfo'
             ]),
+            addressIndex: function () {
+            	return this.newShow ? 5 :3;
+            }
         },
         methods: {
 			/*addAddress(){
@@ -56,13 +59,8 @@
 			}*/
 			// 收货地址列表
 			getAddressList: function () {
-				console.log('___________________________');
-				console.log(this.s_userInfo.userId);
 				getAddressListAxios(this.s_userInfo.userId).then(response=>{
-					// this.searchResult=response.data;
-					console.log(response);
 					this.addressList=response;
-					console.log('___________________________');
 				})
 			},
 			// 操作添加新地址出现或消失
@@ -86,6 +84,10 @@
 	@import '~src/style/mixin';
 	.profile-item-page.profile-item-page-address{
 		background: #F9F9F9;
+		overflow-y: auto; 
+		// bottom: 61px;
+		padding-bottom: 91px;
+		box-sizing: border-box;
 		a{
 			.text-prompt.active{
 				color: @color_gray;
@@ -149,6 +151,19 @@
 					}
 				}
 			}
+		}
+		.add-address-button{
+		    height: 38px;
+		    width: 100%;
+		    background: @color_main;
+		    text-align: center;
+		    color: #fff;
+		    line-height: 38px;
+		    border-radius: 5px;
+		    position: fixed;
+		    left: 0;
+		    bottom: 53px;
+		    z-index: 1;
 		}
 	}
 </style>

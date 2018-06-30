@@ -5,7 +5,7 @@
 		<transition name="router-fade" mode="out-in">
 			<router-view v-if="!$route.meta.keepAlive"></router-view>
 		</transition>
-		<loading :loading="loading" zIndex="2"></loading>
+		<loading :loading="loading" zIndex="10"></loading>
 	</div>
 </template>
 <script>
