@@ -14,8 +14,8 @@ export default class MissMysql{
 		this.whereRequirement=this.whereRequirement.bind(this);
 		this.orderRequirement=this.orderRequirement.bind(this);
 		this.missInsertMysql=this.missInsertMysql.bind(this);
-		this.missUpdateMysql=this.missUpdateMysql.bind(this);
 		this.missDeleteMysql=this.missDeleteMysql.bind(this);
+		this.missUpdateMysql=this.missUpdateMysql.bind(this);
 	}
 	//请求数据通用sql
 	async missSelectMysql(datasheet='', image_requirment={}, where_requirement={}, order_requirement={}, fuzzy){
@@ -87,13 +87,37 @@ export default class MissMysql{
 		let result=await mysql(sql);
     	return result;
 	}
+	//删除数据通用sql
+	async missDeleteMysql(datasheet='', where_requirement={}){
+		// if (JSON.stringify(column_value)!=="{}") {
+			let sql='delete from '+datasheet;
+			if (where_requirement&&JSON.stringify(where_requirement)!=="{}") {
+				sql+=await this.whereRequirement(where_requirement);				
+			}
+			// return sql;	
+			console.log('--------');
+			console.log(sql);
+			console.log('--------');	
+			// return;	
+			let result=await mysql(sql);
+    		return result;
+		/*} else{
+			return '';
+		}*/
+	}
 	//更新数据通用sql
 	async missUpdateMysql(datasheet='', column_value={}, where_requirement={}){
 		if (JSON.stringify(column_value)!=="{}") {
 			let sql='update ';
 			sql+=datasheet+' set ';
 			Object.keys(column_value).forEach(key => {
-				sql+= key+'='+column_value[key]+',';
+				if (Object.prototype.toString.call(column_value[key])=='[object String]') {
+					// value+='"'+column_value[key]+'",';
+					sql+= key+'="'+column_value[key]+'",';		
+				} else{
+					sql+= key+'='+column_value[key]+',';
+				}
+				// sql+= key+'='+column_value[key]+',';
 			})
 			sql=sql.substr(0, sql.lastIndexOf(','));
 			if (where_requirement&&JSON.stringify(where_requirement)!=="{}") {
@@ -103,7 +127,7 @@ export default class MissMysql{
 			console.log('--------');
 			console.log(sql);
 			console.log('--------');	
-			return;	
+			// return;	
 			let result=await mysql(sql);
     		return result;
 		} else{
@@ -129,23 +153,6 @@ export default class MissMysql{
 		let result=await mysql(sql);
     	return result;*/
 	}
-	//删除数据通用sql
-	async missDeleteMysql(datasheet='', where_requirement={}){
-		// if (JSON.stringify(column_value)!=="{}") {
-			let sql='delete from '+datasheet;
-			if (where_requirement&&JSON.stringify(where_requirement)!=="{}") {
-				sql+=await this.whereRequirement(where_requirement);				
-			}
-			// return sql;	
-			console.log('--------');
-			console.log(sql);
-			console.log('--------');	
-			// return;	
-			let result=await mysql(sql);
-    		return result;
-		/*} else{
-			return '';
-		}*/
-	}
+	
 }
 

@@ -48,7 +48,7 @@
 
 
     	<transition name="bottom" mode="out-in">
-    		<addressDelivery v-show="deliveryShow" v-on:locationSure="locationSure" v-on:deliveryAction="deliveryAction"></addressDelivery>
+    		<addressDelivery v-show="deliveryShow" v-on:locationSure="locationSure" v-on:deliveryAction="deliveryAction" :newShow="newShow"></addressDelivery>
 		</transition>
 		
 		<transition name="" mode="out-in">
@@ -58,7 +58,7 @@
 </template>
 <script>
 	import {mapState} from 'vuex'
-	import {addAddressAxios,deleteAddressAxios} from 'src/service/getData'
+	import {addAddressAxios,deleteAddressAxios,updateAddressAxios} from 'src/service/getData'
 
 	import mheader from 'src/components/mheader/mheader'
 	import mprompt1 from 'src/components/mprompt1/mprompt1'
@@ -86,7 +86,7 @@
 				name: '',
 				phone_number: '',
 				address_2: '',
-				radioTag: '',
+				// radioTag: '',
 				tag: '',
 
 
@@ -127,6 +127,25 @@
 	            this.address_2=this.defaultAddress ? this.defaultAddress.address_2 : '';
 	            this.location=this.defaultAddress ? this.defaultAddress.province+this.defaultAddress.city+this.defaultAddress.area+this.defaultAddress.address_1 : '';
 	            this.tag=this.defaultAddress ? this.defaultAddress.tag : '';
+
+
+	            this.address_1=this.defaultAddress ? this.defaultAddress.address_1 : '';
+	            this.area=this.defaultAddress ? this.defaultAddress.area : '';
+	            this.city=this.defaultAddress ? this.defaultAddress.city : '';
+	            this.code=this.defaultAddress ? this.defaultAddress.code : '';
+	            this.full_address=this.defaultAddress ? this.defaultAddress.full_address : '';
+	            this.lat_lng=this.defaultAddress ? this.defaultAddress.lat_lng : '';
+	            this.province=this.defaultAddress ? this.defaultAddress.province : '';
+			},
+			newShow: function () {
+				if (this.newMode==0) {
+					this.location='';
+					this.name='';
+					this.phone_number='';
+					this.address_2='';
+					this.tag='';			
+				}
+				/**/
 			}
 		},
 		computed: {
@@ -180,13 +199,13 @@
 			//保存收货地址
 			async saveAddress(){
 				this.address_detail=this.address_1+this.address_2;
+				let response;
 				if (this.newMode==0) {
-					let response=await addAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
-					if (response.code==0) this.addressActionComplete();		
+					response=await addAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);	
 				} else if(this.newMode==1){
-
+					response=await updateAddressAxios(this.defaultAddress.id, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
 				}
-				
+				if (response.code==0) this.addressActionComplete();	
 			},
 			// 操作选择收货地址页面出现或消失
 			deliveryAction(status){
@@ -224,7 +243,7 @@
 				this.deleteAddress(false);
 			}
 		},
-		props: ['defaultAddress'],
+		props: ['defaultAddress', 'newShow'],
 		components: {
 			mheader,
 			addressDelivery,

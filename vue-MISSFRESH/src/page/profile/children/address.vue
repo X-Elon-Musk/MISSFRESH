@@ -22,7 +22,7 @@
     	</ul>
     	<div class="add-address-button" @click="newAction(true)">新增收货地址</div>
 		<transition name="bottom" mode="out-in">
-    		<addressNew v-show="newShow" v-on:newAction="newAction" :defaultAddress="defaultAddress" v-on:getAddressList="getAddressList"></addressNew>
+    		<addressNew v-show="newShow" v-on:newAction="newAction" v-on:getAddressList="getAddressList" :defaultAddress="defaultAddress" :newShow="newShow"></addressNew>
 		</transition>
 		<!-- <transition name="bottom" mode="out-in">
     		<addressNew v-show="writeAddressShow" v-on:newAction="newAction" :defaultAddress="defaultAddress"></addressNew>

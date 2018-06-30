@@ -70,6 +70,12 @@
 				pickerShow: false
 			}
 		},
+		watch: {
+			newShow: function () {
+				this.inputVaule='';
+				this.searchResult=[];
+			}
+		},
 		computed: {
             //选择的城市
             choseCity: function () {
@@ -129,6 +135,7 @@
 				this.$emit("deliveryAction", false);
 			}
 		},
+		props: ['newShow'],
 		components: {
 			mheader
 		}
