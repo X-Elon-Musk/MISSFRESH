@@ -4,7 +4,7 @@
     	<div class="addressDelivery-content">
     		<div class="address-bar">
 	    		<div class="address-input">
-	    			<div class="address-city" @click='pickerAction(true)'>{{city||choseCity}}</div>
+	    			<div class="ellips address-city" @click='pickerAction(true)'>{{city||choseCity}}</div>
 	    			<!-- <div class="address-position">请输入要收货的小区/写字楼</div> -->
 	    			<div class="search-box">
 			        	<div class="search-bar">
@@ -101,7 +101,6 @@
 			},
 			// 操作选择城市列表出现或消失
 			pickerAction(status){
-				console.log(222);
 				this.pickerShow=status;
 			},
 			// 搜索地址推荐
@@ -117,17 +116,16 @@
 			},
 			// 确定选择城市
 			cityChose(){
-				this.pickerShow=false;
+				// this.pickerShow=false;
+				this.pickerAction(false);
 				this.city=this.pickerCity;
 			},
 			//详细地址选择
 			locationChose(item){
-				console.log(11111111111);
 				this.$emit("locationSure",item);
 			},
 			//页面显示或者隐藏
 			deliveryBackFunction(){
-				console.log('fanfanfan');
 				this.$emit("deliveryAction", false);
 			}
 		},
@@ -175,13 +173,14 @@
 				.address-city{
 					width: 25%;
 					padding-left: 4%;
+					padding-right: 0.8em;
+					box-sizing: border-box;
 					position: relative;
 					&:after{
 						content: '';
-						display: inline-block;
-						vertical-align: top;
-						margin-top: 0.6em;
-						margin-left: 6%;
+						position: absolute;
+						top: 0.6em;
+						right: 0;
 						.bg(0.8em,0.8em,transparent,'~images/icon/address-city.png',100% 100%);
 					}
 				}

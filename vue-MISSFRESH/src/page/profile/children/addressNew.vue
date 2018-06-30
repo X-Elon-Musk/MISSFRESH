@@ -119,10 +119,6 @@
 				newMode: 0
 			}
 		},
-		mounted (){
-			console.log(122222211);
-			
-		},
 		watch: {
 			defaultAddress: function () {
 				this.newMode=this.defaultAddress ? 1 : 0;
@@ -184,8 +180,6 @@
 			//保存收货地址
 			async saveAddress(){
 				this.address_detail=this.address_1+this.address_2;
-				// this.full_address=this.address_1+this.address_2;
-				console.log(this.s_userInfo);
 				if (this.newMode==0) {
 					let response=await addAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
 					if (response.code==0) this.addressActionComplete();		
@@ -196,11 +190,9 @@
 			},
 			// 操作选择收货地址页面出现或消失
 			deliveryAction(status){
-				console.log(222);
 				this.deliveryShow=status;
 			},
 			locationSure(item){
-				console.log(this.s_userInfo);
 				this.deliveryShow=false;
 				this.location=item.province+item.city+item.district+item.title;
 				this.address_1=item.title;
@@ -214,28 +206,22 @@
 			},
 			// 页面显示或者隐藏
 			newBackFunction(){
-				console.log(111111111111);
 				this.$emit("newAction", false);
 			},
 			// 显示或隐藏提示
 			deleteAddress(status){
-				console.log(555555555555);
 				this.mpromptShow=status;
 			},
-			/*// 关闭删除提示
-			cancelActionFunction(){
-				this.mpromptShow=false;
-			},*/
 			// 点击确定按钮，删除地址
 			async confirmActionFunction(){
 				let response=await deleteAddressAxios(this.defaultAddress.id);
-				console.log(response);
 				if (response.code==0) this.addressActionComplete();
 			},
 			// 地址添加或修改完成
 			addressActionComplete(){
 				this.$emit("getAddressList");
 				this.$emit("newAction", false);
+				this.deleteAddress(false);
 			}
 		},
 		props: ['defaultAddress'],
