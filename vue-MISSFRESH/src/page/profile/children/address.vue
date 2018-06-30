@@ -23,6 +23,9 @@
 		<transition name="bottom" mode="out-in">
     		<addressNew v-show="newShow" v-on:newAction="newAction" :defaultAddress="defaultAddress"></addressNew>
 		</transition>
+		<!-- <transition name="bottom" mode="out-in">
+    		<addressNew v-show="writeAddressShow" v-on:newAction="newAction" :defaultAddress="defaultAddress"></addressNew>
+		</transition> -->
     </div>  
 </template>
 <script>
@@ -34,6 +37,7 @@
 		data(){
 			return {
 				newShow: false,
+				writeAddressShow: false,
 				addressList: [],
 				defaultAddress: ''
 			}

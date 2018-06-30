@@ -39,7 +39,7 @@
     				<li>公司</li>
     				<li>学校</li>
     				<li>其他</li> -->
-    				<li v-for="(item,index) in tags" @click="radioSwitch(item.tag)" :class="{active:item.tag==radioTag}">{{item.text}}</li>
+    				<li v-for="(item,index) in tags" @click="radioSwitch(item.tag)" :class="{active:item.tag==tag}">{{item.text}}</li>
     			</ul>
     		</li>
 
@@ -81,7 +81,17 @@
 				phone_number: '',
 				address_2: '',
 				radioTag: '',*/
-				tag: '',
+
+
+				// tag: '',
+
+
+
+				// name: this.defaultAddress?this.defaultAddress.name:'',
+	            phone_number: this.defaultAddress?this.defaultAddress.phone_number:'',
+	            address_2: this.defaultAddress?this.defaultAddress.address_2:'',
+	            location: this.defaultAddress?this.defaultAddress.province+this.defaultAddress.city+this.defaultAddress.area+this.defaultAddress.address_1:'',
+	            tag: this.defaultAddress?this.defaultAddress.tag:'',
 				tags: [{
 					tag: 'HOME',
 					text: '住宅'
@@ -107,6 +117,9 @@
             name: function () {
             	return this.defaultAddress?this.defaultAddress.name:'';
             },
+            /*name: function () {
+            	return this.defaultAddress?this.defaultAddress.name:'';
+            },
             phone_number: function () {
             	return this.defaultAddress?this.defaultAddress.phone_number:'';
             },
@@ -116,9 +129,9 @@
             location: function () {
             	return this.defaultAddress?this.defaultAddress.province+this.defaultAddress.city+this.defaultAddress.area+this.defaultAddress.address_1:'';
             },
-            radioTag: function () {
-            	return this.defaultAddress?this.defaultAddress.tag:this.tag;
-            },
+            tag: function () {
+            	return this.defaultAddress?this.defaultAddress.tag:'';
+            },*/
         },
         methods: {
         	//清除输入内容
