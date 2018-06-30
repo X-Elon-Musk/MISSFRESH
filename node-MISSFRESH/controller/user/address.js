@@ -61,7 +61,7 @@ class Address extends MissMysql{
         });
         // console.log(sqlresult.warningCount);
         // return;
-        if (sqlresult.warningCount==0) basiccontent = await MissMethods.basicContent(1, 3);
+        if (sqlresult.warningCount==0) basiccontent = await MissMethods.basicContent(0, 2);
         // console.log(sqlresult);
         res.type('application/json');
         res.jsonp(basiccontent);

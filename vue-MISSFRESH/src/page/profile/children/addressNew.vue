@@ -6,7 +6,7 @@
     	<ul class="list">
     		<li class="item-block">
     			<span class="input-label">收件人</span>
-    			<input v-model="name" type="text" placeholder="收货人姓名" class="item-input">
+    			<input v-model="name" type="text" placeholder="收货人姓名" class="item-input" ref="name">
     			<img src="~images/icon/close.png" alt="" class="clear-button" v-show="name" @click="clear('name')">
     		</li>
     		<li class="item-block">
@@ -58,7 +58,7 @@
 </template>
 <script>
 	import {mapState} from 'vuex'
-	import {saveAddressAxios,deleteAddressAxios} from 'src/service/getData'
+	import {addAddressAxios,deleteAddressAxios} from 'src/service/getData'
 
 	import mheader from 'src/components/mheader/mheader'
 	import mprompt1 from 'src/components/mprompt1/mprompt1'
@@ -82,16 +82,23 @@
 				address_2: '',
 				radioTag: '',*/
 
+				location: '',
+				name: '',
+				phone_number: '',
+				address_2: '',
+				radioTag: '',
+				tag: '',
+
 
 				// tag: '',
 
 
 
 				// name: this.defaultAddress?this.defaultAddress.name:'',
-	            phone_number: this.defaultAddress?this.defaultAddress.phone_number:'',
+	            /*phone_number: this.defaultAddress?this.defaultAddress.phone_number:'',
 	            address_2: this.defaultAddress?this.defaultAddress.address_2:'',
 	            location: this.defaultAddress?this.defaultAddress.province+this.defaultAddress.city+this.defaultAddress.area+this.defaultAddress.address_1:'',
-	            tag: this.defaultAddress?this.defaultAddress.tag:'',
+	            tag: this.defaultAddress?this.defaultAddress.tag:'',*/
 				tags: [{
 					tag: 'HOME',
 					text: '住宅'
@@ -107,16 +114,47 @@
 				}],
 				
 				deliveryShow: false,
-				mpromptShow: false
+				mpromptShow: false,
+				// 当前为0-“添加”状态，还是为1-“编辑”状态
+				mode: 0
+			}
+		},
+		mounted (){
+			console.log(122222211);
+			
+		},
+		watch: {
+			defaultAddress: function () {
+				this.mode=this.defaultAddress ? 1 : 0;
+				this.name=this.defaultAddress ? this.defaultAddress.name : '';
+				this.phone_number=this.defaultAddress ? this.defaultAddress.phone_number : '';
+	            this.address_2=this.defaultAddress ? this.defaultAddress.address_2 : '';
+	            this.location=this.defaultAddress ? this.defaultAddress.province+this.defaultAddress.city+this.defaultAddress.area+this.defaultAddress.address_1 : '';
+	            this.tag=this.defaultAddress ? this.defaultAddress.tag : '';
 			}
 		},
 		computed: {
 	    	...mapState([
                 's_userInfo'
             ]),
-            name: function () {
-            	return this.defaultAddress?this.defaultAddress.name:'';
-            },
+	    	/*name: {
+	    		get: function () {
+	    			console.log('getter')
+	    			// return this.defaultAddress?this.defaultAddress.name:'';
+	    			
+	    			return this.name;
+	    		},
+		        // setter
+			    set: function () {
+			      	console.log('setter');
+			      	console.log(this.name);
+			      	console.log(this.$refs.name);
+			      	console.log(this.$refs.name.value);
+			      	return this.$refs.name.value;
+			      	// this.
+			      	// this.message = newValue
+			    }
+			},*/
             /*name: function () {
             	return this.defaultAddress?this.defaultAddress.name:'';
             },
@@ -148,7 +186,7 @@
 				this.address_detail=this.address_1+this.address_2;
 				// this.full_address=this.address_1+this.address_2;
 				console.log(this.s_userInfo);
-				let response=await saveAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
+				let response=await addAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
 			},
 			// 操作选择收货地址页面出现或消失
 			deliveryAction(status){

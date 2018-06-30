@@ -72,7 +72,7 @@ export const getAddressListAxios=user_id => axios('/customer/getaddresslist', {
 });
 
 //新增收货地址
-export const saveAddressAxios=(user_id, address_1, address_2, address_detail, area, city, code, full_address, lat_lng, name, phone_number, province, tag) => axios('/customer/addAddress', {
+export const addAddressAxios=(user_id, address_1, address_2, address_detail, area, city, code, full_address, lat_lng, name, phone_number, province, tag) => axios('/customer/addAddress', {
     user_id,
     address_1,
     address_2,
