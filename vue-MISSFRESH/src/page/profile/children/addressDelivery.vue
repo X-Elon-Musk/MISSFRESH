@@ -146,6 +146,7 @@
 	.profile-item-page.profile-item-page-addressDelivery{
 		padding-top: 42px;
 		box-sizing: border-box;
+		background: #f0f0f0;
 		z-index: 5;
 		.header-component{
 			position: fixed;
@@ -173,7 +174,7 @@
 				flex-wrap: nowrap;
 				overflow: hidden;
 				white-space: nowrap;
-				background-color: #f5f5f5;
+				background-color: #eee;
 				border-radius: 0.25em;
 				height: 2em;
 				line-height: 2em;
@@ -207,7 +208,7 @@
 			}
 		}
 		.search-box{
-			background-color: #fff;
+			// background-color: #fff;
 			color: #4b4b4b;
 			// box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.1);
 			border-bottom: none;
@@ -241,7 +242,7 @@
 						.bg(24px,24px,transparent,'~images/icon/search-logo.png',66% 66%);
 					}
 					.search-input{
-						background-color: #f5f5f5;
+						background-color: transparent;
 						.wh(100%,100%);
 						border-radius: 0.25rem;
 						// font-size: 0.875rem;

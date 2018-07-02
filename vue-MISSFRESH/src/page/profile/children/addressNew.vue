@@ -44,6 +44,9 @@
     		</li>
 
     	</ul>
+    	<div class="toast-wrap" v-show="toastWrap">
+    		<span>{{toastWrap}}</span>
+    	</div>
     	<div class="button-common save-address" @click="saveAddress">保存收货地址</div>	
 
 
@@ -57,6 +60,7 @@
     </div>  
 </template>
 <script>
+	import {testTele} from 'src/config/mUtils'
 	import {mapState} from 'vuex'
 	import {addAddressAxios,deleteAddressAxios,updateAddressAxios} from 'src/service/getData'
 
@@ -75,30 +79,11 @@
 				full_address: '',
 				lat_lng: '',
 				province: '',
-
-				/*location: '',
-				name: '',
-				phone_number: '',
-				address_2: '',
-				radioTag: '',*/
-
 				location: '',
 				name: '',
 				phone_number: '',
 				address_2: '',
-				// radioTag: '',
-				tag: '',
-
-
-				// tag: '',
-
-
-
-				// name: this.defaultAddress?this.defaultAddress.name:'',
-	            /*phone_number: this.defaultAddress?this.defaultAddress.phone_number:'',
-	            address_2: this.defaultAddress?this.defaultAddress.address_2:'',
-	            location: this.defaultAddress?this.defaultAddress.province+this.defaultAddress.city+this.defaultAddress.area+this.defaultAddress.address_1:'',
-	            tag: this.defaultAddress?this.defaultAddress.tag:'',*/
+				tag: 'HOME',
 				tags: [{
 					tag: 'HOME',
 					text: '住宅'
@@ -116,7 +101,8 @@
 				deliveryShow: false,
 				mpromptShow: false,
 				// 当前为0-“添加”状态，还是为1-“编辑”状态
-				newMode: 0
+				newMode: 0,
+				toastWrap: ''
 			}
 		},
 		watch: {
@@ -126,7 +112,7 @@
 				this.phone_number=this.defaultAddress ? this.defaultAddress.phone_number : '';
 	            this.address_2=this.defaultAddress ? this.defaultAddress.address_2 : '';
 	            this.location=this.defaultAddress ? this.defaultAddress.province+this.defaultAddress.city+this.defaultAddress.area+this.defaultAddress.address_1 : '';
-	            this.tag=this.defaultAddress ? this.defaultAddress.tag : '';
+	            this.tag=this.defaultAddress ? this.defaultAddress.tag : 'HOME';
 
 
 	            this.address_1=this.defaultAddress ? this.defaultAddress.address_1 : '';
@@ -143,7 +129,7 @@
 					this.name='';
 					this.phone_number='';
 					this.address_2='';
-					this.tag='';			
+					this.tag='HOME';			
 				}
 				/**/
 			}
@@ -164,6 +150,26 @@
 			},
 			//保存收货地址
 			async saveAddress(){
+				if (this.name=='') {
+					this.promptText('请填写收货人姓名');
+					return;			
+				}
+				if (this.phone_number=='') {
+					this.promptText('请填写收货人手机号码');
+					return;			
+				}
+				if (!testTele(this.phone_number)) {
+					this.promptText('手机号码格式错误');
+					return;			
+				}
+				if (this.location=='') {
+					this.promptText('请选择收货地址');
+					return;			
+				}
+				if (this.address_2=='') {
+					this.promptText('请填写楼号门牌');
+					return;			
+				}
 				this.address_detail=this.address_1+this.address_2;
 				let response;
 				if (this.newMode==0) {
@@ -173,6 +179,7 @@
 				}
 				if (response.code==0) this.addressActionComplete();	
 			},
+
 			// 操作选择收货地址页面出现或消失
 			deliveryAction(status){
 				this.deliveryShow=status;
@@ -207,6 +214,13 @@
 				this.$emit("getAddressList");
 				this.$emit("newAction", false);
 				this.deleteAddress(false);
+			},
+			// 提示文字
+			promptText(text) {
+				this.toastWrap=text;
+            	setTimeout(function () {
+            		this.toastWrap='';
+            	},4000)
 			}
 		},
 		props: ['defaultAddress', 'newShow'],
@@ -310,13 +324,19 @@
 				}
 			}
 		}
+		.toast-wrap{
+			z-index: 200;
+			.positionCenter();
+			border-radius: 5px;
+			background-color: rgba(0,0,0,0.8);
+			padding: 10px;
+			color: #fff;
+			height: auto;
+			text-align: center;
+		}
 		.save-address{
 			width: 92%;
 			margin: 1em auto 0;
-		}
-
-		.addressDelivery{
-
 		}
 	}
 </style>
