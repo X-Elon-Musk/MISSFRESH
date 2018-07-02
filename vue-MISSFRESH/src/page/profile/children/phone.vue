@@ -18,6 +18,9 @@
         	</div>
         </div>
         <toastWrap :toastWrap="toastText"></toastWrap>
+        <transition name="" mode="out-in">
+    		<mprompt1 promptTitle="获取验证码" promptText="我们将以短信的形式告知您验证码, 请留意查收短信呦~" v-show="mpromptShow" :cancelShow="false" v-on:confirmActionFunction="mpromptActionFunction(false)"></mprompt1>
+		</transition>
     </div>  
 </template>
 <script>
@@ -26,6 +29,7 @@
 	import {teleCodeAxios, submitMessageAxios} from 'src/service/getData'
 
 	import mheader from 'src/components/mheader/mheader'
+	import mprompt1 from 'src/components/mprompt1/mprompt1'
 	import toastWrap from 'src/components/toastWrap/toastWrap'
 	import profileItem from '../component/profileItem'
 	export default{
@@ -34,7 +38,8 @@
 				disabled: false,
 				phone_number: '',
 				message: '',
-				toastText: ''
+				toastText: '',
+				mpromptShow: false
 			}
 		},
 		methods: {
@@ -46,24 +51,30 @@
 				this.phone_number='';
 			},
 			//点击“获取验证码”按钮，获取验证码
-	        getCode(){
+	        async getCode(){
 	        	if (this.phone_number==''||!testTele(this.phone_number)) {
 					this.toastText='请填写正确的手机号码';
 					return;			
 				}
 	        	if (!this.disabled) {
-	        		this.teleCode();
-		            this.disabled=true;
-	                let timer=setTimeout(()=> {
-	                    this.disabled=false;
-	                    clearTimeout(timer);
-	                },120000)				
+	        		let response=await teleCodeAxios(this.phone_number);
+	        		console.log(response);
+	        		// return;
+	        		if (response.code==0) {
+	        			this.disabled=true;
+		                let timer=setTimeout(()=> {
+		                    this.disabled=false;
+		                    clearTimeout(timer);
+		                },120000)
+		                this.mpromptActionFunction(true);	
+	        		}			
 	        	}
 	        },
-	        //获取手机验证码
-	        teleCode(){
-				teleCodeAxios(this.phone_number);
-	        },
+	        /*//获取手机验证码
+	        async teleCode(){
+				let response=await teleCodeAxios(this.phone_number);
+				return response;
+	        },*/
 	        //短信登录
 	        async submitMessage(){
 	        	if (this.phone_number==''||!testTele(this.phone_number)) {
@@ -82,9 +93,14 @@
 					this.$router.replace('/profile');
 				}
 	        },
+	        // 提示信息状态操作
+	        mpromptActionFunction(status){
+	        	this.mpromptShow=status;
+	        }
 		},
 		components: {
 			mheader,
+			mprompt1,
 			toastWrap,
 			profileItem
 		}

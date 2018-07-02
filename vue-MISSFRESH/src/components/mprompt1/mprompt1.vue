@@ -7,8 +7,8 @@
 	        		<h4 class="popup-text">{{promptText}}</h4>
 	        	</div>
 	        	<div class="clearfix popup-buttons">
-	        		<div class="f_l button button-cancel" @click="cancelAction">取消</div>
-	        		<div class="f_r button button-confirm" @click="confirmAction">确定</div>
+	        		<div class="f_l button button-cancel" v-show="cancelShow" @click="cancelAction">取消</div>
+	        		<div class="f_r button button-confirm" @click="confirmAction" :class="{'cancel-not':!cancelShow}">{{cancelShow?'确定':'我知道了'}}</div>
 	        	</div>
 	        </div>
     	</div>
@@ -33,7 +33,7 @@
 				this.$emit("confirmActionFunction");
 			}
 		},
-		props: ['promptTitle', 'promptText']
+		props: ['promptTitle', 'promptText', 'cancelShow']
 	}
 </script>
 <style lang="less">
@@ -60,7 +60,7 @@
 				text-align: center;
 				.popup-text{
 					.font(1.2em,0.7em,#b8b8b8);
-					padding-bottom: 1em;
+					padding: 0 2% 1em 2%;
 				}
 			}	
 			.popup-buttons{
@@ -70,7 +70,7 @@
 					.wh(3em,50%);
 					text-align: center;	
 				}
-				.button-confirm{
+				/* .button-confirm{
 					position: relative;
 					&:before{
 						content: '';
@@ -81,6 +81,22 @@
 						width: 1px;
 						background: #d1d1d1;
 					}
+				} */
+				.button-cancel{
+					position: relative;
+					&:after{
+						content: '';
+						position: absolute;
+						right: 0;
+						top: 15%;
+						height: 70%;
+						width: 1px;
+						background: #d1d1d1;
+					}
+				}
+				.cancel-not{
+					width: 100%;
+					color: @color_main;
 				}
 			}
 		}

@@ -35,9 +35,6 @@
     		</li>
 
     	</ul>
-    	<!-- <div class="toast-wrap" v-show="toastWrap">
-    		<span>{{toastWrap}}</span>
-    	</div> -->
     	<toastWrap :toastWrap="toastText"></toastWrap>
     	<div class="button-common save-address" @click="saveAddress">保存收货地址</div>	
 
@@ -47,7 +44,7 @@
 		</transition>
 		
 		<transition name="" mode="out-in">
-    		<mprompt1 promptTitle="提示" promptText="确认删除此收货地址信息么!" v-show="mpromptShow" v-on:cancelActionFunction="deleteAddress(false)" v-on:confirmActionFunction="confirmActionFunction"></mprompt1>
+    		<mprompt1 promptTitle="提示" promptText="确认删除此收货地址信息么!" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="deleteAddress(false)" v-on:confirmActionFunction="confirmActionFunction"></mprompt1>
 		</transition>
     </div>  
 </template>
@@ -171,7 +168,6 @@
 				}
 				if (response.code==0) this.addressActionComplete();	
 			},
-
 			// 操作选择收货地址页面出现或消失
 			deliveryAction(status){
 				this.deliveryShow=status;
@@ -310,17 +306,6 @@
 				}
 			}
 		}
-		/* .toast-wrap{
-			z-index: 200;
-			.positionCenter();
-			border-radius: 5px;
-			background-color: rgba(0,0,0,0.8);
-			padding: 10px;
-			font-size: 0.9em;
-			color: #fff;
-			height: auto;
-			text-align: center;
-		} */
 		.save-address{
 			width: 92%;
 			margin: 1em auto 0;
