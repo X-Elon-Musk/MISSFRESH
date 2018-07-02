@@ -25,6 +25,10 @@
 				</li>
 			</ul>
 		</div>
+		<div class="not-address" v-show="searchResult.length==0">
+			<div>您所选城市在“<span class="no-address-city">{{city||choseCity}}</span>”</div>
+			<div>请搜索该城市内您收货的写字楼、小区</div>
+		</div>
 		<div class="region-picker-backdrop" v-show="pickerShow"></div>
 		<transition name="sideslip" mode="out-in">
 			<div class="region-picker" v-show="pickerShow">
@@ -279,6 +283,19 @@
 					color: #4C4440;
 					font-weight: 700;
 				}
+			}
+		}
+		.not-address {
+			margin: 120px auto 0;
+			background: url(~images/icon/address-search.png) center no-repeat;
+			background-size: 70px 70px;
+			padding-top: 128px;
+			text-align: center;
+			font-size: 0.9em;
+			color: #7f7f7f;
+			line-height: 1.2em;
+			.no-address-city{
+			    color: #ffad3d;
 			}
 		}
 		.region-picker-backdrop{

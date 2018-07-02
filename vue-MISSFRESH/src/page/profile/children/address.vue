@@ -159,6 +159,7 @@
 			text-align: center;
 			font-size: 0.9em;
 			color: #7f7f7f;
+			line-height: 1.2em;
 		}
 		.add-address-button{
 		    height: 38px;
