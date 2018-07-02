@@ -20,6 +20,7 @@
     			<div class="address-write" @click="writeAddress(item)">编辑</div>
     		</li>
     	</ul>
+    	<div class="not-address" v-show="addressList.length==0">您还没有收货地址,请新增地址</div>
     	<div class="add-address-button" @click="newAction(true)">新增收货地址</div>
 		<transition name="bottom" mode="out-in">
     		<addressNew v-show="newShow" v-on:newAction="newAction" v-on:getAddressList="getAddressList" :defaultAddress="defaultAddress" :newShow="newShow"></addressNew>
@@ -81,7 +82,7 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.profile-item-page.profile-item-page-address{
-		background: #F9F9F9;
+		background: #f0f0f0;
 		overflow-y: auto; 
 		// bottom: 61px;
 		padding-bottom: 91px;
@@ -149,6 +150,15 @@
 					}
 				}
 			}
+		}
+		.not-address {
+			margin: 120px auto 0;
+			background: url(~images/icon/not-address.png) center no-repeat;
+			background-size: 90px 90px;
+			padding-top: 128px;
+			text-align: center;
+			font-size: 0.9em;
+			color: #7f7f7f;
 		}
 		.add-address-button{
 		    height: 38px;
