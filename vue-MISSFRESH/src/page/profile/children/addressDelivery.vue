@@ -17,7 +17,6 @@
 	    		</div>
 	    	</div>
 			<ul class="search-result">
-				<!-- <li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="changeCurrentRegion(item)"> -->
 				<li class="search-list" v-for="(item,index) in searchResult" :key="index" @click="locationChose(item)">
 					<div class="location-title">{{item.title}}</div> 
 					<div class="location-desc">{{item.address}}</div>
@@ -89,7 +88,6 @@
         	// 滚动选择城市列表
 			onValuesChange(picker, values) {
 				if(!values[0]){
-					console.log(1);
 					this.$nextTick(()=>{
 						if(this.myAdress){
 	                        // 赋默认值
@@ -125,7 +123,6 @@
 			},
 			// 确定选择城市
 			cityChose(){
-				// this.pickerShow=false;
 				this.pickerAction(false);
 				this.city=this.pickerCity;
 			},

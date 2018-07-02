@@ -122,7 +122,6 @@
 							margin-right: 0.5em;
 						}
 					}
-					
 				}
 				.address-write{
 					.positionY();
