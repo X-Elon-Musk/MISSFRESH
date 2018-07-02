@@ -37,10 +37,10 @@
 		},
         props: ['categorylist'],
         methods: {
-            closeButton: function () {
+            closeButton() {
                 this.$emit("closeClassify");
             },
-            iconClick: function (index) {
+            iconClick(index) {
                 // console.log(index);
                 this.closeButton();
                 this.$emit("tabMove",index);

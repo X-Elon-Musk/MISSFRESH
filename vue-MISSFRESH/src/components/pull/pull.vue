@@ -23,7 +23,7 @@
 			})
 		},
 		methods: {
-			swiperPull: function () {
+			swiperPull() {
 				var _this=this;
 				this.pull= new Swiper('.pull',{
 					slidesOffsetBefore: 0,

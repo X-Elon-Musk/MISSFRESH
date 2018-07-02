@@ -39,7 +39,7 @@
                 'SET_POSITION'
             ]),
 			// 搜索地址推荐
-			suggestionLocation: function () {
+			suggestionLocation() {
 				let _this=this;
 				if (this.inputVaule) {
 					let keyword=this.inputVaule,

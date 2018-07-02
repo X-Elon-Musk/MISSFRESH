@@ -29,7 +29,7 @@
 		},
 		methods: {
 			// 商品搜索
-			suggestionProducts: function () {
+			suggestionProducts() {
 				let _this=this;
 				if (this.inputVaule) {
 					let name=this.inputVaule;

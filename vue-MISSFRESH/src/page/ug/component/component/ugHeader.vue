@@ -34,7 +34,7 @@
             },
         },
 		methods: {
-			closeTips: function () {
+			closeTips() {
 				this.tips=false;
 			},
 			// goAddressChose: function () {

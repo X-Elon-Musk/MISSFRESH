@@ -1,17 +1,16 @@
-//判断是否是array
+// 判断是否是array
 export const isArray=(obj)=>{
 	return Object.prototype.toString.call(obj)=='[object Array]';
 }
-//判断是否是object
+// 判断是否是object
 export const isObject=(obj)=>{
 	return Object.prototype.toString.call(obj)=='[object Object]';
 }
-//分解对象，直接获得所要key值对应的value
+// 分解对象，直接获得所要key值对应的value
 export const getValue=(objProvide,keyNeed)=>{
 	 if(Object.prototype.toString.call(objProvide) === '[object Object]'){
         var obj={};
         (function getValueFun(object, char) {
-            // var key='';
             for(var key in object){
                 if (key==char) {
                     obj.value=object[key];
@@ -28,7 +27,7 @@ export const getValue=(objProvide,keyNeed)=>{
 }
 
 
-//存储localStorage
+// 存储localStorage
 export const setStore=(name, content)=> {
     if (!name) return;
     if (typeof content !== 'string') {
@@ -37,19 +36,19 @@ export const setStore=(name, content)=> {
     window.localStorage.setItem(name, content);
 }
 
-//获取localStorage
+// 获取localStorage
 export const getStore=name=>{
     if (!name) return;
     return window.localStorage.getItem(name);
 }
 
-//删除localStorage
+// 删除localStorage
 export const removeStore=name=>{
     if (!name) return;
     window.localStorage.removeItem(name);
 }
 
-//正则匹配手机号
+// 正则匹配手机号
 export const testTele=(telephone)=>{
     let myreg=/^[1][3,4,5,7,8][0-9]{9}$/;  
     /*if (!myreg.test(telephone)) {  

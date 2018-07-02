@@ -5,7 +5,6 @@
     		<div class="address-bar">
 	    		<div class="address-input">
 	    			<div class="ellips address-city" @click='pickerAction(true)'>{{city||choseCity}}</div>
-	    			<!-- <div class="address-position">请输入要收货的小区/写字楼</div> -->
 	    			<div class="search-box">
 			        	<div class="search-bar">
 			        		<form class="search-form" v-on:submit.prevent>
@@ -158,7 +157,6 @@
 			top: 0;
 		}
 		.addressDelivery-content{
-			// height: calc(100% - 42px);
 			position: absolute;
 			left: 0;
 			top: 42px;
@@ -212,14 +210,11 @@
 			}
 		}
 		.search-box{
-			// background-color: #fff;
 			color: #4b4b4b;
-			// box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.1);
 			border-bottom: none;
 			border-top-width: 0;
 			width: 75%;
     		position: relative;
-			// padding: 6px 4%;
 			box-sizing: border-box;
 			position: relative;
 			&:before{
@@ -249,7 +244,6 @@
 						background-color: transparent;
 						.wh(100%,100%);
 						border-radius: 0.25rem;
-						// font-size: 0.875rem;
 						text-indent: 1.875rem;
 						border: none;
 						outline: none;

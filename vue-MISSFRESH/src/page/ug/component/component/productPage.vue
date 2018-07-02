@@ -42,7 +42,7 @@
         props: ['products','banner'],
         methods: {
             //上滑加载
-            getData: function () {
+            getData() {
                 this.productsEnd+=8;
                 if (this.productsEnd>=this.products.length) {
                     this.productsEnd=this.products.length;

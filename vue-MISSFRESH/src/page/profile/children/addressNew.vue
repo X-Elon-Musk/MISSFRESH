@@ -16,11 +16,6 @@
     		</li>
     		<li class="clearfix item-block item-block-location">
     			<span class="input-label">收货地址</span>
-    			<!-- <router-link :to="{path: '/profile/addressDelivery'}" tag="div" class="f_r go-right">
-    				<span class="address-icon"></span>
-	    			<span v-show="1" class="item-placeholder">{{'小区/写字楼'}}</span>
-	    			<span class="go-right-icon"></span>
-    			</router-link> -->
     			<div class="f_r go-right" @click="deliveryAction(true)">
     				<span class="address-icon"></span>
 	    			<span v-show="1" class="item-placeholder">{{location||'小区/写字楼'}}</span>
@@ -35,10 +30,6 @@
     		<li class="clearfix item-block">
     			<span class="input-label">地址类型</span>
     			<ul class="f_r item-radio-container">
-    				<!-- <li>住宅</li>
-    				<li>公司</li>
-    				<li>学校</li>
-    				<li>其他</li> -->
     				<li v-for="(item,index) in tags" @click="radioSwitch(item.tag)" :class="{active:item.tag==tag}">{{item.text}}</li>
     			</ul>
     		</li>
@@ -131,7 +122,6 @@
 					this.address_2='';
 					this.tag='HOME';			
 				}
-				/**/
 			}
 		},
 		computed: {
@@ -150,6 +140,7 @@
 			},
 			//保存收货地址
 			async saveAddress(){
+				let response;
 				if (this.name=='') {
 					this.promptText('请填写收货人姓名');
 					return;			
@@ -171,7 +162,6 @@
 					return;			
 				}
 				this.address_detail=this.address_1+this.address_2;
-				let response;
 				if (this.newMode==0) {
 					response=await addAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);	
 				} else if(this.newMode==1){
@@ -217,10 +207,12 @@
 			},
 			// 提示文字
 			promptText(text) {
+				let _this=this;
 				this.toastWrap=text;
-            	setTimeout(function () {
-            		this.toastWrap='';
-            	},4000)
+            	let timer=setTimeout(()=>{
+            		_this.toastWrap='';
+            		clearTimeout(timer);
+            	},3000)
 			}
 		},
 		props: ['defaultAddress', 'newShow'],
@@ -330,6 +322,7 @@
 			border-radius: 5px;
 			background-color: rgba(0,0,0,0.8);
 			padding: 10px;
+			font-size: 0.9em;
 			color: #fff;
 			height: auto;
 			text-align: center;

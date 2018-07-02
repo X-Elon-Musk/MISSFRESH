@@ -121,7 +121,7 @@
 			}
 		},
 		methods: {
-			getData: function () {
+			getData() {
 				for(var i = 0; i <3; i++) {
               	  	this.products.push({
 						hot: 0,

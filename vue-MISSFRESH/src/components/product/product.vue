@@ -62,13 +62,13 @@
 			...mapMutations([
                 'ADD_CART','REDUCE_CART','SET_MPROMPT'
             ]),
-            minusOutCart: function (id,event) {
+            minusOutCart(id,event) {
 				this.REDUCE_CART({id});
 				if (this.mpromptExist&&this.s_mpromptStatus) {
 					this.SET_MPROMPT({status: true});			
 				}
 			},
-			addToCart: function (id,image,name,product_tags,price_up,price_down,event) {
+			addToCart(id,image,name,product_tags,price_up,price_down,event) {
 				this.ADD_CART({id,image,name,product_tags,price_up,price_down});
 			}
 		},

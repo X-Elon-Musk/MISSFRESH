@@ -40,7 +40,7 @@
 			...mapMutations([
                 'SET_MPROMPT'
             ]),
-			cancelAction: function () {
+			cancelAction() {
 				this.SET_MPROMPT({status: false});	
 			}
 		}

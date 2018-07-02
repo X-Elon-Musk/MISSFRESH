@@ -1,7 +1,6 @@
 <template>
     <div class="profile-item-page profile-item-page-address" :style="{zIndex:addressIndex}">
     	<mheader title="收货地址">
-    		<!-- <router-link :to="{path: '/profile/addressNew'}" tag="div" class="add-address">添加</router-link> -->
     		<div class="header-right-buttom" @click="newAction(true)">添加</div>
     	</mheader>
     	<ul class="address-list">
@@ -30,6 +29,7 @@
 <script>
 	import {mapState} from 'vuex'
 	import {getAddressListAxios} from 'src/service/getData'
+	import {getStore} from 'src/config/mUtils.js'
 	import mheader from 'src/components/mheader/mheader'
 	import addressNew from './addressNew'
 	export default{
@@ -47,18 +47,16 @@
 	    	...mapState([
                 's_userInfo'
             ]),
+            // 页面层级
             addressIndex: function () {
             	return this.newShow ? 5 :3;
             }
         },
         methods: {
-			/*addAddress(){
-				this.$router.go(-1);
-			}*/
 			// 收货地址列表
 			getAddressList: function () {
-				console.log('gengxin');
-				getAddressListAxios(this.s_userInfo.userId).then(response=>{
+				let userId=getStore('userId');
+				getAddressListAxios(this.s_userInfo.userId||userId).then(response=>{
 					this.addressList=response;
 				})
 			},
@@ -84,7 +82,6 @@
 	.profile-item-page.profile-item-page-address{
 		background: #f0f0f0;
 		overflow-y: auto; 
-		// bottom: 61px;
 		padding-bottom: 91px;
 		box-sizing: border-box;
 		a{
@@ -94,13 +91,6 @@
 		}
 		.header-component{
 			text-align: center;
-			/* .add-address{
-				position: absolute;
-				right: 0;
-				top: 0;
-				height: 100%;
-				padding: 0 1em;
-			} */
 		}
 		.address-list{
 			.address-item{
