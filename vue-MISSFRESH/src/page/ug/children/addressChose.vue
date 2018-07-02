@@ -139,7 +139,6 @@
 				.address-position{
 					width: 75%;
 					position: relative;
-					// margin-left: 1em;
 					&:before{
 						content: '';
 						display: inline-block;
@@ -152,11 +151,8 @@
 			}
 		}
 		.trans-tip{
-			// font-size: 0.7em;
-			// color: #f4a22d;
 			padding-left: 0.9em;
 			height: 2em;
-			// line-height: 2em;
 			.font(2em,0.7em,#f4a22d);
 		}
 		.location-bar{
@@ -180,8 +176,6 @@
 			}
 			.location-refresh{
 				float: right;
-				// width: 2.5em;
-				// height: 2.5em;
 				.bg(2.5em,2.5em,transparent,'~images/icon/location-refresh.png',70% 70%);
 			}
 		}

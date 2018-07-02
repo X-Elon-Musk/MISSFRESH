@@ -77,18 +77,12 @@
 			    white-space: nowrap;
 			    vertical-align: top;
 			    line-height: 100%;
-			    // font-size: 0.8em;
 			    margin-left: 0.4em;
 			    &:after{
 			    	content: '';
 				    display: inline-block;
-				    // width: 1em;
-				    // height: 1em;
-				    // background: url(~images/icon/arrow.png) no-repeat center;
-				    // background-size: 0.6rem;
 				    .bg(1em,1em,transparent,'~images/icon/arrow.png',0.6rem);
 				    vertical-align: top;
-				    // color: transparent;
 			    }
 			}
 			.short-tips{
@@ -99,12 +93,9 @@
 				width: 50%;
 				transform: translateX(-50%);
 			    white-space: normal;
-			    // font-size: 0.6em;
-			    // line-height: 1.2em;
 			    background: transparent url(~images/icon/header-prompt.png) no-repeat;
 			    background-size: 100% 100%;
 			    padding: 1.2em 1em 1em;
-			    // color: #262626;
 			    .font(1.2em,0.6em,#262626);
 			}
 		}
@@ -113,10 +104,6 @@
 			position: absolute;
 			right: 0.6em;
 			top: 0;
-			// height: 100%;
-			// width: 24px;
-			// background: url(~images/icon/search.png) no-repeat center;
-			// background-size: 1.2rem;
 			.bg(24px,100%,transparent,'~images/icon/search.png',1.2rem);
 		}
 	}

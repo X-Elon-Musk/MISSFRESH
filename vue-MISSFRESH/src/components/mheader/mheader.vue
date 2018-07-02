@@ -33,7 +33,6 @@
 	    background: #fff;
 	    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.06);
 	    border-bottom: 1px solid #eee;
-	    // position: relative;
 	    position: fixed;
 	    left: 0;
 	    top: 0;

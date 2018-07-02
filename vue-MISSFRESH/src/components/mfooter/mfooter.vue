@@ -79,15 +79,12 @@
 	    	display: block;
 	    	flex: 1;
 	    	padding: 5px 0 0;
-	    	// font-size: 0;
 	    	color: #999;
 	    	text-align: center;
 	    	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	    	position: relative;
 	    	.nav-icon{
 				display: block;
-			    // width: 27px;
-			    // height: 27px;
 			    .wh(27px,27px);
 			    margin: 0 auto;
 			    background-size: 100% 100%; 
@@ -106,12 +103,9 @@
 	    top: 2px;
 	    right: 20%;
 	    background-color: #ff4891;
-	    // color: #fff;
 	    height: 1em;
 	    min-width: 1em;
-	    // line-height: 1;
 	    border-radius: 0.6em;
-	    // font-size: 0.6em;
 	    .font(1,0.6em,#fff);
 	    border: 1px solid #fff;
 	    padding: 0.1em 0.2em;

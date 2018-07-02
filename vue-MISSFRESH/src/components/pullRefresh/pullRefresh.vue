@@ -95,8 +95,6 @@
 		// bottom: 0;
 		overflow: visible;
 		margin-bottom: 53px;
-		// width: 100%;
-		// height: 100%;
 		.wh(100%);
 		.list-group-item{    
 			position: relative; 

@@ -61,11 +61,6 @@
 			width:100%;
 			display:block;
 		}
-		// a{
-		// 	display: inline-block;
-		// 	width: 100%;
-		// 	height: auto;	
-		// }
 		.product-detail-img{
 			img{
 				width: 75%;

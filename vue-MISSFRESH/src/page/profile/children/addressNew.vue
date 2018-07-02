@@ -35,9 +35,10 @@
     		</li>
 
     	</ul>
-    	<div class="toast-wrap" v-show="toastWrap">
+    	<!-- <div class="toast-wrap" v-show="toastWrap">
     		<span>{{toastWrap}}</span>
-    	</div>
+    	</div> -->
+    	<toastWrap :toastWrap="toastText"></toastWrap>
     	<div class="button-common save-address" @click="saveAddress">保存收货地址</div>	
 
 
@@ -57,6 +58,7 @@
 
 	import mheader from 'src/components/mheader/mheader'
 	import mprompt1 from 'src/components/mprompt1/mprompt1'
+	import toastWrap from 'src/components/toastWrap/toastWrap'
 	import addressDelivery from './addressDelivery'
 
 	export default{
@@ -93,7 +95,7 @@
 				mpromptShow: false,
 				// 当前为0-“添加”状态，还是为1-“编辑”状态
 				newMode: 0,
-				toastWrap: ''
+				toastText: ''
 			}
 		},
 		watch: {
@@ -142,23 +144,23 @@
 			async saveAddress(){
 				let response;
 				if (this.name=='') {
-					this.promptText('请填写收货人姓名');
+					this.toastText='请填写收货人姓名';
 					return;			
 				}
 				if (this.phone_number=='') {
-					this.promptText('请填写收货人手机号码');
+					this.toastText='请填写收货人手机号码';
 					return;			
 				}
 				if (!testTele(this.phone_number)) {
-					this.promptText('手机号码格式错误');
+					this.toastText='手机号码格式错误';
 					return;			
 				}
 				if (this.location=='') {
-					this.promptText('请选择收货地址');
+					this.toastText='请选择收货地址';
 					return;			
 				}
 				if (this.address_2=='') {
-					this.promptText('请填写楼号门牌');
+					this.toastText='请填写楼号门牌';
 					return;			
 				}
 				this.address_detail=this.address_1+this.address_2;
@@ -205,21 +207,13 @@
 				this.$emit("newAction", false);
 				this.deleteAddress(false);
 			},
-			// 提示文字
-			promptText(text) {
-				let _this=this;
-				this.toastWrap=text;
-            	let timer=setTimeout(()=>{
-            		_this.toastWrap='';
-            		clearTimeout(timer);
-            	},3000)
-			}
 		},
 		props: ['defaultAddress', 'newShow'],
 		components: {
 			mheader,
 			addressDelivery,
-			mprompt1
+			mprompt1,
+			toastWrap
 		}
 	}
 </script>
@@ -316,7 +310,7 @@
 				}
 			}
 		}
-		.toast-wrap{
+		/* .toast-wrap{
 			z-index: 200;
 			.positionCenter();
 			border-radius: 5px;
@@ -326,7 +320,7 @@
 			color: #fff;
 			height: auto;
 			text-align: center;
-		}
+		} */
 		.save-address{
 			width: 92%;
 			margin: 1em auto 0;

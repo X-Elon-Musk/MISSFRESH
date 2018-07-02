@@ -576,15 +576,11 @@
 			font-size: 0.9em;
 			line-height: 2em;
 			.delivery-range{
-				// line-height: 2em;
-				// color: #262626;
-				// font-size: 0.8em;
 				.position-icon{
 					.wh(1em,1em);
 					margin-top: 0.5em;
 				}
 				span{
-					// .font(2em,0.8em,#262626);
 					font-size: 0.8em;
 					margin-left: 0.5em;
 				}
@@ -609,7 +605,6 @@
 			background: #fff;
 			font-size: 0.9em;
 			.image-spot-container{
-				// .wh(100%,36px);
 				position: relative;
 				.bg(46px,100%,transparent,'~src/images/icon/shopping_cart.png',52% 60%);
 				.image-spot-dot{

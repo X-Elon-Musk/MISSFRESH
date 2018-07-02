@@ -57,12 +57,6 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.safe-detection{
-		// position: absolute; 
-		// left: 0;
-		// right: 0;
-		// top: 0;
-		// bottom: 0;
-		// z-index: 4; 
 		.fullscreen(4);
 		position: absolute;
 		background: #fff;

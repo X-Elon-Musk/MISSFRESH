@@ -336,7 +336,6 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.shopping-cart{
-		// padding-bottom: 145px;
 		background-color: #f0f0f0;
 		font-size: 14px;
 		position: absolute;
@@ -352,23 +351,15 @@
 			background-color: #fff;
 			.coordinate{
 				content: '';
-				// width: 24px;
-				// height: 24px;
 				display: inline-block;
 				vertical-align: middle;
 				margin-right: .1rem;
-				// background: url(~src/images/icon/position-icon.png) no-repeat;
-				// background-size: 100% 100%;
 				.bg(24px,24px,transparent,'~src/images/icon/position-icon.png',100% 100%);
 			}
 			.arrow{
 				content: '';
-				// width: 16px;
-				// height: 16px;
 				display: inline-block;
 				vertical-align: middle;
-				// background: url(~src/images/icon/cart-position-select.png) no-repeat;
-				// background-size: 100% 100%;
 				.bg(16px,16px,transparent,'~src/images/icon/cart-position-select.png',100% 100%);
 			}
 		}
@@ -411,8 +402,6 @@
 						font-size: 14px;
 						padding: 0;
 						img{
-							// width: 70px;
-	    		// 			height: 70px;
 	    					.wh(70px,70px);
 						}
 						.name{
@@ -468,26 +457,18 @@
 			background: #fff;
 	    	margin-top: 10px;
 	    	padding-bottom: 102px;
-	    	// margin-bottom: 102px;
 	    	.vip-card{
-	    		// height: 49px;
 	    		text-align: left;
 	    		padding: 0 15px;
 	    		border-bottom: 1px solid #f5f5f5;
-	    		// width: 100%;
 	    		.wh(49px,100%);
 	    		display: table;
 	    		box-sizing: border-box;
 	    		.card{
 	    			float: left;
 	    			vertical-align: middle;
-	    			// height: 18px;
-	    			// width: 60px;
 	    			margin-top: 15px;
-	    // 			background: url(~src/images/icon/membership_card.png) no-repeat;
-					// background-size: auto 100%;
 					.bg(60px,18px,transparent,'~src/images/icon/membership_card.png',auto 100%);
-					// background-position: inherit;
 	    		}
 	    		.card.active{
 	    			background: url(~src/images/icon/card_active.png) no-repeat;
@@ -495,16 +476,12 @@
 	    		}
 	    		.card-info{
 	    			float: left;
-	    			// height: 100%;
-	    			// width: auto;
 	    			.wh(100%,auto);
 	    			i{
 						color: #FF4891;
 					}
 	    			span{
 	    				display: block;
-	    				// width: 100%;
-	    				// height: 50%;
 	    				.wh(50%);
 	    				line-height: 25px;
 	    			}
@@ -521,8 +498,6 @@
 	    			box-sizing: border-box;
 	    			span{
 	    				float: left;
-	    				// width: 66%;
-	    				// height: 50px;
 	    				.wh(50px,66%);
 	    			}
 	    			.marquee{
@@ -555,19 +530,14 @@
 			left: 0;
 			bottom: 53px;
 			z-index: 2;
-			// width: 100%;
-			// height: 49px;
 			.wh(49px);
 			background-color: #fff;
 			.check-all-button{
-				// width: 24%;
-				// height: 100%;
 				.wh(100%,24%);
 				line-height: 49px;
 				position: static;
 				margin-top: 0;
 				background: #fff;
-				// padding-right: 10px;
 				.marquee{
 					vertical-align: top;
 					margin-top: 15px;
@@ -578,8 +548,6 @@
 				width: 44%;
 				display: flex;
 				flex-direction: column;
-				// flex: 1;
-				// border-top: .5px solid #e6e6e6;
 				background: #fff;
 				color: #262626;
 				text-align: left;
@@ -604,22 +572,14 @@
 				}
 			}
 			.settlement-button{
-				// float: right;
-				// width: 26%;
 				font-size: 1.1em;
 				background: #ff4891;
-				// height: 100%;
-				// width: 130px;
 				.wh(100%,26%);
 				line-height: 49px;
 				text-align: center;
 				color: #fff;
 				&:after{
 					content: ' ';
-					// width: 7px;
-					// height: 10px;
-					// background: url(~src/images/icon/youjiantou.png) no-repeat;
-					// background-size: 7px 8px;
 					.bg(10px,7px,transparent,'~src/images/icon/youjiantou.png',7px 8px);
 					display: inline-block;
 					line-height: 49px;
@@ -634,19 +594,12 @@
 		text-align: center;
 		padding: 6px 12px 0 10px;
 		box-sizing: border-box;
-		// width: 22px;
-		// height: 22px;
 		display: inline-block;
-		// background: url(~src/images/icon/unchecked.png) no-repeat;
-		// background-size: 100% 100%;
 		.bg(22px,22px,transparent,'~src/images/icon/unchecked.png',100% 100%);
 		margin-right: 11px;
 		margin-left: 11px;
 	}
 	.marquee.active{
-		// background: url(~src/images/icon/checked.png) no-repeat;
-		// background-size: 100% 100%;
-		// background: transparent;
 		.bg(22px,22px,transparent,'~src/images/icon/checked.png',100% 100%);
 	}
 </style>

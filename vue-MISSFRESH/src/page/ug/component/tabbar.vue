@@ -531,7 +531,6 @@
 			bottom: 0;
 			z-index: 2;
 			.bg(40px,40px,#fff,'~images/icon/ellipsis.png',1.375rem);
-		    /*z-index: 15;*/
 		}
 	}
 	
@@ -553,9 +552,8 @@
 	}
 	.slidescroll {
 		height:auto;
-		// padding-bottom: 53px; 
 	}
-	/*票*/
+	// 票
 	.ticket-item{
 		padding: 9px 2%;
 		box-sizing: border-box;

@@ -73,7 +73,6 @@
 				.button-confirm{
 					position: relative;
 					&:before{
-						// .border(0,0,100%,1px,#ddd,0);
 						content: '';
 						position: absolute;
 						left: 0;
