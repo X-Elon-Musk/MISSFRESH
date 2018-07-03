@@ -254,9 +254,7 @@
 			},
 			// 点击“删除”按钮后删除商品
 			productDelete(index) {
-				for (var i=0;i<this.swiperdelete.length;i++) {
-					if (i!==index) this.swiperdelete[i].slideTo(0, 400, false);			
-				}
+				
 			},
 			// mpromptAction: function () {
 			// 	this.mprompt=true;
