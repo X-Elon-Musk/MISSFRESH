@@ -97,8 +97,11 @@
     		</div>
     		<div class="f_r settlement-button">去结算</div>
 	    </div>
+	    <transition name="" mode="out-in">
+    		<mprompt1 promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="mpromptStatus(false)" v-on:confirmActionFunction="mpromptActionFunction(false)"></mprompt1>
+		</transition>
 		<mfooter></mfooter>
-		<mprompt></mprompt>
+		<!-- <mprompt></mprompt> -->
 	</div>
 </template>
 <script>
@@ -108,7 +111,8 @@
 	import pull from 'src/components/pull/pull'
 	import mfooter from 'src/components/mfooter/mfooter'
 	import product from 'src/components/product/product'
-	import mprompt from 'src/components/mprompt/mprompt'
+	// import mprompt from 'src/components/mprompt/mprompt'
+	import mprompt1 from 'src/components/mprompt1/mprompt1'
 	export default{
 		data(){
 		  	return {
@@ -138,7 +142,8 @@
 				],
 				settlement: 0,
 				cardMoney: 0,
-				mprompt: false
+				mpromptShow: true,
+				deleteProductId: ''
 		  	}
 	  	},
 		created (){
@@ -253,8 +258,9 @@
 				})
 			},
 			// 点击“删除”按钮后删除商品
-			productDelete(index) {
-				
+			productDelete(deleteProductId) {
+				this.mpromptStatus(true);
+				this.deleteProductId=deleteProductId;
 			},
 			// mpromptAction: function () {
 			// 	this.mprompt=true;
@@ -380,13 +386,22 @@
 					this.cardMoney=0;	
 				}
 							
-			}
+			},
+			// 显示或隐藏提示
+			mpromptStatus(status){
+				this.mpromptShow=status;
+			},
+			// 点击确定按钮，删除地址
+			async confirmActionFunction(){
+				/*let response=await deleteAddressAxios(this.defaultAddress.id);
+				if (response.code==0) this.addressActionComplete();*/
+			},
 		},
 		components:{
 			pull,
 	        mfooter,
 	        product,
-	        mprompt
+	        mprompt1
 	    },
 	}
 </script>

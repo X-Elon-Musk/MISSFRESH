@@ -4,7 +4,7 @@
     		<div class="popup">
 	        	<div class="popup-head">
 	        		<h3 class="popup-title">{{promptTitle}}</h3>
-	        		<h4 class="popup-text">{{promptText}}</h4>
+	        		<h4 class="popup-text" v-show="promptText">{{promptText}}</h4>
 	        	</div>
 	        	<div class="clearfix popup-buttons">
 	        		<div class="f_l button button-cancel" v-show="cancelShow" @click="cancelAction">取消</div>
@@ -58,6 +58,9 @@
 			color: #4b4b4b;
 			.popup-head{
 				text-align: center;
+				.popup-title{
+					line-height: 3em;
+				}
 				.popup-text{
 					.font(1.2em,0.7em,#b8b8b8);
 					padding: 0 2% 1em 2%;

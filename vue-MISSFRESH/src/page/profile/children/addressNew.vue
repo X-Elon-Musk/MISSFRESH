@@ -1,7 +1,7 @@
 <template>
     <div class="profile-item-page profile-item-page-addressNew">
     	<mheader :title="defaultAddress?'编辑收货地址':'新增收货地址'" :functionOrLink="true" v-on:backFunction="newBackFunction">
-    		<div class="header-right-buttom" v-show="defaultAddress" @click="deleteAddress(true)">删除</div>
+    		<div class="header-right-buttom" v-show="defaultAddress" @click="mpromptStatus(true)">删除</div>
     	</mheader>
     	<ul class="list">
     		<li class="item-block">
@@ -44,7 +44,7 @@
 		</transition>
 		
 		<transition name="" mode="out-in">
-    		<mprompt1 promptTitle="提示" promptText="确认删除此收货地址信息么!" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="deleteAddress(false)" v-on:confirmActionFunction="confirmActionFunction"></mprompt1>
+    		<mprompt1 promptTitle="提示" promptText="确认删除此收货地址信息么!" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="mpromptStatus(false)" v-on:confirmActionFunction="confirmActionFunction"></mprompt1>
 		</transition>
     </div>  
 </template>
@@ -189,7 +189,7 @@
 				this.$emit("newAction", false);
 			},
 			// 显示或隐藏提示
-			deleteAddress(status){
+			mpromptStatus(status){
 				this.mpromptShow=status;
 			},
 			// 点击确定按钮，删除地址
@@ -201,7 +201,7 @@
 			addressActionComplete(){
 				this.$emit("getAddressList");
 				this.$emit("newAction", false);
-				this.deleteAddress(false);
+				this.mpromptStatus(false);
 			},
 		},
 		props: ['defaultAddress', 'newShow'],
