@@ -26,11 +26,9 @@ export default async(url='', parameter={}, type='get')=>{
 			.catch(function (error) {
 				reject(error)
 			});	
-
 	    })	
 	    return result.data;	
 	} else if(type=='post'){
-		// console.log(params);
 		result=await new Promise((resolve, reject) =>{
 			/*let params={};
 			if (parameter) {

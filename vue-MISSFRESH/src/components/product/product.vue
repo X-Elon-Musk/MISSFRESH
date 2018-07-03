@@ -43,7 +43,7 @@
 			}
 		},
 		mounted: function () {
-			// console.log(this.productNum);
+
 		},
 		computed: {
 			...mapState([
@@ -107,7 +107,6 @@
 					top: 0;
 					left: 0px;
 					.wh(32px,24px);
-					// z-index: 2;
 				}
 			}
 			.product-info{
