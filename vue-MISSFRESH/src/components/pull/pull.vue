@@ -24,7 +24,7 @@
 		},
 		methods: {
 			swiperPull() {
-				var _this=this;
+				let _this=this;
 				this.pull= new Swiper('.pull',{
 					slidesOffsetBefore: 0,
 					direction: 'vertical',

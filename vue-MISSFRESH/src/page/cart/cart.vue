@@ -12,11 +12,22 @@
 					全国送商品
 				</div>
 				<!-- 商品 -->
-				<ul class="commodity-items products">
-					<!-- {{products}} -->
+				<!-- <ul class="commodity-items products">
 					<li class="commodity-item clearfix" v-for="item in products">
 						<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
 						<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true"></product>
+					</li>
+				</ul> -->
+
+				<ul class="commodity-items products">
+					<li class="swiper-container commodity-item clearfix" v-for="item in products">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide swiper-content">
+								<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
+								<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true"></product>
+							</div>
+					        <div class="swiper-slide swiper-delete" @click="productDelete(item.id)"><span>删除</span></div>
+					    </div>	
 					</li>
 				</ul>
 			</div>
@@ -92,6 +103,8 @@
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
+	import Swiper from 'swiper';
+    import 'swiper/dist/css/swiper.min.css';
 	import pull from 'src/components/pull/pull'
 	import mfooter from 'src/components/mfooter/mfooter'
 	import product from 'src/components/product/product'
@@ -132,7 +145,12 @@
 	    	this.calculateTotal();
 	    },
 	    mounted: function () {
-	    	
+	    	this.$nextTick(() => {
+				if (!this.swiperdelete) {
+					this.swiperDelete();
+					this.swiperReachEnd();
+				}
+			})
 	    },
 	    computed: {
 	    	...mapState([
@@ -199,6 +217,47 @@
 			...mapMutations([
                 'SET_STATUS'
             ]),
+            // 左滑商品，出现删除按钮
+			swiperDelete() {
+				let _this=this;
+				this.swiperdelete= new Swiper('.commodity-item',{
+					// 定义slides的数量多少为一组。
+					slidesPerGroup: 1,
+		    		// 显示的slides数量
+		    		slidesPerView: 'auto',
+		    		// 抵抗率。边缘抵抗力的大小比例。
+		    		resistanceRatio: 0,
+		    		on: {
+		    			touchStart: function() {
+
+		    			},
+		    			touchEnd: function(swiper) {
+		    				console.log(1);
+		    			},
+		    			reachEnd: function(){
+		    				console.log('最后一个');
+					      	// goBack();
+					      },
+					}
+				});		
+			},
+			// 单个商品滑动后，“删除”按钮出现后，其他商品“删除”按钮消失
+			swiperReachEnd(){
+				let _this=this;
+				this.swiperdelete.forEach(function (item,index,array) {
+					item.on('reachEnd', function (e) {
+						for (var i=0;i<_this.swiperdelete.length;i++) {
+							if (i!==index) _this.swiperdelete[i].slideTo(0, 400, false);	
+						}
+					})
+				})
+			},
+			// 点击“删除”按钮后删除商品
+			productDelete(index) {
+				for (var i=0;i<this.swiperdelete.length;i++) {
+					if (i!==index) this.swiperdelete[i].slideTo(0, 400, false);			
+				}
+			},
 			// mpromptAction: function () {
 			// 	this.mprompt=true;
 			// },
@@ -384,11 +443,23 @@
 				    position: relative;
 				    border: none;
 				    border-color: #f5f5f5;
-				    padding-top: 20px;
-				    padding-bottom: 23px;
 				    border-bottom: 1px solid #f5f5f5;
-				    padding: 21px 0;
-	    			margin-top: 0;
+				    margin-top: 0;
+	    			.swiper-content{
+	    				width: 100%!important;
+	    				padding: 21px 0;
+	    			}
+	    			.swiper-delete{
+	    				// font-size: 1.2em;
+						width: 4em;
+						white-space: nowrap;
+						background: @color_main;
+						color: #fff;
+						position: relative;
+						span{
+							.positionCenter();
+						}
+					} 
 					.marquee{
 						float: left;
 						margin-top: 26px;
