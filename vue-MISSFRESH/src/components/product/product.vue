@@ -35,6 +35,7 @@
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
+	import {getStore} from 'src/config/mUtils.js'
 	import price from 'src/components/price/price'
 	export default{
 		data(){
@@ -51,9 +52,12 @@
             ]),
             //shopCart变化的时候重新计算当前商品的数量
             productNum: function (){
-                if (this.s_cartList&&this.s_cartList[this.product.id]) {
-                    return this.s_cartList[this.product.id]['num'];
-                }else {
+            	let s_cartList=this.s_cartList, buyCart=JSON.parse(getStore('buyCart'));
+                if (s_cartList&&s_cartList[this.product.id]) {
+                    return s_cartList[this.product.id]['num'];
+                } else if (buyCart&&buyCart[this.product.id]) {
+                    return buyCart[this.product.id]['num'];
+                } else {
                     return 0;
                 }
             },

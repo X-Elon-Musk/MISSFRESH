@@ -12,7 +12,7 @@
         	<li class="nav-item" @click="goAddress({path: '/cart'})">
         		<span class="nav-icon nav-cart" :style="{backgroundImage:$route.path.indexOf('cart')==-1?`url(${backgroundImage.cart})`:`url(${backgroundImage.cartActive})`}"></span>
         		<!-- <span class="cart-count">{{cartCount}}</span> -->
-        		<span class="cart-count">{{s_cartCount}}</span>
+        		<span class="cart-count">{{cartCount}}</span>
         		<p class="nav-label">购物车</p>
         	</li>
         	<li class="nav-item" @click="goAddress({path: '/profile'})">
@@ -24,6 +24,7 @@
 </template>
 <script>
 	import {mapState} from 'vuex'
+	import {getStore} from 'src/config/mUtils.js'
 	export default{
 		data(){
 			return {
@@ -48,14 +49,22 @@
 			...mapState([
                 's_cartCount'
             ]),
-            /*//shopCart变化的时候重新计算当前商品的数量
+            //shopCart变化的时候重新计算当前商品的数量
             cartCount: function (){
-                if (this.s_cartCount) {
+                /*if (this.s_cartCount) {
                     return this.s_cartCount;
                 }else {
                     return 0;
+                }*/
+                let s_cartCount=this.s_cartCount, cartCount=getStore('cartCount');
+                if (s_cartCount) {
+                    return s_cartCount;
+                } else if (cartCount) {
+                    return cartCount;
+                } else {
+                    return 0;
                 }
-            },*/
+            },
 		},
 		methods: {
         	goAddress(path){
