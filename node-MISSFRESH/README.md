@@ -11,7 +11,9 @@ cd node-note
 
 npm install
 
-node app.js
+set NODE_ENV=development
+
+node --harmony index.js
 ```
 nginx反向代理部署nodejs后，在Xshell中开启node服务
 ```
@@ -138,6 +140,14 @@ app.use(express.static("./public",{
 .
 
 ```
+#### 问题解决:
 
+- `req.session`存储必须配合res.send使用;
+```
+req.session.telephone[telephone]=message;
+let basiccontent = await MissMethods.basicContent(0, 0);
+res.type('application/json');
+res.jsonp(basiccontent);
+```
 
 

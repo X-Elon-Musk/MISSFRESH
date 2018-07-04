@@ -3,18 +3,19 @@
         <pullRefresh :tabIndex="tabIndex" @getData="getData" :pullEnd="pullEnd">
             <gif></gif>
             <!-- 内容部分 -->
-            <carousel :banner="banner"></carousel>
+            <carousel :banner="banner" :link="true"></carousel>
             <!-- <guarantee :brands="brands"></guarantee>
             <card :categoryareas="categoryareas"></card> -->
             <slot></slot>
             <!-- 上滑加载、下拉刷新 -->
             <div class="clearfix list-group-item ticket-item" v-for="(item,index) in (products||[]).slice(productsStart,productsEnd)" :key="index">
-                <product :product="item" :subtitle="true" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="false"></product>
+                <product :product="item" :subtitle="true" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="false" v-on:callbackFunction=""></product>
             </div>
         </pullRefresh>
     </div>
 </template>
 <script>
+    import {mapMutations} from 'vuex'
     import pullRefresh from 'src/components/pullRefresh/pullRefresh'
     import gif from 'src/components/gif/gif'
     import carousel from 'src/components/carousel/carousel'
@@ -39,10 +40,15 @@
             }
         },*/
         // props: ['products','banner','brands','categoryareas'],
-        props: ['products','banner'],
+        mounted: function () {
+            this.SET_MPROMPTEXIST({status: false});
+        },
         methods: {
+            ...mapMutations([
+                'SET_MPROMPTEXIST'
+            ]),
             //上滑加载
-            getData: function () {
+            getData() {
                 this.productsEnd+=8;
                 if (this.productsEnd>=this.products.length) {
                     this.productsEnd=this.products.length;
@@ -50,6 +56,7 @@
                 }
             },
         },
+        props: ['products','banner'],
         components: {
             pullRefresh,
             gif,

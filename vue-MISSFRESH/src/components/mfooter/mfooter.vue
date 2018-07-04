@@ -11,6 +11,7 @@
         	</li>
         	<li class="nav-item" @click="goAddress({path: '/cart'})">
         		<span class="nav-icon nav-cart" :style="{backgroundImage:$route.path.indexOf('cart')==-1?`url(${backgroundImage.cart})`:`url(${backgroundImage.cartActive})`}"></span>
+        		<!-- <span class="cart-count">{{cartCount}}</span> -->
         		<span class="cart-count">{{cartCount}}</span>
         		<p class="nav-label">购物车</p>
         	</li>
@@ -23,6 +24,7 @@
 </template>
 <script>
 	import {mapState} from 'vuex'
+	import {getStore} from 'src/config/mUtils.js'
 	export default{
 		data(){
 			return {
@@ -35,22 +37,31 @@
 					newvpActive: require('images/icon/newvp-active.png'),
 					cartActive: require('images/icon/cart-active.png'),
 					mineActive: require('images/icon/mine-active.png')
-				}
+				},
+				/*// 购物车商品总数
+				cartCount: 0*/
 			}
 		},
+		/*mounted(){
+			this.cartCount=this.s_cartCount;
+		},*/
 		computed: {
 			...mapState([
-                's_cartList'
+                's_cartCount'
             ]),
             //shopCart变化的时候重新计算当前商品的数量
             cartCount: function (){
-                if (this.s_cartList) {
-                    let num = 0;
-                    Object.values(this.s_cartList).forEach((item,index) => {
-                    	num += item.num;
-                    })
-                    return num;
+                /*if (this.s_cartCount) {
+                    return this.s_cartCount;
                 }else {
+                    return 0;
+                }*/
+                let s_cartCount=this.s_cartCount, cartCount=getStore('cartCount');
+                if (s_cartCount) {
+                    return s_cartCount;
+                } else if (cartCount) {
+                    return cartCount;
+                } else {
                     return 0;
                 }
             },
@@ -63,30 +74,27 @@
 	}
 </script>
 <style lang='less'>
+	@import '~src/style/mixin';
 	.foot-nav{
 		position: fixed;
 	    background-color: #fff;
 	    line-height: 1;
 	    display: flex;
-	    z-index: 1;
+	    z-index: 4;
 	    bottom: 0;
 	    width: 100%;
 	    box-shadow: 0 0 10px rgba(0,0,0,.1);
 	    .nav-item{
 	    	display: block;
-	    	-webkit-box-flex: 1;
-	    	-webkit-flex: 1;
 	    	flex: 1;
 	    	padding: 5px 0 0;
-	    	// font-size: 0;
 	    	color: #999;
 	    	text-align: center;
 	    	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	    	position: relative;
 	    	.nav-icon{
 				display: block;
-			    width: 27px;
-			    height: 27px;
+			    .wh(27px,27px);
 			    margin: 0 auto;
 			    background-size: 100% 100%; 
 			    background-repeat: no-repeat;
@@ -97,21 +105,20 @@
 			    font-size: 10px;
 			    line-height: 1.8;
 	    	}
-	    	.cart-count{
-				position: absolute;
-			    top: 2px;
-			    right: 20%;
-			    background-color: #ff4891;
-			    color: #fff;
-			    height: 1em;
-			    min-width: 1em;
-			    line-height: 1;
-			    border-radius: 0.6em;
-			    font-size: 0.6em;
-			    border: 1px solid #fff;
-			    padding: 0.1em 0.2em;
-			    box-sizing: content-box;
-	    	}
 	    }
+	}
+	.cart-count{
+		position: absolute;
+	    top: 2px;
+	    right: 20%;
+	    background-color: #ff4891;
+	    height: 1em;
+	    min-width: 1em;
+	    border-radius: 0.6em;
+	    .font(1,0.6em,#fff);
+	    border: 1px solid #fff;
+	    padding: 0.1em 0.2em;
+	    box-sizing: content-box;
+	    text-align: center;
 	}
 </style>

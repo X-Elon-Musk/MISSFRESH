@@ -1,5 +1,5 @@
-var mysql=require('mysql');
-var connection=mysql.createConnection({
+let mysql=require('mysql');
+let connection=mysql.createConnection({
 	host: '39.104.65.227',
 	user: 'root',
 	password: 'Beijing@0983',
@@ -7,11 +7,11 @@ var connection=mysql.createConnection({
 })
 
 connection.connect();
-var Mysql=function () {};
+let Mysql=function () {};
 Mysql.prototype={
 	constructor: Mysql,
 	async mysql_(sql,params){
-		var result=await new Promise((resolve, reject) =>{
+		let result=await new Promise((resolve, reject) =>{
 			connection.query(sql,params,function (err,result) {
 				if(err){
 	              	reject(err)

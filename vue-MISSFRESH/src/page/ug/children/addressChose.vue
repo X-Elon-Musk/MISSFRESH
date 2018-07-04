@@ -5,8 +5,8 @@
     	</div>
     	<div class="address-bar">
     		<div class="address-input">
-    			<router-link :to="{path: '/ug/citylist'}" tag="div" class="address-city">{{choseCity}}</router-link>
-    			<router-link :to="{path: '/ug/locationsearch'}" tag="div" class="address-position">请输入要收货的小区/写字楼</router-link>
+    			<router-link :to="{path: '/ug/citylist'}" replace tag="div" class="address-city">{{choseCity}}</router-link>
+    			<router-link :to="{path: '/ug/locationsearch'}" replace tag="div" class="address-position">请输入要收货的小区/写字楼</router-link>
     		</div>
     	</div>
     	<div class="trans-tip">因各地区商品和配送服务不同，请您选择准确收货地址</div>
@@ -20,46 +20,56 @@
     </div>  
 </template>
 <script>
-	import {mapState, mapMutations} from 'vuex'
+	import {mapMutations} from 'vuex'
 	import {getStore} from 'src/config/mUtils.js'
+	import {locationRefreshAxios} from 'src/service/getData'
 	export default{
 		data(){
 			return {
-				// refreshtext: '正在获取'
 				refreshtext: ''
 			}
 		},
 		computed: {
-	    	...mapState([
-                's_currentRegion'
-            ]),
-            //当前城市
+	    	//当前城市
             currentCity: function () {
-            	return this.refreshtext||getStore('currentCity');
+            	return this.refreshtext || getStore('currentCity');
             },
             //选择的城市
             choseCity: function () {
             	return getStore('choseCity');
             }
         },
+        beforeRouteLeave(to, from, next){
+        	console.log(to);
+        	console.log(from);
+        	// if (to.name=='http://localhost:8080/#/ug') {
+        	if (to.fullPath=='/ug') {
+        		// from.meta.keepAlive=false;
+        		// to.meta.keepAlive=true;
+        		console.log(1);
+        		
+        	} else{
+        		// from.meta.keepAlive=false;
+        		// to.meta.keepAlive=true;
+        		// this.$route.meta.keepAlive=true;
+        		// console.log(this.$route.meta.keepAlive);
+        		console.log(2);
+        		// this.$router.push({path: '/ug/citylist'})
+        	}
+        	next();
+        },
 		methods: {
 			...mapMutations([
                 'SET_CURRENTCITY'
             ]),
 			//刷新当前位置
-			locationRefresh(){
+			async locationRefresh(){
 				this.refreshtext="正在获取";
-				let _this=this;
-				this.axios.get('http://localhost:3390/position/location')
-				.then(function (response) {
-					_this.SET_CURRENTCITY({
-						currentCity: response.data.ad_info.city
-					})
-					_this.refreshtext='';
+				let response=await locationRefreshAxios();
+				this.SET_CURRENTCITY({
+					currentCity: response.ad_info.city
 				})
-				.catch(function (error) {
-				  	console.log(error);
-				});	
+				this.refreshtext='';
 			}
 		}
 	}
@@ -129,7 +139,6 @@
 				.address-position{
 					width: 75%;
 					position: relative;
-					// margin-left: 1em;
 					&:before{
 						content: '';
 						display: inline-block;
@@ -142,11 +151,9 @@
 			}
 		}
 		.trans-tip{
-			font-size: 0.7em;
-			color: #f4a22d;
 			padding-left: 0.9em;
 			height: 2em;
-			line-height: 2em;
+			.font(2em,0.7em,#f4a22d);
 		}
 		.location-bar{
 			font-size: 0.8em;
@@ -169,8 +176,6 @@
 			}
 			.location-refresh{
 				float: right;
-				width: 2.5em;
-				height: 2.5em;
 				.bg(2.5em,2.5em,transparent,'~images/icon/location-refresh.png',70% 70%);
 			}
 		}

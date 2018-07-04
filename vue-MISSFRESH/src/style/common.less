@@ -32,6 +32,22 @@ body,html{
 :focus {
 	outline: 1;
 }
+input:focus, textarea:focus, select:focus {
+  outline: none;
+}
+input[type=search], input[type=text], input[type=password], input[type=datetime], input[type=datetime-local], input[type=date], input[type=month], input[type=time], input[type=week], input[type=number], input[type=email], input[type=url], input[type=tel], input[type=color], textarea {
+    border: 0;
+}
+input[type=search], input[type=text], input[type=password], input[type=datetime], input[type=datetime-local], input[type=date], input[type=month], input[type=time], input[type=week], input[type=number], input[type=email], input[type=url], input[type=tel], input[type=color], textarea {
+    display: block;
+    // padding-top: 2px;
+    padding-left: 0;
+    height: 34px;
+    color: #111;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 16px;
+}
 
 article,aside,canvas,details,figcaption,figure,
 footer,header,hgroup,menu,nav,section,summary { 
@@ -160,5 +176,24 @@ ul,li{
     word-break: break-all;
     white-space: nowrap;
     overflow: hidden;
-    // text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+
+.button-common{
+    width: 100%;
+    height: 2.4em;
+    background: rgb(255, 72, 145);
+    text-align: center;
+    color: #fff;
+    line-height: 2.4em;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+.bottom-enter-active, .bottom-leave-active {
+    transition: all .4s;
+}
+.bottom-enter, .bottom-leave-active {
+    transform: translate3d(0, 100%, 0);
+    // opacity: 0;
 }

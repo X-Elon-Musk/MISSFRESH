@@ -40,7 +40,8 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
-      'images': path.resolve(__dirname, '../src/images')
+      'images': path.resolve(__dirname, '../src/images'),
+      'config': path.resolve(__dirname, '../src/config')
     }
   },
   module: {

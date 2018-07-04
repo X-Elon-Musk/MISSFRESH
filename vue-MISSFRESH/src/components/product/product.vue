@@ -7,46 +7,48 @@
 			</div>
 			<div class="f_r product-info">
 				<p class="name">{{product.name}}</p>
-				<!-- <p class="name">{{product.id}}</p> -->
 				<p class="point" v-if="subtitle">{{product.subtitle}}</p>
 				<ul class="preferential">
 					<li v-for="(item,index) in product.product_tags" :key="index">{{item.name}}</li>
 				</ul>
 				<p class="price">
-					<price :price="priceDown.price" class="price-now"></price>
+					<price :price="priceDown.price" class="price-now price-down"></price>
 					<!-- 商城价 -->
-					<price :price="priceUp.price" class="price-original"></price>
+					<price :price="priceUp.price" class="price-original price-up"></price>
 				</p>
-				<p class="vip">
-					<!-- 会员价 -->
-					<!-- <price :price="priceDown.price"></price> -->
-				</p>
+				<!-- <p class="vip">
+					会员价
+					<price :price="priceDown.price"></price>
+				</p> -->
 				
 			</div>
 		</router-link>
 		<div class="cart-operate">
+<<<<<<< HEAD
 			<img :src="product.cart_image" class="shopping-cart-img" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
+=======
+			<img :src="product.cart_image" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
+>>>>>>> 838e99d8bab1a4ad7eeed25a2dc61fb5a4280c94
 			<div class="clearfix cart-action" v-if="productNum">
 				<span class="minus-action" @touchstart.stop="minusOutCart(product.id,$event)"></span> 
 				<span class="count">{{productNum}}</span> 
 				<span class="add-action" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"></span>
 			</div>
 		</div>
-		
 	</div> 
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
+	import {getStore} from 'src/config/mUtils.js'
 	import price from 'src/components/price/price'
 	export default{
 		data(){
 			return {
-				// img: require('images/product_0.jpg'),
 				cartStatus: true
 			}
 		},
 		mounted: function () {
-			// console.log(this.productNum);
+			this.INIT_CARTLIST();
 		},
 		computed: {
 			...mapState([
@@ -54,24 +56,28 @@
             ]),
             //shopCart变化的时候重新计算当前商品的数量
             productNum: function (){
-                if (this.s_cartList&&this.s_cartList[this.product.id]) {
-                    return this.s_cartList[this.product.id]['num'];
-                }else {
+
+                let s_cartList=this.s_cartList;
+                /*if (s_cartList&&s_cartList[this.product.id]) {
+                    return s_cartList[this.product.id]['num'];
+                } else {
                     return 0;
-                }
+                }*/
+                return s_cartList&&s_cartList[this.product.id] ? s_cartList[this.product.id]['num'] : 0;
             },
 		},
 		methods: {
 			...mapMutations([
-                'ADD_CART','REDUCE_CART','SET_MPROMPT'
+                'ADD_CART','REDUCE_CART','SET_MPROMPT', 'INIT_CARTLIST'
             ]),
-            minusOutCart: function (id,event) {
+            minusOutCart(id,event) {
 				this.REDUCE_CART({id});
-				if (this.mpromptExist&&this.s_mpromptStatus) {
+				/*if (this.mpromptExist&&this.s_mpromptStatus) {
 					this.SET_MPROMPT({status: true});			
-				}
+				}*/
+				this.$emit("callbackFunction", id);
 			},
-			addToCart: function (id,image,name,product_tags,price_up,price_down,event) {
+			addToCart(id,image,name,product_tags,price_up,price_down,event) {
 				this.ADD_CART({id,image,name,product_tags,price_up,price_down});
 			}
 		},
@@ -96,26 +102,20 @@
 		position: relative;
 		.product-link{
 			position: relative;
-			height: auto;
-			width: 100%;
+			.wh(auto);
 			.product-item-img{
-				width: 40%;
-				height: auto;
+				.wh(auto,40%);
 				position: relative;
 				.product-img{
 					display: block;
 					border-radius: 0;
-					width: 120px;
-					height: 120px;
-					// border-radius: 100%;
+					.wh(120px,120px);
 				}
 				.product-tag{
 					position: absolute;
-					height: 32px;
-					width: 24px;
 					top: 0;
 					left: 0px;
-					// z-index: 2;
+					.wh(32px,24px);
 				}
 			}
 			.product-info{
@@ -151,7 +151,6 @@
 						line-height: 11px;
 						border: 1px solid #d165e1;
 						padding: 1px;
-						color: #d165e1;
 						background: #fff;
 						margin-right: 5px;
 						border-color: @color_main;
@@ -165,16 +164,10 @@
 					color: @color_main;
 					padding-top: 18px;
 					.price-original{
-						// margin-left: 0.2em;
 						text-decoration: line-through;
 						color: @color_gray;
 					}
 				}
-				/* .vip{
-					line-height: 1.4;
-					font-size: 12px;
-					color: @color_assist;
-				} */
 			}
 		}
 		.cart-operate{
@@ -182,11 +175,10 @@
 			bottom: 32px;
 			right: 0;
 			.shopping-cart-img{
-				width: 46px;
-				height: 46px;
 				position: absolute;
 				right: 15px;
 				bottom: -10px;
+				.wh(46px,46px);
 			}
 			.cart-action{
 				.wh(1.2em,4.8em);
@@ -210,5 +202,12 @@
 				}
 			}
 		}
+	}
+	.price-down{
+		color: @color_main;
+	}
+	.price-up{
+		text-decoration: line-through;
+		color: @color_gray;
 	}
 </style>

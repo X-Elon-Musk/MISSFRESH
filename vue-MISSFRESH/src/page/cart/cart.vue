@@ -12,11 +12,22 @@
 					全国送商品
 				</div>
 				<!-- 商品 -->
-				<ul class="commodity-items products">
-					<!-- {{products}} -->
+				<!-- <ul class="commodity-items products">
 					<li class="commodity-item clearfix" v-for="item in products">
 						<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
 						<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true"></product>
+					</li>
+				</ul> -->
+
+				<ul class="commodity-items products">
+					<li class="swiper-container commodity-item clearfix" v-for="item in products">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide swiper-content">
+								<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
+								<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true" v-on:callbackFunction="setDeleteProductId"></product>
+							</div>
+					        <div class="swiper-slide swiper-delete" @click="productDelete(item.id)"><span>删除</span></div>
+					    </div>	
 					</li>
 				</ul>
 			</div>
@@ -86,16 +97,23 @@
     		</div>
     		<div class="f_r settlement-button">去结算</div>
 	    </div>
+	    <transition name="" mode="out-in">
+    		<mprompt1 promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt1>
+		</transition>
 		<mfooter></mfooter>
-		<mprompt></mprompt>
+		<!-- <mprompt></mprompt> -->
 	</div>
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
+	import Swiper from 'swiper'
+    import 'swiper/dist/css/swiper.min.css'
+    import {getStore, isArray} from 'src/config/mUtils.js'
 	import pull from 'src/components/pull/pull'
 	import mfooter from 'src/components/mfooter/mfooter'
 	import product from 'src/components/product/product'
-	import mprompt from 'src/components/mprompt/mprompt'
+	// import mprompt from 'src/components/mprompt/mprompt'
+	import mprompt1 from 'src/components/mprompt1/mprompt1'
 	export default{
 		data(){
 		  	return {
@@ -125,23 +143,36 @@
 				],
 				settlement: 0,
 				cardMoney: 0,
-				mprompt: false
+				mpromptShow: false,
+				deleteProductId: ''
 		  	}
 	  	},
 		created (){
 	    	this.calculateTotal();
 	    },
 	    mounted: function () {
-	    	
+	    	this.SET_MPROMPTEXIST({status: true});
+	    	this.INIT_CARTLIST();
+	    	this.$nextTick(() => {
+				if (!this.swiperdelete) {
+					this.swiperDelete();
+					this.swiperReachEnd();
+				}
+			})
+
 	    },
+	    watch: {
+			s_mpromptStatus: function () {
+				if (this.s_mpromptStatus) this.mpromptStatus(true);
+			}
+		},
 	    computed: {
 	    	...mapState([
-                's_cartList'
+                's_cartList', 's_mpromptStatus'
             ]),
-            //商品列表
+            // 商品列表
             products: function () {
-            	var products=[];
-				// console.log(this.s_cartList);
+            	let products=[];
 				Object.values(this.s_cartList).forEach(item => {
                     products.push({
                     	"num": item.num,
@@ -158,9 +189,9 @@
                 })
                 return products;
             },
-           	//商品总价
+           	// 商品总价
             total_price: function () {
-            	var total_price=0;
+            	let total_price=0;
 				Object.values(this.s_cartList).forEach(item => {
                     if (item.status) {
                     	total_price+=item.total_price;	
@@ -169,10 +200,10 @@
                 // return parseFloat(total_price.toFixed(2));
                 return parseFloat(total_price);
             },
-            //是否选中购物车中所有商品
+            // 是否选中购物车中所有商品
             checkAll: function () {
             	if (this.products) {
-			    	for (var i=0;i<this.products.length;i++) {
+			    	for (let i=0;i<this.products.length;i++) {
 				    	if (!this.products[i].status) {
 				    		return false;
 				        }		
@@ -182,31 +213,77 @@
 			    	return true;
 			    }
 			},
-			//邮费
+			// 运费
 			postage: function () {
-				/*let postage=this.total_price>=69||this.total_price==0?"免邮":5;
-				return postage;*/
 				return this.total_price>=69||this.total_price==0?"免邮":5;
 			},
-			//商品合计
+			// 商品合计
 			products_total_price: function () {
-				if (this.postage!=="免邮") {
-					return 	parseFloat(this.total_price-this.postage);	
-				} else{
-					return parseFloat(this.total_price);
-				}
+				return this.postage!=="免邮" ? parseFloat(this.total_price+this.postage) : parseFloat(this.total_price);
 			}
 	    },
 		methods: {
 			...mapMutations([
-                'SET_STATUS'
+                'SET_STATUS', 'DELETE_CART', 'INIT_CARTLIST', 'SET_MPROMPTEXIST', 'SET_MPROMPT'
             ]),
+            // 左滑商品，出现删除按钮
+			swiperDelete() {
+				let _this=this;
+				this.swiperdelete= new Swiper('.commodity-item',{
+					// 定义slides的数量多少为一组。
+					slidesPerGroup: 1,
+		    		// 显示的slides数量
+		    		slidesPerView: 'auto',
+		    		// 抵抗率。边缘抵抗力的大小比例。
+		    		resistanceRatio: 0,
+		    		on: {
+		    			touchStart: function() {
+
+		    			},
+		    			touchEnd: function(swiper) {
+		    				console.log(1);
+		    			},
+		    			reachEnd: function(){
+		    				console.log('最后一个');
+				      	},
+					}
+				});		
+			},
+			// 单个商品滑动后，“删除”按钮出现后，其他商品“删除”按钮消失
+			swiperReachEnd(){
+				// let _this=this;
+				if (isArray(this.swiperdelete)) {
+					/*this.swiperdelete.forEach(function (item,index,array) {
+						item.on('reachEnd', function (e) {
+							for (let i=0;i<_this.swiperdelete.length;i++) {
+								if (i!==index) _this.swiperdelete[i].slideTo(0, 400, false);	
+							}
+						})
+					})*/	
+					this.swiperdelete.forEach((item,index,array)=> {
+						item.on('reachEnd', (e)=> {
+							for (let i=0;i<this.swiperdelete.length;i++) {
+								if (i!==index) this.swiperdelete[i].slideTo(0, 400, false);	
+							}
+						})
+					})			
+				}
+			},
+			// 点击“删除”按钮后删除商品
+			productDelete(deleteProductId) {
+				this.mpromptStatus(true);
+				this.deleteProductId=deleteProductId;
+			},
+			// 设定删除产品的id
+			setDeleteProductId(id){
+				this.deleteProductId=id;
+			},
 			// mpromptAction: function () {
 			// 	this.mprompt=true;
 			// },
 			/*//初始化数据
 			async initData(){
-				var products=[];
+				let products=[];
 				// console.log(this.s_cartList);
 				Object.values(this.s_cartList).forEach(item => {
                     products.push({
@@ -225,7 +302,7 @@
 			},*/
 			//商品总价计算
 		    calculateTotal(){
-		     //  	var all=0;
+		     //  	let all=0;
 		     //  	this.products.forEach(function (item) {
 			    //     if (item.checked) {
 			    //       all+=item.price*item.number; 
@@ -236,7 +313,7 @@
 		    },
 		    //商品实付计算
 		    actuallyPaid(){
-		    	/*var all=0;
+		    	/*let all=0;
 		      	this.products.forEach(function (item) {
 			        if (item.benefit.orNot) {
 			          all+=item.benefit.text; 
@@ -294,7 +371,7 @@
 		    checkedAll(){
 			    // this.checkAll=!this.checkAll;
 			    // if (this.checkAll) {
-			    //     var total=0;
+			    //     let total=0;
 			    //     this.products.forEach(function (item) {
 			    //       	item.checked=true;
 			    //       	total+=item.price*item.number; 
@@ -312,7 +389,7 @@
 		    },
 		    //会员卡选择
 		    cardCheck(card){
-		    	var state=card.checked;
+		    	let state=card.checked;
 		    	this.cards.forEach(function (item) {
 			        item.checked=false;  
 			    }) 
@@ -325,20 +402,38 @@
 					this.cardMoney=0;	
 				}
 							
-			}
+			},
+			// 显示或隐藏提示
+			mpromptStatus(status){
+				this.mpromptShow=status;
+			},
+			// 点击“取消”按钮
+			cancelActionFunction(){
+				this.mpromptStatus(false);
+				this.SET_MPROMPT({status: false});	
+			},
+			// 点击“确定”按钮，删除单个商品
+			confirmActionFunction(){
+				let id=this.deleteProductId;
+				this.DELETE_CART({id});
+				/*this.SET_MPROMPT({status: false});	
+				this.mpromptStatus(false);*/
+				this.cancelActionFunction();
+				this.swiperDelete();
+				this.swiperReachEnd();
+			},
 		},
 		components:{
 			pull,
 	        mfooter,
 	        product,
-	        mprompt
+	        mprompt1
 	    },
 	}
 </script>
 <style lang="less">
 	@import '~src/style/mixin';
 	.shopping-cart{
-		// padding-bottom: 145px;
 		background-color: #f0f0f0;
 		font-size: 14px;
 		position: absolute;
@@ -354,23 +449,15 @@
 			background-color: #fff;
 			.coordinate{
 				content: '';
-				// width: 24px;
-				// height: 24px;
 				display: inline-block;
 				vertical-align: middle;
 				margin-right: .1rem;
-				// background: url(~src/images/icon/position-icon.png) no-repeat;
-				// background-size: 100% 100%;
 				.bg(24px,24px,transparent,'~src/images/icon/position-icon.png',100% 100%);
 			}
 			.arrow{
 				content: '';
-				// width: 16px;
-				// height: 16px;
 				display: inline-block;
 				vertical-align: middle;
-				// background: url(~src/images/icon/cart-position-select.png) no-repeat;
-				// background-size: 100% 100%;
 				.bg(16px,16px,transparent,'~src/images/icon/cart-position-select.png',100% 100%);
 			}
 		}
@@ -395,11 +482,23 @@
 				    position: relative;
 				    border: none;
 				    border-color: #f5f5f5;
-				    padding-top: 20px;
-				    padding-bottom: 23px;
 				    border-bottom: 1px solid #f5f5f5;
-				    padding: 21px 0;
-	    			margin-top: 0;
+				    margin-top: 0;
+	    			.swiper-content{
+	    				width: 100%!important;
+	    				padding: 21px 0;
+	    			}
+	    			.swiper-delete{
+	    				// font-size: 1.2em;
+						width: 4em;
+						white-space: nowrap;
+						background: @color_main;
+						color: #fff;
+						position: relative;
+						span{
+							.positionCenter();
+						}
+					} 
 					.marquee{
 						float: left;
 						margin-top: 26px;
@@ -413,8 +512,7 @@
 						font-size: 14px;
 						padding: 0;
 						img{
-							width: 70px;
-	    					height: 70px;
+	    					.wh(70px,70px);
 						}
 						.name{
 							padding-top: 0;
@@ -469,25 +567,18 @@
 			background: #fff;
 	    	margin-top: 10px;
 	    	padding-bottom: 102px;
-	    	// margin-bottom: 102px;
 	    	.vip-card{
-	    		height: 49px;
 	    		text-align: left;
 	    		padding: 0 15px;
 	    		border-bottom: 1px solid #f5f5f5;
-	    		width: 100%;
+	    		.wh(49px,100%);
 	    		display: table;
 	    		box-sizing: border-box;
 	    		.card{
 	    			float: left;
 	    			vertical-align: middle;
-	    			// height: 18px;
-	    			// width: 60px;
 	    			margin-top: 15px;
-	    // 			background: url(~src/images/icon/membership_card.png) no-repeat;
-					// background-size: auto 100%;
 					.bg(60px,18px,transparent,'~src/images/icon/membership_card.png',auto 100%);
-					// background-position: inherit;
 	    		}
 	    		.card.active{
 	    			background: url(~src/images/icon/card_active.png) no-repeat;
@@ -495,15 +586,13 @@
 	    		}
 	    		.card-info{
 	    			float: left;
-	    			height: 100%;
-	    			width: auto;
+	    			.wh(100%,auto);
 	    			i{
 						color: #FF4891;
 					}
 	    			span{
 	    				display: block;
-	    				width: 100%;
-	    				height: 50%;
+	    				.wh(50%);
 	    				line-height: 25px;
 	    			}
 	    		}
@@ -519,8 +608,7 @@
 	    			box-sizing: border-box;
 	    			span{
 	    				float: left;
-	    				width: 66%;
-	    				height: 50px;
+	    				.wh(50px,66%);
 	    			}
 	    			.marquee{
 	    				float: right;
@@ -552,17 +640,14 @@
 			left: 0;
 			bottom: 53px;
 			z-index: 2;
-			width: 100%;
-			height: 49px;
+			.wh(49px);
 			background-color: #fff;
 			.check-all-button{
-				width: 24%;
-				height: 100%;
+				.wh(100%,24%);
 				line-height: 49px;
 				position: static;
 				margin-top: 0;
 				background: #fff;
-				// padding-right: 10px;
 				.marquee{
 					vertical-align: top;
 					margin-top: 15px;
@@ -573,8 +658,6 @@
 				width: 44%;
 				display: flex;
 				flex-direction: column;
-				// flex: 1;
-				// border-top: .5px solid #e6e6e6;
 				background: #fff;
 				color: #262626;
 				text-align: left;
@@ -599,21 +682,14 @@
 				}
 			}
 			.settlement-button{
-				// float: right;
-				width: 26%;
 				font-size: 1.1em;
 				background: #ff4891;
-				height: 100%;
-				// width: 130px;
+				.wh(100%,26%);
 				line-height: 49px;
 				text-align: center;
 				color: #fff;
 				&:after{
 					content: ' ';
-					// width: 7px;
-					// height: 10px;
-					// background: url(~src/images/icon/youjiantou.png) no-repeat;
-					// background-size: 7px 8px;
 					.bg(10px,7px,transparent,'~src/images/icon/youjiantou.png',7px 8px);
 					display: inline-block;
 					line-height: 49px;
@@ -628,19 +704,12 @@
 		text-align: center;
 		padding: 6px 12px 0 10px;
 		box-sizing: border-box;
-		// width: 22px;
-		// height: 22px;
 		display: inline-block;
-		// background: url(~src/images/icon/unchecked.png) no-repeat;
-		// background-size: 100% 100%;
 		.bg(22px,22px,transparent,'~src/images/icon/unchecked.png',100% 100%);
 		margin-right: 11px;
 		margin-left: 11px;
 	}
 	.marquee.active{
-		// background: url(~src/images/icon/checked.png) no-repeat;
-		// background-size: 100% 100%;
-		// background: transparent;
 		.bg(22px,22px,transparent,'~src/images/icon/checked.png',100% 100%);
 	}
 </style>

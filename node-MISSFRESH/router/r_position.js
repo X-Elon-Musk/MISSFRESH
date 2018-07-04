@@ -1,20 +1,22 @@
 'use strict';
 
 import express from 'express'
-// import Location from '../controller/position/location.js'
+const router = express.Router();
+
 import missaddress from '../prototype/missaddress.js'
 const MissAddress = new missaddress();
 import citylist from '../controller/position/city_list.js'
 const CityList = new citylist();
+import view from '../controller/position/view.js'
+const View = new view();
 
-const router = express.Router();
 
-// router.get('/location',Location.location);
 
-router.get('/location',MissAddress.getPosition);
-// router.post('/locationsearch',MissAddress.searchPosition);
-router.post('/locationsuggestion',MissAddress.suggestionPosition);
-router.get('/list',CityList.getCityList);
+
+router.get('/location',MissAddress.getPosition);//刷新当前位置
+router.post('/locationsuggestion',MissAddress.suggestionPosition);//搜索地址推荐
+router.get('/list',CityList.getCityList);//获得城市列表
+router.get('/view',View.getView);//获取配送的类型信息
 
 export default router
 

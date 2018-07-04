@@ -1,26 +1,31 @@
 'use strict';
 import Mysql from '../model/sql-config.js'
 let mysql=Mysql.mysql_;
+// import MissMethods from './missMethods.js'
 let dirname='http://localhost:3390/public/images/';
 
 
 
 export default class MissMysql{
 	constructor(){
-		this.missMysql=this.missMysql.bind(this);
+		// this.missMysql=this.missMysql.bind(this);
+		this.missSelectMysql=this.missSelectMysql.bind(this);
 		this.imageRequirment=this.imageRequirment.bind(this);
 		this.whereRequirement=this.whereRequirement.bind(this);
 		this.orderRequirement=this.orderRequirement.bind(this);
-		this.priceChange=this.priceChange.bind(this);
+		this.missInsertMysql=this.missInsertMysql.bind(this);
+		this.missDeleteMysql=this.missDeleteMysql.bind(this);
+		this.missUpdateMysql=this.missUpdateMysql.bind(this);
 	}
 	//请求数据通用sql
-	async missMysql(datasheet='', imageRequirment={}, whereRequirement={}, orderRequirement={}){
+	async missSelectMysql(datasheet='', image_requirment={}, where_requirement={}, order_requirement={}, fuzzy){
 		let sql='select *';
-		sql+=await this.imageRequirment(imageRequirment);	
+		sql+=await this.imageRequirment(image_requirment);	
 		sql+=' from '+datasheet;
-		sql+=await this.whereRequirement(whereRequirement);	
-		sql+=await this.orderRequirement(orderRequirement);	
+		sql+=await this.whereRequirement(where_requirement, fuzzy);	
+		sql+=await this.orderRequirement(order_requirement);	
 		// console.log(sql);
+		// return;
 		let result=await mysql(sql);
     	return result;
 	}
@@ -32,14 +37,17 @@ export default class MissMysql{
 		})
 		return sql;
 	}
-	//处理条件sql
-	async whereRequirement(requirement={}){
+	//处理条件sql,fuzzy为模糊查找
+	async whereRequirement(requirement={}, fuzzy){
 		let sql=' where ';
 		Object.keys(requirement).forEach(key => {
-			sql+= key+'='+requirement[key]+' and ';
+			if (Object.prototype.toString.call(requirement[key])=='[object String]') {
+				!fuzzy ? sql+= key+'="'+requirement[key]+'" and ' : sql+= key+' like "%'+requirement[key]+'%"';
+			} else {
+				!fuzzy ? sql+= key+'='+requirement[key]+' and ' : sql+= key+' like "%'+requirement[key]+'%"';
+			}
 		})
-		// return sql.slice(0,sql.length-5);
-		sql=sql.substr(0, sql.lastIndexOf(' and '));
+		sql= !fuzzy ? sql.substr(0, sql.lastIndexOf(' and ')) : sql;
 		return sql;
 	}
 	//处理顺序sql
@@ -47,7 +55,6 @@ export default class MissMysql{
 		if (JSON.stringify(requirement)!=="{}") {
 			let sql=' order by ';
 			Object.keys(requirement).forEach(key => {
-				// sql+= key+'='+requirement[key]+',';
 				sql+= key+',';
 			})
 			sql=sql.substr(0, sql.lastIndexOf(','))+' desc';
@@ -56,9 +63,96 @@ export default class MissMysql{
 			return '';
 		}
 	}
-	//价格处理
-	async priceChange(price) {
-	  	return price.slice(0,price.length-2)+'.'+price.slice(price.length-2,price.length);
+	//插入数据通用sql
+	async missInsertMysql(datasheet='', column_value={}){
+		let sql='insert into ';
+		let column='',value='';
+		Object.keys(column_value).forEach(key => {
+			column+=key+',';
+		})
+		column=column.substr(0, column.lastIndexOf(','));
+		Object.keys(column_value).forEach(key => {
+			if (Object.prototype.toString.call(column_value[key])=='[object String]') {
+				value+='"'+column_value[key]+'",';		
+			} else{
+				value+=column_value[key]+',';
+			}
+		})
+		value=value.substr(0, value.lastIndexOf(','));
+		sql+=datasheet+' ('+column+') values ('+value+')';
+		console.log('--------');
+		console.log(sql);
+		console.log('--------');
+		// return;
+		let result=await mysql(sql);
+    	return result;
 	}
+	//删除数据通用sql
+	async missDeleteMysql(datasheet='', where_requirement={}){
+		// if (JSON.stringify(column_value)!=="{}") {
+			let sql='delete from '+datasheet;
+			if (where_requirement&&JSON.stringify(where_requirement)!=="{}") {
+				sql+=await this.whereRequirement(where_requirement);				
+			}
+			// return sql;	
+			console.log('--------');
+			console.log(sql);
+			console.log('--------');	
+			// return;	
+			let result=await mysql(sql);
+    		return result;
+		/*} else{
+			return '';
+		}*/
+	}
+	//更新数据通用sql
+	async missUpdateMysql(datasheet='', column_value={}, where_requirement={}){
+		if (JSON.stringify(column_value)!=="{}") {
+			let sql='update ';
+			sql+=datasheet+' set ';
+			Object.keys(column_value).forEach(key => {
+				if (Object.prototype.toString.call(column_value[key])=='[object String]') {
+					// value+='"'+column_value[key]+'",';
+					sql+= key+'="'+column_value[key]+'",';		
+				} else{
+					sql+= key+'='+column_value[key]+',';
+				}
+				// sql+= key+'='+column_value[key]+',';
+			})
+			sql=sql.substr(0, sql.lastIndexOf(','));
+			if (where_requirement&&JSON.stringify(where_requirement)!=="{}") {
+				sql+=await this.whereRequirement(where_requirement);				
+			}
+			// return sql;	
+			console.log('--------');
+			console.log(sql);
+			console.log('--------');	
+			// return;	
+			let result=await mysql(sql);
+    		return result;
+		} else{
+			return '';
+		}
+
+		/*let column='',value='';
+		Object.keys(column_value).forEach(key => {
+			column+=key+',';
+		})
+		column=column.substr(0, column.lastIndexOf(','));
+		Object.keys(column_value).forEach(key => {
+			if (Object.prototype.toString.call(column_value[key])=='[object String]') {
+				value+='"'+column_value[key]+'",';		
+			} else{
+				value+=column_value[key]+',';
+			}
+		})
+		value=value.substr(0, value.lastIndexOf(','));
+		sql+=datasheet+' ('+column+') values ('+value+')';
+		console.log(sql);
+		// return;
+		let result=await mysql(sql);
+    	return result;*/
+	}
+	
 }
 

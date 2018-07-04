@@ -122,7 +122,7 @@ params:{image: "https://j-image.missfresh.cn/img_20180403101557574.jpg",…}
 	url:"https://as-vip.missfresh.cn/ug/new-enjoy.html?station_code=&address_code=110108"
 
 
-//单个产品
+//首页--->单个产品
 {image: "http://missfresh-fms.ufile.ucloud.cn/9a4caa8c7a7c4caf938fd24997757a24.jpg",…}
 buy_permission:0
 cart_btn_name:"加入购物车"
@@ -146,7 +146,7 @@ vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 5990},�
 vip_product:0
 
 
-//单个产品--->product_tags
+//首页--->单个产品--->product_tags
 product_tags:[{name: "红包不可用",…}]
 	0:{name: "红包不可用",…}
 	color:16097217
@@ -154,7 +154,7 @@ product_tags:[{name: "红包不可用",…}]
 	name:"红包不可用"
 	type:"property"
 
-//单个产品--->vip_price_pro
+//首页--->单个产品--->vip_price_pro
 vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 1690},…}
 	price_down:{name: "", show_type: 1, color: 16730257, price: 1290}
 		color:16730257
@@ -241,3 +241,271 @@ status:0
 	province:"北京市"
 	title:"北京交通大学"
 	type:0
+
+
+
+// 详情页
+{country: "海南",…}
+	brand:""
+	buy_permission:0
+	buyerDescription:"专注国内外水果9年，去新疆，海南，台湾实地考察，只选当季的新鲜水果给你。"
+	buyerName:"青松"
+	buyerUrl:"https://image.missfresh.cn/34d218758d714b95a0b0e75c5b1abba4.png"
+	can_use_voucher:1
+	cart_btn_name:"加入购物车"
+	cart_image:"https://image.missfresh.cn/97042f5ae1274a3aa21046bd6dd6f4d6.jpg"
+	country:"海南"
+	delivery_mode:1
+	delivery_mode_name:"2小时达"
+	delivery_style:"2小时达"
+	description:["阳光充足，水果甜度足，是荔枝较早成熟的地方", "妃子笑果皮偏绿色，甜中带点微酸口感，冰镇后更加清甜爽口", "皮薄核小肉多，一剥开就能看见晶莹的荔枝果肉，咬一口便能尝到多汁口感"]
+	enable_mrd:0
+	exchange_limit_day:0
+	exchange_times_per_day:0
+	exchange_times_per_period:0
+	free_shipping:0
+	group_info:{event_end_time: "", deliver_end_time: "", group_number_dec: "", owner_discount_price: 0,…}
+	id:2611
+	image:"https://image.missfresh.cn/9f5dead3717541e9a717f9edd76dd7bd.jpg"
+	images:["https://image.missfresh.cn/c87921e030654e63830f88801d323750.jpg"]
+	instruction:[,…]
+	integral_price:0
+	integral_product_type:0
+	is_exchange_product:0
+	is_present:0
+	is_vip:1
+	market_price:2990
+	material:""
+	member_level:1
+	name:"妃子笑荔枝500g*1盒"
+	nationwide:0
+	pack:"盒装"
+	presale_type:0
+	price:1990
+	productFingerprints:[{stationRegion: "MRYXBJN",…}, {securityTagName: "100%品控检测",…}]
+	product_chrome:1
+	product_created_at:"2016-05-11 20:05:06"
+	product_need_level:0
+	product_share_info_v2:{prodcut_share_bg_login_text: "登陆方可享受奖励,立即登陆", product_share_need_price: 1,…}
+	promote_tag:"https://j-image.missfresh.cn/img_20170605114117571.png"
+	promote_tag_new:""
+	promotion:["实付满39包邮"]
+	qa_info:[{stationRegion: "MRYXBJN",…}]
+	quantity:1
+	sales_volume:"268656"
+	seckill_limit:0
+	securityText:"经14项感官排查64项农残专检，100%可溯，点标签查看。"
+	securityTitle:"安心指纹"
+	share_info:{wx_share_type: 0, image_url: "https://image.missfresh.cn/97042f5ae1274a3aa21046bd6dd6f4d6.jpg",…}
+	sku:"p-HBfzxlz-1j"
+	stock:368
+	storage_code:"MRYXSZ,MRYXSH,"
+	storage_method:"冷藏"
+	storage_time:"到货即可食用"
+	subtitle:"哈哈哈 甜到拥有贵妃同款笑容"
+	unit:"1盒"
+	vip_card:{is_opened: 0, back_cash_text: "支付8元开会员↵购买本商品更返#_$0.49#_$元",…}
+	vip_price:990
+	vip_price_pro:{price_up: {show_type: 2, color: 9868950, price: 1990, name: ""},…}
+	weight:"500g*1盒"
+
+//详情页--->description
+description:["阳光充足，水果甜度足，是荔枝较早成熟的地方", "妃子笑果皮偏绿色，甜中带点微酸口感，冰镇后更加清甜爽口", "皮薄核小肉多，一剥开就能看见晶莹的荔枝果肉，咬一口便能尝到多汁口感"]
+	0:"阳光充足，水果甜度足，是荔枝较早成熟的地方"
+	1:"妃子笑果皮偏绿色，甜中带点微酸口感，冰镇后更加清甜爽口"
+	2:"皮薄核小肉多，一剥开就能看见晶莹的荔枝果肉，咬一口便能尝到多汁口感"
+
+//详情页--->group_info
+group_info:{event_end_time: "", deliver_end_time: "", group_number_dec: "", owner_discount_price: 0,…}
+	count_down:0
+	deliver_end_time:""
+	deliver_start_time:""
+	event_end_time:""
+	event_start_time:""
+	group_h5_url:""
+	group_initiator_benifit:""
+	group_number_dec:""
+	group_rule_img:""
+	new_user_only:0
+	owner_discount_price:0
+
+//详情页--->images
+images:["https://image.missfresh.cn/c87921e030654e63830f88801d323750.jpg"]
+	0:"https://image.missfresh.cn/c87921e030654e63830f88801d323750.jpg"
+
+//详情页--->instruction
+instruction:[,…]
+	0:{blur_image: "", image: "https://image.missfresh.cn/98b5f87c5e934ecb882a41043705d9fc.jpg", ordering: 0,…}
+	1:{blur_image: "", image: "https://image.missfresh.cn/425686a1fe6641d085a849873ba9ba4c.jpg", ordering: 0,…}
+	2:{blur_image: "", image: "https://image.missfresh.cn/6b2a6c34a1254a1080d6b76ef7b9540e.jpg", ordering: 0,…}
+	3:{blur_image: "", image: "https://image.missfresh.cn/0fab9dd40b944d639105f8e0c7ea96a4.jpg", ordering: 0,…}
+	4:{blur_image: "", image: "https://image.missfresh.cn/9b1a4036f89d44468106b79d7b426c16.jpg", ordering: 0,…}
+	5:{blur_image: "", image: "https://image.missfresh.cn/74c37a896d2248b69ab30500b9a3b330.jpg", ordering: 0,…}
+	6:{blur_image: "", image: "https://image.missfresh.cn/2e0e1a2bc11d4f7abbb5ffaac2ad683d.jpg", ordering: 0,…}
+	7:{blur_image: "", image: "https://image.missfresh.cn/309080ddefe844349546572f77d80e3a.jpg", ordering: 0,…}
+	8:{blur_image: "", image: "https://image.missfresh.cn/015ac7a33d4e4ca8a76b1aed82a26c6b.jpg", ordering: 0,…}
+	9:{blur_image: "", image: "https://image.missfresh.cn/47fd1612dff64f6dbc0eec3593a4a8f0.jpg", ordering: 0,…}
+	10:{blur_image: "", image: "https://image.missfresh.cn/806bc14285744c3b830f09873db13bb7.jpg", ordering: 0,…}
+
+//详情页--->instruction--->0
+0:{blur_image: "", image: "https://image.missfresh.cn/98b5f87c5e934ecb882a41043705d9fc.jpg", ordering: 0,…}
+	blur_image:""
+	description:""
+	image:"https://image.missfresh.cn/98b5f87c5e934ecb882a41043705d9fc.jpg"
+	ordering:0
+	title:""video:""
+
+//详情页--->productFingerprints
+productFingerprints:[{stationRegion: "MRYXBJN",…}, {securityTagName: "100%品控检测",…}]
+	0:{stationRegion: "MRYXBJN",…}
+		height:6296
+		id:10000
+		missfreshAnalytica:true
+		picUrl:"http://missfresh-asvip-develop-common.ufile.ucloud.cn/wms_1527060354886121465.png"
+		securityDetailUrl:"https://as-vip.missfresh.cn/ug/safe-detection.html?id=10000&sku=p-HBfzxlz-1j"
+		securityTagName:"优鲜安心检测"
+		securityTagUrl:"https://j-image.missfresh.cn/img_20180313023856777.png"
+		securityUnselectedTagUrl:"https://j-image.missfresh.cn/img_20180313023911409.png"
+		stationRegion:"MRYXBJN"
+		width:1001
+	1:{securityTagName: "100%品控检测",…}
+
+
+//详情页--->product_share_info_v2
+product_share_info_v2:{prodcut_share_bg_login_text: "登陆方可享受奖励,立即登陆", product_share_need_price: 1,…}
+	benefit_get_txt:"已获得"
+	benefit_status:0
+	preview_need_qrcode:1
+	preview_show:0
+	prodcut_share_bg_img:"http://missfresh-asschool-develop-common.ufile.ucloud.com.cn/img_20170327161934693.jpg"
+	prodcut_share_bg_login_text:"登陆方可享受奖励,立即登陆"
+	prodcut_share_bg_text:"分享商品邀请新人下单即得30元红包↵好友下单购买，更有5%的返现等你拿"
+	product_bright_spot:"亮点"
+	product_detail_is_show:1
+	product_integarl_explain:"分享商品，邀请新用户点击链接并下单，可得59减30元红包。会员分享商品，非会员下单签收后，会员得5%返现。"
+	product_integarl_icon:"http://missfresh-asschool-develop-common.ufile.ucloud.com.cn/img_20170215184830712.png"
+	product_integarl_text:"分享有机会得30元红包"
+	product_rule_is_show:1
+	product_share_need_price:1
+	qr_size:77
+	qr_x:74
+	qr_y:13
+	share_bg_title:"哈哈哈 甜到拥有贵妃同款笑容"
+	share_bt_bg_img:"https://j-image.missfresh.cn/img_20180419112810200.png"
+	share_product_img:"https://j-image.missfresh.cn/img_20171029215450695.png"
+	share_product_text:"已经有159088人分享了该商品"
+	share_s_p_img:["https://j-image.missfresh.cn/img_20171029215450695.png"]
+		0:"https://j-image.missfresh.cn/img_20171029215450695.png"
+	share_s_p_txt:"点击分享"
+	show_share_img:"http://missfresh-asschool-develop-common.ufile.ucloud.com.cn/img_20170504191635971.png"
+
+//详情页--->promotion
+promotion:["实付满39包邮"]
+	0:"实付满39包邮"
+
+//详情页--->qa_info
+qa_info:[{stationRegion: "MRYXBJN",…}]
+	0:{stationRegion: "MRYXBJN",…}
+		height:6296
+		id:10000
+		missfreshAnalytica:true
+		picUrl:"http://missfresh-asvip-develop-common.ufile.ucloud.cn/wms_1527060354886121465.png"
+		securityDetailUrl:"https://as-vip.missfresh.cn/ug/safe-detection.html?id=10000&sku=p-HBfzxlz-1j"
+		securityTagName:"优鲜安心检测"
+		securityTagUrl:"https://j-image.missfresh.cn/img_20180313023856777.png"
+		securityUnselectedTagUrl:"https://j-image.missfresh.cn/img_20180313023911409.png"
+		stationRegion:"MRYXBJN"
+		width:1001
+
+
+//详情页--->share_info
+share_info:{wx_share_type: 0, image_url: "https://image.missfresh.cn/97042f5ae1274a3aa21046bd6dd6f4d6.jpg",…}
+	content:"新人下单立享30红包！优质生鲜，一小时达~"
+	friend_share_type:1
+	friend_url:"https://as-vip.missfresh.cn/s/pd?a=p-HBfzxlz-1j&b=&t=867&v=&u=0"
+	image_url:"https://image.missfresh.cn/97042f5ae1274a3aa21046bd6dd6f4d6.jpg"
+	qqFriendShareType:0
+	qqFriendUrl:"https://s.missfresh.cn/s/2611/867"
+	sina_url:"https://s.missfresh.cn/s/2611/867"
+	title:"快来看好商品！「妃子笑荔枝500g*1盒」"
+	wx_share_type:0
+	wx_url:"https://as-vip.missfresh.cn/s/pd?a=p-HBfzxlz-1j&b=&t=867&v=&u=0"
+
+
+//详情页--->vip_card
+vip_card:{is_opened: 0, back_cash_text: "支付8元开会员↵购买本商品更返#_$0.49#_$元",…}
+	back_cash_text:"支付8元开会员↵购买本商品更返#_$0.49#_$元"
+	icon_img:"https://j-image.missfresh.cn/img_20170823161352436.png"
+	is_opened:0
+
+
+//详情页--->vip_price_pro
+vip_price_pro:{price_up: {show_type: 2, color: 9868950, price: 1990, name: ""},…}
+	price_down:{show_type: 1, color: 16730257, price: 990, name: ""}
+		color:16730257
+		name:""
+		price:990
+		show_type:1
+	price_up:{show_type: 2, color: 9868950, price: 1990, name: ""}
+		color:9868950
+		name:""
+		price:1990
+		show_type:2
+
+
+// 商品搜索
+{msg: "成功", code: 0, data: [,…], success: true}
+	code:0
+	data:[,…]
+		0:{trans_title: "以下为次日达商品", trans_type_image: "https://j-image.missfresh.cn/img_20170228112712281.png",…}
+			active_item:[{score: 551.9273071289062, nationwide: 0, sku: "p-xrhb-jsd-p-TJjhszq138g*2", stock: 2009,…},…]
+				0:{score: 551.9273071289062, nationwide: 0, sku: "p-xrhb-jsd-p-TJjhszq138g*2", stock: 2009,…}
+					displayName:"金晔原味山楂球138g"
+					nationwide:0
+					score:551.9273071289062
+					sku:"p-xrhb-jsd-p-TJjhszq138g*2"
+					stock:2009
+				1:{score: 551.9273071289062, nationwide: 0, sku: "p-HBjyszq138g", stock: 4018,…}
+				2:{score: 551.9273071289062, nationwide: 0, sku: "p-szbbszt*128g", stock: 2615,…}
+				3:{score: 427.3393249511719, nationwide: 0, sku: "p-sykxsz90g", stock: 685, displayName: "素颜空心山楂90g"}
+				4:{score: 406.29217529296875, nationwide: 0, sku: "p-ssszt100g", stock: 712, displayName: "桑葚山楂条100g"}
+				5:{score: 326.0097351074219, nationwide: 0, sku: "p-TJjhszq138g*2", stock: 2009,…}
+				6:{score: 271.0546417236328, nationwide: 0, sku: "p-zmgszgt-700g", stock: 644,…}
+				7:{score: 237.5965087890625, nationwide: 0, sku: "p-trfwszlal-2d", stock: 370,…}
+			inactive_item:[]
+			trans_title:"以下为次日达商品"
+			trans_type:"nextday"
+			trans_type_image:"https://j-image.missfresh.cn/img_20170228112712281.png"
+		msg:"成功"
+		success:true
+
+
+// verify-captcha
+{msg: "ok", access_token: "QVM4TGJpM25EdmFQRC8rMHdUa1ZDd0Vwdk4vM0FvNjhFMC9sKzhxa0hRRT0=",…}
+	access_token: "QVM4TGJpM25EdmFQRC8rMHdUa1ZDd0Vwdk4vM0FvNjhFMC9sKzhxa0hRRT0="
+	alert_info: ""
+	code: 0
+	has_bind_weixin: 0
+	msg: "ok"
+	user_id: 49931351
+
+// 收货地址
+[{area: "海淀区", code: "110108", city: "北京市", address_1: "九章大厦", address_2: "B座",…},…]
+	0:{area: "海淀区", code: "110108", city: "北京市", address_1: "九章大厦", address_2: "B座",…}
+	1:{area: "海淀区", code: "110108", city: "北京市", address_1: "九章大厦", address_2: "B座",…}
+		address_1:"九章大厦"
+		address_2:"B座"
+		address_detail:"九章大厦B座"
+		area:"海淀区"
+		city:"北京市"
+		code:"110108"
+		default:false
+		full_address:"北京市海淀区中关村南二条一号"
+		id:20498692
+		is_valid:true
+		lat_lng:"39.982099074,116.337098479"
+		name:"李超"
+		phone_number:"15538254335"
+		province:"北京"
+		tag:"COMPANY"
+		transport:true

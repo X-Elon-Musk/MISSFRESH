@@ -2,33 +2,29 @@
     <div class="product-detail">
     	<div class="clearfix section-header">
     		<span class="header-text">商品详情</span>
-    		<strong class="share-icon" @click="shareAction(true)"></strong>
+    		<strong class="share-icon" @click="shareAction(true)"  :style="{backgroundImage:`url(${product_share_info_v2.show_share_img})`}"></strong>
     	</div>
     	<div class="product-img-container">
-    		<carousel></carousel>
+    		<carousel :banner="product.images" :link="false"></carousel>
     	</div>
-    	<div class="padding_common product-name">2018升级版摩奇桃汁首发，出游全靠它</div>
-    	<p class="padding_common sub-title">【4盒】升级版摩奇桃汁饮料250ml*4</p>
-    	<div class="padding_common price-original">
-    		<price :price="13.9"></price>
-    	</div>
+    	<div class="padding_common product-name">{{product.subtitle}}</div>
+    	<p class="padding_common sub-title">{{product.name}}</p>
     	<div class="padding_common clearfix price-sales">
-    		<span class="price-vip">
-    			优享会员价<price :price="13.9"></price>
-    		</span>
+    		<price :price="priceDown.price" class="price-down"></price>
+    		<price :price="priceUp.price" class="price-up"></price>
     		<span class="f_r sales-volume">
-    			已售<i>9809</i>份
+    			已售<i>{{product.sales_volume}}</i>份
     		</span>
     	</div>
     	<ul class="padding_common clearfix product-attrs">
-    		<li class="f_l">产地<span>北京</span></li>
-    		<li class="f_l">次日达</li>
-    		<li class="f_l">实付满<span>69</span>包邮</li>
+    		<li class="f_l">产地<span>{{product.country}}</span></li>
+    		<li class="f_l">{{product.delivery_style}}</li>
+    		<li class="f_l" v-for="(item, index) in product.promotion" :key="index">{{item}}</li>
     	</ul>
     	<ul class="vip-share">
     		<li class="vip-info">
     			<div class="clearfix vip-share-item">
-    				<span class="f_l item-card"></span>
+    				<span class="f_l item-card" :style="{backgroundImage:`url(${vip_card.icon_img})`}"></span>
     				<div class="f_l item-text">
     					<span>支付8元开会员</span>
     					<span>购买本商品更省<i>0.4</i>元+返<i>0.67</i>元</span>
@@ -50,35 +46,32 @@
     	</ul>
     	<div class="padding_common product-safe-area">
     		<div class="clearfix security-tit">
-    			<span class="security-tit-title">安心指纹</span>
-    			<router-link :to="{path: 'safeDetection'}" tag='span' class="f_r security-tit-see">
+    			<span class="security-tit-title">{{product.securityTitle}}</span>
+    			<router-link :to="{path: 'safeDetection',query:{product_id: product_id}}" tag='span' class="f_r security-tit-see">
     				点击查看 >
     			</router-link>	
-    			<!-- <span class="f_r security-tit-see">点击查看 ></span> -->
     		</div>
-    		<p class="security-txt">经14项感官排查64项农残专检，100%可溯，点标签查看。</p>
+    		<p class="security-txt">{{product.securityText}}</p>
     		<div class="scroll-box">
-    			<icons :icons="icons"></icons>
+    			<icons :icons="product.productFingerprints"></icons>
     		</div>
     	</div>
     	<div class="buyer-said">
     		<div class="buyer-area-person">
     			<div class="clearfix flexbox">
     				<div class="f_l buyer-area-person-icon">
-    					<img src="~src/images/person-icon.png" alt="">
+    					<img :src="product.buyerUrl" alt="">
     				</div>
-    				<span class="f_l buyer-name">摩奇复活核心团队</span>
+    				<span class="f_l buyer-name">{{product.buyerName}}</span>
     				<i class="f_r buyer-area-person-tip"></i>
     			</div>
     			<div class="buyer-person-des">
-    				由每日优鲜商品中心VP刘啸峰发起，得到摩奇董事长姜建民，摩奇饮料工艺师张昱的大力支持。
+    				{{product.buyerDescription}}
     			</div>
     			<div class="buyer-description">
     				<div class="marks-left"></div>
     				<ul class="commodity-details">
-    					<li>2018升级版摩奇桃汁，桃汁UP，不添加色素，不添加防腐剂，不添加阿斯巴甜。</li>
-    					<li>摩奇复活核心团队于2018年1月25日联合复活国民饮料摩奇，一起守住老北京的味道。</li>
-    					<li>摩奇生于1984年，兴于1992年，于2018年1月重现人们视野中。80 90年的老北京四合院里，孩子们最爱的三大饮品就是老酸奶、北冰洋、摩奇了。</li>
+    					<li v-for="(item, index) in product.description" :key="index">{{item.text}}</li>
     				</ul>
     			</div>
     		</div>
@@ -86,29 +79,15 @@
     	<div class="padding_common graphic-list-container">
     		<h3 class="image-text">商品详情</h3>
     		<ul class="list-container">
-    			<li class="list-item">规格: <span>6</span><i>盒</i></li>
-    			<li class="list-item">重量: <span>250</span><span>ml</span>*<span>1</span><i>盒</i></li>
-    			<li class="list-item">包装: 盒装</li>
-    			<li class="list-item">保质期: 330天</li>
-    			<li class="list-item">贮存方法: 室温</li></ul>
+    			<li class="list-item">规格: {{product.unit}}</li>
+    			<li class="list-item">重量: {{product.weight}}</li>
+    			<li class="list-item">包装: {{product.pack}}</li>
+    			<li class="list-item">保质期: {{product.storage_time}}</li>
+    			<li class="list-item">贮存方法: {{product.storage_method}}</li>
+    		</ul>
     	</div>
     	<ul class="padding_common instruction-list-container">
-    		<li><img src="~src/images/productdetail/1.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/2.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/3.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/4.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/5.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/6.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/7.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/8.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/9.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/10.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/11.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/12.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/13.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/14.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/15.jpg" alt=""></li>
-    		<li><img src="~src/images/productdetail/16.jpg" alt=""></li>
+    		<li v-for="(item, index) in product.instruction" :key="index"><img :src="item.image" alt=""></li>
     	</ul>
     	<div class="weui-mask" v-show="share">
     		<div class="mask-bg" @click="shareAction(false)"></div>
@@ -123,7 +102,7 @@
     	<div class="weui-mask" v-show="dialog">
     		<div class="mask-bg" @click="dialogAction(false)"></div>
     		<div class="weui-mask-dialog">
-    			<div class="share-name">快来看好商品！<span>「千禧圣女果500g*1盒」</span></div>
+    			<div class="share-name">{{share_info.title}}<span>「{{product.name}}」</span></div>
     			<div class="share-link">长按文字及链接复制 分享给好友</div>
     			<div class="share-cancle" @click="dialogAction(false)">取消</div>
     		</div>
@@ -135,34 +114,122 @@
     			<div class="share-text">分享商品，邀请新用户点击链接并下单，可得59减30元红包。会员分享商品，非会员下单签收后，会员得5%返现。</div>
     		</div>
     	</div>
+    	<router-link :to="{path: '/ug/addressChose'}" tag='div' class="clearfix address-bar-container">
+			<div class="clearfix f_l delivery-range">
+    			<img src="~images/icon/location.png" alt="" class="f_l position-icon">
+    			<span class="f_l"> 送至 </span>
+    			<span class="f_l delivery-place">{{choseAddress}}</span>
+    			<img src="" alt="" class="f_l delivery-icon">
+    		</div>
+    		<img src="~images/icon/right-jiantou.png" alt="" class="f_r address-choose-arrow">
+		</router-link>
+    	<div class="clearfix product-bar-footer-container">
+    		<router-link :to="{path: '/cart'}" tag='div' class="f_l image-spot-container">
+				<span class="cart-count image-spot-dot">{{s_cartCount}}</span>
+			</router-link>
+    		<!-- <div class="f_l image-spot-container">
+    			<span class="cart-count image-spot-dot">{{s_cartCount}}</span>
+    		</div> -->
+    		<div class="f_r add-cart-btn" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
+    			加入购物车
+    		</div>
+    	</div>
     </div>  
 </template>
 <script>
+	import {mapState, mapMutations} from 'vuex'
+	import {getDataProductDetailAxios} from 'src/service/getData'
+
 	import carousel from 'src/components/carousel/carousel'
 	import price from 'src/components/price/price'
 	import icons from 'src/components/icons/icons'
 	export default{
 		data(){
 			return {
-				icons: [
-					{
-						src: require('images/icon/security_1_0.png'),
-						text: '优鲜安心检测'
-					},
-					{
-						src: require('images/icon/security_2_0.png'),
-						text: '100%品控检测'
-					}
-				],
 				share: false,
 				dialog: false,
-				doubt: false
+				doubt: false,
+				//商品id
+				product_id: 0,
+				//商品分类
+				product_index: 0,
+				//商品
+				product: {},
+				//商品现价
+				priceDown: {},
+				//商品原价
+				priceUp: {},
+				//分享信息
+				share_info: {},
+				//会员卡
+				vip_card: {},
+				//商品分享信息
+				product_share_info_v2: {}
 			}
 		},
+		created(){
+            this.product_id=this.$route.query.product_id;
+            this.product_index=this.$route.query.product_index;
+        },
+        mounted(){
+            this.getDataProductDetail();
+   //          this.$nextTick(()=>{
+			// 	this.getDataProductDetail();
+			// })
+        },
+        computed: {
+	    	...mapState([
+                's_choseAddress', 's_cartCount'
+            ]),
+            //选择的配送地址
+            choseAddress: function () {
+            	if (this.s_choseAddress) {
+            		return this.s_choseAddress;
+            	} else{
+            		return '';
+            	}
+            }
+        },
 		methods: {
+			...mapMutations([
+                'ADD_CART','REDUCE_CART','SET_MPROMPT'
+            ]),
+            // 商品详情
+			async getDataProductDetail(){
+			// getDataProductDetail(){	
+				let response=await getDataProductDetailAxios(this.product_id, this.product_index);
+				/*console.log('0619');
+				console.log(response);
+				console.log('0619');*/
+				// if (response.status==200) {
+					let data=response.data;
+					this.product=response;	
+					this.priceDown=response.vip_price_pro.price_down;	
+					this.priceUp=response.vip_price_pro.price_up;
+					this.share_info=response.share_info;	
+					this.vip_card=response.vip_card;	
+					this.product_share_info_v2=response.product_share_info_v2;	
+				// }
+
+				/*getDataProductDetailAxios(this.product_id, this.product_index).then(response=>{
+					console.log('0619');
+					console.log(response);
+					console.log('0619');
+						this.product=response;	
+						console.log(this.product);
+						this.priceDown=response.vip_price_pro.price_down;	
+						this.priceUp=response.vip_price_pro.price_up;
+						this.share_info=response.share_info;	
+						this.vip_card=response.vip_card;	
+						this.product_share_info_v2=response.product_share_info_v2;	
+				})*/
+				
+			},
+			// 分享
 			shareAction(state){
 				this.share=state;
 			},
+			// 分享方式
 			shareMode(mode){
 				this.share=false;
 				this.dialog=true;
@@ -172,6 +239,10 @@
 			},
 			doubtAction(state){
 				this.doubt=state;
+			},
+			// 添加到购物车
+			addToCart: function (id,image,name,product_tags,price_up,price_down,event) {
+				this.ADD_CART({id,image,name,product_tags,price_up,price_down});
 			}
 		},
 		components: {
@@ -190,9 +261,7 @@
 		top: 0;
 		bottom: 0;
 		z-index: 3; 
-		// padding: 3em; 
 		background: #fff;
-		// font-size: 30px;
 		overflow-y: auto;
 		color: @color_common;
 		.section-header{
@@ -206,7 +275,7 @@
 			text-align: center;
 			background: #fff;
 			box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.06);
-    		border-bottom: 1PX solid #eee;
+    		border-bottom: 1px solid #eee;
 			.header-text{
 				position: relative;
 				display: inline-block;
@@ -232,13 +301,10 @@
 		.sub-title{
 			.font(1.2em);
 		}
-		.price-original{
-			padding-top: 1em;
-			.font(2.2em,0.8em,@color_main);
-		}
 		.price-sales{
 			.font(1.4em,0.8em,@color_assist);
 			padding-bottom: 1em;
+			padding-top: 1em;
 			.price-vip{
 				
 			}
@@ -325,8 +391,9 @@
 			.font(1.4em,0.8em,@color_gray);
 			.security-tit{
 				.security-tit-title{
-					line-height: 2.2em;
-					color: @color_common;
+					// line-height: 2.2em;
+					// color: @color_common;
+					.font(2.2em,1em);
 					font-weight: 700;
 
 				}
@@ -497,6 +564,60 @@
 					.font(1.4em,0.8em,@color_gray);
 				}
 			}
+		}
+		.address-bar-container{
+			position: fixed;
+			left: 0;
+			bottom: 36px;
+			.wh(2em);
+			background: rgba(255, 244, 226, 0.9);
+			padding: 0 4%;
+			box-sizing: border-box;
+			font-size: 0.9em;
+			line-height: 2em;
+			.delivery-range{
+				.position-icon{
+					.wh(1em,1em);
+					margin-top: 0.5em;
+				}
+				span{
+					font-size: 0.8em;
+					margin-left: 0.5em;
+				}
+				.delivery-place{
+					
+				}
+				.delivery-icon{
+
+				}
+			}
+			.address-choose-arrow{
+				.wh(1.2em,1.2em);
+				margin-top: 0.4em;
+			}
+		}
+		.product-bar-footer-container{
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			.wh(36px); 
+			line-height: 36px;
+			background: #fff;
+			font-size: 0.9em;
+			.image-spot-container{
+				position: relative;
+				.bg(46px,100%,transparent,'~src/images/icon/shopping_cart.png',52% 60%);
+				.image-spot-dot{
+					right: 8%;
+				}
+			}
+			.add-cart-btn{
+				height: 100%;
+				width: calc(100% - 46px);
+				background: @color_main;
+				color: #fff;
+				text-align: center;
+			}	
 		}
 	}
 </style>

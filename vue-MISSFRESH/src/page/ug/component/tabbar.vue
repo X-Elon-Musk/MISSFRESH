@@ -2,7 +2,7 @@
 	<div class="tabbar">
         <div id="top">
         	<!-- <div class="addr"></div> -->
-        	<ugHeader :choseAddress="choseAddress"></ugHeader>
+        	<ugHeader :view="view"></ugHeader>
         	<div class="swiper-container tab-nav" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
         			<div class="swiper-slide" v-for="(item,index) in categorylist[0]" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index" :style="{backgroundImage:item.category_image.indexOf('icon')>0?`url(${item.category_image})`:'none'}">
@@ -17,18 +17,21 @@
 		</div>
 		<!-- 分类 -->
 		<classify v-show="classifyState" :categorylist="categorylist[0]" v-on:closeClassify="closeClassify"  v-on:tabMove="tabMove"></classify>
+		
 		<div class="swiper-container" id="page" ref="page">
 		  	<div class="swiper-wrapper">
 
 				<!-- nav对应页面 -->
 				<!-- 热卖 -->
 		      	<!-- <productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage> -->
+		      	<!-- <productPage :products="products[0]||[]" :banner="banner[0]||[]" class="product_index_0"> -->
 		      	<productPage :products="products[0]" :banner="banner[0]" class="product_index_0">
 		      		<guarantee :brands="brands[0]"></guarantee>
             		<card :categoryareas="categoryareas[0]"></card>
 		      	</productPage>
-		      	<productPage :products="products[1]||[]" :banner="banner[1]||[]" class="product_index_0"></productPage>
-		      	<productPage :products="products[2]||[]" :banner="banner[2]||[]" class="product_index_0"></productPage>
+		      	<!-- <productPage :products="products[1]||[]" :banner="banner[1]||[]" class="product_index_0"></productPage> -->
+		      	<productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage>
+		      	<productPage :products="products[2]" :banner="banner[2]" class="product_index_0"></productPage>
 		      	<!-- <productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage> -->
 			    <!-- <div class="swiper-slide slidepage swiper-container gif-show">
 		      		<div class="swiper-container scroll" ref="scroll">
@@ -176,7 +179,7 @@
 		</div>
 		<!-- <div class="img" id="footer"><img src="../../images/carousel/0.jpg"></div> -->
 	
-		<loading :loading="loading"></loading>
+		<loading :loading="loading" zIndex="1"></loading>
 	</div>
 </template>
 <script>
@@ -184,7 +187,7 @@
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
     import qs from 'qs';
-    // import {isArray} from 'src/config/mUtils'
+    import {getDataPageIndexAxios, getDataPositionAxios, getViewAxios} from 'src/service/getData'
 
   	import ugHeader from './component/ugHeader'
     import classify from './component/classify'
@@ -206,8 +209,8 @@
 				clientWidth: 0,
 				//导航的宽度
 				navWidth: 0,
-				//计数，后面需要去除
-				num: 0,
+				// //计数，后面需要去除
+				// num: 0,
 				//“分类”显示状态
 				classifyState: false,
 				//上滑加载初始的位置
@@ -215,89 +218,107 @@
 				//上滑加载滑动的位置
 				translate: 0,
 				//分类列表
-				// categorylist: [],
 				categorylist: {},
 				//banner
-				// banner: [],
 				banner: {},
 				//品牌
-				// brands: [],
 				brands: {},
 				//分类区域
-				// categoryareas: [],
 				categoryareas: {},
 				//产品
-				// products: [],
 				products: {},
 				//loading组件状态
 				loading: false,
 				//导航移动的最大距离
 				maxLeft: 0,
 				//种类数据加载情况
-				product_index: {}
+				product_index: {},
+				// 配送的信息
+				view: {}
 			}
 		},
 		mounted (){
-			// this.$nextTick(() => {
-			this.getPageIndex(0, () => {
-				this.$nextTick(() => {
-					if (!this.navSwiper) this.tab();
-					if (!this.pageSwiper) this.page();
-				})
-			});
-			// })
-			this.getPosition();
+			this.getDataPageIndex(0);
+			this.getDataPosition();
+			this.getView();
 		},
+		activated(){
+			console.log(444444);
+			// this.getDataPageIndex(0, () => {
+			// 	this.$nextTick(() => {
+			// 		if (!this.navSwiper) this.tab();
+			// 		if (!this.pageSwiper) this.page();
+			// 	})
+			// });
+			// this.getView();
+		},
+		beforeRouteEnter(to, from, next){
+        	// console.log(to);
+        	// console.log(from);
+        	/*// if (to.name=='http://localhost:8080/#/ug') {
+        	if (to.fullPath=='/ug/') {
+        		from.meta.keepAlive=true;
+        		// to.meta.keepAlive=true;
+        		console.log(1);
+        	} else{
+        		from.meta.keepAlive=false;
+        		// to.meta.keepAlive=true;
+        		// this.$route.meta.keepAlive=true;
+        		console.log(this.$route.meta.keepAlive);
+        		console.log(2);
+        	}
+        	from.meta.keepAlive=false;*/
+        	next();
+        },
+        watch: {
+        	s_choseAddress: function () {
+    			this.getDataPageIndex(0);
+				this.getView();			
+        	}
+        },
 		computed: {
 	    	...mapState([
-                's_currentRegion', 's_choseAddress'
+                's_viewType', 's_choseAddress'
             ]),
-            //选择的配送地址
-            choseAddress: function () {
-            	if (this.s_choseAddress) {
-            		return this.s_choseAddress;
-            	} else{
-            		return '';
-            	}
-            },
         },
 		methods: {
 			...mapMutations([
                 'SET_POSITION'
             ]),
 			//获取index数据
-			getPageIndex: function (product_index,callback) {
-				var _this=this;
-				this.loading=true;
-				this.axios.get('http://localhost:3390/page/index',{
-			    	params: {
-				      	product_index: product_index
-				    }
+			async getDataPageIndex(product_index) {
+				let response=await getDataPageIndexAxios(product_index);
+				let product_list=response.product_list;
+				if (product_index==0) {
+					// this.categorylist[product_index]=[].concat(response.category_list);	
+					this.$set(this.categorylist, product_index, response.category_list);
+					this.$set(this.brands, product_index, product_list.brands);
+					this.$set(this.categoryareas, product_index, product_list.category_areas);
+					this.$emit('hideLoading', false);
+				}
+				this.$set(this.banner, product_index, product_list.banner);
+				this.$set(this.products, product_index, product_list.products);
+				this.loading=false;
+				this.$nextTick(() => {
+					if (!this.navSwiper) this.tab();
+					if (!this.pageSwiper) this.page();
 				})
-				.then(function (response) {
-					let product_list=response.data.product_list;
-					if (product_index==0) {
-						_this.categorylist[product_index]=(_this.categorylist[product_index]||[]).concat(response.data.category_list);	
-						_this.brands[product_index]=(_this.brands[product_index]||[]).concat(product_list.brands);
-						_this.categoryareas[product_index]=(_this.categoryareas[product_index]||[]).concat(product_list.category_areas);	
-					}
-					_this.banner[product_index]=(_this.banner[product_index]||[]).concat(product_list.banner);
-					_this.products[product_index]=(_this.products[product_index]||[]).concat(product_list.products);
-					// _this.product_index[product_index]=_this.products[product_index]||true;
-					console.log('=====================');
-					console.log(_this.products);
-					console.log('=====================');	
-                  	
-					_this.loading=false;
-					callback&&callback();
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
 			},
 			//获取当前地址
-			getPosition: function (callback) {
-				let _this=this;
+			async getDataPosition(callback) {
+				let response=await getDataPositionAxios();
+				let ad_info=response.ad_info
+				let chosecity={
+					id: ad_info.adcode,
+					name: ad_info.city,
+					province: ad_info.province,
+					district: ad_info.district
+				}
+				this.SET_POSITION({
+					type: 0,
+					city: chosecity
+				});
+				/*let _this=this;
 				this.axios.get('http://localhost:3390/position/location')
 				.then(function (response) {
 					let ad_info=response.data.ad_info
@@ -315,7 +336,9 @@
 				})
 				.catch(function (error) {
 				  	console.log(error);
-				});	
+				});*/	
+
+				
 
 
 				//post方法
@@ -346,8 +369,14 @@
 				  	console.log(error);
 				});	*/	
 			},
+			//获取配送的类型信息
+			getView() {
+				getViewAxios(this.s_viewType).then(response=>{
+					this.view=response;
+				})
+			},
 			//导航栏
-			tab: function () {
+			tab() {
 				var _this=this;
 				//this.navSwiper=new Swiper(this.$refs.tabNav, {
 				this.navSwiper=new Swiper('.tab-nav', {
@@ -372,7 +401,7 @@
 				});
 			},
 			//导航栏对应的page页面
-			page: function () {
+			page() {
 				var _this=this;
 				this.pageSwiper = new Swiper(this.$refs.page, {
 				  	watchSlidesProgress: true,
@@ -390,25 +419,24 @@
 				});
 			},
 			//点击导航	
-			tabClick: function(index,event) {
-				console.log(1111);
+			tabClick(index,event) {
 				/*this.tabIndex=index;
 				//对应的内容显示
 				this.pageSwiper.slideTo(index, 0);*/
 				this.pageShow(index);
 				//请求对应种类的数据,没有加载过的话加载数据,已经加载过不再加载。
 				if (!this.products[index]) {
-					this.getPageIndex(index);		
+					this.getDataPageIndex(index);		
 				}
 			},
 			//对应内容显示
-			pageShow: function (index) {
+			pageShow(index) {
 				this.tabIndex=index;
 				//对应的内容显示
 				this.pageSwiper.slideTo(index, 0);
 			},
 			//导航移动
-			slideMove: function (index,navSlideWidth) {
+			slideMove(index,navSlideWidth) {
 				var navSwiper=this.navSwiper,
 				clientWidth=this.clientWidth;
 				var navActiveSlideLeft=navSwiper.slides[index].offsetLeft;
@@ -422,14 +450,14 @@
 				this.pageShow(index);
 			},
 	        //分类切换显示状态
-	        showClassify: function () {
+	        showClassify() {
 	        	this.classifyState=true;
 	        },
-	        closeClassify: function () {
+	        closeClassify() {
 	        	this.classifyState=false;
 	        },
 	        //导航移动、导航对应的page显示
-	        tabMove: function (index) {
+	        tabMove(index) {
 	        	this.tabClick(index);
 	        }
 	        	
@@ -503,7 +531,6 @@
 			bottom: 0;
 			z-index: 2;
 			.bg(40px,40px,#fff,'~images/icon/ellipsis.png',1.375rem);
-		    /*z-index: 15;*/
 		}
 	}
 	
@@ -525,9 +552,8 @@
 	}
 	.slidescroll {
 		height:auto;
-		// padding-bottom: 53px; 
 	}
-	/*票*/
+	// 票
 	.ticket-item{
 		padding: 9px 2%;
 		box-sizing: border-box;

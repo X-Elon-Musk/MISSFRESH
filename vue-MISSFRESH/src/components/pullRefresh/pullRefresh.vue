@@ -33,7 +33,7 @@
 		},
 		methods: {
 			//下拉刷新、上滑加载初始化函数
-			refresh: function () {
+			refresh() {
 				var _this=this;
 				this.pullRefresh= new Swiper('.scroll',{
 					slidesOffsetBefore: 0,
@@ -58,7 +58,7 @@
 			    });		
 			},
 			// 下拉刷新、上滑加载动作触摸释放时执行
-			touchEnd: function () {
+			touchEnd() {
 				var _this=this;
 				//console.log(this.translate,this.startPosition);
 				if (this.translate<this.startPosition) {
@@ -86,7 +86,8 @@
 	}
 </script>
 <style lang="less">
-	/*上滑加载、下拉刷新*/
+	@import '~src/style/mixin';
+	// 上滑加载、下拉刷新
 	.swiper-container.pull-refresh{
 		// position: absolute;
 		// left: 0;
@@ -94,8 +95,7 @@
 		// bottom: 0;
 		overflow: visible;
 		margin-bottom: 53px;
-		width: 100%;
-		height: 100%;
+		.wh(100%);
 		.list-group-item{    
 			position: relative; 
 			display: block;

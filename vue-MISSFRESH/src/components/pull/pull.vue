@@ -23,8 +23,8 @@
 			})
 		},
 		methods: {
-			swiperPull: function () {
-				var _this=this;
+			swiperPull() {
+				let _this=this;
 				this.pull= new Swiper('.pull',{
 					slidesOffsetBefore: 0,
 					direction: 'vertical',
@@ -49,10 +49,10 @@
 	}
 </script>
 <style lang="less">
+	@import '~src/style/mixin';
 	.pull{
 		overflow: visible;
-		width: 100%;
-		height: 100%;
+		.wh(100%);
 		.swiper-slide{
 			height: auto;
 			.swiper-scrollbar{

@@ -1,6 +1,6 @@
 <template>
     <div class="profile-item-page feedback">
-    	<mheader></mheader>	
+    	<mheader :title="意见反馈"></mheader>	
         <div class="feedback-form">
         	<textarea class="feedback-text" placeholder="请写下您的意见或建议"></textarea>
         	<p class="tip">每一条反馈小鲜都会认真对待。我们将定期选出优秀反馈意见，发送积分奖励哦~</p>
@@ -41,18 +41,13 @@
 			    box-sizing: border-box;
 			}
 			.tip{
-				color: initial;
-				font-size: 0.8em;
-				line-height: 1.6em;
+				.font(1.6em,0.8em,initial);
 				padding-bottom: 1em;
 			}
 			.submit-btn{
-			    width: 100%;
-			    height: 44px;
-			    font-size: 16px;
-			    line-height: 44px;
+			    .wh(44px);
 			    text-align: center;
-			    color: #fff;
+			    .font(44px,16px,#fff);
 			    background: #ff4891;
 			}
 		}

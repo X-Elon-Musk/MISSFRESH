@@ -3,12 +3,14 @@
     	<div class="list-item" v-for="(item, index) in citylist" :key="index">
     		<h4 class="area-list">{{item.name}}</h4>
     		<span class="area-city" v-for="(city, city_index) in item.areas" :key="city_index" @click="changeCurrentRegion(city)">{{city.name}}</span>
+    		<!-- <router-link :to="{path: '/ug/addressChose'}" tag="span" v-for="(city, city_index) in item.areas" :key="city_index" @click="changeCurrentRegion(city)" class="area-city">{{city.name}}</router-link> -->
     	</div>
     	<div class="area-tip">我们将为更多城市提供优质服务，敬请期待</div>
     </div>  
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
+	import {getCityListAxios} from 'src/service/getData'
 	export default{
 		data(){
 			return {
@@ -27,18 +29,13 @@
         },
 		methods: {
 			...mapMutations([
-                'SET_POSITION'
+                'SET_POSITION', 'SET_VIEWTYPE'
             ]),
             //获得城市列表
 			getCityList(){
-				var _this=this;
-				this.axios.get('http://localhost:3390/position/list')
-				.then(function (response) {
-					_this.citylist=_this.citylist.concat(response.data);
+				getCityListAxios().then(response=>{
+					this.citylist=response;
 				})
-				.catch(function (error) {
-				  	console.log(error);
-				});
 			},
 			//改变当前城市信息
 			changeCurrentRegion(city){
@@ -48,12 +45,16 @@
 					province: city.province||'',
 					district: city.district||''
 				};
-				console.log(chosecity);
 				this.SET_POSITION({
 					type: 0,
 					city: chosecity
 				});
-				this.$router.push('/ug/addressChose');
+				this.SET_VIEWTYPE({
+					is_chrome_city: city.is_chrome_city,
+					ordering: city.ordering
+				});
+				// this.$router.push('/ug/addressChose');
+				this.$router.replace('/ug/addressChose');
 			}
 		}
 	}

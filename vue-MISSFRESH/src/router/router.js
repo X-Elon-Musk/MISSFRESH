@@ -6,21 +6,27 @@ const safeDetection = r => require.ensure([], () => r(require('../page/ug/childr
 const addressChose = r => require.ensure([], () => r(require('../page/ug/children/addressChose')), 'addressChose')
 const locationSearch = r => require.ensure([], () => r(require('../page/ug/children/locationSearch')), 'locationSearch')
 const cityList = r => require.ensure([], () => r(require('../page/ug/children/cityList')), 'cityList')
+const search = r => require.ensure([], () => r(require('../page/ug/children/search')), 'search')
 const city = r => require.ensure([], () => r(require('../page/city/city')), 'city')
 const member = r => require.ensure([], () => r(require('../page/member/member')), 'member')
 const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'cart')
 const cartDetail = r => require.ensure([], () => r(require('../page/cart/children/cartDetail')), 'cartDetail')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const safe = r => require.ensure([], () => r(require('../page/profile/children/safe')), 'safe')
+const address = r => require.ensure([], () => r(require('../page/profile/children/address')), 'address')
+const picker = r => require.ensure([], () => r(require('../page/profile/children/picker')), 'picker')
+// const addressNew = r => require.ensure([], () => r(require('../page/profile/children/addressNew')), 'addressNew')
+// const addressDelivery = r => require.ensure([], () => r(require('../page/profile/children/addressDelivery')), 'addressDelivery')
+const phone = r => require.ensure([], () => r(require('../page/profile/children/phone')), 'phone')
 const feedback = r => require.ensure([], () => r(require('../page/profile/children/feedback')), 'feedback')
 const about_us = r => require.ensure([], () => r(require('../page/profile/children/about_us')), 'about_us')
-const frontend = r => require.ensure([], () => r(require('../page/profile/children/frontend')), 'frontend')
-const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
-const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
-const setusername = r => require.ensure([], () => r(require('../page/profile/children/children/setusername')), 'setusername')
-const address = r => require.ensure([], () => r(require('../page/profile/children/children/address')), 'address')
-const add = r => require.ensure([], () => r(require('../page/profile/children/children/children/add')), 'add')
-const addDetail = r => require.ensure([], () => r(require('../page/profile/children/children/children/children/addDetail')), 'addDetail')
+const setting = r => require.ensure([], () => r(require('../page/profile/children/setting')), 'setting')
+// const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
+// const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
+// const setusername = r => require.ensure([], () => r(require('../page/profile/children/children/setusername')), 'setusername')
+// const address = r => require.ensure([], () => r(require('../page/profile/children/children/address')), 'address')
+// const add = r => require.ensure([], () => r(require('../page/profile/children/children/children/add')), 'add')
+// const addDetail = r => require.ensure([], () => r(require('../page/profile/children/children/children/children/addDetail')), 'addDetail')
 
 
 
@@ -44,6 +50,8 @@ export default [{
 		{
 			path: '/ug',
 			component: ug,
+            // meta: {keepAlive: true},
+            meta: {keepAlive: false},
             children: [{
                 path: 'productDetail', //商品详情页
                 component: productDetail,
@@ -59,6 +67,9 @@ export default [{
             },{
                 path: 'cityList',
                 component: cityList//城市列表
+            },{
+                path: 'search',
+                component: search//商品搜索页
             }]
 		},
         {
@@ -92,6 +103,26 @@ export default [{
             children: [{
                     path: 'safe',//账户与安全
                     component: safe,
+                },
+                {
+                    path: 'address',//我的地址
+                    component: address,
+                },
+                {
+                    path: 'picker',//我的地址
+                    component: picker,
+                },
+                /*{
+                    path: 'addressNew',//新增收货地址
+                    component: addressNew,
+                },
+                {
+                    path: 'addressDelivery',//收货地址
+                    component: addressDelivery,
+                },*/
+                {
+                    path: 'phone',//绑定手机
+                    component: phone,
                 },{
                     path: 'feedback',//意见反馈
                     component: feedback,
@@ -99,9 +130,11 @@ export default [{
                     path: 'about_us',//关于我们
                     component: about_us,
                 },{
-                    path: 'frontend',//设置
-                    component: frontend,
-                },{
+                    path: 'setting',//设置
+                    component: setting,
+                },
+
+                /*{
                     path: 'info', //个人信息详情页
                     component: info,
                     children: [{
@@ -122,7 +155,8 @@ export default [{
                 },{
                     path: 'service', //服务中心
                     component: service,
-                }]
+                }*/
+                ]
         },
         {
             path: '/loading',

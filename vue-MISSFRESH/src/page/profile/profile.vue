@@ -2,7 +2,16 @@
 	<div class="my-center">
 		<div class="my-center-content">
 			<div class="sign-in">
-				<span>用户登录</span>
+				<router-link :to="{path: '/profile/phone'}" v-show="!s_login" class="login-button" tag="span">用户登录</router-link>
+				<div class="home-header-user" v-show="s_login">
+					<div class="home-head-user-icon">
+						<img :src="s_userInfo.portrait" alt="" class="home-head">
+					</div>
+					<div class="home-des-detail">
+						<span class="home-name">{{s_userInfo.nick_name}}</span>
+						<!-- <img src="https://j-image.missfresh.cn/img_20171028220456485.png" alt="" class="home-img"> -->
+					</div>
+				</div>
 			</div>
 			<ul class="wallet">
 				<li>
@@ -58,6 +67,10 @@
 	</div>
 </template>
 <script>
+	import {mapState, mapMutations} from 'vuex'
+	import {getStore} from 'config/mUtils'
+	import {getUserAxios} from 'src/service/getData'
+
 	import mfooter from 'src/components/mfooter/mfooter'
 	import icons from 'src/components/icons/icons'
 	import profileItem from './component/profileItem'
@@ -74,7 +87,7 @@
 		  				text: '我的订单'
 		  			},
 		  			{
-		  				to: '/',
+		  				to: '/profile/address',
 		  				text: '我的地址'
 		  			},
 		  			{
@@ -98,7 +111,7 @@
 		  				text: '关于我们'
 		  			},
 		  			{
-		  				to: '/profile/frontend',
+		  				to: '/profile/setting',
 		  				text: '设置'
 		  			}
 		  		],
@@ -126,6 +139,42 @@
 				]
 			}
 		},
+		computed: {
+            ...mapState([
+                's_userInfo', 's_login'
+            ]),
+        },
+        mounted (){
+			this.$nextTick(() => {
+				this.getUser();
+				/*
+				//第二种写法
+				getUserAxios().then(response=>{
+					if (response.code==0) {
+						console.log(typeof response);
+						console.log(response);
+						this.SET_USERINFO({
+							info: {...response}
+						})
+					}
+				})*/
+				
+			})
+		},
+        methods: {
+			...mapMutations([
+           		'SET_USERINFO'
+            ]),
+			//获取用户信息
+			async getUser(){
+				let response=await getUserAxios();
+				if (response.code==0) {
+					this.SET_USERINFO({
+						info: {...response}
+					})
+				}
+			},
+		},
 		components:{
 	        mfooter,
 	        icons,
@@ -136,11 +185,7 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.my-center{
-		position: fixed;
-		left: 0;
-		top: 0;
-		bottom: 0;
-		right: 0;
+		.fullscreen();
 		overflow-y: scroll;
 		.my-center-content{
 			padding-bottom: 47px;
@@ -149,21 +194,56 @@
 				text-align: center;
 				padding-top: 17px;
 				box-sizing: border-box;
-				span{
+				.login-button{
 					display: inline-block;
 					margin-top: 36px;
 					background: 0 0;
 					min-width: 83px;
 					min-height: 36px;
-					line-height: 36px;
-					font-size: 14px;
-					color: #ff4891;
+					.font(36px,14px,#ff4891);
 					text-align: center;
 					border: 1px solid #ff4891;
 					border-radius: 4px;
 					position: relative;
 					padding: 0 12px;
 					box-sizing: border-box;
+				}
+				.home-header-user{
+					padding-top: 20px;
+					padding-left: 4%; 
+					.wh(100%);
+					box-sizing: border-box;
+					text-align: left;
+					.home-head-user-icon{
+						display: inline-block;
+						vertical-align: middle;
+							.wh(100%,auto);
+						.home-head{
+							.wh(100%,auto);
+							border-radius: 100%;
+							overflow: hidden;
+						}
+					}
+					.home-des-detail{
+						display: inline-block;
+						vertical-align: middle;
+						.home-name{
+							display: inline-block;
+							max-width: 100px;
+							font-size: 16px;
+							color: #474245;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+							vertical-align: middle;
+						}
+						/* .home-img{
+							margin-left: 6px;
+							min-width: 50px;
+							height: 15px;
+							vertical-align: middle;
+						} */
+					}
 				}
 			}
 			.wallet{
@@ -180,9 +260,7 @@
 						display: block;
 						text-align: center;
 						display: block;
-		    			color: #4d4d4d;
-		    			font-size: 12px;
-		    			line-height: 2;
+		    			.font(2,12px,#4d4d4d);
 		    			i{
 		    				font-size: 18px;
 		    			}
@@ -195,27 +273,19 @@
 				padding-right: 10px;
 				padding-top: 15px;
 				background-color: #fff;
-		    	// height: 30px;
 		    	box-sizing: border-box;
-		    	// height: 45px;
 		    	span{
 		    		&:nth-of-type(1){
-		    			line-height: 30px;
-		    			font-size: 20px;
-		    			color: #474245;
+		    			.font(30px,20px,#474245);
 		    		}
 		    	}
 		    	.open-membership{
 		    		float: right;
-		    		line-height: 30px;
-		    		color: #969696;
-		    		font-size: 12px;
+		    		.font(30px,12px,#969696);
 		    	}
 			}
 			.rights-detail{
-				font-size: 12px;
-				color: #969696;
-				line-height: 18px;
+				.font(18px,12px,#969696);
 				padding-left: 15px;
 				padding-bottom: 20px;
 				span{
@@ -237,6 +307,8 @@
 		.profile-item-page{
 			.fullscreen(3);
 			background: #fff;
+			padding-top: 42px;
+			box-sizing: border-box;
 		}
 		
 	}

@@ -15,14 +15,12 @@ export default class CityList extends MissMysql{
 		await this.cityAnalysis(10, '华北');
 		await this.cityAnalysis(9, '华南');
 		await this.cityAnalysis(8, '华东');
-		
-    	// return cityList;
     	res.send(this.cityList);
 	}
 	//分析城市信息
 	async cityAnalysis(area_ordering,name){
 		let city_list={};
-		let cities=await this.missMysql('areas', {}, {
+		let cities=await this.missSelectMysql('areas', {}, {
 			area_ordering: area_ordering
 		}, {
 			ordering: 'ordering'
@@ -35,7 +33,6 @@ export default class CityList extends MissMysql{
 			}			
 		}
 		this.cityList.push(city_list);
-		// return this.cityList;
 	}
 }
 

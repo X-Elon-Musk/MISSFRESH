@@ -1,28 +1,33 @@
-# vue-missfresh
+### 前言
+本项目想法来源于官网移动端，用vue最大限度的还原官网。
+### 技术栈
+vue2 + vuex + vue-router + webpack + ES6/7 + axios + less
+### 项目运行
+```
+git clone https://github.com/792884274/node-note.git
 
-> A Vue.js project
+cd vue-MISSFRESH
 
-## Build Setup
-
-``` bash
-# install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 项目完成功能
+定位功能
+城市选择
+地点检索
+商品列表
+商品详情
+商品搜索
+添加购物车
+商品结算
+手机号短信登录
+地址添加
+地址删除
+地址修改
 
-
-***
-#### 问题解决:
+### 问题解决:
 
 - 跨域解决方法：jsonp只能解决get请求的跨域，xmlhttprequest可以实现post跨域
 - backgroundImage中url的使用
@@ -31,27 +36,33 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
     方法二：用require方法将图片作为模块加载进去
     方法三：`<img src="~src/images/fresh-news/0.jpg">`
 - mint-ui的引入
+```
+按需引入
+import { Picker } from 'mint-ui';
+import 'mint-ui/lib/style.css';
+Vue.component(Picker.name, Picker); 
+```
 - swiper的使用
 - @impot引入less问题
 
-    ```
-    <style lang='less' scoped rel="stylesheet/less">
-        @import 'src/style/mixin'(报错)
-        @import 'src/style/mixin';(报错)
-        @import '~src/style/mixin';(正确)
-    </style>
-    ```
+```
+<style lang='less' scoped rel="stylesheet/less">
+    @import 'src/style/mixin'(报错)
+    @import 'src/style/mixin';(报错)
+    @import '~src/style/mixin';(正确)
+</style>
+```
 
 -报错：`Cannot use v-for on stateful component root element because it renders multiple elements.`
- 原因：
-
-    ```
-        <template>
-            <div class="product" v-for="product in products">
-            ···
-            </div> 
-        </template>
-    ```
+原因：
+```
+不能在最外层遍历数组数据
+<template>
+    <div class="product" v-for="product in products">
+    ···
+    </div> 
+</template>
+```
 - vue无法进行超过三层的数据传递
 ```
 <p :price="product.vip_price_pro.price_up.price"></p>   //报错
