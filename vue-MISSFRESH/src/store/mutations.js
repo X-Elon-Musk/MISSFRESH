@@ -1,7 +1,7 @@
 import {setStore, getStore, removeStore} from '../config/mUtils'
 
 export default {
-	//添加购物车
+	// 添加购物车
 	ADD_CART: (state,{id,image,name,product_tags,price_up,price_down})=>{
 		let cart = state.s_cartList;
 		if (cart[id]) {
@@ -21,17 +21,17 @@ export default {
 					"price": price_down
 				},
 				"total_price": price_down,
-				//状态，是否选中
+				// 状态，是否选中
 				"status": true
 			}
 		}
 		state.s_cartList = {...cart};
-		//存入localStorage
+		// 存入localStorage
 		setStore('buyCart', state.s_cartList);
-		// console.log(this);
+		//  console.log(this);
 		this.a.SET_CARTNUMBER(state,state.s_cartList);
 	},
-	//减少购物车
+	// 减少购物车
 	REDUCE_CART: (state,{id})=>{
 		let cart = state.s_cartList;
 		if (cart[id]) {
@@ -47,7 +47,17 @@ export default {
 			}
 		}
 	},
-	//设置单个商品在购物车中状态，是否被选中
+	// 删除购物车中单个商品
+	DELETE_CART: (state,{id})=>{
+		let cart = state.s_cartList;
+		if (cart[id]) {
+			delete cart[id];
+			state.s_cartList = {...cart};
+			setStore('buyCart', state.s_cartList);	
+			this.a.SET_CARTNUMBER(state,state.s_cartList);
+		}
+	},
+	// 设置单个商品在购物车中状态，是否被选中
 	SET_STATUS: (state,{id})=>{
 		let cart=state.s_cartList;
 		if (cart[id]) {
@@ -56,7 +66,7 @@ export default {
 			setStore('buyCart', state.s_cartList);	
 		}
 	},
-	//设置购物车商品总数量
+	// 设置购物车商品总数量
 	SET_CARTNUMBER: (state,cartList)=>{
 		let num = 0;
 		Object.values(cartList).forEach((item,index) => {
@@ -65,12 +75,12 @@ export default {
 	    state.s_cartCount = num;
 		setStore('cartCount', state.s_cartCount);
 	},
-	//设置提示内容的状态
+	// 设置提示内容的状态
 	SET_MPROMPT: (state,{status})=>{
 		state.s_mpromptStatus = status;
 		setStore('s_mpromptStatus', state.s_mpromptStatus);	
 	},
-	//设置城市信息，存入store和localStorage
+	// 设置城市信息，存入store和localStorage
 	SET_POSITION: (state,{type, city={}, building={}, location={}, position={}, station={}})=>{
 		let region = state.s_choseRegion;
 
@@ -129,25 +139,25 @@ export default {
 		state.s_choseCity = currentcity;
 		state.s_choseAddress = choseaddress;
 
-		//存入localStorage
+		// 存入localStorage
 		setStore('choseRegion', state.s_choseRegion);
 		setStore('currentCity', state.s_currentCity);
 		setStore('choseCity', state.s_choseCity);
 		setStore('choseAddress', state.s_choseAddress);
 	},
-	//设置选择的城市
+	// 设置选择的城市
 	SET_CHOSECITY: (state,{choseCity})=>{
 		state.s_choseCity = choseCity;
 		setStore('choseCity', choseCity);	
 	},
-	//设置当前城市
+	// 设置当前城市
 	SET_CURRENTCITY: (state,{currentCity})=>{
 		state.s_currentCity = currentCity;
 		setStore('currentCity', currentCity);	
 	},
-	//设置配送的类型
+	// 设置配送的类型
 	SET_VIEWTYPE: (state,{is_chrome_city, ordering})=>{
-		//配送方式
+		// 配送方式
 		if (state.s_choseCity===state.s_choseAddress) {
 			is_chrome_city == 1 && ordering > 90 ? state.s_viewType = 1 : state.s_viewType = 2;	
 		} else{
@@ -155,7 +165,7 @@ export default {
 		}
 
 	},
-	//设置用户信息和登录情况
+	// 设置用户信息和登录情况
 	SET_USERINFO: (state,{info})=>{
 		// state.s_userInfo=info;
 		state.s_userInfo={...info};
@@ -165,7 +175,7 @@ export default {
 		// setStore('accessToken', info.userId);
 		console.log(state);
 	},
-	//退出登录
+	// 退出登录
 	OUT_LOGIN: (state)=>{
 		state.s_userInfo={};
 		state.s_login=false;
@@ -174,12 +184,12 @@ export default {
 	},
 }
 
-// //设置购物车商品总数量
-// let	SET_CARTNUMBER=(state, {cartList})=>{
-// 	let num = 0;
-//     Object.values(cartList).forEach((item,index) => {
-//     	num += item.num;
-//     })
-//     state.s_cartCount = num;
-// 	setStore('cartCount', state.s_cartCount);
-// };
+/*//设置购物车商品总数量
+let	SET_CARTNUMBER=(state, {cartList})=>{
+	let num = 0;
+    Object.values(cartList).forEach((item,index) => {
+    	num += item.num;
+    })
+    state.s_cartCount = num;
+	setStore('cartCount', state.s_cartCount);
+};*/

@@ -98,7 +98,7 @@
     		<div class="f_r settlement-button">去结算</div>
 	    </div>
 	    <transition name="" mode="out-in">
-    		<mprompt1 promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="mpromptStatus(false)" v-on:confirmActionFunction="mpromptActionFunction(false)"></mprompt1>
+    		<mprompt1 promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="mpromptStatus(false)" v-on:confirmActionFunction="confirmActionFunction()"></mprompt1>
 		</transition>
 		<mfooter></mfooter>
 		<!-- <mprompt></mprompt> -->
@@ -142,7 +142,7 @@
 				],
 				settlement: 0,
 				cardMoney: 0,
-				mpromptShow: true,
+				mpromptShow: false,
 				deleteProductId: ''
 		  	}
 	  	},
@@ -161,7 +161,7 @@
 	    	...mapState([
                 's_cartList'
             ]),
-            //商品列表
+            // 商品列表
             products: function () {
             	var products=[];
 				// console.log(this.s_cartList);
@@ -181,7 +181,7 @@
                 })
                 return products;
             },
-           	//商品总价
+           	// 商品总价
             total_price: function () {
             	var total_price=0;
 				Object.values(this.s_cartList).forEach(item => {
@@ -192,7 +192,7 @@
                 // return parseFloat(total_price.toFixed(2));
                 return parseFloat(total_price);
             },
-            //是否选中购物车中所有商品
+            // 是否选中购物车中所有商品
             checkAll: function () {
             	if (this.products) {
 			    	for (var i=0;i<this.products.length;i++) {
@@ -205,22 +205,18 @@
 			    	return true;
 			    }
 			},
-			//邮费
+			// 运费
 			postage: function () {
 				return this.total_price>=69||this.total_price==0?"免邮":5;
 			},
-			//商品合计
+			// 商品合计
 			products_total_price: function () {
-				if (this.postage!=="免邮") {
-					return 	parseFloat(this.total_price-this.postage);	
-				} else{
-					return parseFloat(this.total_price);
-				}
+				return this.postage!=="免邮" ? parseFloat(this.total_price+this.postage) : parseFloat(this.total_price);
 			}
 	    },
 		methods: {
 			...mapMutations([
-                'SET_STATUS'
+                'SET_STATUS', 'DELETE_CART'
             ]),
             // 左滑商品，出现删除按钮
 			swiperDelete() {
@@ -241,8 +237,7 @@
 		    			},
 		    			reachEnd: function(){
 		    				console.log('最后一个');
-					      	// goBack();
-					      },
+				      	},
 					}
 				});		
 			},
@@ -391,10 +386,13 @@
 			mpromptStatus(status){
 				this.mpromptShow=status;
 			},
-			// 点击确定按钮，删除地址
-			async confirmActionFunction(){
-				/*let response=await deleteAddressAxios(this.defaultAddress.id);
-				if (response.code==0) this.addressActionComplete();*/
+			// 点击确定按钮，删除单个商品
+			confirmActionFunction(){
+				let id=this.deleteProductId;
+				this.DELETE_CART({id});
+				this.mpromptStatus(false);
+				this.swiperDelete();
+				this.swiperReachEnd();
 			},
 		},
 		components:{

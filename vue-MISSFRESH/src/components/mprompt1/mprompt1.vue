@@ -39,7 +39,7 @@
 <style lang="less">
 	@import '~src/style/mixin';
 	.mprompt{
-		.fullscreen(3);
+		.fullscreen(5);
 		background: rgba(0,0,0,0.7);
 		.mprompt-content{
 			border-radius: 15px;
