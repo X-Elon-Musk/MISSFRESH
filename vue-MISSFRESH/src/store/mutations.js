@@ -1,6 +1,11 @@
 import {setStore, getStore, removeStore} from '../config/mUtils'
 
 export default {
+	// 初始数据
+	INIT_CARTLIST: (state)=>{
+		let cartList=JSON.parse(getStore('cartList'));
+		if (cartList) state.s_cartList={...cartList};
+	},
 	// 添加购物车
 	ADD_CART: (state,{id,image,name,product_tags,price_up,price_down})=>{
 		let cart = state.s_cartList;
@@ -27,20 +32,27 @@ export default {
 		}
 		state.s_cartList = {...cart};
 		// 存入localStorage
-		setStore('buyCart', state.s_cartList);
+		setStore('cartList', state.s_cartList);
 		//  console.log(this);
 		this.a.SET_CARTNUMBER(state,state.s_cartList);
 	},
 	// 减少购物车
 	REDUCE_CART: (state,{id})=>{
+		state.s_cartList={...JSON.parse(getStore('cartList'))};
+
 		let cart = state.s_cartList;
 		if (cart[id]) {
 			if (cart[id]['num']>0) {
+				
+				if (cart[id]['num']==1&&state.s_mpromptExist) {
+					console.log('删除');
+					state.s_mpromptStatus=true;	
+					return;
+				}
 				cart[id]['num']--;
-				if (cart[id]['num']==0) state.s_mpromptStatus=true;	
 				cart[id]['total_price']=cart[id]['num']*parseFloat(cart[id]['price_down']['price']);	
 				state.s_cartList = {...cart};
-				setStore('buyCart', state.s_cartList);	
+				setStore('cartList', state.s_cartList);	
 				this.a.SET_CARTNUMBER(state,state.s_cartList);
 			} else{
 				cart[id]=null;
@@ -53,7 +65,7 @@ export default {
 		if (cart[id]) {
 			delete cart[id];
 			state.s_cartList = {...cart};
-			setStore('buyCart', state.s_cartList);	
+			setStore('cartList', state.s_cartList);	
 			this.a.SET_CARTNUMBER(state,state.s_cartList);
 		}
 	},
@@ -63,7 +75,7 @@ export default {
 		if (cart[id]) {
 			cart[id]['status']=!cart[id]['status'];	
 			state.s_cartList = {...cart};
-			setStore('buyCart', state.s_cartList);	
+			setStore('cartList', state.s_cartList);	
 		}
 	},
 	// 设置购物车商品总数量
@@ -74,6 +86,11 @@ export default {
 	    })
 	    state.s_cartCount = num;
 		setStore('cartCount', state.s_cartCount);
+	},
+	// 设置是否显示提示内容
+	SET_MPROMPTEXIST: (state,{status})=>{
+		state.s_mpromptExist = status;
+		setStore('s_mpromptExist', state.s_mpromptExist);	
 	},
 	// 设置提示内容的状态
 	SET_MPROMPT: (state,{status})=>{

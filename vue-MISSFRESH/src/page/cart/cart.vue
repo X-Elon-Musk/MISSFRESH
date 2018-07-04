@@ -24,7 +24,7 @@
 						<div class="swiper-wrapper">
 							<div class="swiper-slide swiper-content">
 								<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
-								<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true"></product>
+								<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true" v-on:callbackFunction="setDeleteProductId"></product>
 							</div>
 					        <div class="swiper-slide swiper-delete" @click="productDelete(item.id)"><span>删除</span></div>
 					    </div>	
@@ -98,7 +98,7 @@
     		<div class="f_r settlement-button">去结算</div>
 	    </div>
 	    <transition name="" mode="out-in">
-    		<mprompt1 promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="mpromptStatus(false)" v-on:confirmActionFunction="confirmActionFunction()"></mprompt1>
+    		<mprompt1 promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt1>
 		</transition>
 		<mfooter></mfooter>
 		<!-- <mprompt></mprompt> -->
@@ -106,8 +106,9 @@
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
-	import Swiper from 'swiper';
-    import 'swiper/dist/css/swiper.min.css';
+	import Swiper from 'swiper'
+    import 'swiper/dist/css/swiper.min.css'
+    import {getStore, isArray} from 'src/config/mUtils.js'
 	import pull from 'src/components/pull/pull'
 	import mfooter from 'src/components/mfooter/mfooter'
 	import product from 'src/components/product/product'
@@ -150,21 +151,28 @@
 	    	this.calculateTotal();
 	    },
 	    mounted: function () {
+	    	this.SET_MPROMPTEXIST({status: true});
+	    	this.INIT_CARTLIST();
 	    	this.$nextTick(() => {
 				if (!this.swiperdelete) {
 					this.swiperDelete();
 					this.swiperReachEnd();
 				}
 			})
+
 	    },
+	    watch: {
+			s_mpromptStatus: function () {
+				if (this.s_mpromptStatus) this.mpromptStatus(true);
+			}
+		},
 	    computed: {
 	    	...mapState([
-                's_cartList'
+                's_cartList', 's_mpromptStatus'
             ]),
             // 商品列表
             products: function () {
-            	var products=[];
-				// console.log(this.s_cartList);
+            	let products=[];
 				Object.values(this.s_cartList).forEach(item => {
                     products.push({
                     	"num": item.num,
@@ -183,7 +191,7 @@
             },
            	// 商品总价
             total_price: function () {
-            	var total_price=0;
+            	let total_price=0;
 				Object.values(this.s_cartList).forEach(item => {
                     if (item.status) {
                     	total_price+=item.total_price;	
@@ -195,7 +203,7 @@
             // 是否选中购物车中所有商品
             checkAll: function () {
             	if (this.products) {
-			    	for (var i=0;i<this.products.length;i++) {
+			    	for (let i=0;i<this.products.length;i++) {
 				    	if (!this.products[i].status) {
 				    		return false;
 				        }		
@@ -216,7 +224,7 @@
 	    },
 		methods: {
 			...mapMutations([
-                'SET_STATUS', 'DELETE_CART'
+                'SET_STATUS', 'DELETE_CART', 'INIT_CARTLIST', 'SET_MPROMPTEXIST', 'SET_MPROMPT'
             ]),
             // 左滑商品，出现删除按钮
 			swiperDelete() {
@@ -243,26 +251,39 @@
 			},
 			// 单个商品滑动后，“删除”按钮出现后，其他商品“删除”按钮消失
 			swiperReachEnd(){
-				let _this=this;
-				this.swiperdelete.forEach(function (item,index,array) {
-					item.on('reachEnd', function (e) {
-						for (var i=0;i<_this.swiperdelete.length;i++) {
-							if (i!==index) _this.swiperdelete[i].slideTo(0, 400, false);	
-						}
-					})
-				})
+				// let _this=this;
+				if (isArray(this.swiperdelete)) {
+					/*this.swiperdelete.forEach(function (item,index,array) {
+						item.on('reachEnd', function (e) {
+							for (let i=0;i<_this.swiperdelete.length;i++) {
+								if (i!==index) _this.swiperdelete[i].slideTo(0, 400, false);	
+							}
+						})
+					})*/	
+					this.swiperdelete.forEach((item,index,array)=> {
+						item.on('reachEnd', (e)=> {
+							for (let i=0;i<this.swiperdelete.length;i++) {
+								if (i!==index) this.swiperdelete[i].slideTo(0, 400, false);	
+							}
+						})
+					})			
+				}
 			},
 			// 点击“删除”按钮后删除商品
 			productDelete(deleteProductId) {
 				this.mpromptStatus(true);
 				this.deleteProductId=deleteProductId;
 			},
+			// 设定删除产品的id
+			setDeleteProductId(id){
+				this.deleteProductId=id;
+			},
 			// mpromptAction: function () {
 			// 	this.mprompt=true;
 			// },
 			/*//初始化数据
 			async initData(){
-				var products=[];
+				let products=[];
 				// console.log(this.s_cartList);
 				Object.values(this.s_cartList).forEach(item => {
                     products.push({
@@ -281,7 +302,7 @@
 			},*/
 			//商品总价计算
 		    calculateTotal(){
-		     //  	var all=0;
+		     //  	let all=0;
 		     //  	this.products.forEach(function (item) {
 			    //     if (item.checked) {
 			    //       all+=item.price*item.number; 
@@ -292,7 +313,7 @@
 		    },
 		    //商品实付计算
 		    actuallyPaid(){
-		    	/*var all=0;
+		    	/*let all=0;
 		      	this.products.forEach(function (item) {
 			        if (item.benefit.orNot) {
 			          all+=item.benefit.text; 
@@ -350,7 +371,7 @@
 		    checkedAll(){
 			    // this.checkAll=!this.checkAll;
 			    // if (this.checkAll) {
-			    //     var total=0;
+			    //     let total=0;
 			    //     this.products.forEach(function (item) {
 			    //       	item.checked=true;
 			    //       	total+=item.price*item.number; 
@@ -368,7 +389,7 @@
 		    },
 		    //会员卡选择
 		    cardCheck(card){
-		    	var state=card.checked;
+		    	let state=card.checked;
 		    	this.cards.forEach(function (item) {
 			        item.checked=false;  
 			    }) 
@@ -386,11 +407,18 @@
 			mpromptStatus(status){
 				this.mpromptShow=status;
 			},
-			// 点击确定按钮，删除单个商品
+			// 点击“取消”按钮
+			cancelActionFunction(){
+				this.mpromptStatus(false);
+				this.SET_MPROMPT({status: false});	
+			},
+			// 点击“确定”按钮，删除单个商品
 			confirmActionFunction(){
 				let id=this.deleteProductId;
 				this.DELETE_CART({id});
-				this.mpromptStatus(false);
+				/*this.SET_MPROMPT({status: false});	
+				this.mpromptStatus(false);*/
+				this.cancelActionFunction();
 				this.swiperDelete();
 				this.swiperReachEnd();
 			},

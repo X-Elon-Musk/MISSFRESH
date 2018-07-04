@@ -44,7 +44,7 @@
 			}
 		},
 		mounted: function () {
-
+			this.INIT_CARTLIST();
 		},
 		computed: {
 			...mapState([
@@ -52,25 +52,26 @@
             ]),
             //shopCart变化的时候重新计算当前商品的数量
             productNum: function (){
-            	let s_cartList=this.s_cartList, buyCart=JSON.parse(getStore('buyCart'));
-                if (s_cartList&&s_cartList[this.product.id]) {
+
+                let s_cartList=this.s_cartList;
+                /*if (s_cartList&&s_cartList[this.product.id]) {
                     return s_cartList[this.product.id]['num'];
-                } else if (buyCart&&buyCart[this.product.id]) {
-                    return buyCart[this.product.id]['num'];
                 } else {
                     return 0;
-                }
+                }*/
+                return s_cartList&&s_cartList[this.product.id] ? s_cartList[this.product.id]['num'] : 0;
             },
 		},
 		methods: {
 			...mapMutations([
-                'ADD_CART','REDUCE_CART','SET_MPROMPT'
+                'ADD_CART','REDUCE_CART','SET_MPROMPT', 'INIT_CARTLIST'
             ]),
             minusOutCart(id,event) {
 				this.REDUCE_CART({id});
-				if (this.mpromptExist&&this.s_mpromptStatus) {
+				/*if (this.mpromptExist&&this.s_mpromptStatus) {
 					this.SET_MPROMPT({status: true});			
-				}
+				}*/
+				this.$emit("callbackFunction", id);
 			},
 			addToCart(id,image,name,product_tags,price_up,price_down,event) {
 				this.ADD_CART({id,image,name,product_tags,price_up,price_down});

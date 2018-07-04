@@ -55,6 +55,10 @@
         methods: {
 			// 收货地址列表
 			getAddressList: function () {
+				/*console.log('++++++++++++++');
+				console.log('++++++++++++++');
+				console.log(this.s_userInfo);
+				console.log('++++++++++++++');*/
 				let userId=getStore('userId');
 				getAddressListAxios(this.s_userInfo.userId||userId).then(response=>{
 					this.addressList=response;
