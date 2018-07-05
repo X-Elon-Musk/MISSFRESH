@@ -1,7 +1,7 @@
 import {setStore, getStore, removeStore} from '../config/mUtils'
 
 export default {
-	// 初始数据
+	// 初始购物车数据
 	INIT_CARTLIST: (state)=>{
 		let cartList=JSON.parse(getStore('cartList'));
 		if (cartList) state.s_cartList={...cartList};
@@ -96,6 +96,11 @@ export default {
 	SET_MPROMPT: (state,{status})=>{
 		state.s_mpromptStatus = status;
 		setStore('s_mpromptStatus', state.s_mpromptStatus);	
+	},
+	// 初始购物车数据
+	INIT_CHOSEADDRESS: (state)=>{
+		let choseAddress=getStore('choseAddress');
+		if (choseAddress) state.s_choseAddress=choseAddress;
 	},
 	// 设置城市信息，存入store和localStorage
 	SET_POSITION: (state,{type, city={}, building={}, location={}, position={}, station={}})=>{

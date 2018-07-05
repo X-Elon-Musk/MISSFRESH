@@ -44,7 +44,7 @@
 		</transition>
 		
 		<transition name="" mode="out-in">
-    		<mprompt1 promptTitle="提示" promptText="确认删除此收货地址信息么!" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="mpromptStatus(false)" v-on:confirmActionFunction="confirmActionFunction"></mprompt1>
+    		<mprompt promptTitle="提示" promptText="确认删除此收货地址信息么!" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="mpromptStatus(false)" v-on:confirmActionFunction="confirmActionFunction"></mprompt>
 		</transition>
     </div>  
 </template>
@@ -54,7 +54,7 @@
 	import {addAddressAxios,deleteAddressAxios,updateAddressAxios} from 'src/service/getData'
 
 	import mheader from 'src/components/mheader/mheader'
-	import mprompt1 from 'src/components/mprompt1/mprompt1'
+	import mprompt from 'src/components/mprompt/mprompt'
 	import toastWrap from 'src/components/toastWrap/toastWrap'
 	import addressDelivery from './addressDelivery'
 
@@ -208,7 +208,7 @@
 		components: {
 			mheader,
 			addressDelivery,
-			mprompt1,
+			mprompt,
 			toastWrap
 		}
 	}

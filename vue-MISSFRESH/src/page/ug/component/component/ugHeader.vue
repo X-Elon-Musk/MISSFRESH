@@ -1,53 +1,75 @@
 <template>
     <div class="clearfix ug-header">
-    	<!-- <div class="delivery-info" @click="goAddressChose"> -->
     	<router-link :to="{path: '/ug/addressChose'}" tag="div" class="delivery-info">
 	        <div class="delivery-time">
 	        	<img :src="view.img_url" alt="">
 	        </div>
 	        <div class="delivery-place">
-	        	{{choseAddress}}
+	        	{{s_choseAddress}}
 	        </div>
-	        <div class="short-tips" v-show="tips&&view.first_page_addr_text" @click.stop="closeTips">{{view.first_page_addr_text}}</div>
-        <!-- </div> -->
+	        <div class="short-tips" v-show="tips&&view.first_page_addr_text" @click.stop="closeTips(false)">{{view.first_page_addr_text}}</div>
         </router-link>
         <router-link :to="{path: '/ug/search'}" tag="div" class="f_r search-button"></router-link>
     </div>  
 </template>
 <script>
-	import {mapState} from 'vuex'
+	import {mapState, mapMutations} from 'vuex'
 	import {getStore} from 'src/config/mUtils.js'
+	import {getDataPositionAxios, getViewAxios} from 'src/service/getData'
 	export default{
 		data(){
 			return {
 				//提示信息显示
-				tips: true
+				tips: true,
+				// 配送的信息
+				view: {}
 			}
 		},
-		props: ['view'],
+		mounted: function () {
+	    	this.INIT_CHOSEADDRESS();
+	    	if (!getStore('choseAddress')) {
+				this.getDataPosition();			
+			}
+			this.getView();		
+	    },
+	    watch: {
+        	s_choseAddress: function () {
+    			this.getView();			
+        	}
+        },
         computed: {
 	    	...mapState([
-                's_choseAddress'
-            ]),
-            //选择的配送地址
-            choseAddress: function () {
-            	// return this.s_choseAddress ? this.s_choseAddress : '';
-            	if (this.s_choseAddress) {
-            		return this.s_choseAddress;			
-            	} else if(getStore('choseAddress')){
-            		return getStore('choseAddress');
-            	} else{
-            		return '';
-            	}
-            },
+                's_choseAddress', 's_viewType'
+            ])
         },
 		methods: {
-			closeTips() {
-				this.tips=false;
+			...mapMutations([
+                'INIT_CHOSEADDRESS', 'SET_POSITION'
+            ]),
+			closeTips(status) {
+				this.tips=status;
 			},
-			// goAddressChose: function () {
-			// 	this.$router.push('/ug/addressChose');
-			// }			
+			//获取当前地址
+			async getDataPosition() {
+				let response=await getDataPositionAxios();
+				let ad_info=response.ad_info
+				let chosecity={
+					id: ad_info.adcode,
+					name: ad_info.city,
+					province: ad_info.province,
+					district: ad_info.district
+				}
+				this.SET_POSITION({
+					type: 0,
+					city: chosecity
+				});
+			},
+			//获取配送的类型信息
+			getView() {
+				getViewAxios(this.s_viewType).then(response=>{
+					this.view=response;
+				})
+			}		
 		}
 	}
 </script>

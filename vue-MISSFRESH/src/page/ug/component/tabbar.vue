@@ -2,7 +2,8 @@
 	<div class="tabbar">
         <div id="top">
         	<!-- <div class="addr"></div> -->
-        	<ugHeader :view="view"></ugHeader>
+        	<!-- <ugHeader :view="view"></ugHeader> -->
+        	<ugHeader></ugHeader>
         	<div class="swiper-container tab-nav" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
         			<div class="swiper-slide" v-for="(item,index) in categorylist[0]" @click="tabClick(index,$event)" :class="{active:tabIndex==index}" :key="index" :style="{backgroundImage:item.category_image.indexOf('icon')>0?`url(${item.category_image})`:'none'}">
@@ -187,8 +188,8 @@
 	import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
     import qs from 'qs';
-    import {getDataPageIndexAxios, getDataPositionAxios, getViewAxios} from 'src/service/getData'
-    import {getStore} from 'src/config/mUtils.js'
+    import {getDataPageIndexAxios} from 'src/service/getData'
+    // import {getStore} from 'src/config/mUtils.js'
 
   	import ugHeader from './component/ugHeader'
     import classify from './component/classify'
@@ -234,16 +235,16 @@
 				maxLeft: 0,
 				//种类数据加载情况
 				product_index: {},
-				// 配送的信息
-				view: {}
+				/*// 配送的信息
+				view: {}*/
 			}
 		},
 		mounted (){
 			this.getDataPageIndex(0);
-			if (!getStore('choseAddress')) {
+			/*if (!getStore('choseAddress')) {
 				this.getDataPosition();			
 			}
-			this.getView();
+			this.getView();*/
 		},
 		activated(){
 			console.log(444444);
@@ -276,18 +277,18 @@
         watch: {
         	s_choseAddress: function () {
     			this.getDataPageIndex(0);
-				this.getView();			
+				// this.getView();			
         	}
         },
 		computed: {
 	    	...mapState([
-                's_viewType', 's_choseAddress'
+                's_choseAddress'
             ]),
         },
 		methods: {
-			...mapMutations([
+			/*...mapMutations([
                 'SET_POSITION'
-            ]),
+            ]),*/
 			//获取index数据
 			async getDataPageIndex(product_index) {
 				let response=await getDataPageIndexAxios(product_index);
@@ -307,7 +308,7 @@
 					if (!this.pageSwiper) this.page();
 				})
 			},
-			//获取当前地址
+			/*//获取当前地址
 			async getDataPosition(callback) {
 				let response=await getDataPositionAxios();
 				let ad_info=response.ad_info
@@ -321,63 +322,44 @@
 					type: 0,
 					city: chosecity
 				});
-				/*let _this=this;
-				this.axios.get('http://localhost:3390/position/location')
-				.then(function (response) {
-					let ad_info=response.data.ad_info
-					let chosecity={
-						id: ad_info.adcode,
-						name: ad_info.city,
-						province: ad_info.province,
-						district: ad_info.district
-					}
-					_this.SET_POSITION({
-						type: 0,
-						city: chosecity
-					});
-
-				})
-				.catch(function (error) {
-				  	console.log(error);
-				});*/	
 
 				
 
 
 				//post方法
-				/*this.axios.post('http://localhost:3390/position/locationsuggestion', {
-				    keyword:'知春路',
-					cityName:'北京'
-				}, {
-                    headers:{
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                })
-				.then(function (response) {
-				  	console.log(response.data);
-				})
-				.catch(function (error) {
-				  	console.log(error);
-				});	*/
+				// this.axios.post('http://localhost:3390/position/locationsuggestion', {
+				//     keyword:'知春路',
+				// 	cityName:'北京'
+				// }, {
+    //                 headers:{
+    //                     'Content-Type': 'application/x-www-form-urlencoded'
+    //                 }
+    //             })
+				// .then(function (response) {
+				//   	console.log(response.data);
+				// })
+				// .catch(function (error) {
+				//   	console.log(error);
+				// });	
 
 				//get方法
-				/*this.axios.get('http://localhost:3390/position/locationsearch',{params:{
-				    keyword:'知春路',
-					cityName:'北京'
-				}})
-				.then(function (response) {
-				  	console.log(response.data);
-				})
-				.catch(function (error) {
-				  	console.log(error);
-				});	*/	
-			},
-			//获取配送的类型信息
+				// this.axios.get('http://localhost:3390/position/locationsearch',{params:{
+				//     keyword:'知春路',
+				// 	cityName:'北京'
+				// }})
+				// .then(function (response) {
+				//   	console.log(response.data);
+				// })
+				// .catch(function (error) {
+				//   	console.log(error);
+				// });		
+			},*/
+			/*//获取配送的类型信息
 			getView() {
 				getViewAxios(this.s_viewType).then(response=>{
 					this.view=response;
 				})
-			},
+			},*/
 			//导航栏
 			tab() {
 				var _this=this;
@@ -477,7 +459,7 @@
 </script>
 <style lang="less">
 	@import '~src/style/mixin';
-	/*添加gif的pullRefresh组件的父级需要加‘gif-show’的ClassName*/
+	// 添加gif的pullRefresh组件的父级需要加‘gif-show’的ClassName
 	.gif-show{
 		margin-top: 34px;
 	}

@@ -99,10 +99,9 @@
     		<div class="f_r settlement-button">去结算</div>
 	    </div>
 	    <transition name="" mode="out-in">
-    		<mprompt1 promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt1>
+    		<mprompt promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt>
 		</transition>
 		<mfooter></mfooter>
-		<!-- <mprompt></mprompt> -->
 	</div>
 </template>
 <script>
@@ -113,8 +112,7 @@
 	import pull from 'src/components/pull/pull'
 	import mfooter from 'src/components/mfooter/mfooter'
 	import product from 'src/components/product/product'
-	// import mprompt from 'src/components/mprompt/mprompt'
-	import mprompt1 from 'src/components/mprompt1/mprompt1'
+	import mprompt from 'src/components/mprompt/mprompt'
 	export default{
 		data(){
 		  	return {
@@ -435,7 +433,7 @@
 			pull,
 	        mfooter,
 	        product,
-	        mprompt1
+	        mprompt
 	    },
 	}
 </script>

@@ -19,7 +19,7 @@
         </div>
         <toastWrap :toastWrap="toastText"></toastWrap>
         <transition name="" mode="out-in">
-    		<mprompt1 promptTitle="获取验证码" promptText="我们将以短信的形式告知您验证码, 请留意查收短信呦~" v-show="mpromptShow" :cancelShow="false" v-on:confirmActionFunction="mpromptActionFunction(false)"></mprompt1>
+    		<mprompt promptTitle="获取验证码" promptText="我们将以短信的形式告知您验证码, 请留意查收短信呦~" v-show="mpromptShow" :cancelShow="false" v-on:confirmActionFunction="mpromptActionFunction(false)"></mprompt>
 		</transition>
     </div>  
 </template>
@@ -29,7 +29,7 @@
 	import {teleCodeAxios, submitMessageAxios} from 'src/service/getData'
 
 	import mheader from 'src/components/mheader/mheader'
-	import mprompt1 from 'src/components/mprompt1/mprompt1'
+	import mprompt from 'src/components/mprompt/mprompt'
 	import toastWrap from 'src/components/toastWrap/toastWrap'
 	import profileItem from '../component/profileItem'
 	export default{
@@ -70,11 +70,6 @@
 	        		}			
 	        	}
 	        },
-	        /*//获取手机验证码
-	        async teleCode(){
-				let response=await teleCodeAxios(this.phone_number);
-				return response;
-	        },*/
 	        //短信登录
 	        async submitMessage(){
 	        	if (this.phone_number==''||!testTele(this.phone_number)) {
@@ -100,7 +95,7 @@
 		},
 		components: {
 			mheader,
-			mprompt1,
+			mprompt,
 			toastWrap,
 			profileItem
 		}
