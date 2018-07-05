@@ -24,11 +24,9 @@
 			</div>
 		</router-link>
 		<div class="cart-operate">
-<<<<<<< HEAD
-			<img :src="product.cart_image" class="shopping-cart-img" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
-=======
+			<!-- <img :src="product.cart_image" class="shopping-cart-img" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"> -->
+
 			<img :src="product.cart_image" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
->>>>>>> 838e99d8bab1a4ad7eeed25a2dc61fb5a4280c94
 			<div class="clearfix cart-action" v-if="productNum">
 				<span class="minus-action" @touchstart.stop="minusOutCart(product.id,$event)"></span> 
 				<span class="count">{{productNum}}</span> 
