@@ -7,10 +7,10 @@ let connection=mysql.createConnection({
 })
 
 connection.connect();
-let Mysql=function () {};
+/*let Mysql=function () {};
 Mysql.prototype={
 	constructor: Mysql,
-	async mysql_(sql,params){
+	async mysqlAnalysis(sql,params){
 		let result=await new Promise((resolve, reject) =>{
 			connection.query(sql,params,function (err,result) {
 				if(err){
@@ -22,4 +22,21 @@ Mysql.prototype={
 	    return result;
 	}
 }
-export default new Mysql();
+export default new Mysql();*/
+
+export default class MissMysql{
+	constructor(){
+		this.mysqlAnalysis=this.mysqlAnalysis.bind(this);
+	}
+	async mysqlAnalysis(sql,params){
+		let result=await new Promise((resolve, reject) =>{
+			connection.query(sql,params,function (err,result) {
+				if(err){
+	              	reject(err)
+	            }
+	            resolve(result)	
+			})
+	    })
+	    return result;
+	}
+}
