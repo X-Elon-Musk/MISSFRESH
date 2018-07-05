@@ -3,7 +3,7 @@
 		<pull>
 			<div class="address">
 				<span class="coordinate"></span>
-				<span class="address-text">北京市</span>
+				<span class="address-text">{{choseAddress}}</span>
 				<span class="arrow"></span>
 			</div>
 			<div class="commodity">
@@ -87,7 +87,8 @@
 				全选
 	    	</div>
 	    	<div class="f_l card-info">
-    			<span>合计<i>¥ {{products_total_price+cardMoney}}</i></span>
+    			<!-- <span>合计<i>¥ {{products_total_price+cardMoney}}</i></span> -->
+    			<span>合计<i>¥ {{settlement_total_price}}</i></span>
     			<span>
     				{{postage}}
     				<strong v-if="cardMoney!=0">
@@ -108,7 +109,7 @@
 	import {mapState, mapMutations} from 'vuex'
 	import Swiper from 'swiper'
     import 'swiper/dist/css/swiper.min.css'
-    import {getStore, isArray} from 'src/config/mUtils.js'
+    import {getStore, isArray, toDecimal} from 'src/config/mUtils.js'
 	import pull from 'src/components/pull/pull'
 	import mfooter from 'src/components/mfooter/mfooter'
 	import product from 'src/components/product/product'
@@ -168,7 +169,7 @@
 		},
 	    computed: {
 	    	...mapState([
-                's_cartList', 's_mpromptStatus'
+                's_cartList', 's_mpromptStatus', 's_choseAddress'
             ]),
             // 商品列表
             products: function () {
@@ -197,8 +198,7 @@
                     	total_price+=item.total_price;	
                     }
                 })
-                // return parseFloat(total_price.toFixed(2));
-                return parseFloat(total_price);
+                return toDecimal(total_price);
             },
             // 是否选中购物车中所有商品
             checkAll: function () {
@@ -220,7 +220,15 @@
 			// 商品合计
 			products_total_price: function () {
 				return this.postage!=="免邮" ? parseFloat(this.total_price+this.postage) : parseFloat(this.total_price);
-			}
+			},
+			// 结算价格
+			settlement_total_price: function () {
+				return toDecimal(this.products_total_price+this.cardMoney);
+			},
+			// 配送地址
+            choseAddress: function () {
+            	return this.s_choseAddress ? this.s_choseAddress : '';
+            },
 	    },
 		methods: {
 			...mapMutations([
@@ -248,7 +256,7 @@
 				      	},
 					}
 				});		
-			},
+			}, 
 			// 单个商品滑动后，“删除”按钮出现后，其他商品“删除”按钮消失
 			swiperReachEnd(){
 				// let _this=this;

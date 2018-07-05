@@ -15,6 +15,7 @@ export default class MissAddress{
 	}
 	//获取当前ip对应地址
 	async getPosition(req, res, next){
+		console.log('地址');
 		let ip=await this.getPositionIp(req);
 		if (process.env.NODE_ENV=='development') {
  			// ip = '61.148.16.170';
@@ -43,6 +44,7 @@ export default class MissAddress{
 			axios.get('http://apis.map.qq.com/ws/location/v1/ip'+query)
 			.then(function (response) {
 				if (response.data.status==0) {
+					console.log(response.data.result);
 					resolve(response.data.result)			
 				}
 			})

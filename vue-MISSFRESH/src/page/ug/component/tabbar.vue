@@ -188,6 +188,7 @@
     import 'swiper/dist/css/swiper.min.css';
     import qs from 'qs';
     import {getDataPageIndexAxios, getDataPositionAxios, getViewAxios} from 'src/service/getData'
+    import {getStore} from 'src/config/mUtils.js'
 
   	import ugHeader from './component/ugHeader'
     import classify from './component/classify'
@@ -239,7 +240,9 @@
 		},
 		mounted (){
 			this.getDataPageIndex(0);
-			this.getDataPosition();
+			if (!getStore('choseAddress')) {
+				this.getDataPosition();			
+			}
 			this.getView();
 		},
 		activated(){

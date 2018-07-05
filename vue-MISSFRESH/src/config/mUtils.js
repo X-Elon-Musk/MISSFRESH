@@ -53,3 +53,13 @@ export const testTele=(telephone)=>{
     let myreg=/^[1][3,4,5,7,8][0-9]{9}$/;  
     return myreg.test(telephone);
 }
+
+// 十进制
+export const toDecimal=(number)=>{
+    let value = Number(number);  
+    if(!isNaN(parseFloat(value))) {   
+        //把 Number 四舍五入为指定小数位数的数字。 
+       value = value.toFixed(2);
+    }  
+    return value;  
+}

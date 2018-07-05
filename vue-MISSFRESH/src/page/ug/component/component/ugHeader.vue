@@ -16,6 +16,7 @@
 </template>
 <script>
 	import {mapState} from 'vuex'
+	import {getStore} from 'src/config/mUtils.js'
 	export default{
 		data(){
 			return {
@@ -30,7 +31,14 @@
             ]),
             //选择的配送地址
             choseAddress: function () {
-            	return this.s_choseAddress ? this.s_choseAddress : '';
+            	// return this.s_choseAddress ? this.s_choseAddress : '';
+            	if (this.s_choseAddress) {
+            		return this.s_choseAddress;			
+            	} else if(getStore('choseAddress')){
+            		return getStore('choseAddress');
+            	} else{
+            		return '';
+            	}
             },
         },
 		methods: {
