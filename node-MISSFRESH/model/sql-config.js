@@ -24,7 +24,7 @@ Mysql.prototype={
 }
 export default new Mysql();*/
 
-export default class MissMysql{
+export default class Mysql{
 	constructor(){
 		this.mysqlAnalysis=this.mysqlAnalysis.bind(this);
 	}

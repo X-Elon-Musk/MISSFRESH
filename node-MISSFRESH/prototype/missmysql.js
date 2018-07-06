@@ -1,6 +1,10 @@
 'use strict';
 import Mysql from '../model/sql-config.js'
-let mysql=Mysql.mysqlAnalysis;
+// let mysql=Mysql.mysqlAnalysis;
+let mysql=(new Mysql()).mysqlAnalysis;
+
+console.log(Mysql);
+// return;
 // import MissMethods from './missMethods.js'
 let dirname='http://localhost:3390/public/images/';
 

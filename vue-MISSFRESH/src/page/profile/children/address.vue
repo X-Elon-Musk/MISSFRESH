@@ -108,14 +108,17 @@
 					width: 83%;
 					padding-left: 20px;
 					box-sizing: border-box;
+					// .font(1.125rem,0.875rem,#4b4b4b);
+					.font(26px,14px,#4b4b4b);
 					.address-text{
-						.font(1.7em,0.8em,#4b4b4b);
+						// .font(1.7em,0.8em,#4b4b4b);
 						white-space: nowrap;
 						overflow: hidden;
 						text-overflow: ellipsis;
 					}
 					.address-phone{
 					    color: #666;
+					    // font-size: 12px;
 					}
 					.address-id{
 						span{
@@ -123,15 +126,16 @@
 						}
 						.address-types{
 							color: @color_main;
-							margin-right: 0.5em;
+							margin-right: 4px;
 						}
 					}
 				}
 				.address-write{
 					.positionY();
 					right: 7%;
-					padding: 0.5em;
-					font-size: 0.8em;
+					padding: 0.375rem;
+					// font-size: 0.8em;
+					font-size: 13px;
 					color: #969696;
 					&:before{
 						content: '';
@@ -155,12 +159,17 @@
 			line-height: 1.2em;
 		}
 		.add-address-button{
-		    height: 38px;
+		    // height: 38px;
 		    width: 100%;
+	        height: 3rem;
 		    background: @color_main;
 		    text-align: center;
-		    color: #fff;
-		    line-height: 38px;
+		    // color: #fff;
+		    // line-height: 38px;
+		    // font-size: 1.1rem;
+	     //    line-height: 3rem;
+	        .font(3rem,1.1rem,#fff);
+    		font-weight: 900;
 		    border-radius: 5px;
 		    position: fixed;
 		    left: 0;

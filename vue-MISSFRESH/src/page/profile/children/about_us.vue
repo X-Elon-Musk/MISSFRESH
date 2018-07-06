@@ -27,7 +27,7 @@
 			img{
 				display: inline-block;
 				.wh(auto);
-				margin-bottom: 1em;
+				margin-bottom: 20px;
 			}
 		}
 	}
