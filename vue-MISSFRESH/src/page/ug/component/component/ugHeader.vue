@@ -84,28 +84,29 @@
 		align-items: center;
 		justify-content: center;
 		.delivery-info{
-			height: 1em;
-			flex: 1;
-			font-size: 0.8em;
-			line-height: 1em;
+			height: 1rem;
+			// flex: 1;
+			// font-size: 0.8em;
+			// line-height: 1em;
 			.delivery-time{
 				display: inline-block;
 				line-height: 100%;
 				position: relative;
-				vertical-align: top;
+				vertical-align: middle;
 				img{
-					height: 1em;
+					height: 1rem;
 				}
 				
 			}
 			.delivery-place{
 				display: inline-block;
-				line-height: 100%;
+				// line-height: 100%;
+				line-height: 1rem;
 				max-width: 10em;
 			    overflow: hidden;
 			    text-overflow: ellipsis;
 			    white-space: nowrap;
-			    vertical-align: top;
+			    vertical-align: middle;
 			    line-height: 100%;
 			    margin-left: 0.4em;
 			    &:after{

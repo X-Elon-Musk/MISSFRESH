@@ -4,31 +4,31 @@
     		<div class="header-right-buttom" v-show="defaultAddress" @click="mpromptStatus(true)">删除</div>
     	</mheader>
     	<ul class="list">
-    		<li class="item-block">
-    			<span class="input-label">收件人</span>
-    			<input v-model="name" type="text" placeholder="收货人姓名" class="item-input" ref="name">
+    		<li class="clearfix item-block">
+    			<span class="f_l input-label">收件人</span>
+    			<input v-model="name" type="text" placeholder="收货人姓名" class="f_r item-input" ref="name">
     			<img src="~images/icon/close.png" alt="" class="clear-button" v-show="name" @click="clear('name')">
     		</li>
-    		<li class="item-block">
-    			<span class="input-label">手机号码</span>
-    			<input v-model="phone_number" type="text" placeholder="配送员联系您的电话" class="item-input">
+    		<li class="clearfix item-block">
+    			<span class="f_l input-label">手机号码</span>
+    			<input v-model="phone_number" type="text" placeholder="配送员联系您的电话" class="f_r item-input">
     			<img src="~images/icon/close.png" alt="" class="clear-button" v-show="phone_number" @click="clear('phone_number')">
     		</li>
     		<li class="clearfix item-block item-block-location">
-    			<span class="input-label">收货地址</span>
+    			<span class="f_l input-label">收货地址</span>
     			<div class="f_r go-right" @click="deliveryAction(true)">
     				<span class="address-icon"></span>
 	    			<span v-show="1" class="item-placeholder">{{location||'小区/写字楼'}}</span>
 	    			<span class="go-right-icon"></span>
     			</div>
     		</li>
-    		<li class="item-block">
-    			<span class="input-label">楼号门牌</span>
-    			<input v-model="address_2" type="text" placeholder="楼号/单元/门牌号" class="item-input">
+    		<li class="clearfix item-block">
+    			<span class="f_l input-label">楼号门牌</span>
+    			<input v-model="address_2" type="text" placeholder="楼号/单元/门牌号" class="f_r item-input">
     			<img src="~images/icon/close.png" alt="" class="clear-button" v-show="address_2" @click="clear('address_2')">
     		</li>
-    		<li class="clearfix item-block">
-    			<span class="input-label">地址类型</span>
+    		<li class="clearfix clearfix item-block">
+    			<span class="f_l input-label">地址类型</span>
     			<ul class="f_r item-radio-container">
     				<li v-for="(item,index) in tags" @click="radioSwitch(item.tag)" :class="{active:item.tag==tag}">{{item.text}}</li>
     			</ul>
@@ -239,8 +239,7 @@
 				.item-input{
 					display: inline-block;
 					vertical-align: middle;
-					margin: 0;
-					padding: 0;
+					width: calc(100% - 5em);
 				}
 				.clear-button{
 					display: inline-block;

@@ -73,7 +73,7 @@
 </script>
 <style lang='less' scoped rel="stylesheet/less">
 	@import '~src/style/mixin';
-	.category-nav-wrap{
+	/* .category-nav-wrap{
 		position: fixed;
 		top: 2em;
 	    z-index: 100;
@@ -97,7 +97,7 @@
 				border-bottom: 2px solid #ff4891;
 			}
 	    }
-	}
+	} */
 	.ug ::-webkit-scrollbar {
 	    .wh(0,0);
 	}

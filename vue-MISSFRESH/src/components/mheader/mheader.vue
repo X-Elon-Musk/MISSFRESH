@@ -28,7 +28,7 @@
 	@import '~src/style/mixin';
 	.header-component{
 	    .wh(42px);
-	    .font(42px);
+	    .font(42px,17px);
 	    text-align: center;
 	    background: #fff;
 	    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.06);

@@ -484,18 +484,17 @@
 			.swiper-slide{
 				text-align: center;
 				width: auto;
-				padding: 0 0.8em;
+				padding: 0 1.0rem;
 				background-repeat: no-repeat;
 				background-size: 100% 100%;
 				background-position: center center;
 				span {
-
 					text-align:center;
 					display: inline-block;
 					height: 100%;
 					line-height: 40px;
 					font-size:14px;
-					color:#333333;
+					color: #333;
 					position: relative;
 				}
 			}
@@ -518,7 +517,6 @@
 			.bg(40px,40px,#fff,'~images/icon/ellipsis.png',1.375rem);
 		}
 	}
-	
 	#page {
 		margin-bottom:50px;
 		height:100%;
@@ -543,7 +541,6 @@
 		padding: 9px 2%;
 		box-sizing: border-box;
 	}
-
 	.tabber ::-webkit-scrollbar {
 	    width: 0;
 	    height: 0;
