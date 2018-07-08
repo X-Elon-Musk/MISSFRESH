@@ -23,9 +23,11 @@
 		},
         props: ['categorylist'],
         methods: {
+            // 关闭分类
             closeButton() {
                 this.$emit("closeClassify");
             },
+            // 分类图标
             iconClick(index) {
                 // console.log(index);
                 this.closeButton();

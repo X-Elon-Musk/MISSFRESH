@@ -47,7 +47,7 @@
             ...mapMutations([
                 'SET_MPROMPTEXIST'
             ]),
-            //上滑加载
+            // 上滑加载
             getData() {
                 this.productsEnd+=8;
                 if (this.productsEnd>=this.products.length) {

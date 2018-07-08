@@ -7,7 +7,7 @@
 	        <div class="delivery-place">
 	        	{{s_choseAddress}}
 	        </div>
-	        <div class="short-tips" v-show="tips&&view.first_page_addr_text" @click.stop="closeTips(false)">{{view.first_page_addr_text}}</div>
+	        <div class="short-tips" v-show="tips&&view.first_page_addr_text" @click.stop="tipsStatus(false)">{{view.first_page_addr_text}}</div>
         </router-link>
         <router-link :to="{path: '/ug/search'}" tag="div" class="f_r search-button"></router-link>
     </div>  
@@ -19,7 +19,7 @@
 	export default{
 		data(){
 			return {
-				//提示信息显示
+				// 提示信息显示
 				tips: true,
 				// 配送的信息
 				view: {}
@@ -46,10 +46,11 @@
 			...mapMutations([
                 'INIT_CHOSEADDRESS', 'SET_POSITION'
             ]),
-			closeTips(status) {
+            // 提示信息状态
+			tipsStatus(status) {
 				this.tips=status;
 			},
-			//获取当前地址
+			// 获取当前地址
 			async getDataPosition() {
 				let response=await getDataPositionAxios();
 				let ad_info=response.ad_info
@@ -64,7 +65,7 @@
 					city: chosecity
 				});
 			},
-			//获取配送的类型信息
+			// 获取配送的类型信息
 			getView() {
 				getViewAxios(this.s_viewType).then(response=>{
 					this.view=response;
