@@ -59,9 +59,9 @@
 		mounted: function () {
 		},
 		methods: {
+			// 加载动画
 			hideLoading(status){
 				this.loading=status;
-				// console.log(this.loading);
 			}
 		},
 		components: {
