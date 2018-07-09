@@ -517,14 +517,22 @@
 						border: none;
 						font-size: 14px;
 						padding: 0;
-						img{
-	    					.wh(70px,70px);
+						.product-item-img {
+						    width: 32%;
+						    img{
+		    					// .wh(70px,70px);
+		    					.wh(5.5rem,5.5rem);
+							}
 						}
-						.name{
-							padding-top: 0;
+						.product-info{
+							width: 68%;
+							padding-left: 0;
+							.name{
+								padding-top: 0;
+							}
 						}
 						.cart-operate .cart-action {
-						    bottom: -33px;
+						    bottom: -1.5rem;
 						}
 					}
 				}	

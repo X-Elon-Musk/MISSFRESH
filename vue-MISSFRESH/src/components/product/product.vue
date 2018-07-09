@@ -11,11 +11,20 @@
 				<ul class="preferential">
 					<li v-for="(item,index) in product.product_tags" :key="index">{{item.name}}</li>
 				</ul>
-				<p class="price">
+				<div class="price">
 					<price :price="priceDown.price" class="price-now price-down"></price>
 					<!-- 商城价 -->
 					<price :price="priceUp.price" class="price-original price-up"></price>
-				</p>
+					
+					<div class="cart-operate">
+						<img :src="product.cart_image" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
+						<div class="clearfix cart-action" v-if="productNum">
+							<span class="minus-action" @touchstart.stop="minusOutCart(product.id,$event)"></span> 
+							<span class="count">{{productNum}}</span> 
+							<span class="add-action" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"></span>
+						</div>
+					</div>
+				</div>
 				<!-- <p class="vip">
 					会员价
 					<price :price="priceDown.price"></price>
@@ -23,16 +32,14 @@
 				
 			</div>
 		</router-link>
-		<div class="cart-operate">
-			<!-- <img :src="product.cart_image" class="shopping-cart-img" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"> -->
-
+		<!-- <div class="cart-operate">
 			<img :src="product.cart_image" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
 			<div class="clearfix cart-action" v-if="productNum">
 				<span class="minus-action" @touchstart.stop="minusOutCart(product.id,$event)"></span> 
 				<span class="count">{{productNum}}</span> 
 				<span class="add-action" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"></span>
 			</div>
-		</div>
+		</div> -->
 	</div> 
 </template>
 <script>
@@ -107,7 +114,8 @@
 				.product-img{
 					display: block;
 					border-radius: 0;
-					.wh(120px,120px);
+					// .wh(120px,120px);
+					.wh(7.5rem,7.5rem);
 				}
 				.product-tag{
 					position: absolute;
@@ -123,7 +131,7 @@
 				color: #262626;
 				line-height: 20px;
 				position: relative;
-				padding-left: 2%;
+				// padding-left: 2%;
 				box-sizing: border-box;
 				.name{
 					font-size: 14px;
@@ -170,19 +178,22 @@
 		}
 		.cart-operate{
 			position: absolute;
-			bottom: 32px;
+			// bottom: 32px;
+			bottom: 0;
 			right: 0;
+			padding: 0 1rem;
+			font-size: initial;
 			.shopping-cart-img{
 				position: absolute;
-				right: 15px;
-				bottom: -10px;
-				.wh(46px,46px);
+				right: 2.5rem;
+				bottom: 0;
+				.wh(2.25rem,2.25rem);
 			}
 			.cart-action{
 				.wh(1.2em,4.8em);
-			    position: absolute;
+			    /* position: absolute;
 			    right: 6px;
-				bottom: 8px;
+			    				bottom: 8px; */
 				background: transparent;
 				span{
 					float: left;
@@ -194,6 +205,7 @@
 					line-height: 1.2em;
 				    text-align: center;
 				    min-width: 2.4em; 
+				    color: #474245;
 				}
 				.add-action{
 					.bg(1.2em,1.2em,transparent,'~images/icon/add-action.png',100% 100%);
