@@ -179,9 +179,9 @@
 		.cart-operate{
 			position: absolute;
 			// bottom: 32px;
-			bottom: 0;
+			bottom: -1rem;
 			right: 0;
-			padding: 0 1rem;
+			padding: 1rem 1rem;
 			font-size: initial;
 			.shopping-cart-img{
 				position: absolute;
