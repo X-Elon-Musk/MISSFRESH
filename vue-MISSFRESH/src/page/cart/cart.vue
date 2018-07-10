@@ -1,7 +1,7 @@
 <template>
 	<div class="shopping-cart">
 		<pull>
-			<div class="address">
+			<div class="address" @click="addressChoseAction(true)">
 				<span class="coordinate"></span>
 				<span class="address-text">{{choseAddress}}</span>
 				<span class="arrow"></span>
@@ -101,6 +101,9 @@
 	    <transition name="" mode="out-in">
     		<mprompt promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt>
 		</transition>
+		<transition name="bottom" mode="out-in">
+    		<addressChose v-show="addressChoseShow" v-on:addressChose="addressChoseAction(false)" :newText="true" :functionOrLink="true"></addressChose>
+		</transition>
 		<mfooter></mfooter>
 	</div>
 </template>
@@ -113,6 +116,7 @@
 	import mfooter from 'src/components/mfooter/mfooter'
 	import product from 'src/components/product/product'
 	import mprompt from 'src/components/mprompt/mprompt'
+	import addressChose from 'src/page/ug/children/addressChose'
 	export default{
 		data(){
 		  	return {
@@ -143,7 +147,8 @@
 				settlement: 0,
 				cardMoney: 0,
 				mpromptShow: false,
-				deleteProductId: ''
+				deleteProductId: '',
+				addressChoseShow: false
 		  	}
 	  	},
 		created (){
@@ -428,12 +433,17 @@
 				this.swiperDelete();
 				this.swiperReachEnd();
 			},
+			// 操作选择收货地址
+			addressChoseAction(status){
+				this.addressChoseShow=status;
+			},
 		},
 		components:{
 			pull,
 	        mfooter,
 	        product,
-	        mprompt
+	        mprompt,
+	        addressChose
 	    },
 	}
 </script>

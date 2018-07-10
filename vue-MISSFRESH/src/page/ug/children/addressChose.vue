@@ -3,8 +3,8 @@
     	<!-- <div class="header">
     		<h2>选择收货地址<i>新增地址</i></h2>
     	</div> -->
-    	<mheader title="选择收货地址">
-    		<div class="header-right-buttom" @click="newAction(true)">新增地址</div>
+    	<mheader title="选择收货地址" :functionOrLink="functionOrLink" v-on:backFunction="deliveryBackFunction">
+    		<div class="header-right-buttom" v-show="newText" @click="newAction(true)">新增地址</div>
     	</mheader>
     	<div class="address-bar">
     		<div class="address-input">
@@ -60,7 +60,11 @@
 				showIndex: 2,
 				refreshtext: '',
 				newShow: false,
-				defaultAddress: ''
+				defaultAddress: '',
+				// 是否隐藏箭头，默认为隐藏
+				// backHide: true,
+				// 是否显示“新增地址”，默认为不显示
+				// newText: false
 			}
 		},
 		mounted (){
@@ -77,7 +81,11 @@
             //选择的城市
             choseCity: function () {
             	return getStore('choseCity');
-            }
+            },
+            // backHide: function () {
+            // 	console.log(this.$route.path);
+            // 	return false
+            // }
         },
         beforeRouteLeave(to, from, next){
         	console.log(to);
@@ -150,26 +158,6 @@
 				let station={
 					id: city.id,
 				};
-				/*this.SET_POSITION({
-					id: city.adcode,
-					name: city.name,
-					province: city.province,
-					district: city.district
-				}, {
-					address: city.address,
-					distance: city.distance,
-					name: city.name
-				}, {
-					accuracy: city.type,
-					lat: city.location.lat,
-					lng: city.location.lng
-				}, {
-					accuracy: city.type,
-					lat: city.location.lat,
-					lng: city.location.lng
-				}, {
-					id: city.id,
-				});*/
 				this.SET_POSITION({
 					type: 1,
 					city: chosecity, 
@@ -194,8 +182,14 @@
 			newAction(status){
 				this.defaultAddress='';
 				this.newShow=status;
+				this.showIndex=2;
 			},
+			//页面显示或者隐藏
+			deliveryBackFunction(){
+				this.$emit("addressChose", false);
+			}
 		},
+		props: ['newText', 'functionOrLink'],
 		components: {
 			mheader,
 			addressNew
