@@ -114,7 +114,7 @@
 			getAddressList(){
 				let userId=getStore('userId');
 				getAddressListAxios(this.s_userInfo.userId||userId).then(response=>{
-					console.log(response);
+					// console.log(response);
 					this.addressList=response;
 				})
 			},

@@ -198,7 +198,7 @@
             	let total_price=0;
 				Object.values(this.s_cartList).forEach(item => {
                     if (item.status) {
-                    	total_price+=item.total_price;	
+                    	total_price+=parseFloat(item.total_price);	
                     }
                 })
                 return toDecimal(total_price);

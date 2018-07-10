@@ -183,11 +183,12 @@
             ]),
             //选择的配送地址
             choseAddress: function () {
-            	if (this.s_choseAddress) {
+            	/*if (this.s_choseAddress) {
             		return this.s_choseAddress;
             	} else{
             		return '';
-            	}
+            	}*/
+            	return this.s_choseAddress ? this.s_choseAddress : '';
             }
         },
 		methods: {
@@ -260,7 +261,8 @@
 		right: 0;
 		top: 0;
 		bottom: 0;
-		z-index: 3; 
+		// z-index: 3; 
+		z-index: 4; 
 		background: #fff;
 		overflow-y: auto;
 		color: @color_common;
@@ -568,7 +570,8 @@
 		.address-bar-container{
 			position: fixed;
 			left: 0;
-			bottom: 53px;
+			// bottom: 53px;
+			bottom: 36px;
 			.wh(1.6875rem);
 			background: rgba(255, 244, 226, 0.9);
 			padding: 0 4%;
