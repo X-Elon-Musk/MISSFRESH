@@ -1,11 +1,14 @@
 <template>
     <div class="address-chose">
-    	<div class="header">
+    	<!-- <div class="header">
     		<h2>选择收货地址<i>新增地址</i></h2>
-    	</div>
+    	</div> -->
+    	<mheader title="选择收货地址">
+    		<div class="header-right-buttom" @click="newAction(true)">新增地址</div>
+    	</mheader>
     	<div class="address-bar">
     		<div class="address-input">
-    			<router-link :to="{path: '/ug/citylist'}" replace tag="div" class="address-city">{{choseCity}}</router-link>
+    			<router-link :to="{path: '/ug/citylist'}" replace tag="div" class="address-city ellips">{{choseCity}}</router-link>
     			<router-link :to="{path: '/ug/locationsearch'}" replace tag="div" class="address-position">请输入要收货的小区/写字楼</router-link>
     		</div>
     	</div>
@@ -20,7 +23,7 @@
     	<div class="location-list" v-show="addressList.length>0">
     		<div class="location-mine">我的收货地址</div>
     		<ul>
-    			<li class="address-content"  v-for="item in addressList.slice(0,showIndex)">
+    			<li class="address-content"  v-for="item in addressList.slice(0,showIndex)" @click="changeCurrentRegion(item)">
 	    			<div class="address-detail">
 	    				<div class="address-info">
 	    					<span class="address-tag" v-if="item.tag === 'HOME'">住宅</span>
@@ -38,18 +41,26 @@
     		</ul>
     		<div class="location-more" v-show="addressList.length>2&&showIndex<=2" @click="showAllAddress">更多收货地址</div>
     	</div>
+
+    	<transition name="bottom" mode="out-in">
+    		<addressNew v-show="newShow" v-on:newAction="newAction" v-on:getAddressList="getAddressList" :defaultAddress="defaultAddress" :newShow="newShow"></addressNew>
+		</transition>
     </div>  
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
 	import {getStore} from 'src/config/mUtils.js'
 	import {getAddressListAxios, locationRefreshAxios} from 'src/service/getData'
+	import mheader from 'src/components/mheader/mheader'
+	import addressNew from 'src/page/profile/children/addressNew'
 	export default{
 		data(){
 			return {
 				addressList: [],
 				showIndex: 2,
-				refreshtext: ''
+				refreshtext: '',
+				newShow: false,
+				defaultAddress: ''
 			}
 		},
 		mounted (){
@@ -89,7 +100,7 @@
         },
 		methods: {
 			...mapMutations([
-                'SET_CURRENTCITY'
+                'SET_CURRENTCITY', 'SET_POSITION'
             ]),
             // 收货地址列表
 			getAddressList(){
@@ -103,6 +114,73 @@
 			showAllAddress() {
 				this.showIndex=this.addressList.length;
 			},
+			//改变当前城市信息
+			changeCurrentRegion(city){
+				let chosecity={
+					// id: city.adcode,
+					id: city.code,
+					name: city.city,
+					province: city.province,
+					// district: city.district
+					district: city.area
+				};
+				let building={
+					// address: city.address,
+					address: city.full_address,
+					distance: city.distance||'',
+					// name: city.title
+					name: city.address_1
+				};
+				let location={
+					// accuracy: city.type,
+					accuracy: city.default_,
+					// lat: city.location.lat,
+					lat: city.lat_lng.split(',')[0],
+					// lng: city.location.lng
+					lng: city.lat_lng.split(',')[1]
+				};
+				let position={
+					// accuracy: city.type,
+					accuracy: city.default_,
+					// lat: city.location.lat,
+					lat: city.lat_lng.split(',')[0],
+					// lng: city.location.lng
+					lng: city.lat_lng.split(',')[1]
+				}
+				let station={
+					id: city.id,
+				};
+				/*this.SET_POSITION({
+					id: city.adcode,
+					name: city.name,
+					province: city.province,
+					district: city.district
+				}, {
+					address: city.address,
+					distance: city.distance,
+					name: city.name
+				}, {
+					accuracy: city.type,
+					lat: city.location.lat,
+					lng: city.location.lng
+				}, {
+					accuracy: city.type,
+					lat: city.location.lat,
+					lng: city.location.lng
+				}, {
+					id: city.id,
+				});*/
+				this.SET_POSITION({
+					type: 1,
+					city: chosecity, 
+					building, 
+					location, 
+					position, 
+					station
+				});
+				// this.$router.push('/ug');
+				this.$router.replace('/ug');
+			},
 			//刷新当前位置
 			async locationRefresh(){
 				this.refreshtext="正在获取";
@@ -111,7 +189,16 @@
 					currentCity: response.ad_info.city
 				})
 				this.refreshtext='';
-			}
+			},
+			// 操作添加新地址出现或消失
+			newAction(status){
+				this.defaultAddress='';
+				this.newShow=status;
+			},
+		},
+		components: {
+			mheader,
+			addressNew
 		}
 	}
 </script>
@@ -127,7 +214,8 @@
 		background: @bg_color;
 		overflow-y: auto;
 		color: @color_common; 
-		.header{
+		padding-top: 42px;
+		/* .header{
 			height: 36px;
 		    line-height: 36px;
 		    background-color: #fff;
@@ -148,7 +236,7 @@
 			    	color: #999;
 			    }
 			}
-		}
+		} */
 		.address-bar{
 			background-color: #fff;
 			padding: 0.625rem 0.9375rem 0.625rem 0.9375rem;
@@ -165,13 +253,16 @@
     			line-height: 2.1875rem;
 				.address-city{
 					width: 25%;
-					padding-left: 4%;
+					padding-left: 3%;
+    				padding-right: 0.8rem;
+					box-sizing: border-box;
 					position: relative;
 					&:after{
 						content: '';
-						display: inline-block;
-						vertical-align: top;
-						.bg(2.1875rem,2.1875rem,transparent,'~images/icon/address-city.png',50% 50%);
+						.positionY();
+		    			right: 0;
+						.bg(1rem,1rem,transparent,'~images/icon/address-city.png',80% 80%);
+
 					}
 				}
 				.address-position{

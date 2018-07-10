@@ -165,9 +165,9 @@
 			background-color: #fff;
 			padding: 0.625rem 0.9375rem 0.625rem 0.9375rem;
 			height: auto;
-			font-size: 0.8em;
+			// font-size: 0.8em;
 		    box-shadow: 0 0 0.625rem rgba(0,0,0,.06);
-			.address-input{
+			/* .address-input{
 				display: flex;
 				flex-direction: row;
 				flex-wrap: nowrap;
@@ -203,6 +203,42 @@
 						.bg(0.8em,0.8em,transparent,'~images/icon/address-position.png',100% 100%);
 					}
 				}
+			} */
+			.address-input{
+				display: flex;
+				flex-direction: row;
+				flex-wrap: nowrap;
+				overflow: hidden;
+				white-space: nowrap;
+				background-color: #eee;
+				border-radius: 0.25em;
+				height: 2.1875rem;
+    			line-height: 2.1875rem;
+				.address-city{
+					width: 25%;
+					padding-left: 3%;
+    				padding-right: 0.8rem;
+					box-sizing: border-box;
+					position: relative;
+					&:after{
+						content: '';
+						.positionY();
+		    			right: 0;
+						.bg(1rem,1rem,transparent,'~images/icon/address-city.png',80% 80%);
+
+					}
+				}
+				/* .address-position{
+					width: 75%;
+					position: relative;
+					&:before{
+						content: '';
+						display: inline-block;
+						vertical-align: top;
+						margin-top: 0.5rem;
+						.bg(1.1875rem,1.1875rem,transparent,'~images/icon/address-position.png',80% 80%);
+					}
+				} */
 			}
 		}
 		.search-box{
@@ -229,12 +265,12 @@
 					display: block;
 					.wh(100%,100%);
 					position: relative;
-					line-height: 2em;
+					// line-height: 2em;
 					.search-logo{
 						position: absolute;
-						left: 0.5em;
-						top: 1px;
-						.bg(24px,24px,transparent,'~images/icon/search-logo.png',66% 66%);
+						left: 0;
+						top: 0.1rem;
+						.bg(1.875rem,1.875rem,transparent,'~images/icon/search-logo.png',60% 60%);
 					}
 					.search-input{
 						background-color: transparent;
@@ -243,7 +279,7 @@
 						text-indent: 1.875rem;
 						border: none;
 						outline: none;
-						line-height: 2em;
+						// line-height: 2em;
 					}
 					.search-submit{
 						display: none;

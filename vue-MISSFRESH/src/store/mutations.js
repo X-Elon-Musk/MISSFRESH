@@ -145,6 +145,7 @@ export default {
 				})
 			}
 		})
+		// 首页初始化获得当前城市，选择配送城市，这两种情况时type为0。选择具体地址后type为1。
 		if (type==0&&JSON.stringify(region)!=="{}") {
 			Object.keys(region).forEach(key => {
 				if(key!=='city'&&JSON.stringify(region[key])!=="{}"){
