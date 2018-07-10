@@ -568,21 +568,20 @@
 		.address-bar-container{
 			position: fixed;
 			left: 0;
-			bottom: 36px;
-			.wh(2em);
+			bottom: 53px;
+			.wh(1.6875rem);
 			background: rgba(255, 244, 226, 0.9);
 			padding: 0 4%;
 			box-sizing: border-box;
-			font-size: 0.9em;
-			line-height: 2em;
+			font-size: 0.875rem;
+			line-height: 1.6875rem;
 			.delivery-range{
 				.position-icon{
-					.wh(1em,1em);
-					margin-top: 0.5em;
+					.wh(0.875rem,0.875rem);
+					margin-top: 0.40625rem;
 				}
 				span{
-					font-size: 0.8em;
-					margin-left: 0.5em;
+					margin-left: 0.5rem;
 				}
 				.delivery-place{
 					

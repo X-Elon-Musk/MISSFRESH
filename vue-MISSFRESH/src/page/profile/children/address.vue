@@ -54,7 +54,7 @@
         },
         methods: {
 			// 收货地址列表
-			getAddressList: function () {
+			getAddressList(){
 				/*console.log('++++++++++++++');
 				console.log('++++++++++++++');
 				console.log(this.s_userInfo);
