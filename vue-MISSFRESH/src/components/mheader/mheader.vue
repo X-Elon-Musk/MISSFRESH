@@ -1,10 +1,8 @@
 <template>
     <div class="clearfix header-component">
         <span class="title">{{title}}</span>
-        <!-- <span v-show="!backHide"> -->
-	        <span class="back" v-if="!functionOrLink" @click="goBack"></span>
-	        <span class="back" v-else @click="backAction"></span>
-        <!-- </span> -->
+        <span class="back" v-if="!functionOrLink" @click="goBack"></span>
+        <span class="back" v-else @click="backAction"></span>
         <slot class="slot"></slot>
     </div>  
 </template>
@@ -23,7 +21,6 @@
 				this.$emit("backFunction");
 			}
 		},
-		// props: ['title', 'functionOrLink', 'backHide']
 		props: ['title', 'functionOrLink']
 	}
 </script>
