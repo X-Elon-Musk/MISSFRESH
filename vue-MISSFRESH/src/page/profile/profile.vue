@@ -87,7 +87,7 @@
 		  				text: '我的订单'
 		  			},
 		  			{
-		  				to: '/profile/address',
+		  				to: '/profile/addressPage',
 		  				text: '我的地址'
 		  			},
 		  			{

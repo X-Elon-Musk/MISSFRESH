@@ -1,8 +1,8 @@
 <template>
 	<div class="shopping-cart modal-backdrop">
-		<mheader title="订单确认" :functionOrLink="true" v-on:backFunction="newBackFunction"></mheader>
+		<mheader title="订单确认" :functionOrLink="true" v-on:backFunction="backFunction"></mheader>
 		<pull>
-			<div class="select-address">点击选择收货地址</div>
+			<div class="select-address" @click="addressAction(true)">点击选择收货地址</div>
 			<div class="address" @click="addressChoseAction(true)" v-show="false">
 				<span class="coordinate"></span>
 				<span class="address-text">{{choseAddress}}</span>
@@ -15,7 +15,7 @@
 					<span class="f_r delivery-time">今天2小时内送达[可选]</span>
 				</div>
 				<!-- 商品 -->
-				<div class="products-list-content">
+				<div class="products-list-content" @click="settlementListAction(true)">
 					<ul class="commodity-items products">
 						<li class="swiper-container commodity-item clearfix products-img">
 							<div class="swiper-wrapper">
@@ -105,8 +105,17 @@
 	    <transition name="" mode="out-in">
     		<mprompt promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt>
 		</transition>
+		<!-- <transition name="bottom" mode="out-in">
+		    		<addressChose v-show="addressChoseShow" v-on:addressChose="addressChoseAction(false)" :newText="true" :functionOrLink="true"></addressChose>
+		</transition> -->
+
 		<transition name="bottom" mode="out-in">
-    		<addressChose v-show="addressChoseShow" v-on:addressChose="addressChoseAction(false)" :newText="true" :functionOrLink="true"></addressChose>
+    		<!-- <address v-show="addressPage"></address> -->
+    		<addressPage :style="{zIndex:5}" v-show="addressPageShow" :isComponent="true" v-on:backFunction="addressAction(false)"></addressPage>
+		</transition>
+		<transition name="bottom" mode="out-in">
+    		<!-- <address v-show="addressPage"></address> -->
+    		<settlementList :style="{zIndex:6}" v-show="settlementListShow" v-on:backFunction="settlementListAction(false)" :products="products"></settlementList>
 		</transition>
 		<!-- <mfooter></mfooter> -->
 	</div>
@@ -123,6 +132,8 @@
 	import product from 'src/components/product/product'
 	import mprompt from 'src/components/mprompt/mprompt'
 	import addressChose from 'src/page/ug/children/addressChose'
+	import addressPage from 'src/page/profile/children/addressPage'
+	import settlementList from './settlementList'
 	export default{
 		data(){
 		  	return {
@@ -154,7 +165,9 @@
 				cardMoney: 0,
 				mpromptShow: false,
 				deleteProductId: '',
-				addressChoseShow: false
+				// addressChoseShow: true,
+				addressPageShow: false,
+				settlementListShow: false
 		  	}
 	  	},
 		created (){
@@ -245,8 +258,9 @@
                 'SET_STATUS', 'DELETE_CART', 'INIT_CARTLIST', 'SET_MPROMPTEXIST', 'SET_MPROMPT'
             ]),
             // 页面显示或者隐藏
-			newBackFunction(){
-				// this.$emit("newAction", false);
+			backFunction(){
+				console.log(11111);
+				this.$emit("backFunction");
 			},
             // 商品图片列表
 			productsImg() {
@@ -382,6 +396,14 @@
 			addressChoseAction(status){
 				this.addressChoseShow=status;
 			},
+			// 操作收货地址
+			addressAction(status){
+				this.addressPageShow=status;
+			},
+			// 操作商品列表
+			settlementListAction(status){
+				this.settlementListShow=status;
+			},
 		},
 		components:{
 			mheader,
@@ -389,7 +411,9 @@
 	        // mfooter,
 	        product,
 	        mprompt,
-	        addressChose
+	        addressChose,
+	        addressPage,
+	        settlementList
 	    },
 	}
 </script>

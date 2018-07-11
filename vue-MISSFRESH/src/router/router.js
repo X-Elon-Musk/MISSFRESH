@@ -13,7 +13,7 @@ const cart = r => require.ensure([], () => r(require('../page/cart/cart')), 'car
 const cartDetail = r => require.ensure([], () => r(require('../page/cart/children/cartDetail')), 'cartDetail')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const safe = r => require.ensure([], () => r(require('../page/profile/children/safe')), 'safe')
-const address = r => require.ensure([], () => r(require('../page/profile/children/address')), 'address')
+const addressPage = r => require.ensure([], () => r(require('../page/profile/children/addressPage')), 'addressPage')
 const picker = r => require.ensure([], () => r(require('../page/profile/children/picker')), 'picker')
 // const addressNew = r => require.ensure([], () => r(require('../page/profile/children/addressNew')), 'addressNew')
 // const addressDelivery = r => require.ensure([], () => r(require('../page/profile/children/addressDelivery')), 'addressDelivery')
@@ -105,8 +105,8 @@ export default [{
                     component: safe,
                 },
                 {
-                    path: 'address',//我的地址
-                    component: address,
+                    path: 'addressPage',//我的地址
+                    component: addressPage,
                 },
                 {
                     path: 'picker',//我的地址

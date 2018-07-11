@@ -96,7 +96,7 @@
     				</strong>
     			</span>
     		</div>
-    		<div class="f_r settlement-button">去结算</div>
+    		<div class="f_r settlement-button" @click="backFunction(true)">去结算</div>
 	    </div>
 	    <transition name="" mode="out-in">
     		<mprompt promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt>
@@ -105,7 +105,7 @@
     		<addressChose v-show="addressChoseShow" v-on:addressChose="addressChoseAction(false)" :newText="true" :functionOrLink="true"></addressChose>
 		</transition>
 		<transition name="bottom" mode="out-in">
-    		<settleAccounts v-show="settleAccountsShow"></settleAccounts>
+    		<settleAccounts v-show="settleAccountsShow" v-on:backFunction="backFunction(false)"></settleAccounts>
 		</transition>
 		<mfooter></mfooter>
 	</div>
@@ -153,7 +153,7 @@
 				mpromptShow: false,
 				deleteProductId: '',
 				addressChoseShow: false,
-				settleAccountsShow: true
+				settleAccountsShow: false
 		  	}
 	  	},
 		created (){
@@ -237,6 +237,10 @@
             choseAddress: function () {
             	return this.s_choseAddress ? this.s_choseAddress : '';
             },
+            // 操作选择城市列表出现或消失
+			pickerAction(status){
+				this.pickerShow=status;
+			},
 	    },
 		methods: {
 			...mapMutations([
@@ -438,9 +442,9 @@
 				this.swiperDelete();
 				this.swiperReachEnd();
 			},
-			// 操作选择收货地址
-			addressChoseAction(status){
-				this.addressChoseShow=status;
+			// 操作页面显示
+			backFunction(status){
+				this.settleAccountsShow=status;
 			},
 		},
 		components:{
@@ -458,7 +462,7 @@
 	.shopping-cart{
 		background-color: #f0f0f0;
 		font-size: 14px;
-		position: absolute;
+		position: fixed;
 		left: 0;
 		top: 0;
 		bottom: 0;

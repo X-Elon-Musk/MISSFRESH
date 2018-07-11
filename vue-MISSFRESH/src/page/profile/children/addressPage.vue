@@ -1,6 +1,6 @@
 <template>
     <div class="profile-item-page profile-item-page-address" :style="{zIndex:addressIndex}">
-    	<mheader title="收货地址">
+    	<mheader title="收货地址" :functionOrLink="isComponent" v-on:backFunction="backFunction">
     		<div class="header-right-buttom" @click="newAction(true)">添加</div>
     	</mheader>
     	<ul class="address-list">
@@ -20,7 +20,7 @@
     		</li>
     	</ul>
     	<div class="not-address" v-show="addressList.length==0">您还没有收货地址,请新增地址</div>
-    	<div class="add-address-button" @click="newAction(true)">新增收货地址</div>
+    	<div class="add-address-button" :style="{bottom:isComponent?0:'53px'}" @click="newAction(true)">新增收货地址</div>
 		<transition name="bottom" mode="out-in">
     		<addressNew v-show="newShow" v-on:newAction="newAction" v-on:getAddressList="getAddressList" :defaultAddress="defaultAddress" :newShow="newShow"></addressNew>
 		</transition>
@@ -73,8 +73,13 @@
 			writeAddress(item){
 				this.newShow=true;
 				this.defaultAddress=item;
-			}
+			},
+			// 页面显示或者隐藏
+			backFunction(){
+				this.$emit("backFunction");
+			},
 		},
+		props: ['isComponent'],
 		components: {
 			mheader,
 			addressNew
