@@ -1,35 +1,39 @@
 <template>
-	<div class="shopping-cart">
+	<div class="shopping-cart modal-backdrop">
+		<mheader title="订单确认" :functionOrLink="true" v-on:backFunction="newBackFunction"></mheader>
 		<pull>
-			<div class="address" @click="addressChoseAction(true)">
+			<div class="select-address">点击选择收货地址</div>
+			<div class="address" @click="addressChoseAction(true)" v-show="false">
 				<span class="coordinate"></span>
 				<span class="address-text">{{choseAddress}}</span>
 				<span class="arrow"></span>
 			</div>
 			<div class="commodity">
-				<div class="commodity-header">
-					<i class="marquee" @click="checkedAll" :class="{active:checkAll}"></i>
+				<div class="clearfix commodity-header">
+					<!-- <i class="marquee" @click="checkedAll" :class="{active:checkAll}"></i> -->
 					<span class="service">全国送商品</span>
+					<span class="f_r delivery-time">今天2小时内送达[可选]</span>
 				</div>
 				<!-- 商品 -->
-				<!-- <ul class="commodity-items products">
-					<li class="commodity-item clearfix" v-for="item in products">
-						<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
-						<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true"></product>
-					</li>
-				</ul> -->
-
-				<ul class="commodity-items products">
-					<li class="swiper-container commodity-item clearfix" v-for="item in products">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide swiper-content">
-								<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
-								<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true" v-on:callbackFunction="setDeleteProductId"></product>
-							</div>
-					        <div class="swiper-slide swiper-delete" @click="productDelete(item.id)"><span>删除</span></div>
-					    </div>	
-					</li>
-				</ul>
+				<div class="products-list-content">
+					<ul class="commodity-items products">
+						<li class="swiper-container commodity-item clearfix products-img">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide swiper-content" v-for="(item,index) in products" :key="index">
+									<!-- <i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i> -->
+									<!-- <product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true" v-on:callbackFunction="setDeleteProductId"></product> -->
+									<div class="img-item">
+										<img src="" v-lazy="item.image" alt="" class="product-img">
+									</div>
+								</div>
+						        <!-- <div class="swiper-slide swiper-delete" @click="productDelete(item.id)"><span>删除</span></div> -->
+						    </div>	
+						</li>
+					</ul>
+					<div class="product-count">
+						<span>共7件</span>
+					</div>
+				</div>
 			</div>
 			<!-- 商品总价 -->
 			<div class="total-price">
@@ -82,21 +86,21 @@
 	    </pull>	
 	    <!-- 结算 -->
 	    <div class="clearfix settlement">
-	    	<div class="f_l check-all-button">
+	    	<!-- <div class="f_l check-all-button">
 	    		<i class="marquee" @click="checkedAll" :class="{active:checkAll}"></i>
-				全选
-	    	</div>
+	    					全选
+	    	</div> -->
 	    	<div class="f_l card-info">
     			<!-- <span>合计<i>¥ {{products_total_price+cardMoney}}</i></span> -->
-    			<span>合计<i>¥ {{settlement_total_price}}</i></span>
-    			<span>
+    			<span>付款<i>¥ {{settlement_total_price}}</i></span>
+    			<!-- <span>
     				{{postage}}
     				<strong v-if="cardMoney!=0">
     					,包含会员卡费用<i>{{cardMoney}}</i>元
     				</strong>
-    			</span>
+    			</span>-->
     		</div>
-    		<div class="f_r settlement-button">去结算</div>
+    		<div class="f_r settlement-button">去支付</div>
 	    </div>
 	    <transition name="" mode="out-in">
     		<mprompt promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt>
@@ -104,10 +108,7 @@
 		<transition name="bottom" mode="out-in">
     		<addressChose v-show="addressChoseShow" v-on:addressChose="addressChoseAction(false)" :newText="true" :functionOrLink="true"></addressChose>
 		</transition>
-		<transition name="bottom" mode="out-in">
-    		<settleAccounts v-show="settleAccountsShow"></settleAccounts>
-		</transition>
-		<mfooter></mfooter>
+		<!-- <mfooter></mfooter> -->
 	</div>
 </template>
 <script>
@@ -115,12 +116,13 @@
 	import Swiper from 'swiper'
     import 'swiper/dist/css/swiper.min.css'
     import {getStore, isArray, toDecimal} from 'src/config/mUtils.js'
+
+    import mheader from 'src/components/mheader/mheader'
 	import pull from 'src/components/pull/pull'
-	import mfooter from 'src/components/mfooter/mfooter'
+	// import mfooter from 'src/components/mfooter/mfooter'
 	import product from 'src/components/product/product'
 	import mprompt from 'src/components/mprompt/mprompt'
 	import addressChose from 'src/page/ug/children/addressChose'
-	import settleAccounts from './children/settleAccounts'
 	export default{
 		data(){
 		  	return {
@@ -152,20 +154,20 @@
 				cardMoney: 0,
 				mpromptShow: false,
 				deleteProductId: '',
-				addressChoseShow: false,
-				settleAccountsShow: true
+				addressChoseShow: false
 		  	}
 	  	},
 		created (){
-	    	this.calculateTotal();
+	    	// this.calculateTotal();
 	    },
 	    mounted: function () {
 	    	this.SET_MPROMPTEXIST({status: true});
 	    	this.INIT_CARTLIST();
 	    	this.$nextTick(() => {
-				if (!this.swiperdelete) {
-					this.swiperDelete();
-					this.swiperReachEnd();
+				if (!this.imgSwiper) {
+					/*this.swiperDelete();
+					this.swiperReachEnd();*/
+					this.productsImg();
 				}
 			})
 
@@ -242,7 +244,35 @@
 			...mapMutations([
                 'SET_STATUS', 'DELETE_CART', 'INIT_CARTLIST', 'SET_MPROMPTEXIST', 'SET_MPROMPT'
             ]),
-            // 左滑商品，出现删除按钮
+            // 页面显示或者隐藏
+			newBackFunction(){
+				// this.$emit("newAction", false);
+			},
+            // 商品图片列表
+			productsImg() {
+				var _this=this;
+				this.imgSwiper=new Swiper('.products-img', {
+					slidesPerView: 'auto',
+					freeMode: true,
+					observer:true,
+      				observeParents:true,
+      				// resistanceRatio : 0,
+					on: {
+						init: function() {
+							/*//设置transition-duration值
+							this.setTransition(_this.tSpeed);
+							//Nav的可视宽度
+				  			_this.clientWidth = parseInt(this.$wrapperEl.css('width'));
+				  			_this.navWidth = 0;
+				  			for (var i = 0; i < this.slides.length; i++) {
+				  				_this.navWidth += parseInt(this.slides[i].offsetWidth)
+				  			}
+				  			_this.maxLeft=_this.navWidth-_this.clientWidth;*/
+				  		}
+				  	},
+				});
+			},
+            /*// 左滑商品，出现删除按钮
 			swiperDelete() {
 				let _this=this;
 				this.swiperdelete= new Swiper('.commodity-item',{
@@ -264,18 +294,11 @@
 				      	},
 					}
 				});		
-			}, 
-			// 单个商品滑动后，“删除”按钮出现后，其他商品“删除”按钮消失
+			}, */
+			/*// 单个商品滑动后，“删除”按钮出现后，其他商品“删除”按钮消失
 			swiperReachEnd(){
 				// let _this=this;
-				if (isArray(this.swiperdelete)) {
-					/*this.swiperdelete.forEach(function (item,index,array) {
-						item.on('reachEnd', function (e) {
-							for (let i=0;i<_this.swiperdelete.length;i++) {
-								if (i!==index) _this.swiperdelete[i].slideTo(0, 400, false);	
-							}
-						})
-					})*/	
+				if (isArray(this.swiperdelete)) {	
 					this.swiperdelete.forEach((item,index,array)=> {
 						item.on('reachEnd', (e)=> {
 							for (let i=0;i<this.swiperdelete.length;i++) {
@@ -284,8 +307,8 @@
 						})
 					})			
 				}
-			},
-			// 点击“删除”按钮后删除商品
+			},*/
+			/*// 点击“删除”按钮后删除商品
 			productDelete(deleteProductId) {
 				this.mpromptStatus(true);
 				this.deleteProductId=deleteProductId;
@@ -293,65 +316,7 @@
 			// 设定删除产品的id
 			setDeleteProductId(id){
 				this.deleteProductId=id;
-			},
-			// mpromptAction: function () {
-			// 	this.mprompt=true;
-			// },
-			/*//初始化数据
-			async initData(){
-				let products=[];
-				// console.log(this.s_cartList);
-				Object.values(this.s_cartList).forEach(item => {
-                    products.push({
-                    	"num": item.num,
-						"id": item.id,
-						"image": item.image,
-						"name": item.name,
-						"product_tags": item.product_tags,
-						"subtitle": item.subtitle,
-						"price_up": item.price_up,
-						"price_down": item.price_down,
-						"status": item.status
-                    })
-                })
-                this.products=products;
 			},*/
-			//商品总价计算
-		    calculateTotal(){
-		     //  	let all=0;
-		     //  	this.products.forEach(function (item) {
-			    //     if (item.checked) {
-			    //       all+=item.price*item.number; 
-			    //     } 
-			    // })  
-			    // this.totalPrice=all;
-			    // this.actuallyPaid();
-		    },
-		    //商品实付计算
-		    actuallyPaid(){
-		    	/*let all=0;
-		      	this.products.forEach(function (item) {
-			        if (item.benefit.orNot) {
-			          all+=item.benefit.text; 
-			        } 
-			    })  
-			    this.paid=this.totalPrice-all;
-			    this.freightCharge();
-			    this.totalCount();*/
-		    },
-		    //运费计算
-		    freightCharge(){
-		    	/*if (this.paid>=69) {
-		    		this.freight='免邮';		
-		    	} else{
-		    		// console.log(this.paid);
-		    		if (this.paid<=0) {
-		    			this.freight='免邮';			
-		    		}else{
-			    		this.freight=10;
-		    		}
-		    	}*/
-		    },
 		    //商品合计计算
 		    totalCount(){
 		    	this.total<0?0:this.total;
@@ -366,17 +331,6 @@
 		    	}
 		    		
 		    },
-		   	//单个商品减少
-		    reduce(item){
-		      	// if (item.number==0) return;
-		      	// item.number--;
-		      	// this.calculateTotal();
-		    },
-		    //单个商品增加
-		    add(item){
-		      	// item.number++;
-		      	// this.calculateTotal();
-		    },
 		    //单个商品选择
 		    productCheck(id){
 		    	// this.calculateTotal();
@@ -385,20 +339,6 @@
 		    },
 		    //商品全部选择
 		    checkedAll(){
-			    // this.checkAll=!this.checkAll;
-			    // if (this.checkAll) {
-			    //     let total=0;
-			    //     this.products.forEach(function (item) {
-			    //       	item.checked=true;
-			    //       	total+=item.price*item.number; 
-			    //     }) 
-			    //     this.totalPrice=total;     
-			    // } else{
-			    //     this.products.forEach(function (item) {
-			    //       	item.checked=false;
-			    //     }) 
-			    //     this.totalPrice=0;    
-			    // }
 			    Object.values(this.s_cartList).forEach(item => {
 			    	this.productCheck(item.id);
 			    })
@@ -444,25 +384,54 @@
 			},
 		},
 		components:{
+			mheader,
 			pull,
-	        mfooter,
+	        // mfooter,
 	        product,
 	        mprompt,
-	        addressChose,
-	        settleAccounts
+	        addressChose
 	    },
 	}
 </script>
 <style lang="less">
 	@import '~src/style/mixin';
-	.shopping-cart{
-		background-color: #f0f0f0;
-		font-size: 14px;
-		position: absolute;
-		left: 0;
+	.shopping-cart.modal-backdrop{
+		/* background-color: #f0f0f0;
+		font-size: 14px; */
+		// position: absolute;
+		position: fixed;
+		/* left: 0;
 		top: 0;
 		bottom: 0;
-		right: 0;
+		right: 0; */
+		z-index: 5;
+		padding-top: 43px;
+		.header-component{
+			z-index: 5;
+		}
+		.pull {
+		    background-color: #f0f0f0;
+		}
+		.select-address{
+			padding: 28px 34px 28px 38px;
+			font-size: 1.125rem;
+		    color: #474245;
+			box-sizing: border-box;
+			position: relative;
+			background: #fff;
+			&:before{
+				content: '';
+				.bg(20px,20px,transparent,'~src/images/icon/location.png',100% 100%);
+				.positionY();
+				left: 12px;
+			}
+			&:after{
+				content: '';
+				.bg(15px,15px,transparent,'~src/images/icon/right-jiantou.png',100% 100%);
+				.positionY();
+				right: 12px;
+			}
+		}
 		.address{
 			height: 49px;
 			text-align: center;
@@ -484,74 +453,91 @@
 			}
 		}
 		.commodity{
-			background-color: #fff;
+			// background-color: #fff;
 			.commodity-header{
-				position: relative;
-				height: 48px;
-				border-bottom: .5px solid #e6e6e6;
-				background-color: #fff;
+				/* position: relative;
+				height: 48px; */
+				// border-bottom: .5px solid #e6e6e6;
+				border: none;
+				/* background-color: #fff;
 				margin-top: 12px;
 				display: flex;
 				flex-direction: row;
 				align-items: center;
-				color: #262626;
+				color: #262626; */
+				// padding: 0 15px;
+				margin: 12px 15px 0;
+				box-sizing: border-box;
+				display: block;
+				line-height: 48px;
+				&:after{
+					content: '';
+					.bg(15px,15px,transparent,'~src/images/icon/right-jiantou.png',100% 100%);
+					.positionY();
+					right: 0;
+				}
+				.service{
+					border-left: 4px solid @color_main;
+					padding-left: 0.5rem;
+				}
+				.delivery-time{
+					margin-right: 1.2rem;
+					color: @color_main;
+					font-weight: 700;
+				}
 			}
-			.commodity-items{
-				.commodity-item{
-					background-color: #fff;
-				    display: flex;
-				    flex-direction: row;
-				    position: relative;
-				    border: none;
-				    border-color: #f5f5f5;
-				    border-bottom: 1px solid #f5f5f5;
-				    margin-top: 0;
-	    			.swiper-content{
-	    				width: 100%!important;
-	    				padding: 21px 0;
-	    			}
-	    			.swiper-delete{
-	    				// font-size: 1.2em;
-						width: 4em;
-						white-space: nowrap;
-						background: @color_main;
-						color: #fff;
-						position: relative;
-						span{
-							.positionCenter();
-						}
-					} 
-					.marquee{
-						float: left;
-						margin-top: 26px;
-						margin-right: 0;
-					}
-					.product{
-						float: right;
-						width: 85%;
-						margin-left: 2%;
-						border: none;
-						font-size: 14px;
-						padding: 0;
-						.product-item-img {
-						    width: 32%;
-						    img{
-		    					// .wh(70px,70px);
-		    					.wh(5.5rem,5.5rem);
+			.products-list-content{
+				margin: 0 15px;
+				border-top: 1px solid #f5f5f5;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				.commodity-items{
+					width: 78%;
+					.commodity-item{
+						/* background-color: #fff;
+					    display: flex;
+					    flex-direction: row;
+					    position: relative;
+					    border: none;
+					    border-color: #f5f5f5;
+					    border-bottom: 1px solid #f5f5f5;
+					    margin-top: 0; */
+		    			.swiper-content{
+		    				width: auto!important;
+		    				padding: 18px 0;
+		    			}
+						.img-item{
+							display: inline-block;
+							width: 41px;
+							height: 41px;
+							padding: 3px;
+							margin-right: 8px;
+							background: #FFF;
+							border-radius: 4px;
+							position: relative;
+							.product-img{
+								width: 100%;
+								height: 100%;
 							}
 						}
-						.product-info{
-							width: 68%;
-							padding-left: 0;
-							.name{
-								padding-top: 0;
-							}
-						}
-						.cart-operate .cart-action {
-						    bottom: -1.5rem;
-						}
+					}	
+				}
+				.product-count{
+					width: 22%;
+					position: relative;
+					&:after{
+						content: '';
+						.bg(15px,15px,transparent,'~src/images/icon/right-jiantou.png',100% 100%);
+						.positionY();
+						right: 0;
 					}
-				}	
+					span{
+						font-size: 0.75rem;
+						.positionY();
+						left: 1rem;
+					}
+				}
 			}
 		}
 		.total-price{
@@ -562,21 +548,32 @@
 			background-color: #fff;
 			line-height: 1.4;
 			strong{
-				float: right;
+				// float: right;
 			}
 			.count-total{
-				border-bottom: 1px solid #f5f5f5;
-				padding: 15px;
+				/* border-bottom: 1px solid #f5f5f5;
+				padding: 15px; */
 			}
 			.benefit-total{
-				padding: 15px;
-				border-bottom: 1px solid #f5f5f5;
+				
+				padding: 0;
+				border: none;
+				/* padding: 15px;
+				border-bottom: 1px solid #f5f5f5; */
 				.product-benefit{
 					strong{
 						color: rgb(255, 72, 145);
 					}
 				}
+				.paid{
+					padding: 15px;
+					border-bottom: 1px solid #f5f5f5;
+					box-sizing: border-box;
+				}
 				.freight{
+					padding: 15px;
+					border-bottom: 1px solid #f5f5f5;
+					box-sizing: border-box;
 					i{
 						font-size: 12px;
 						color: #969696;
@@ -666,12 +663,15 @@
 			}
 		}
 		.settlement{
-			position: fixed;
+			/* position: fixed;
 			left: 0;
 			bottom: 53px;
 			z-index: 2;
 			.wh(49px);
-			background-color: #fff;
+			background-color: #fff; */
+
+			bottom: 0;
+			border-top: 1px solid #e6e6e6;
 			.check-all-button{
 				.wh(100%,24%);
 				line-height: 49px;
@@ -685,7 +685,7 @@
 				}
 			}
 			.card-info{
-				width: 44%;
+				/* width: 44%;
 				display: flex;
 				flex-direction: column;
 				background: #fff;
@@ -698,8 +698,12 @@
 				font-size: 14px;
 				line-height: 15px;
 				box-sizing: border-box;
-				padding:10px 0; 
-				span{
+				padding:10px 0;  */
+				padding: 0;
+				line-height: 49px;
+				text-indent: 1rem;
+				font-size: 1.0625rem;
+				/* span{
 					&:nth-of-type(1){
 						i{
 							color: rgb(255, 72, 145);
@@ -709,10 +713,10 @@
 						font-size: 10px;
 						color: rgb(150, 150, 150);
 					}
-				}
+				} */
 			}
 			.settlement-button{
-				font-size: 1.0625rem;
+				/* font-size: 1.0625rem;
 				background: #ff4891;
 				.wh(100%,26%);
 				line-height: 49px;
@@ -725,11 +729,11 @@
 					line-height: 49px;
 					vertical-align: middle;
 					margin-left: 0.1em;
-				}
+				} */
 			}
 		}
 	}
-	.marquee{
+	/* .marquee{
 		display: inline-block;
 		text-align: center;
 		padding: 6px 12px 0 10px;
@@ -741,5 +745,5 @@
 	}
 	.marquee.active{
 		.bg(22px,22px,transparent,'~src/images/icon/checked.png',100% 100%);
-	}
+	} */
 </style>

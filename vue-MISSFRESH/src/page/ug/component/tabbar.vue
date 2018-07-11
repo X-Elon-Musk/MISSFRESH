@@ -290,7 +290,7 @@
 			/*...mapMutations([
                 'SET_POSITION'
             ]),*/
-			//获取index数据
+			// 获取index数据
 			async getDataPageIndex(product_index) {
 				let response=await getDataPageIndexAxios(product_index);
 				let product_list=response.product_list;
@@ -362,7 +362,7 @@
 					this.view=response;
 				})
 			},*/
-			//导航栏
+			// 导航栏
 			tab() {
 				var _this=this;
 				//this.navSwiper=new Swiper(this.$refs.tabNav, {
@@ -387,7 +387,7 @@
 				  	},
 				});
 			},
-			//导航栏对应的page页面
+			// 导航栏对应的page页面
 			page() {
 				var _this=this;
 				this.pageSwiper = new Swiper(this.$refs.page, {
@@ -405,7 +405,7 @@
 				  	}
 				});
 			},
-			//点击导航	
+			// 点击导航	
 			tabClick(index,event) {
 				/*this.tabIndex=index;
 				//对应的内容显示
@@ -416,13 +416,13 @@
 					this.getDataPageIndex(index);		
 				}
 			},
-			//对应内容显示
+			// 对应内容显示
 			pageShow(index) {
 				this.tabIndex=index;
 				//对应的内容显示
 				this.pageSwiper.slideTo(index, 0);
 			},
-			//导航移动
+			// 导航移动
 			slideMove(index,navSlideWidth) {
 				var navSwiper=this.navSwiper,
 				clientWidth=this.clientWidth;
@@ -436,7 +436,7 @@
 				navSwiper.setTranslate(-left);
 				this.pageShow(index);
 			},
-	        //分类切换显示状态
+	        // 分类切换显示状态
 	        showClassify() {
 	        	this.classifyState=true;
 	        },
