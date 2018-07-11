@@ -18,16 +18,13 @@
 	@import '~src/style/mixin';
 	.guarantee{
 		flex:1;
-		font-size: 12px;
-		line-height: 49px;
+		font-size: 0.75rem;
+		line-height: 3.0625rem;
 		text-align: center;
 		.guarantee-icon{
-			vertical-align: top;
 			display: inline-block;
-			.wh(16px,16px);
-			margin-top: 16px;
-			background-repeat: no-repeat;
-			background-size: 100% 100%;
+			.wh(1.0rem,1.0rem);
+			vertical-align: sub;
 		}
 		strong{
 			vertical-align: top;

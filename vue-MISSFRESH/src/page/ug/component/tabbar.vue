@@ -29,6 +29,7 @@
 		      	<productPage :products="products[0]" :banner="banner[0]" class="product_index_0">
 		      		<guarantee :brands="brands[0]"></guarantee>
             		<card :categoryareas="categoryareas[0]"></card>
+        			<!-- {{products[0]}} -->
 		      	</productPage>
 		      	<!-- <productPage :products="products[1]||[]" :banner="banner[1]||[]" class="product_index_0"></productPage> -->
 		      	<productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage>
@@ -302,6 +303,7 @@
 				}
 				this.$set(this.banner, product_index, product_list.banner);
 				this.$set(this.products, product_index, product_list.products);
+				console.log(this.products[0]);
 				this.loading=false;
 				this.$nextTick(() => {
 					if (!this.navSwiper) this.tab();

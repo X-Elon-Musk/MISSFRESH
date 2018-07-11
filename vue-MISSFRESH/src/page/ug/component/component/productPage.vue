@@ -4,11 +4,9 @@
             <gif></gif>
             <!-- 内容部分 -->
             <carousel :banner="banner" :link="true"></carousel>
-            <!-- <guarantee :brands="brands"></guarantee>
-            <card :categoryareas="categoryareas"></card> -->
             <slot></slot>
             <!-- 上滑加载、下拉刷新 -->
-            <div class="clearfix list-group-item ticket-item" v-for="(item,index) in (products||[]).slice(productsStart,productsEnd)" :key="index">
+            <div class="clearfix list-group-item ticket-item" v-for="(item,index) in productsShowList" :key="index">
                 <product :product="item" :subtitle="true" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="false" v-on:callbackFunction=""></product>
             </div>
         </pullRefresh>
@@ -19,29 +17,29 @@
     import pullRefresh from 'src/components/pullRefresh/pullRefresh'
     import gif from 'src/components/gif/gif'
     import carousel from 'src/components/carousel/carousel'
-    import guarantee from './component/guarantee'
-    import card from './component/card'
     import product from 'src/components/product/product'
 
-    // import {getValue} from 'src/config/mUtils'
     export default{
 		data(){
 			return {
-                //当前导航栏所处位置
+                // 当前导航栏所处位置
                 tabIndex: 0,
-				productsStart: 0,
                 productsEnd: 8,
-                pullEnd: false
+                pullEnd: false,
 			}
 		},
-        /*watch: {
-            products: function () {
-                this.productsShow=this.products.slice(this.productsStart,this.productsEnd);
-            }
-        },*/
-        // props: ['products','banner','brands','categoryareas'],
         mounted: function () {
             this.SET_MPROMPTEXIST({status: false});
+        },
+        computed: {
+            // 产品列表
+            productsList: function (){
+                return this.products?this.products:[];
+            },
+            // 显示的产品
+            productsShowList: function (){
+                return this.productsList.slice(0,this.productsEnd);
+            },
         },
         methods: {
             ...mapMutations([
@@ -49,9 +47,10 @@
             ]),
             // 上滑加载
             getData() {
+                let length=this.productsList.length;
                 this.productsEnd+=8;
-                if (this.productsEnd>=this.products.length) {
-                    this.productsEnd=this.products.length;
+                if (this.productsEnd>=length) {
+                    this.productsEnd=length;
                     this.pullEnd=true;
                 }
             },
@@ -61,8 +60,6 @@
             pullRefresh,
             gif,
             carousel,
-            guarantee,
-            card,
             product
         }
 	}

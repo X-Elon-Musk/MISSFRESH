@@ -1,6 +1,7 @@
 <template>
     <div class="product">
-    	<router-link :to="{path: '/ug/productDetail',query:{product_id: product.product_id,product_index: product.product_index}}" tag="div" class="clearfix product-link">
+    	<!-- <router-link :to="{path: '/ug/productDetail',query:{product_id: product.product_id,product_index: product.product_index}}" tag="div" class="clearfix product-link"> -->
+    	<div class="clearfix product-link" @click="productDetail(product.product_id,product.product_index)">
 			<div class="f_l product-item-img">
 				<img src="" v-lazy="product.image" alt="" class="product-img">
 				<img :src="product.promote_tag" v-if="product.promote_tag" alt="" class="product-tag">
@@ -17,11 +18,11 @@
 					<price :price="priceUp.price" class="price-original price-up"></price>
 					
 					<div class="cart-operate">
-						<img :src="product.cart_image" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
+						<img :src="product.cart_image" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @click.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
 						<div class="clearfix cart-action" v-if="productNum">
-							<span class="minus-action" @touchstart.stop="minusOutCart(product.id,$event)"></span> 
+							<span class="minus-action" @click.stop="minusOutCart(product.id,$event)"></span> 
 							<span class="count">{{productNum}}</span> 
-							<span class="add-action" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"></span>
+							<span class="add-action" @click.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"></span>
 						</div>
 					</div>
 				</div>
@@ -31,7 +32,8 @@
 				</p> -->
 				
 			</div>
-		</router-link>
+		<!-- </router-link> -->
+		</div>
 		<!-- <div class="cart-operate">
 			<img :src="product.cart_image" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
 			<div class="clearfix cart-action" v-if="productNum">
@@ -57,33 +59,30 @@
 		},
 		computed: {
 			...mapState([
-                's_cartList','s_mpromptStatus'
+                's_cartList', 's_mpromptStatus'
             ]),
             //shopCart变化的时候重新计算当前商品的数量
             productNum: function (){
-
-                let s_cartList=this.s_cartList;
-                /*if (s_cartList&&s_cartList[this.product.id]) {
-                    return s_cartList[this.product.id]['num'];
-                } else {
-                    return 0;
-                }*/
-                return s_cartList&&s_cartList[this.product.id] ? s_cartList[this.product.id]['num'] : 0;
+				let s_cartList=this.s_cartList;
+               	return s_cartList&&s_cartList[this.product.id] ? s_cartList[this.product.id]['num'] : 0;
             },
 		},
 		methods: {
 			...mapMutations([
-                'ADD_CART','REDUCE_CART','SET_MPROMPT', 'INIT_CARTLIST'
+                'ADD_CART', 'REDUCE_CART', 'INIT_CARTLIST'
             ]),
+            // 减少单个商品数量
             minusOutCart(id,event) {
 				this.REDUCE_CART({id});
-				/*if (this.mpromptExist&&this.s_mpromptStatus) {
-					this.SET_MPROMPT({status: true});			
-				}*/
 				this.$emit("callbackFunction", id);
 			},
+			// 增加单个商品数量
 			addToCart(id,image,name,product_tags,price_up,price_down,event) {
 				this.ADD_CART({id,image,name,product_tags,price_up,price_down});
+			},
+			// 跳转到商品详情页
+			productDetail(product_id,product_index) {
+				this.$router.replace({path: '/ug/productDetail',query:{product_id: product_id,product_index: product_index}});
 			}
 		},
 		props: ['product','subtitle','priceUp','priceDown','mpromptExist'],
@@ -129,12 +128,11 @@
 				text-align: left;
 				margin: 0;
 				color: #262626;
-				line-height: 20px;
+				line-height: 1.575rem;
 				position: relative;
-				// padding-left: 2%;
 				box-sizing: border-box;
 				.name{
-					font-size: 14px;
+					font-size: 1rem;
 					white-space: nowrap;
 					overflow: hidden;
 					text-overflow: ellipsis;
@@ -142,7 +140,7 @@
 					color: #474245;
 				}
 				.point{
-					font-size: 12px;
+					font-size: 0.875rem;
 					color: #969696;
 					white-space: nowrap;
 					text-overflow: ellipsis;
@@ -152,23 +150,24 @@
 					li{
 						display: inline-block;
 						border-radius: 2px;
-						font-size: 9px;
-						height: 13px;
-						line-height: 11px;
+						font-size: 0.75rem;
+						line-height: 1;
 						border: 1px solid #d165e1;
 						padding: 1px;
 						background: #fff;
-						margin-right: 5px;
+						margin-right: 0.3125rem;
 						border-color: @color_main;
 						color: @color_main;
 						opacity: 0.5;
 					}
 				}
 				.price{
-					line-height: 1.4;
-					font-size: 12px;
+					line-height: 1;
 					color: @color_main;
 					padding-top: 18px;
+					.price-component{
+						font-size: 0.75rem; 
+					}
 					.price-original{
 						text-decoration: line-through;
 						color: @color_gray;

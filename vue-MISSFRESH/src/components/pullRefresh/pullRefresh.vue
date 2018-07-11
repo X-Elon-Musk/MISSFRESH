@@ -34,7 +34,7 @@
 		methods: {
 			//下拉刷新、上滑加载初始化函数
 			refresh() {
-				var _this=this;
+				let _this=this;
 				this.pullRefresh= new Swiper('.scroll',{
 					slidesOffsetBefore: 0,
 					direction: 'vertical',
@@ -59,11 +59,11 @@
 			},
 			// 下拉刷新、上滑加载动作触摸释放时执行
 			touchEnd() {
-				var _this=this;
+				let _this=this;
 				//console.log(this.translate,this.startPosition);
 				if (this.translate<this.startPosition) {
 	                setTimeout(()=>{
-	                	//发送ajax请求
+	                	//发送请求
 	                	if(!this.pullEnd) {
 	                		this.$emit('getData');
 	                		// this.pullRefresh.update(); // 重新计算高度;

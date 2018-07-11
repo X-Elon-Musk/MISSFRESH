@@ -20,7 +20,7 @@
 </script>
 <style lang="less">
 	.guarantee-container{
-		height: 49px;
+		height: 3.0625rem;
 		display: flex;
 		.guarantee-icons{
 			flex: 1;
