@@ -3,7 +3,7 @@
 		<mheader title="商品列表" :functionOrLink="true" v-on:backFunction="backFunction"></mheader>
 		<pull>
 			<ul class="settlement-list-products">
-				<li class="settlement-list-product clearfix" v-for="item in products">
+				<li class="settlement-list-product clearfix" v-for="(item,index) in products" :key="index">
 					<product :product="item" :subtitle="false" :priceUp="item.price_up" :priceDown="item.price_down"></product>
 				</li>
 			</ul>

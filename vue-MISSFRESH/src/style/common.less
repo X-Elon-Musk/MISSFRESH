@@ -1,3 +1,5 @@
+@import './mixin';
+
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code,
@@ -179,8 +181,9 @@ ul,li{
 
 
 .button-common{
-    width: 100%;
-    height: 2.4em;
+    /* width: 100%;
+    height: 2.4em; */
+    .wh(2.4em);
     background: rgb(255, 72, 145);
     text-align: center;
     color: #fff;
@@ -197,13 +200,27 @@ ul,li{
 }
 
 .profile-item-page{
-    position: fixed;
+    /* position: fixed;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 3;
+    z-index: 3; */
+    .fullscreen(3);
     background: #fff;
     padding-top: 42px;
     box-sizing: border-box;
+}
+.marquee{
+    display: inline-block;
+    text-align: center;
+    padding: 6px 12px 0 10px;
+    box-sizing: border-box;
+    display: inline-block;
+    .bg(22px,22px,transparent,'~src/images/icon/unchecked.png',100% 100%);
+    margin-right: 11px;
+    margin-left: 11px;
+}
+.marquee.active{
+    .bg(22px,22px,transparent,'~src/images/icon/checked.png',100% 100%);
 }

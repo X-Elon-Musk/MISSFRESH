@@ -4,17 +4,21 @@
     		<div class="header-right-buttom" @click="newAction(true)">添加</div>
     	</mheader>
     	<ul class="address-list">
-    		<li class="address-item" v-for="item in addressList">
-    			<div class="address-content">
-    				<h2 class="address-text address-name">{{item.name}}</h2>
-    				<p class="address-text address-phone">{{item.phone_number}}</p>
-    				<p class="address-text address-id">
-    					<span class="address-types" v-if="item.tag === 'HOME'">[住宅]</span>
-    					<span class="address-types" v-else-if="item.tag === 'COMPANY'">[公司]</span>
-    					<span class="address-types" v-else-if="item.tag === 'SCHOOL'">[学校]</span>
-    					<span class="address-types" v-else>[其他]</span>
-    					<span class="address-detail">{{item.province+item.city+item.area+'('+item.address_detail+')'}}</span>
-    				</p>
+    		<li class="address-item" v-for="(item,index) in addressList" :key="index">
+    			<div class="address-content-container" :style="{width:isComponent?'85%':'92%'}" @click="checkedAddress(index)">
+	    			<!-- <i class="marquee" v-show="isComponent" :class="{active:true}"></i> -->
+	    			<i class="marquee" v-show="isComponent" :class="{active:index==addressChose}"></i>
+	    			<div class="address-content">
+	    				<h2 class="address-text address-name">{{item.name}}</h2>
+	    				<p class="address-text address-phone">{{item.phone_number}}</p>
+	    				<p class="address-text address-id">
+	    					<span class="address-types" v-if="item.tag === 'HOME'">[住宅]</span>
+	    					<span class="address-types" v-else-if="item.tag === 'COMPANY'">[公司]</span>
+	    					<span class="address-types" v-else-if="item.tag === 'SCHOOL'">[学校]</span>
+	    					<span class="address-types" v-else>[其他]</span>
+	    					<span class="address-detail">{{item.province+item.city+item.area+'('+item.address_detail+')'}}</span>
+	    				</p>
+	    			</div>
     			</div>
     			<div class="address-write" @click="writeAddress(item)">编辑</div>
     		</li>
@@ -37,7 +41,8 @@
 			return {
 				newShow: false,
 				addressList: [],
-				defaultAddress: ''
+				defaultAddress: '',
+				addressChose: 99999
 			}
 		},
 		mounted (){
@@ -78,6 +83,13 @@
 			backFunction(){
 				this.$emit("backFunction");
 			},
+			// 选择收货地址
+			checkedAddress(index){
+				console.log(this);
+				if (this.isComponent) {
+					this.addressChose=index;	
+				}
+			}
 		},
 		props: ['isComponent'],
 		components: {
@@ -109,37 +121,44 @@
 			    background: #fff;
 			    margin-bottom: 9px;
 			    position: relative;
-				.address-content{
-					width: 83%;
-					padding-left: 20px;
-					box-sizing: border-box;
-					// .font(1.125rem,0.875rem,#4b4b4b);
-					.font(26px,14px,#4b4b4b);
-					.address-text{
-						// .font(1.7em,0.8em,#4b4b4b);
-						white-space: nowrap;
-						overflow: hidden;
-						text-overflow: ellipsis;
-					}
-					.address-phone{
-					    color: #666;
-					    // font-size: 12px;
-					}
-					.address-id{
-						span{
-							vertical-align: middle;
+		        
+		        .marquee{
+		        	margin-right: 0;
+		        }
+		        .address-content-container{
+		        	width: 83%;
+					width: 74%;
+					display: flex;
+			        flex-direction: row;
+			        align-items: center;
+			        .address-content{
+						width: 90%;
+						padding-left: 20px;
+						box-sizing: border-box;
+						.font(26px,14px,#4b4b4b);
+						.address-text{
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
 						}
-						.address-types{
-							color: @color_main;
-							margin-right: 4px;
+						.address-phone{
+						    color: #666;
+						}
+						.address-id{
+							span{
+								vertical-align: middle;
+							}
+							.address-types{
+								color: @color_main;
+								margin-right: 4px;
+							}
 						}
 					}
-				}
+		        }
 				.address-write{
 					.positionY();
 					right: 7%;
 					padding: 0.375rem;
-					// font-size: 0.8em;
 					font-size: 13px;
 					color: #969696;
 					&:before{

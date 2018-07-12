@@ -12,13 +12,6 @@
 					<span class="service">全国送商品</span>
 				</div>
 				<!-- 商品 -->
-				<!-- <ul class="commodity-items products">
-					<li class="commodity-item clearfix" v-for="item in products">
-						<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
-						<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true"></product>
-					</li>
-				</ul> -->
-
 				<ul class="commodity-items products">
 					<li class="swiper-container commodity-item clearfix" v-for="item in products">
 						<div class="swiper-wrapper">
@@ -732,18 +725,5 @@
 				}
 			}
 		}
-	}
-	.marquee{
-		display: inline-block;
-		text-align: center;
-		padding: 6px 12px 0 10px;
-		box-sizing: border-box;
-		display: inline-block;
-		.bg(22px,22px,transparent,'~src/images/icon/unchecked.png',100% 100%);
-		margin-right: 11px;
-		margin-left: 11px;
-	}
-	.marquee.active{
-		.bg(22px,22px,transparent,'~src/images/icon/checked.png',100% 100%);
 	}
 </style>
