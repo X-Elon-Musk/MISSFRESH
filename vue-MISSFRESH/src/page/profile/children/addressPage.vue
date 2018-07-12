@@ -6,7 +6,6 @@
     	<ul class="address-list">
     		<li class="address-item" v-for="(item,index) in addressList" :key="index">
     			<div class="address-content-container" :style="{width:isComponent?'85%':'92%'}" @click="checkedAddress(index)">
-	    			<!-- <i class="marquee" v-show="isComponent" :class="{active:true}"></i> -->
 	    			<i class="marquee" v-show="isComponent" :class="{active:index==addressChose}"></i>
 	    			<div class="address-content">
 	    				<h2 class="address-text address-name">{{item.name}}</h2>
@@ -60,10 +59,6 @@
         methods: {
 			// 收货地址列表
 			getAddressList(){
-				/*console.log('++++++++++++++');
-				console.log('++++++++++++++');
-				console.log(this.s_userInfo);
-				console.log('++++++++++++++');*/
 				let userId=getStore('userId');
 				getAddressListAxios(this.s_userInfo.userId||userId).then(response=>{
 					this.addressList=response;
@@ -85,9 +80,10 @@
 			},
 			// 选择收货地址
 			checkedAddress(index){
-				console.log(this);
+				// console.log(this);
 				if (this.isComponent) {
 					this.addressChose=index;	
+					this.backFunction();
 				}
 			}
 		},
@@ -183,15 +179,10 @@
 			line-height: 1.2em;
 		}
 		.add-address-button{
-		    // height: 38px;
 		    width: 100%;
 	        height: 3rem;
 		    background: @color_main;
 		    text-align: center;
-		    // color: #fff;
-		    // line-height: 38px;
-		    // font-size: 1.1rem;
-	     //    line-height: 3rem;
 	        .font(3rem,1.1rem,#fff);
     		font-weight: 900;
 		    border-radius: 5px;
