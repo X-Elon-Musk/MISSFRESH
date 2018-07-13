@@ -1,6 +1,6 @@
 <template>
 	<div class="shopping-cart">
-		<pull>
+		<pull :backFunction="true" v-on:backFunction="changeHeaderText">
 			<div class="address" @click="addressChoseAction(true)">
 				<span class="coordinate"></span>
 				<span class="address-text">{{choseAddress}}</span>
@@ -98,7 +98,7 @@
     		<addressChose v-show="addressChoseShow" v-on:addressChose="addressChoseAction(false)" :newText="true" :functionOrLink="true"></addressChose>
 		</transition>
 		<transition name="bottom" mode="out-in">
-    		<settleAccounts v-show="settleAccountsShow" v-on:backFunction="backFunction(false)"></settleAccounts>
+    		<settleAccounts v-show="settleAccountsShow" ref="settleAccounts" v-on:backFunction="backFunction(false)"></settleAccounts>
 		</transition>
 		<mfooter></mfooter>
 	</div>
@@ -439,6 +439,15 @@
 			backFunction(status){
 				this.settleAccountsShow=status;
 			},
+			// 操作收货地址页面显示
+			addressChoseAction(status){
+				this.addressChoseShow=status;
+			},
+			// 改变头部文字
+			changeHeaderText(){
+				console.log('--------');
+				this.$refs.settleAccounts.changeHeaderText()
+			}
 		},
 		components:{
 			pull,

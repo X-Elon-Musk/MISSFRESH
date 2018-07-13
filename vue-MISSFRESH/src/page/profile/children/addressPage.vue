@@ -1,11 +1,11 @@
 <template>
     <div class="profile-item-page profile-item-page-address" :style="{zIndex:addressIndex}">
     	<mheader title="收货地址" :functionOrLink="isComponent" v-on:backFunction="backFunction">
-    		<div class="header-right-buttom" @click="newAction(true)">添加</div>
+    		<div class="header-right-buttom" v-show="!isComponent" @click="newAction(true)">添加</div>
     	</mheader>
     	<ul class="address-list">
     		<li class="address-item" v-for="(item,index) in addressList" :key="index">
-    			<div class="address-content-container" :style="{width:isComponent?'85%':'92%'}" @click="checkedAddress(index)">
+    			<div class="address-content-container" :style="{width:isComponent?'85%':'92%'}" @click="checkedAddress(item,index)">
 	    			<i class="marquee" v-show="isComponent" :class="{active:index==addressChose}"></i>
 	    			<div class="address-content">
 	    				<h2 class="address-text address-name">{{item.name}}</h2>
@@ -23,7 +23,9 @@
     		</li>
     	</ul>
     	<div class="not-address" v-show="addressList.length==0">您还没有收货地址,请新增地址</div>
-    	<div class="add-address-button" :style="{bottom:isComponent?0:'53px'}" @click="newAction(true)">新增收货地址</div>
+    	<!-- <div class="add-address-button" :style="{bottom:isComponent?'0px':'53px'}" @click="newAction(true)">新增收货地址</div> -->
+    	<div class="add-address-button" v-if="!isComponent" @click="newAction(true)">新增收货地址</div>
+    	<div class="add-address-button add-address-button-isComponent" v-else @click="newAction(true)">新增收货地址</div>
 		<transition name="bottom" mode="out-in">
     		<addressNew v-show="newShow" v-on:newAction="newAction" v-on:getAddressList="getAddressList" :defaultAddress="defaultAddress" :newShow="newShow"></addressNew>
 		</transition>
@@ -79,10 +81,12 @@
 				this.$emit("backFunction");
 			},
 			// 选择收货地址
-			checkedAddress(index){
+			checkedAddress(item,index){
 				// console.log(this);
 				if (this.isComponent) {
 					this.addressChose=index;	
+					
+					this.$emit("addressConfirm", item);
 					this.backFunction();
 				}
 			}
@@ -190,6 +194,9 @@
 		    left: 0;
 		    bottom: 53px;
 		    z-index: 1;
+		}
+		.add-address-button-isComponent{
+			bottom: 0;
 		}
 	}
 </style>

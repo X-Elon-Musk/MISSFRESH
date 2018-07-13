@@ -301,6 +301,7 @@
 		}
 		.location-list{
 		    background: #fff;
+		    padding-bottom: 53px;
 		    .location-mine{
 		    	border-bottom: 0.0625rem solid #ddd;
 		    	.font(2.0625rem,0.75rem,#666);

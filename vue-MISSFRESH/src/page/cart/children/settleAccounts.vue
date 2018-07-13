@@ -2,12 +2,28 @@
 	<div class="shopping-cart modal-backdrop">
 		<mheader title="订单确认" :functionOrLink="true" v-on:backFunction="backFunction"></mheader>
 		<pull>
-			<div class="select-address" @click="addressAction(true)">点击选择收货地址</div>
-			<div class="address" @click="addressChoseAction(true)" v-show="false">
+			<div class="select-address" @click="addressAction(true)" v-show="!choseAddress.tag">点击选择收货地址</div>
+			<!-- <div class="address" @click="addressChoseAction(true)" v-show="false">
 				<span class="coordinate"></span>
 				<span class="address-text">{{choseAddress}}</span>
 				<span class="arrow"></span>
-			</div>
+			</div> -->
+			<div class="address-content select-address-content" @click="addressAction(true)" v-show="choseAddress.tag">
+    			<div class="address-detail">
+    				<div class="ellips address-info">
+    					<span class="address-tag" v-if="choseAddress.tag === 'HOME'">住宅</span>
+    					<span class="address-tag" v-else-if="choseAddress.tag === 'COMPANY'">公司</span>
+    					<span class="address-tag" v-else-if="choseAddress.tag === 'SCHOOL'">学校</span>
+    					<span class="address-tag" v-else>其他</span>
+    					<span class="address-location">{{choseAddress.province+' '+choseAddress.city+' '+choseAddress.area}}</span>
+    				</div> 
+    				<div class="ellips address-info address-info-detail">{{choseAddress.address_detail}}</div>
+    				<div class="address-owner">
+    					<span class="owner-name">{{choseAddress.name}}</span> 
+    					<span class="owner-phone">{{choseAddress.phone_number}}</span>
+    				</div>
+    			</div>
+    		</div>
 			<div class="commodity">
 				<div class="clearfix commodity-header">
 					<!-- <i class="marquee" @click="checkedAll" :class="{active:checkAll}"></i> -->
@@ -111,7 +127,7 @@
 
 		<transition name="bottom" mode="out-in">
     		<!-- <address v-show="addressPage"></address> -->
-    		<addressPage :style="{zIndex:5}" v-show="addressPageShow" :isComponent="true" v-on:backFunction="addressAction(false)"></addressPage>
+    		<addressPage :style="{zIndex:5}" v-show="addressPageShow" :isComponent="true" v-on:backFunction="addressAction(false)" v-on:addressConfirm="addressConfirm"></addressPage>
 		</transition>
 		<transition name="bottom" mode="out-in">
     		<!-- <address v-show="addressPage"></address> -->
@@ -167,7 +183,8 @@
 				deleteProductId: '',
 				// addressChoseShow: true,
 				addressPageShow: false,
-				settlementListShow: false
+				settlementListShow: false,
+				choseAddress: {}
 		  	}
 	  	},
 		created (){
@@ -182,6 +199,7 @@
 					this.swiperReachEnd();*/
 					this.productsImg();
 				}
+				console.log(this.pull);
 			})
 
 	    },
@@ -248,10 +266,10 @@
 			settlement_total_price: function () {
 				return toDecimal(this.products_total_price+this.cardMoney);
 			},
-			// 配送地址
+			/*// 配送地址
             choseAddress: function () {
             	return this.s_choseAddress ? this.s_choseAddress : '';
-            },
+            },*/
 	    },
 		methods: {
 			...mapMutations([
@@ -392,10 +410,10 @@
 				this.swiperDelete();
 				this.swiperReachEnd();
 			},
-			// 操作选择收货地址
+			/*// 操作选择收货地址
 			addressChoseAction(status){
 				this.addressChoseShow=status;
-			},
+			},*/
 			// 操作收货地址
 			addressAction(status){
 				this.addressPageShow=status;
@@ -404,6 +422,15 @@
 			settlementListAction(status){
 				this.settlementListShow=status;
 			},
+			// 收货地址确认
+			addressConfirm(item){
+				this.choseAddress=item;
+				console.log(this.choseAddress);
+			},
+			// 改变头部文字
+			changeHeaderText(){
+				console.log(555);
+			}
 		},
 		components:{
 			mheader,
@@ -456,7 +483,70 @@
 				right: 12px;
 			}
 		}
-		.address{
+		.select-address-content{
+	    	padding: 0 0.9375rem 5px 0.9375rem;
+	    	border-bottom: 0.0625rem solid #f5f5f5;
+	    	box-sizing: border-box;
+	    	background: #fff;
+	    	position: relative;
+	    	&:after {
+    			content: '';
+    			.bg(100%,5px,transparent,'~images/icon/cut-off-line.png',100% 100%);
+    			position: absolute;
+    			left: 0;
+    			bottom: 0;
+    		}
+	    	.address-detail{
+	    		padding: 1.25rem 0;
+	    		white-space: nowrap;
+	    		overflow: hidden;
+	    		.font(1.25rem,1rem,#b8b8b8);
+	    		position: relative;
+	    		&:after {
+	    			content: '';
+	    			.bg(1.2rem,1.2rem,transparent,'~images/icon/right-jiantou.png',100% 100%);
+	    			.positionY();
+	    			right: 0;
+	    		}
+	    		.address-info{
+	    			padding: 4px 0;
+	    			.address-tag{
+	    				background-color: @bg_color;
+	    				color: @color_common;
+	    				font-size: 0.5rem;
+	    				border-radius: 0.125rem;
+    				    border: 1px solid #bbb;
+    				    vertical-align: middle;
+	    			}
+	    			.address-location{
+	    				display: inline-block;
+	    				width: 85%;
+	    				overflow: hidden;
+	    				text-overflow: ellipsis;
+	    				white-space: nowrap;
+	    				vertical-align: middle;
+	    				color: #4b4b4b;
+	    			}
+	    		}
+	    		.address-info-detail{
+	    			font-size: 20px;
+	    			color: #474245;
+	    			font-weight: 500;
+	    			padding-bottom: 7px;
+	    		}
+	    		.address-owner{
+	    			line-height: 1.5rem;
+	    			color: initial;
+	    			.owner-name{
+
+	    			}
+	    			.owner-phone{
+
+	    			}
+	    		}
+	    	}
+	    }
+		/* .address{
 			height: 49px;
 			text-align: center;
 			line-height: 49px;
@@ -475,7 +565,7 @@
 				vertical-align: middle;
 				.bg(16px,16px,transparent,'~src/images/icon/cart-position-select.png',100% 100%);
 			}
-		}
+		} */
 		.commodity{
 			// background-color: #fff;
 			.commodity-header{
