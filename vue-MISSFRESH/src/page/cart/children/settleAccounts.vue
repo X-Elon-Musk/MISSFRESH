@@ -55,7 +55,6 @@
 			<div class="total-price">
 		        <div class="count-total">
 		        	<span>商品总价</span>
-		        	<!-- <strong>¥ {{totalPrice}}</strong> -->
 		        	<strong>¥ {{total_price}}</strong>
 			    </div>
 			    <div class="benefit-total">
