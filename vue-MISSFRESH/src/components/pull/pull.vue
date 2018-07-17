@@ -77,8 +77,8 @@
 		.swiper-slide{
 			height: auto;
 			.swiper-scrollbar{
-			display: none;
-		}
+				display: none;
+			}
 		}
 		
 	}
