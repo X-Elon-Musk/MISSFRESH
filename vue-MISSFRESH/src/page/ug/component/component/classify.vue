@@ -53,7 +53,7 @@
             position: relative;
             text-align: center;
             line-height: 40px;
-            border-bottom: 1PX solid #e6e6e6;
+            border-bottom: 1px solid #e6e6e6;
             .close-icon{
                 position: absolute;
                 right: 0;
