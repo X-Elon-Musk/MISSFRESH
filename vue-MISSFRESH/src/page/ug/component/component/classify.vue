@@ -29,7 +29,6 @@
             },
             // 分类图标
             iconClick(index) {
-                // console.log(index);
                 this.closeButton();
                 this.$emit("tabMove",index);
             }
