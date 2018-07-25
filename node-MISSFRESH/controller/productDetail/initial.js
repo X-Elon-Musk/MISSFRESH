@@ -13,7 +13,8 @@ class Initial extends MissMysql{
 			cart_image: 'cart_image',
 			promote_tag: 'promote_tag',
 		},{
-			product_id: product_id
+			// product_id: product_id
+			id: product_id
 		});
     	return result;
 	}

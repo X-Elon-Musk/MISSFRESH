@@ -28,7 +28,7 @@ export default class MissMysql{
 		sql+=' from '+datasheet;
 		sql+=await this.whereRequirement(where_requirement, fuzzy);	
 		sql+=await this.orderRequirement(order_requirement);	
-		// console.log(sql);
+		console.log(sql);
 		// return;
 		let result=await mysql(sql);
     	return result;
