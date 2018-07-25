@@ -22,7 +22,7 @@ product_list:{
 	wx_app_new_img:""
 
 
-//首页--->category_list
+//首页--->category_list@
 category_list:[,…]
 	0:{category_image: "https://j-image.missfresh.cn/img_20180511013332836.png", presell: 0, default: 1,…}
 		category_image:"https://j-image.missfresh.cn/img_20180511013332836.png"
@@ -52,7 +52,7 @@ category_list:[,…]
 		presell:0
 
 
-//首页--->product_list--->banner
+//首页--->product_list--->banner@
 banner:[{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…},…]
 	0:{path: "https://j-image.missfresh.cn/img_20180510000644953.jpg",…}
 	height:525
@@ -86,7 +86,7 @@ qr_info:{bg_i_url: "", qr_size: 70, qr_y: 419, qr_x: 80}
 	qr_y:419
 
 
-//首页--->product_list--->brands
+//首页--->product_list--->brands@
 brands:[{image: "https://j-image.missfresh.cn/img_20170627185311186.png", name: "优鲜严选",…},…]
 	0:{image: "https://j-image.missfresh.cn/img_20170627185311186.png", name: "优鲜严选",…}
 		image:"https://j-image.missfresh.cn/img_20170627185311186.png"
@@ -102,7 +102,7 @@ brands:[{image: "https://j-image.missfresh.cn/img_20170627185311186.png", name: 
 		name:"赔付保障"
 
 
-//首页--->product_list--->category_areas
+//首页--->product_list--->category_areas@
 category_areas:[,…]
 	0:{image: "https://j-image.missfresh.cn/img_20180511015339404.png", user_type: "NEWUSER", ordering: 4,…}
 		id:6460
@@ -122,7 +122,7 @@ params:{image: "https://j-image.missfresh.cn/img_20180403101557574.jpg",…}
 	url:"https://as-vip.missfresh.cn/ug/new-enjoy.html?station_code=&address_code=110108"
 
 
-//首页--->单个产品
+//首页--->单个产品@
 {image: "http://missfresh-fms.ufile.ucloud.cn/9a4caa8c7a7c4caf938fd24997757a24.jpg",…}
 buy_permission:0
 cart_btn_name:"加入购物车"
@@ -146,7 +146,7 @@ vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 5990},�
 vip_product:0
 
 
-//首页--->单个产品--->product_tags
+//首页--->单个产品--->product_tags@
 product_tags:[{name: "红包不可用",…}]
 	0:{name: "红包不可用",…}
 	color:16097217
@@ -154,7 +154,7 @@ product_tags:[{name: "红包不可用",…}]
 	name:"红包不可用"
 	type:"property"
 
-//首页--->单个产品--->vip_price_pro
+//首页--->单个产品--->vip_price_pro@
 vip_price_pro:{price_up: {name: "", show_type: 2, color: 9868950, price: 1690},…}
 	price_down:{name: "", show_type: 1, color: 16730257, price: 1290}
 		color:16730257
@@ -355,7 +355,7 @@ instruction:[,…]
 	ordering:0
 	title:""video:""
 
-//详情页--->productFingerprints
+//详情页--->productFingerprints@
 productFingerprints:[{stationRegion: "MRYXBJN",…}, {securityTagName: "100%品控检测",…}]
 	0:{stationRegion: "MRYXBJN",…}
 		height:6296
@@ -371,7 +371,7 @@ productFingerprints:[{stationRegion: "MRYXBJN",…}, {securityTagName: "100%品�
 	1:{securityTagName: "100%品控检测",…}
 
 
-//详情页--->product_share_info_v2
+//详情页--->product_share_info_v2@
 product_share_info_v2:{prodcut_share_bg_login_text: "登陆方可享受奖励,立即登陆", product_share_need_price: 1,…}
 	benefit_get_txt:"已获得"
 	benefit_status:0
@@ -418,7 +418,7 @@ qa_info:[{stationRegion: "MRYXBJN",…}]
 		width:1001
 
 
-//详情页--->share_info
+//详情页--->share_info@
 share_info:{wx_share_type: 0, image_url: "https://image.missfresh.cn/97042f5ae1274a3aa21046bd6dd6f4d6.jpg",…}
 	content:"新人下单立享30红包！优质生鲜，一小时达~"
 	friend_share_type:1
@@ -432,7 +432,7 @@ share_info:{wx_share_type: 0, image_url: "https://image.missfresh.cn/97042f5ae12
 	wx_url:"https://as-vip.missfresh.cn/s/pd?a=p-HBfzxlz-1j&b=&t=867&v=&u=0"
 
 
-//详情页--->vip_card
+//详情页--->vip_card@
 vip_card:{is_opened: 0, back_cash_text: "支付8元开会员↵购买本商品更返#_$0.49#_$元",…}
 	back_cash_text:"支付8元开会员↵购买本商品更返#_$0.49#_$元"
 	icon_img:"https://j-image.missfresh.cn/img_20170823161352436.png"
