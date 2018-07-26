@@ -22,7 +22,6 @@ app.use(express.static("./public",{
 
 app.get('/public/images/*', function (req, res) {
     res.sendFile( __dirname + "/" + req.url );
-    // console.log("Request for " + req.url + " received.");
 })
 
 //设置跨域访问
@@ -40,35 +39,6 @@ app.all('*', function(req, res, next) {
     }
 });
 
-/*app.use((req, res, next) => {  
-    // 允许的请求主机名及端口号 也可以用通配符*， 表示允许所有主机请求  
-    res.setHeader('Access-Control-Allow-Origin', '*');  
-    // 允许请求携带cookie   
-    res.setHeader('Access-Control-Allow-Credentials', true);  
-    // 允许的请求方式  
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');  
-  
-    // 允许的请求头  
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');  
-     res.header("Content-Type", "application/json;charset=utf-8");
-    next();  
-});  
-*/
-
-
-/*app.all('*', function (req, res, next) {
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Origin", "*");
-    if (req.method == 'OPTIONS') {
-        res.send(200);
-    }
-    else {
-        next();
-    }
-});
-*/
 
 router(app);
 

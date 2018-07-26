@@ -1,18 +1,14 @@
 'use strict';
 import Mysql from '../model/sql-config.js'
-// let mysql=Mysql.mysqlAnalysis;
+
 let mysql=(new Mysql()).mysqlAnalysis;
 
-console.log(Mysql);
-// return;
-// import MissMethods from './missMethods.js'
 let dirname='http://localhost:3390/public/images/';
 
 
 
 export default class MissMysql{
 	constructor(){
-		// this.missMysql=this.missMysql.bind(this);
 		this.missSelectMysql=this.missSelectMysql.bind(this);
 		this.imageRequirment=this.imageRequirment.bind(this);
 		this.whereRequirement=this.whereRequirement.bind(this);
@@ -28,8 +24,7 @@ export default class MissMysql{
 		sql+=' from '+datasheet;
 		sql+=await this.whereRequirement(where_requirement, fuzzy);	
 		sql+=await this.orderRequirement(order_requirement);	
-		console.log(sql);
-		// return;
+		// console.log(sql);
 		let result=await mysql(sql);
     	return result;
 	}
@@ -84,30 +79,17 @@ export default class MissMysql{
 		})
 		value=value.substr(0, value.lastIndexOf(','));
 		sql+=datasheet+' ('+column+') values ('+value+')';
-		console.log('--------');
-		console.log(sql);
-		console.log('--------');
-		// return;
 		let result=await mysql(sql);
     	return result;
 	}
 	//删除数据通用sql
 	async missDeleteMysql(datasheet='', where_requirement={}){
-		// if (JSON.stringify(column_value)!=="{}") {
-			let sql='delete from '+datasheet;
-			if (where_requirement&&JSON.stringify(where_requirement)!=="{}") {
-				sql+=await this.whereRequirement(where_requirement);				
-			}
-			// return sql;	
-			console.log('--------');
-			console.log(sql);
-			console.log('--------');	
-			// return;	
-			let result=await mysql(sql);
-    		return result;
-		/*} else{
-			return '';
-		}*/
+		let sql='delete from '+datasheet;
+		if (where_requirement&&JSON.stringify(where_requirement)!=="{}") {
+			sql+=await this.whereRequirement(where_requirement);				
+		}	
+		let result=await mysql(sql);
+		return result;
 	}
 	//更新数据通用sql
 	async missUpdateMysql(datasheet='', column_value={}, where_requirement={}){
@@ -116,46 +98,20 @@ export default class MissMysql{
 			sql+=datasheet+' set ';
 			Object.keys(column_value).forEach(key => {
 				if (Object.prototype.toString.call(column_value[key])=='[object String]') {
-					// value+='"'+column_value[key]+'",';
 					sql+= key+'="'+column_value[key]+'",';		
 				} else{
 					sql+= key+'='+column_value[key]+',';
 				}
-				// sql+= key+'='+column_value[key]+',';
 			})
 			sql=sql.substr(0, sql.lastIndexOf(','));
 			if (where_requirement&&JSON.stringify(where_requirement)!=="{}") {
 				sql+=await this.whereRequirement(where_requirement);				
 			}
-			// return sql;	
-			console.log('--------');
-			console.log(sql);
-			console.log('--------');	
-			// return;	
 			let result=await mysql(sql);
     		return result;
 		} else{
 			return '';
 		}
-
-		/*let column='',value='';
-		Object.keys(column_value).forEach(key => {
-			column+=key+',';
-		})
-		column=column.substr(0, column.lastIndexOf(','));
-		Object.keys(column_value).forEach(key => {
-			if (Object.prototype.toString.call(column_value[key])=='[object String]') {
-				value+='"'+column_value[key]+'",';		
-			} else{
-				value+=column_value[key]+',';
-			}
-		})
-		value=value.substr(0, value.lastIndexOf(','));
-		sql+=datasheet+' ('+column+') values ('+value+')';
-		console.log(sql);
-		// return;
-		let result=await mysql(sql);
-    	return result;*/
 	}
 	
 }

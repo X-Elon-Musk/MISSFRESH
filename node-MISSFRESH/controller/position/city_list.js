@@ -35,5 +35,3 @@ export default class CityList extends MissMysql{
 		this.cityList.push(city_list);
 	}
 }
-
-// export default new CityList()

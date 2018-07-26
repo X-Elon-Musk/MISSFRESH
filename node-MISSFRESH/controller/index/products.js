@@ -5,8 +5,6 @@ import MissMethods from '../../prototype/missMethods.js'
 import VipPricePro from './vip_price_pro.js'
 let dirname='http://localhost:3390/public/images/';
 
-
-
 class Products extends MissMysql{
 	constructor(){
 		super()
@@ -26,12 +24,10 @@ class Products extends MissMysql{
 	  		//没有product_tag，设置为空
 	  		item.promote_tag=item.promote_tag===dirname?'':item.promote_tag;
 	  		let product_tags=await this.missSelectMysql('product_tags', {},{
-	  			// product_id: item.product_id
 	  			product_id: item.id
 	  		});
 	  		item.product_tags=[];
             item.product_tags=item.product_tags.concat(product_tags);
-            // let vippricepro=await VipPricePro.getVipPricePro(item.product_id);
             let vippricepro=await VipPricePro.getVipPricePro(item.id);
             item.vip_price_pro={};
             item.vip_price_pro=vippricepro;

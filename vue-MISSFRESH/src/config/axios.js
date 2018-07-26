@@ -32,11 +32,9 @@ export default async(url='', parameter={}, type='get')=>{
                 }
             })
 			.then(function (response) {
-				// console.log('正确');
 				resolve(response)	
 			})
 			.catch(function (error) {
-				// console.log('错误');
 				reject(error)
 			});	
 

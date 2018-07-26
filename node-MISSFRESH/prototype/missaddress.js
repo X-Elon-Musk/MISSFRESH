@@ -56,21 +56,10 @@ export default class MissAddress{
 	}
 	//关键字输入提示
 	async suggestionPosition(req, res, next){
-		/*let query='';
-    	req.on("data",(chuck)=>{
-            query+=chuck
-        })
-        query=await new Promise((resolve, reject) =>{
-        	req.on("end",()=>{
-	            resolve(query)
-	        })
-	    })*/
 	    let query=await MissMethods.getQuery(req);
  		let data=await this.suggestionPositionAxios({
  			key: this.tencentkey,
-			// keyword: encodeURIComponent(JSON.parse(query).keyword),
 			keyword: encodeURIComponent(query.keyword),
-			// region: encodeURIComponent(JSON.parse(query).cityName),
 			region: encodeURIComponent(query.cityName),
 			region_fix: 1,
 			policy: 1
@@ -106,4 +95,3 @@ export default class MissAddress{
 	}
 }
 
-// export default new MissAddress()

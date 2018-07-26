@@ -9,8 +9,6 @@ export default class SafeDetection{
         this.getSafeDetection=this.getSafeDetection.bind(this);
     }
     async getSafeDetection(req, res, next){
-        // console.log(req.query.product_id);
-        // return;
         let product_id=parseInt(req.query.product_id);
 
         let safedetection;

@@ -49,7 +49,6 @@ class Address extends MissMysql{
             ...address_item
         }); 
         if (insertResult.warningCount==0) basiccontent = await MissMethods.basicContent(0, 2);
-        console.log('成功');
         res.type('application/json');
         res.jsonp(basiccontent);
     }
@@ -57,14 +56,10 @@ class Address extends MissMysql{
     async deleteAddress(req, res, next){
         let id=parseInt(req.query.id);
         let sqlresult,result=[],basiccontent;
-        console.log(req.query.id);
         sqlresult=await this.missDeleteMysql('address_list', {
             id: id
         });
-        // console.log(sqlresult.warningCount);
-        // return;
         if (sqlresult.warningCount==0) basiccontent = await MissMethods.basicContent(0, 2);
-        // console.log(sqlresult);
         res.type('application/json');
         res.jsonp(basiccontent);
     }

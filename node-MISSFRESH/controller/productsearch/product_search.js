@@ -9,32 +9,7 @@ export default class ProductSearch{
         this.getProductSearch=this.getProductSearch.bind(this);
     }
     async getProductSearch(req, res, next){
-        // console.log(req.query.product_id);
-        // return;
-        // let product_id=parseInt(req.query.product_id);
-
-
-
-
-        /*let query='';
-        req.on("data",(chuck)=>{
-            query+=chuck
-        })
-        query=await new Promise((resolve, reject) =>{
-            req.on("end",()=>{
-                resolve(query)
-            })
-        })*/
-
         let query=await MissMethods.getQuery(req);
-
-
-        // console.log('==========');
-        // console.log(query);
-        // console.log(query);
-        // console.log('==========');
-        // return;
-        // let name = JSON.parse(query).name;
         let name = query.name;
         let activeitem=await ActiveItem.getActiveItem(name);
         let productsearch={
