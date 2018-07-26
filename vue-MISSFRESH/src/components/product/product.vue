@@ -1,7 +1,7 @@
 <template>
     <div class="product">
     	<!-- <router-link :to="{path: '/ug/productDetail',query:{product_id: product.product_id,product_index: product.product_index}}" tag="div" class="clearfix product-link"> -->
-    	<div class="clearfix product-link" @click="productDetail(product.product_id,product.product_index)">
+    	<div class="clearfix product-link" @click="productDetail(product.id,product.product_index)">
 			<div class="f_l product-item-img">
 				<img src="" v-lazy="product.image" alt="" class="product-img">
 				<img :src="product.promote_tag" v-if="product.promote_tag" alt="" class="product-tag">

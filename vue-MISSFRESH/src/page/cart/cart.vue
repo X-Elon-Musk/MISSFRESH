@@ -117,8 +117,6 @@
 	export default{
 		data(){
 		  	return {
-		  		//选择购物车中所有商品
-		  		// checkAll: true,
 		  		totalPrice: 0,
 		  		paid: 0,
 		  		freight: 0,
@@ -150,7 +148,7 @@
 		  	}
 	  	},
 		created (){
-	    	this.calculateTotal();
+	    	// this.calculateTotal();
 	    },
 	    mounted: function () {
 	    	this.SET_MPROMPTEXIST({status: true});
@@ -220,7 +218,7 @@
 			},
 			// 商品合计
 			products_total_price: function () {
-				return this.postage!=="免邮" ? parseFloat(this.total_price+this.postage) : parseFloat(this.total_price);
+				return this.postage!=="免邮" ? parseFloat(this.total_price)+parseFloat(this.postage) : parseFloat(this.total_price);
 			},
 			// 结算价格
 			settlement_total_price: function () {
@@ -264,15 +262,7 @@
 			}, 
 			// 单个商品滑动后，“删除”按钮出现后，其他商品“删除”按钮消失
 			swiperReachEnd(){
-				// let _this=this;
-				if (isArray(this.swiperdelete)) {
-					/*this.swiperdelete.forEach(function (item,index,array) {
-						item.on('reachEnd', function (e) {
-							for (let i=0;i<_this.swiperdelete.length;i++) {
-								if (i!==index) _this.swiperdelete[i].slideTo(0, 400, false);	
-							}
-						})
-					})*/	
+				if (isArray(this.swiperdelete)) {	
 					this.swiperdelete.forEach((item,index,array)=> {
 						item.on('reachEnd', (e)=> {
 							for (let i=0;i<this.swiperdelete.length;i++) {
@@ -291,64 +281,6 @@
 			setDeleteProductId(id){
 				this.deleteProductId=id;
 			},
-			// mpromptAction: function () {
-			// 	this.mprompt=true;
-			// },
-			/*//初始化数据
-			async initData(){
-				let products=[];
-				// console.log(this.s_cartList);
-				Object.values(this.s_cartList).forEach(item => {
-                    products.push({
-                    	"num": item.num,
-						"id": item.id,
-						"image": item.image,
-						"name": item.name,
-						"product_tags": item.product_tags,
-						"subtitle": item.subtitle,
-						"price_up": item.price_up,
-						"price_down": item.price_down,
-						"status": item.status
-                    })
-                })
-                this.products=products;
-			},*/
-			//商品总价计算
-		    calculateTotal(){
-		     //  	let all=0;
-		     //  	this.products.forEach(function (item) {
-			    //     if (item.checked) {
-			    //       all+=item.price*item.number; 
-			    //     } 
-			    // })  
-			    // this.totalPrice=all;
-			    // this.actuallyPaid();
-		    },
-		    //商品实付计算
-		    actuallyPaid(){
-		    	/*let all=0;
-		      	this.products.forEach(function (item) {
-			        if (item.benefit.orNot) {
-			          all+=item.benefit.text; 
-			        } 
-			    })  
-			    this.paid=this.totalPrice-all;
-			    this.freightCharge();
-			    this.totalCount();*/
-		    },
-		    //运费计算
-		    freightCharge(){
-		    	/*if (this.paid>=69) {
-		    		this.freight='免邮';		
-		    	} else{
-		    		// console.log(this.paid);
-		    		if (this.paid<=0) {
-		    			this.freight='免邮';			
-		    		}else{
-			    		this.freight=10;
-		    		}
-		    	}*/
-		    },
 		    //商品合计计算
 		    totalCount(){
 		    	this.total<0?0:this.total;
@@ -363,39 +295,12 @@
 		    	}
 		    		
 		    },
-		   	//单个商品减少
-		    reduce(item){
-		      	// if (item.number==0) return;
-		      	// item.number--;
-		      	// this.calculateTotal();
-		    },
-		    //单个商品增加
-		    add(item){
-		      	// item.number++;
-		      	// this.calculateTotal();
-		    },
-		    //单个商品选择
+		   	//单个商品选择
 		    productCheck(id){
-		    	// this.calculateTotal();
 				this.SET_STATUS({id});
-		    	// this.initData();
 		    },
 		    //商品全部选择
 		    checkedAll(){
-			    // this.checkAll=!this.checkAll;
-			    // if (this.checkAll) {
-			    //     let total=0;
-			    //     this.products.forEach(function (item) {
-			    //       	item.checked=true;
-			    //       	total+=item.price*item.number; 
-			    //     }) 
-			    //     this.totalPrice=total;     
-			    // } else{
-			    //     this.products.forEach(function (item) {
-			    //       	item.checked=false;
-			    //     }) 
-			    //     this.totalPrice=0;    
-			    // }
 			    Object.values(this.s_cartList).forEach(item => {
 			    	this.productCheck(item.id);
 			    })
@@ -429,8 +334,6 @@
 			confirmActionFunction(){
 				let id=this.deleteProductId;
 				this.DELETE_CART({id});
-				/*this.SET_MPROMPT({status: false});	
-				this.mpromptStatus(false);*/
 				this.cancelActionFunction();
 				this.swiperDelete();
 				this.swiperReachEnd();
@@ -445,7 +348,6 @@
 			},
 			// 改变头部文字
 			changeHeaderText(){
-				console.log('--------');
 				this.$refs.settleAccounts.changeHeaderText()
 			}
 		},
@@ -542,7 +444,6 @@
 						.product-item-img {
 						    width: 32%;
 						    img{
-		    					// .wh(70px,70px);
 		    					.wh(5.5rem,5.5rem);
 							}
 						}

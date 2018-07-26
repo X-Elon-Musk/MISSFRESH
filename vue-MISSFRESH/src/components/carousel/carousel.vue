@@ -59,7 +59,7 @@
 		}
 		.product-detail-img{
 			img{
-				width: 75%;
+				// width: 75%;
 				margin: 0 auto;
 			}
 		}

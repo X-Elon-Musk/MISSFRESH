@@ -3,7 +3,8 @@ let connection=mysql.createConnection({
 	host: '39.104.65.227',
 	user: 'root',
 	password: 'Beijing@0983',
-	database: 'missfresh'
+	database: 'missfresh',
+	useConnectionPooling: true
 })
 
 connection.connect();

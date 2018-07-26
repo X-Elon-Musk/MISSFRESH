@@ -478,11 +478,14 @@
 			}
 		}
 		.instruction-list-container{
+			padding-bottom: 60px;
+			box-sizing: border-box;
 			li{
 				.wh(auto);
 				img{
-					display: inline-block;
-					vertical-align: top;
+					// display: inline-block;
+					// vertical-align: top;
+					display: block;
 					margin: 0;
 					padding: 0;
 					.wh(auto);
