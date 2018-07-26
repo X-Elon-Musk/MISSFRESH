@@ -15,20 +15,10 @@ const profile = r => require.ensure([], () => r(require('../page/profile/profile
 const safe = r => require.ensure([], () => r(require('../page/profile/children/safe')), 'safe')
 const addressPage = r => require.ensure([], () => r(require('../page/profile/children/addressPage')), 'addressPage')
 const picker = r => require.ensure([], () => r(require('../page/profile/children/picker')), 'picker')
-// const addressNew = r => require.ensure([], () => r(require('../page/profile/children/addressNew')), 'addressNew')
-// const addressDelivery = r => require.ensure([], () => r(require('../page/profile/children/addressDelivery')), 'addressDelivery')
 const phone = r => require.ensure([], () => r(require('../page/profile/children/phone')), 'phone')
 const feedback = r => require.ensure([], () => r(require('../page/profile/children/feedback')), 'feedback')
 const about_us = r => require.ensure([], () => r(require('../page/profile/children/about_us')), 'about_us')
 const setting = r => require.ensure([], () => r(require('../page/profile/children/setting')), 'setting')
-// const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
-// const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
-// const setusername = r => require.ensure([], () => r(require('../page/profile/children/children/setusername')), 'setusername')
-// const address = r => require.ensure([], () => r(require('../page/profile/children/children/address')), 'address')
-// const add = r => require.ensure([], () => r(require('../page/profile/children/children/children/add')), 'add')
-// const addDetail = r => require.ensure([], () => r(require('../page/profile/children/children/children/children/addDetail')), 'addDetail')
-
-
 
 const loading = r => require.ensure([], () => r(require('../components/loading/loading')), 'loading')
 
@@ -76,12 +66,6 @@ export default [{
 			path: '/city/:cityid',
 			component: city
 		},
-		
-		/*{
-			path: 'msite',
-			component: msite,
-			meta: {keepAlive: true}
-		},*/
 		//会员页面
 		{
             path: '/member',
@@ -112,14 +96,6 @@ export default [{
                     path: 'picker',//我的地址
                     component: picker,
                 },
-                /*{
-                    path: 'addressNew',//新增收货地址
-                    component: addressNew,
-                },
-                {
-                    path: 'addressDelivery',//收货地址
-                    component: addressDelivery,
-                },*/
                 {
                     path: 'phone',//绑定手机
                     component: phone,
@@ -132,31 +108,7 @@ export default [{
                 },{
                     path: 'setting',//设置
                     component: setting,
-                },
-
-                /*{
-                    path: 'info', //个人信息详情页
-                    component: info,
-                    children: [{
-                            path: 'setusername',
-                            component: setusername,
-                        },{
-                            path: 'address',
-                            component: address,     //编辑地址
-                            children:[{
-                                    path:'add',
-                                    component:add,
-                                    children:[{
-                                            path:'addDetail',
-                                            component:addDetail
-                                        }]
-                                }]
-                        }]
-                },{
-                    path: 'service', //服务中心
-                    component: service,
-                }*/
-                ]
+                }]
         },
         {
             path: '/loading',

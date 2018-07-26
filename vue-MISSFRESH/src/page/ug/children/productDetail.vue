@@ -173,9 +173,6 @@
         },
         mounted(){
             this.getDataProductDetail();
-   //          this.$nextTick(()=>{
-			// 	this.getDataProductDetail();
-			// })
         },
         computed: {
 	    	...mapState([
@@ -183,11 +180,6 @@
             ]),
             //选择的配送地址
             choseAddress: function () {
-            	/*if (this.s_choseAddress) {
-            		return this.s_choseAddress;
-            	} else{
-            		return '';
-            	}*/
             	return this.s_choseAddress ? this.s_choseAddress : '';
             }
         },
@@ -196,35 +188,15 @@
                 'ADD_CART','REDUCE_CART','SET_MPROMPT'
             ]),
             // 商品详情
-			async getDataProductDetail(){
-			// getDataProductDetail(){	
+			async getDataProductDetail(){	
 				let response=await getDataProductDetailAxios(this.product_id, this.product_index);
-				/*console.log('0619');
-				console.log(response);
-				console.log('0619');*/
-				// if (response.status==200) {
-					let data=response.data;
-					this.product=response;	
-					this.priceDown=response.vip_price_pro.price_down;	
-					this.priceUp=response.vip_price_pro.price_up;
-					this.share_info=response.share_info;	
-					this.vip_card=response.vip_card;	
-					this.product_share_info_v2=response.product_share_info_v2;	
-				// }
-
-				/*getDataProductDetailAxios(this.product_id, this.product_index).then(response=>{
-					console.log('0619');
-					console.log(response);
-					console.log('0619');
-						this.product=response;	
-						console.log(this.product);
-						this.priceDown=response.vip_price_pro.price_down;	
-						this.priceUp=response.vip_price_pro.price_up;
-						this.share_info=response.share_info;	
-						this.vip_card=response.vip_card;	
-						this.product_share_info_v2=response.product_share_info_v2;	
-				})*/
-				
+				let data=response.data;
+				this.product=response;	
+				this.priceDown=response.vip_price_pro.price_down;	
+				this.priceUp=response.vip_price_pro.price_up;
+				this.share_info=response.share_info;	
+				this.vip_card=response.vip_card;	
+				this.product_share_info_v2=response.product_share_info_v2;	
 			},
 			// 分享
 			shareAction(state){
@@ -261,7 +233,6 @@
 		right: 0;
 		top: 0;
 		bottom: 0;
-		// z-index: 3; 
 		z-index: 4; 
 		background: #fff;
 		overflow-y: auto;
@@ -393,8 +364,6 @@
 			.font(1.4em,0.8em,@color_gray);
 			.security-tit{
 				.security-tit-title{
-					// line-height: 2.2em;
-					// color: @color_common;
 					.font(2.2em,1em);
 					font-weight: 700;
 
@@ -483,8 +452,6 @@
 			li{
 				.wh(auto);
 				img{
-					// display: inline-block;
-					// vertical-align: top;
 					display: block;
 					margin: 0;
 					padding: 0;
@@ -573,7 +540,6 @@
 		.address-bar-container{
 			position: fixed;
 			left: 0;
-			// bottom: 53px;
 			bottom: 36px;
 			.wh(1.6875rem);
 			background: rgba(255, 244, 226, 0.9);

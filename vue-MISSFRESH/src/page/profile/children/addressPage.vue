@@ -82,7 +82,6 @@
 			},
 			// 选择收货地址
 			checkedAddress(item,index){
-				// console.log(this);
 				if (this.isComponent) {
 					this.addressChose=index;	
 					

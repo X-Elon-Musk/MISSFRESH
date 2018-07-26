@@ -60,11 +60,7 @@
 				showIndex: 2,
 				refreshtext: '',
 				newShow: false,
-				defaultAddress: '',
-				// 是否隐藏箭头，默认为隐藏
-				// backHide: true,
-				// 是否显示“新增地址”，默认为不显示
-				// newText: false
+				defaultAddress: ''
 			}
 		},
 		mounted (){
@@ -81,30 +77,7 @@
             //选择的城市
             choseCity: function () {
             	return getStore('choseCity');
-            },
-            // backHide: function () {
-            // 	console.log(this.$route.path);
-            // 	return false
-            // }
-        },
-        beforeRouteLeave(to, from, next){
-        	console.log(to);
-        	console.log(from);
-        	// if (to.name=='http://localhost:8080/#/ug') {
-        	if (to.fullPath=='/ug') {
-        		// from.meta.keepAlive=false;
-        		// to.meta.keepAlive=true;
-        		console.log(1);
-        		
-        	} else{
-        		// from.meta.keepAlive=false;
-        		// to.meta.keepAlive=true;
-        		// this.$route.meta.keepAlive=true;
-        		// console.log(this.$route.meta.keepAlive);
-        		console.log(2);
-        		// this.$router.push({path: '/ug/citylist'})
-        	}
-        	next();
+            }
         },
 		methods: {
 			...mapMutations([
@@ -114,7 +87,6 @@
 			getAddressList(){
 				let userId=getStore('userId');
 				getAddressListAxios(this.s_userInfo.userId||userId).then(response=>{
-					// console.log(response);
 					this.addressList=response;
 				})
 			},
@@ -125,34 +97,24 @@
 			//改变当前城市信息
 			changeCurrentRegion(city){
 				let chosecity={
-					// id: city.adcode,
 					id: city.code,
 					name: city.city,
 					province: city.province,
-					// district: city.district
 					district: city.area
 				};
 				let building={
-					// address: city.address,
 					address: city.full_address,
 					distance: city.distance||'',
-					// name: city.title
 					name: city.address_1
 				};
 				let location={
-					// accuracy: city.type,
 					accuracy: city.default_,
-					// lat: city.location.lat,
 					lat: city.lat_lng.split(',')[0],
-					// lng: city.location.lng
 					lng: city.lat_lng.split(',')[1]
 				};
 				let position={
-					// accuracy: city.type,
 					accuracy: city.default_,
-					// lat: city.location.lat,
 					lat: city.lat_lng.split(',')[0],
-					// lng: city.location.lng
 					lng: city.lat_lng.split(',')[1]
 				}
 				let station={
@@ -166,7 +128,6 @@
 					position, 
 					station
 				});
-				// this.$router.push('/ug');
 				this.$router.replace('/ug');
 			},
 			//刷新当前位置
@@ -209,28 +170,6 @@
 		overflow-y: auto;
 		color: @color_common; 
 		padding-top: 42px;
-		/* .header{
-			height: 36px;
-		    line-height: 36px;
-		    background-color: #fff;
-		    margin-bottom: 1px;
-			h2{
-				font-size: 17px;
-				width: 100%;
-			    text-align: center;
-			    font-weight: normal;
-			    position: relative;
-			    i{
-			    	display: none;
-			    	position: absolute;
-			    	top: 0;
-			    	right: 0;
-			    	line-height: 36px;
-			    	padding: 0 0.625rem;
-			    	color: #999;
-			    }
-			}
-		} */
 		.address-bar{
 			background-color: #fff;
 			padding: 0.625rem 0.9375rem 0.625rem 0.9375rem;
@@ -256,7 +195,6 @@
 						.positionY();
 		    			right: 0;
 						.bg(1rem,1rem,transparent,'~images/icon/address-city.png',80% 80%);
-
 					}
 				}
 				.address-position{
@@ -355,12 +293,9 @@
 		    	}
 		    }
 		    .location-more{
-		    	// color: #b8b8b8;
 		    	text-align: center;
 		    	height: 3.125rem;
-		    	// font-size: 1rem;
 		    	position: relative;
-		    	// line-height: 3.125rem;
 		    	.font(3.125rem,1rem,#b8b8b8);
 		    	&:after{
 					content: '';

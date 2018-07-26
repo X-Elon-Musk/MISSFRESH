@@ -13,11 +13,6 @@
 				</div>
 			</template>
 
-			<!-- <router-link  v-for="(item,index) in banner" :key="index" :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}" tag="div" class="swiper-slide">
-					<img :src="item.image" class="banner-img">
-			</router-link> -->
-
-
 		</div>
 		<div class="swiper-pagination"></div>
 	</div>
