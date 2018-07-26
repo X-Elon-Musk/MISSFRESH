@@ -147,9 +147,6 @@
 				settleAccountsShow: false
 		  	}
 	  	},
-		created (){
-	    	// this.calculateTotal();
-	    },
 	    mounted: function () {
 	    	this.SET_MPROMPTEXIST({status: true});
 	    	this.INIT_CARTLIST();

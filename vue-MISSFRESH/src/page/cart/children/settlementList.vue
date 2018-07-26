@@ -46,15 +46,7 @@
       				// resistanceRatio : 0,
 					on: {
 						init: function() {
-							/*//设置transition-duration值
-							this.setTransition(_this.tSpeed);
-							//Nav的可视宽度
-				  			_this.clientWidth = parseInt(this.$wrapperEl.css('width'));
-				  			_this.navWidth = 0;
-				  			for (var i = 0; i < this.slides.length; i++) {
-				  				_this.navWidth += parseInt(this.slides[i].offsetWidth)
-				  			}
-				  			_this.maxLeft=_this.navWidth-_this.clientWidth;*/
+							
 				  		}
 				  	},
 				});
