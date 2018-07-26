@@ -190,7 +190,6 @@
     import 'swiper/dist/css/swiper.min.css';
     import qs from 'qs';
     import {getDataPageIndexAxios} from 'src/service/getData'
-    // import {getStore} from 'src/config/mUtils.js'
 
   	import ugHeader from './component/ugHeader'
     import classify from './component/classify'
@@ -205,15 +204,12 @@
 				tabIndex: 0,
 				//导航中每个按钮的宽度
 				navSlideWidth: 0,
-				// bar: null,
 				//导航的transition-duration值
 				tSpeed: 300,
 				//导航的可视宽度
 				clientWidth: 0,
 				//导航的宽度
 				navWidth: 0,
-				// //计数，后面需要去除
-				// num: 0,
 				//“分类”显示状态
 				classifyState: false,
 				//上滑加载初始的位置
@@ -236,49 +232,14 @@
 				maxLeft: 0,
 				//种类数据加载情况
 				product_index: {},
-				/*// 配送的信息
-				view: {}*/
 			}
 		},
 		mounted (){
 			this.getDataPageIndex(0);
-			/*if (!getStore('choseAddress')) {
-				this.getDataPosition();			
-			}
-			this.getView();*/
 		},
-		activated(){
-			console.log(444444);
-			// this.getDataPageIndex(0, () => {
-			// 	this.$nextTick(() => {
-			// 		if (!this.navSwiper) this.tab();
-			// 		if (!this.pageSwiper) this.page();
-			// 	})
-			// });
-			// this.getView();
-		},
-		beforeRouteEnter(to, from, next){
-        	// console.log(to);
-        	// console.log(from);
-        	/*// if (to.name=='http://localhost:8080/#/ug') {
-        	if (to.fullPath=='/ug/') {
-        		from.meta.keepAlive=true;
-        		// to.meta.keepAlive=true;
-        		console.log(1);
-        	} else{
-        		from.meta.keepAlive=false;
-        		// to.meta.keepAlive=true;
-        		// this.$route.meta.keepAlive=true;
-        		console.log(this.$route.meta.keepAlive);
-        		console.log(2);
-        	}
-        	from.meta.keepAlive=false;*/
-        	next();
-        },
         watch: {
         	s_choseAddress: function () {
-    			this.getDataPageIndex(0);
-				// this.getView();			
+    			this.getDataPageIndex(0);		
         	}
         },
 		computed: {
@@ -287,15 +248,11 @@
             ]),
         },
 		methods: {
-			/*...mapMutations([
-                'SET_POSITION'
-            ]),*/
 			// 获取index数据
 			async getDataPageIndex(product_index) {
 				let response=await getDataPageIndexAxios(product_index);
 				let product_list=response.product_list;
 				if (product_index==0) {
-					// this.categorylist[product_index]=[].concat(response.category_list);	
 					this.$set(this.categorylist, product_index, response.category_list);
 					this.$set(this.brands, product_index, product_list.brands);
 					this.$set(this.categoryareas, product_index, product_list.category_areas);
@@ -303,69 +260,15 @@
 				}
 				this.$set(this.banner, product_index, product_list.banner);
 				this.$set(this.products, product_index, product_list.products);
-				console.log(this.products[0]);
 				this.loading=false;
 				this.$nextTick(() => {
 					if (!this.navSwiper) this.tab();
 					if (!this.pageSwiper) this.page();
 				})
 			},
-			/*//获取当前地址
-			async getDataPosition(callback) {
-				let response=await getDataPositionAxios();
-				let ad_info=response.ad_info
-				let chosecity={
-					id: ad_info.adcode,
-					name: ad_info.city,
-					province: ad_info.province,
-					district: ad_info.district
-				}
-				this.SET_POSITION({
-					type: 0,
-					city: chosecity
-				});
-
-				
-
-
-				//post方法
-				// this.axios.post('http://localhost:3390/position/locationsuggestion', {
-				//     keyword:'知春路',
-				// 	cityName:'北京'
-				// }, {
-    //                 headers:{
-    //                     'Content-Type': 'application/x-www-form-urlencoded'
-    //                 }
-    //             })
-				// .then(function (response) {
-				//   	console.log(response.data);
-				// })
-				// .catch(function (error) {
-				//   	console.log(error);
-				// });	
-
-				//get方法
-				// this.axios.get('http://localhost:3390/position/locationsearch',{params:{
-				//     keyword:'知春路',
-				// 	cityName:'北京'
-				// }})
-				// .then(function (response) {
-				//   	console.log(response.data);
-				// })
-				// .catch(function (error) {
-				//   	console.log(error);
-				// });		
-			},*/
-			/*//获取配送的类型信息
-			getView() {
-				getViewAxios(this.s_viewType).then(response=>{
-					this.view=response;
-				})
-			},*/
 			// 导航栏
 			tab() {
-				var _this=this;
-				//this.navSwiper=new Swiper(this.$refs.tabNav, {
+				let _this=this;
 				this.navSwiper=new Swiper('.tab-nav', {
 					slidesPerView: 'auto',
 					freeMode: true,
@@ -379,7 +282,7 @@
 							//Nav的可视宽度
 				  			_this.clientWidth = parseInt(this.$wrapperEl.css('width'));
 				  			_this.navWidth = 0;
-				  			for (var i = 0; i < this.slides.length; i++) {
+				  			for (let i = 0; i < this.slides.length; i++) {
 				  				_this.navWidth += parseInt(this.slides[i].offsetWidth)
 				  			}
 				  			_this.maxLeft=_this.navWidth-_this.clientWidth;
@@ -389,7 +292,7 @@
 			},
 			// 导航栏对应的page页面
 			page() {
-				var _this=this;
+				let _this=this;
 				this.pageSwiper = new Swiper(this.$refs.page, {
 				  	watchSlidesProgress: true,
 				  	resistanceRatio: 0,
@@ -397,7 +300,7 @@
       				observeParents:true,
 				  	on: {
 				  		transitionStart: function () {
-				  			var index=this.activeIndex;
+				  			let index=this.activeIndex;
 				  			_this.tabIndex=index;
 				  			_this.navSlideWidth=_this.navSwiper.slides[index].offsetWidth; 
 				  			_this.slideMove(index,_this.navSlideWidth);
@@ -407,9 +310,6 @@
 			},
 			// 点击导航	
 			tabClick(index,event) {
-				/*this.tabIndex=index;
-				//对应的内容显示
-				this.pageSwiper.slideTo(index, 0);*/
 				this.pageShow(index);
 				//请求对应种类的数据,没有加载过的话加载数据,已经加载过不再加载。
 				if (!this.products[index]) {
@@ -424,10 +324,10 @@
 			},
 			// 导航移动
 			slideMove(index,navSlideWidth) {
-				var navSwiper=this.navSwiper,
+				let navSwiper=this.navSwiper,
 				clientWidth=this.clientWidth;
-				var navActiveSlideLeft=navSwiper.slides[index].offsetLeft;
-				var left=navActiveSlideLeft-clientWidth/2;
+				let navActiveSlideLeft=navSwiper.slides[index].offsetLeft;
+				let left=navActiveSlideLeft-clientWidth/2;
 				if (left<=0) {
 					left=0;	
 				} else if(left>=this.maxLeft){
