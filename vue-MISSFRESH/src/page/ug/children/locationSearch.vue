@@ -75,6 +75,26 @@
 				let station={
 					id: city.id,
 				};
+				/*this.SET_POSITION({
+					id: city.adcode,
+					name: city.name,
+					province: city.province,
+					district: city.district
+				}, {
+					address: city.address,
+					distance: city.distance,
+					name: city.name
+				}, {
+					accuracy: city.type,
+					lat: city.location.lat,
+					lng: city.location.lng
+				}, {
+					accuracy: city.type,
+					lat: city.location.lat,
+					lng: city.location.lng
+				}, {
+					id: city.id,
+				});*/
 				this.SET_POSITION({
 					type: 1,
 					city: chosecity, 

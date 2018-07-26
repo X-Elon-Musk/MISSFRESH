@@ -86,6 +86,9 @@
 		justify-content: center;
 		.delivery-info{
 			height: 1rem;
+			// flex: 1;
+			// font-size: 0.8em;
+			// line-height: 1em;
 			.delivery-time{
 				display: inline-block;
 				line-height: 100%;
@@ -98,6 +101,7 @@
 			}
 			.delivery-place{
 				display: inline-block;
+				// line-height: 100%;
 				line-height: 1rem;
 				max-width: 10em;
 			    overflow: hidden;

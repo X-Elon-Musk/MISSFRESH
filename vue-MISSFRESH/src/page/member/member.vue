@@ -1,60 +1,63 @@
 <template>
 	<div class="member">
-		<pullRefresh :tabIndex="tabIndex" @getData="getData" :gif="false">
-			<div class="vip-card">
-				<div class="card-bg"></div>
-				<div class="card-container">
-					<img src="~images/vip.png">
-				</div>
-			</div>
-			<icons :icons="icons"></icons>
-			<div class="vip-calculator">
-				<div class="calculator-content">
-					<div class="calculator-header">
-						<span></span>
-						会员省钱计算器
+		<!-- <div class="content"> -->
+			<pullRefresh :tabIndex="tabIndex" @getData="getData" :gif="false">
+				<div class="vip-card">
+					<div class="card-bg"></div>
+					<div class="card-container">
+						<img src="~images/vip.png">
 					</div>
-					<div class="save clearfix">
-						<span>优享会员将为你节省</span>
-						<span class="save-count">¥1121.30</span>
+				</div>
+				<icons :icons="icons"></icons>
+				<div class="vip-calculator">
+					<div class="calculator-content">
+						<div class="calculator-header">
+							<span></span>
+							会员省钱计算器
+						</div>
+						<div class="save clearfix">
+							<span>优享会员将为你节省</span>
+							<span class="save-count">¥1121.30</span>
+						</div>
+						<div class="basis">根据优鲜用户年平均消费3504元计算</div>
+						<ul class="specific">
+							<li>
+								<div class="clearfix">
+									<span class="item-name">购物返现</span>
+									<span>¥175.20</span>
+								</div>
+								<p>单单返现5%无上限</p>
+							</li>
+							<li>
+								<div class="clearfix">
+									<span class="item-name">购物返现</span>
+									<span>¥175.20</span>
+								</div>
+								<p>单单返现5%无上限</p>
+							</li>
+							<li>
+								<div class="clearfix">
+									<span class="item-name">购物返现</span>
+									<span>¥175.20</span>
+								</div>
+								<p>单单返现5%无上限</p>
+							</li>
+						</ul>
 					</div>
-					<div class="basis">根据优鲜用户年平均消费3504元计算</div>
-					<ul class="specific">
-						<li>
-							<div class="clearfix">
-								<span class="item-name">购物返现</span>
-								<span>¥175.20</span>
-							</div>
-							<p>单单返现5%无上限</p>
-						</li>
-						<li>
-							<div class="clearfix">
-								<span class="item-name">购物返现</span>
-								<span>¥175.20</span>
-							</div>
-							<p>单单返现5%无上限</p>
-						</li>
-						<li>
-							<div class="clearfix">
-								<span class="item-name">购物返现</span>
-								<span>¥175.20</span>
-							</div>
-							<p>单单返现5%无上限</p>
-						</li>
-					</ul>
 				</div>
-			</div>
-			<div class="vip-products">
-				<div class="products-header">
-					<div class="area-header">会员商品&会员专享价</div>
-					<div class="area-introduce">精选全球美食 成为会员抢先购买</div>
+				<div class="vip-products">
+					<div class="products-header">
+						<div class="area-header">会员商品&会员专享价</div>
+						<div class="area-introduce">精选全球美食 成为会员抢先购买</div>
+					</div>
+					<div class="clearfix list-group-item ticket-item" v-for="item in products">
+						<product :product="item"></product>
+					</div>
 				</div>
-				<div class="clearfix list-group-item ticket-item" v-for="item in products">
-					<product :product="item"></product>
-				</div>
-			</div>
-		</pullRefresh>
-		<mfooter></mfooter>
+			</pullRefresh>
+			<!-- <pullRefresh :tabIndex="1" @getData="getData"></pullRefresh> -->
+			<mfooter></mfooter>
+		<!-- </div> -->
 	</div>
 </template>
 <script>
@@ -133,6 +136,7 @@
 						vip: 19.9
 					});
               	}
+              	// console.log(this.products.length);
 			}	
 		},
 		components:{

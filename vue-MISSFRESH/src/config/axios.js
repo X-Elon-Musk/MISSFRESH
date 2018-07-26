@@ -11,6 +11,12 @@ export default async(url='', parameter={}, type='get')=>{
 	}
 	if (type=='get') {
 		result=await new Promise((resolve, reject) =>{
+			/*let params={};
+			if (parameter) {
+				Object.keys(parameter).forEach(key => {
+					params[key]=parameter[key];
+				})			
+			}*/
 			axios.get(baseUrl+url,{
 				params: {...params}
 			})
@@ -24,6 +30,12 @@ export default async(url='', parameter={}, type='get')=>{
 	    return result.data;	
 	} else if(type=='post'){
 		result=await new Promise((resolve, reject) =>{
+			/*let params={};
+			if (parameter) {
+				Object.keys(parameter).forEach(key => {
+					params[key]=parameter[key];
+				})			
+			}*/
 			axios.post(baseUrl+url,{
 				...params
 			}, {
@@ -32,13 +44,16 @@ export default async(url='', parameter={}, type='get')=>{
                 }
             })
 			.then(function (response) {
+				// console.log('正确');
 				resolve(response)	
 			})
 			.catch(function (error) {
+				// console.log('错误');
 				reject(error)
 			});	
 
 	    })	
+	    // console.log(result.data);
 	    return result.data;	
 	}
 }

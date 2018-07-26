@@ -33,6 +33,7 @@ export default {
 		state.s_cartList = {...cart};
 		// 存入localStorage
 		setStore('cartList', state.s_cartList);
+		//  console.log(this);
 		this.a.SET_CARTNUMBER(state,state.s_cartList);
 	},
 	// 减少购物车
@@ -104,6 +105,31 @@ export default {
 	// 设置城市信息，存入store和localStorage
 	SET_POSITION: (state,{type, city={}, building={}, location={}, position={}, station={}})=>{
 		let region = state.s_choseRegion;
+
+		/*
+		region={
+			building:{
+				name: building_name||"", 
+				address: building_address||""
+			},
+			city:{
+				id: city_id||"", 
+				name: city_name||"", 
+				province: city_province||"", 
+				district: city_district||""
+			},
+			location:{
+				lat: location_lat||"",
+				lan: location_lan||""
+			},
+			position:{
+				lat: position_lat||""
+			},
+			station:{
+				id: station_id||""
+			},
+		}*/
+
 		let parameter = {
 			city: city||{},
 			building: building||{},
@@ -164,15 +190,29 @@ export default {
 	},
 	// 设置用户信息和登录情况
 	SET_USERINFO: (state,{info})=>{
+		// state.s_userInfo=info;
 		state.s_userInfo={...info};
 		state.s_login=true;
 		setStore('userId', info.userId);
 		setStore('accessToken', info.accessToken);
+		// setStore('accessToken', info.userId);
+		console.log(state);
 	},
 	// 退出登录
 	OUT_LOGIN: (state)=>{
 		state.s_userInfo={};
 		state.s_login=false;
+		// removeStore('userId');
 		removeStore('accessToken');
 	},
 }
+
+/*//设置购物车商品总数量
+let	SET_CARTNUMBER=(state, {cartList})=>{
+	let num = 0;
+    Object.values(cartList).forEach((item,index) => {
+    	num += item.num;
+    })
+    state.s_cartCount = num;
+	setStore('cartCount', state.s_cartCount);
+};*/

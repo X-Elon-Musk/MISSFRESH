@@ -17,6 +17,8 @@
     export default{
 		data(){
 			return {
+				//当前导航栏所处位置
+				// tabIndex: 0,
 				//上滑加载初始的位置
 				startPosition:0,
 				//上滑加载滑动的位置
@@ -58,6 +60,7 @@
 			// 下拉刷新、上滑加载动作触摸释放时执行
 			touchEnd() {
 				let _this=this;
+				//console.log(this.translate,this.startPosition);
 				if (this.translate<this.startPosition) {
 	                setTimeout(()=>{
 	                	//发送请求
@@ -66,7 +69,9 @@
 	                		// this.pullRefresh.update(); // 重新计算高度;
 	                	}
 	                	// 重新计算高度;
-	                  	if (isArray(this.pullRefresh)) {		
+	                  	if (isArray(this.pullRefresh)) {
+	                  		// console.log(1111);
+	                  		// this.pullRefresh[this.tabIndex].update(); 		
 	                  		this.pullRefresh.forEach((item,index)=>{
 	                  			this.pullRefresh[index].update();
 	                  		}); 		
@@ -84,6 +89,10 @@
 	@import '~src/style/mixin';
 	// 上滑加载、下拉刷新
 	.swiper-container.pull-refresh{
+		// position: absolute;
+		// left: 0;
+		// top: 0;
+		// bottom: 0;
 		overflow: visible;
 		margin-bottom: 53px;
 		.wh(100%);

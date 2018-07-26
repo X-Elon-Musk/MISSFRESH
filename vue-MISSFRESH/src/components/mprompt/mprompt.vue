@@ -73,6 +73,18 @@
 					.wh(3em,50%);
 					text-align: center;	
 				}
+				/* .button-confirm{
+					position: relative;
+					&:before{
+						content: '';
+						position: absolute;
+						left: 0;
+						top: 15%;
+						height: 70%;
+						width: 1px;
+						background: #d1d1d1;
+					}
+				} */
 				.button-cancel{
 					position: relative;
 					&:after{

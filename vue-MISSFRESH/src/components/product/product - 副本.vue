@@ -1,0 +1,225 @@
+<template>
+    <div class="product">
+    	<router-link :to="{path: '/ug/productDetail',query:{id: product.product_id,index: product.product_index}}" tag="div" class="clearfix product-link">
+			<div class="f_l product-img">
+				<!-- <span v-bind:class="{hot_0:product.hot==0,hot_1:product.hot==1,hot_2:product.hot==2}"></span> -->
+				<img src="" v-lazy="product.image" alt="">
+			</div>
+			<div class="f_r product-info">
+				<!-- <p class="name">{{product.name}}</p> -->
+				<p class="name">{{product.id}}</p>
+				<p class="point">{{product.subtitle}}</p>
+				<ul class="preferential">
+					<li v-for="(item,index) in product.product_tags" :key="index">{{item.name}}</li>
+				</ul>
+				<p class="price">
+					商城价
+					<price :price="priceUp.price"></price>
+				</p>
+				<p class="vip">
+					会员价
+					<price :price="priceUp.price"></price>
+				</p>
+				
+			</div>
+		</router-link>
+		<div class="cart-operate">
+			<img src="~images/icon/shopping-cart.png" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,$event)">
+			<div class="clearfix cart-action" v-if="productNum">
+				<span class="minus-action" @touchstart.stop="minusOutCart(product.id,$event)"></span> 
+				<span class="count">{{productNum}}</span> 
+				<span class="add-action" @touchstart.stop="addToCart(product.id,$event)"></span>
+			</div>
+		</div>
+		
+	</div> 
+</template>
+<script>
+	import {mapState, mapMutations} from 'vuex'
+	import price from 'src/components/price/price'
+	export default{
+		data(){
+			return {
+				// img: require('images/product_0.jpg'),
+				cartStatus: true
+			}
+		},
+		mounted: function () {
+			console.log(this.productNum);
+		},
+		computed: {
+			...mapState([
+                'cartList'
+            ]),
+            //shopCart变化的时候重新计算当前商品的数量
+            productNum: function (){
+                if (this.cartList&&this.cartList[this.product.id]) {
+                    /*let num = 0;
+                    Object.values(this.cartList).forEach((item,index) => {
+                    	num += item.num;
+                    })
+                    for(var key in this.cartList[this.product.id]){
+                    	num+=
+                    }*/
+                    // console.log(num);
+                    return this.cartList[this.product.id]['num'];
+                }else {
+                    return 0;
+                }
+            },
+		},
+		methods: {
+			...mapMutations([
+                'ADD_CART','REDUCE_CART'
+            ]),
+            minusOutCart: function (id,event) {
+				this.REDUCE_CART({id});
+			},
+			addToCart: function (id,event) {
+				this.ADD_CART({id});
+			}
+		},
+		props: ['product','priceUp','priceDown'],
+		components: {
+			price
+		}
+	}
+</script>
+<style lang="less">
+	@import '~src/style/mixin';
+	.product{
+		width: 100%;
+	    background-color: #fff;
+		display: flex;
+		position: relative;
+		border: none;
+		border-color: #f5f5f5;
+		padding-top: 18px;
+		padding-bottom: 18px;
+		border-bottom: 1px solid #f5f5f5;
+		position: relative;
+		.product-link{
+			position: relative;
+			height: auto;
+			width: 100%;
+			.product-img{
+				width: 40%;
+				height: auto;
+				position: relative;
+				img{
+					display: block;
+					border-radius: 0;
+					width: 120px;
+					height: 120px;
+					border-radius: 100%;
+				}
+				span{
+					position: absolute;
+					height: 32px;
+					width: 24px;
+					top: 0;
+					left: 0px;
+					// z-index: 2;
+				}
+				// .hot_0{
+				// 	background: url(../images/index/hot_0.png) no-repeat;
+				// 	background-size: 100% 100%;
+				// }
+				// .hot_1{
+				// 	background: url(../images/index/hot_1.png) no-repeat;
+				// 	background-size: 100% 100%;
+				// }
+				// .hot_2{
+				// 	background: url(../images/index/hot_2.png) no-repeat;
+				// 	background-size: 100% 100%;
+				// }
+			}
+			.product-info{
+				width: 60%;
+				text-align: left;
+				margin: 0;
+				color: #262626;
+				line-height: 20px;
+				position: relative;
+				padding-left: 2%;
+				box-sizing: border-box;
+				.name{
+					font-size: 14px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					letter-spacing: -1px;
+					color: #474245;
+				}
+				.point{
+					font-size: 12px;
+					color: #969696;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+				}
+				.preferential{
+					li{
+						display: inline-block;
+						border-radius: 2px;
+						font-size: 9px;
+						height: 13px;
+						line-height: 11px;
+						border: 1px solid #d165e1;
+						padding: 1px;
+						color: #d165e1;
+						background: #fff;
+						margin-right: 5px;
+						background-color: rgb(255, 255, 255);
+						border-color: rgb(198, 198, 198);
+						color: rgb(198, 198, 198);
+					}
+				}
+				.price{
+					line-height: 1.4;
+					font-size: 12px;
+					color: @color_main;
+					padding-top: 18px;
+				}
+				.vip{
+					line-height: 1.4;
+					font-size: 12px;
+					color: @color_assist;
+				}
+			}
+		}
+		.cart-operate{
+			position: absolute;
+			bottom: 18px;
+			right: 0;
+			.shopping-cart-img{
+				width: 46px;
+				height: 46px;
+				position: absolute;
+				right: 15px;
+				bottom: -10px;
+			}
+			.cart-action{
+				.wh(1em,4em);
+			    position: absolute;
+			    right: 6px;
+				bottom: 8px;
+				background: transparent;
+				span{
+					float: left;
+				}
+				.minus-action{
+				    .bg(1em,1em,transparent,'~images/icon/minus-action.png',100% 100%);
+				}
+				.count{
+					line-height: 1em;
+				    text-align: center;
+				    min-width: 2em; 
+				}
+				.add-action{
+					.bg(1em,1em,transparent,'~images/icon/add-action.png',100% 100%);
+				}
+			}
+		}
+	}
+</style>
