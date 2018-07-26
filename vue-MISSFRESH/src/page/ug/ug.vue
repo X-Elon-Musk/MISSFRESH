@@ -35,29 +35,6 @@
 				loading: true
 			}
 		},
-		activated(){
-			console.log(333333);
-		},
-		/*beforeRouteLeave(to, from, next){
-        	console.log(to);
-        	console.log(from);
-        	// if (to.name=='http://localhost:8080/#/ug') {
-        	if (to.fullPath=='/ug/') {
-        		from.meta.keepAlive=true;
-        		// to.meta.keepAlive=true;
-        		console.log(1);
-        	} else{
-        		from.meta.keepAlive=false;
-        		// to.meta.keepAlive=true;
-        		// this.$route.meta.keepAlive=true;
-        		console.log(this.$route.meta.keepAlive);
-        		console.log(2);
-        	}
-        	from.meta.keepAlive=false;
-        	next();
-        },*/
-		mounted: function () {
-		},
 		methods: {
 			// 加载动画
 			hideLoading(status){
@@ -73,31 +50,6 @@
 </script>
 <style lang='less' scoped rel="stylesheet/less">
 	@import '~src/style/mixin';
-	/* .category-nav-wrap{
-		position: fixed;
-		top: 2em;
-	    z-index: 100;
-	    .wh(26px);
-	    background-color: #fff;
-	    border-bottom: 1px solid #e6e6e6;
-	    .mint-tabbar{
-	    	background: none;
-	    	.mint-tab-item{
-				position: relative;
-			}
-			.mint-tab-item.is-selected{
-				background: transparent;
-			}
-			.mint-tab-item.is-selected:after{
-				content: "";
-				position: absolute;
-				left: 0;
-				bottom: 0px;
-				.wh(0);
-				border-bottom: 2px solid #ff4891;
-			}
-	    }
-	} */
 	.ug ::-webkit-scrollbar {
 	    .wh(0,0);
 	}

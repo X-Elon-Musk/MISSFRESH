@@ -2,20 +2,17 @@
 	<div class="clearfix card-wrap">
 		<div class="wrap-left f_l">
             <router-link v-for="(item,index) in categoryareas" v-if="index<1" :to="{path: '/'}" :key="index" tag="div" class="card-wrap-img">
-			<!-- <router-link :to="{path: '/',query:{id: categoryareas[0]['product_id'],index: categoryareas[0].product_index}}" tag="div" class="card-wrap-img"> -->
                 <img :src="item.image">
             </router-link>
 		</div>
 		<div class="wrap-right f_r">
             <div class="wrap-right-top">
                  <router-link v-for="(item,index) in categoryareas" v-if="index==1" :to="{path: '/'}" :key="index" tag="div" class="card-wrap-img">
-                <!-- <router-link :to="{path: '/',query:{id: categoryareas[1]['product_id'],index: categoryareas[1].product_index}}" tag="div" class="card-wrap-img"> -->
                     <img :src="item.image">
                 </router-link>
             </div>
 			<div class="clearfix wrap-right-bottom">
                 <router-link v-for="(item,index) in categoryareas" v-if="index>1" :to="{path: '/'}" :key="index" tag="div" class="f_l card-wrap-img">
-				<!-- <router-link v-for="(item,index) in categoryareas" v-if="index>1" :to="{path: '/',query:{id: item['product_id'],index: item.product_index}}" :key="index" tag="div" class="f_l card-wrap-img"> -->
                     <img :src="item.image">
                 </router-link>
             </div>

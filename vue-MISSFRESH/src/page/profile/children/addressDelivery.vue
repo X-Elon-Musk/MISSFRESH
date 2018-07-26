@@ -165,45 +165,7 @@
 			background-color: #fff;
 			padding: 0.625rem 0.9375rem 0.625rem 0.9375rem;
 			height: auto;
-			// font-size: 0.8em;
 		    box-shadow: 0 0 0.625rem rgba(0,0,0,.06);
-			/* .address-input{
-				display: flex;
-				flex-direction: row;
-				flex-wrap: nowrap;
-				overflow: hidden;
-				white-space: nowrap;
-				background-color: #eee;
-				border-radius: 0.25em;
-				height: 2em;
-				line-height: 2em;
-				.address-city{
-					width: 25%;
-					padding-left: 4%;
-					padding-right: 0.8em;
-					box-sizing: border-box;
-					position: relative;
-					&:after{
-						content: '';
-						position: absolute;
-						top: 0.6em;
-						right: 0;
-						.bg(0.8em,0.8em,transparent,'~images/icon/address-city.png',100% 100%);
-					}
-				}
-				.address-position{
-					width: 75%;
-					position: relative;
-					&:before{
-						content: '';
-						display: inline-block;
-						vertical-align: top;
-						margin-top: 0.6em;
-						margin-right: 2%;
-						.bg(0.8em,0.8em,transparent,'~images/icon/address-position.png',100% 100%);
-					}
-				}
-			} */
 			.address-input{
 				display: flex;
 				flex-direction: row;
@@ -228,17 +190,6 @@
 
 					}
 				}
-				/* .address-position{
-					width: 75%;
-					position: relative;
-					&:before{
-						content: '';
-						display: inline-block;
-						vertical-align: top;
-						margin-top: 0.5rem;
-						.bg(1.1875rem,1.1875rem,transparent,'~images/icon/address-position.png',80% 80%);
-					}
-				} */
 			}
 		}
 		.search-box{
@@ -265,7 +216,6 @@
 					display: block;
 					.wh(100%,100%);
 					position: relative;
-					// line-height: 2em;
 					.search-logo{
 						position: absolute;
 						left: 0;
@@ -279,7 +229,6 @@
 						text-indent: 1.875rem;
 						border: none;
 						outline: none;
-						// line-height: 2em;
 					}
 					.search-submit{
 						display: none;

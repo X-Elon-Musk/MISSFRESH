@@ -9,7 +9,6 @@
 					</div>
 					<div class="home-des-detail">
 						<span class="home-name">{{s_userInfo.nick_name}}</span>
-						<!-- <img src="https://j-image.missfresh.cn/img_20171028220456485.png" alt="" class="home-img"> -->
 					</div>
 				</div>
 			</div>
@@ -50,12 +49,6 @@
 			<icons :icons="icons"></icons>
 			<img src="~images/invitation.png" class="invitation-img">
 			<div class="other-items">
-				<!-- <div v-for="otherItem in otherItems">
-					<router-link :to="otherItem.to">
-						<span>{{otherItem.text}}</span>
-						<span class="arrow"></span>
-					</router-link>
-				</div> -->
 				<profileItem v-for="(item,index) in otherItems" :to="item.to" :text="item.text" :arrow="true" :key="index"></profileItem>
 			</div>
 		</div>
@@ -147,18 +140,6 @@
         mounted (){
 			this.$nextTick(() => {
 				this.getUser();
-				/*
-				//第二种写法
-				getUserAxios().then(response=>{
-					if (response.code==0) {
-						console.log(typeof response);
-						console.log(response);
-						this.SET_USERINFO({
-							info: {...response}
-						})
-					}
-				})*/
-				
 			})
 		},
         methods: {
@@ -237,12 +218,6 @@
 							white-space: nowrap;
 							vertical-align: middle;
 						}
-						/* .home-img{
-							margin-left: 6px;
-							min-width: 50px;
-							height: 15px;
-							vertical-align: middle;
-						} */
 					}
 				}
 			}

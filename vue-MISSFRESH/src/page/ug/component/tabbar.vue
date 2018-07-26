@@ -23,159 +23,32 @@
 		  	<div class="swiper-wrapper">
 
 				<!-- nav对应页面 -->
-				<!-- 热卖 -->
-		      	<!-- <productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage> -->
-		      	<!-- <productPage :products="products[0]||[]" :banner="banner[0]||[]" class="product_index_0"> -->
-		      	<productPage :products="products[0]" :banner="banner[0]" class="product_index_0">
+		      	<productPage :products="products[0]" :banner="banner[0]" class="product_index_page">
 		      		<guarantee :brands="brands[0]"></guarantee>
             		<card :categoryareas="categoryareas[0]"></card>
-        			<!-- {{products[0]}} -->
 		      	</productPage>
-		      	<!-- <productPage :products="products[1]||[]" :banner="banner[1]||[]" class="product_index_0"></productPage> -->
-		      	<productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage>
-		      	<productPage :products="products[2]" :banner="banner[2]" class="product_index_0"></productPage>
-		      	<!-- <productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage> -->
-			    <!-- <div class="swiper-slide slidepage swiper-container gif-show">
-		      		<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								2
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div> -->
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								3
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								4
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								5
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								6
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								7
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								8
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								9
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								10
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								11
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								12
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								13
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								14
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								15
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
+		
+				<productPage :products="products[index]" :banner="banner[index]" class="product_index_page" v-for="(item,index) in categorylist[0]" v-if="index>0" :key="index"></productPage>
 
+
+
+		      	<!-- <productPage :products="products[1]" :banner="banner[1]" class="product_index_page"></productPage>
+		      	<productPage :products="products[2]" :banner="banner[2]" class="product_index_page"></productPage>
+		      	<productPage :products="products[3]" :banner="banner[3]" class="product_index_page"></productPage>
+		      	<productPage :products="products[4]" :banner="banner[4]" class="product_index_page"></productPage>
+		      	<productPage :products="products[5]" :banner="banner[5]" class="product_index_page"></productPage>
+		      	<productPage :products="products[6]" :banner="banner[6]" class="product_index_page"></productPage>
+		      	<productPage :products="products[7]" :banner="banner[7]" class="product_index_page"></productPage>
+		      	<productPage :products="products[8]" :banner="banner[8]" class="product_index_page"></productPage>
+		      	<productPage :products="products[9]" :banner="banner[9]" class="product_index_page"></productPage>
+		      	<productPage :products="products[10]" :banner="banner[10]" class="product_index_page"></productPage>
+		      	<productPage :products="products[11]" :banner="banner[11]" class="product_index_page"></productPage>
+		      	<productPage :products="products[12]" :banner="banner[12]" class="product_index_page"></productPage>
+		      	<productPage :products="products[13]" :banner="banner[13]" class="product_index_page"></productPage>
+		      	<productPage :products="products[14]" :banner="banner[14]" class="product_index_page"></productPage>
+		      	<productPage :products="products[15]" :banner="banner[15]" class="product_index_page"></productPage>
+		      	<productPage :products="products[16]" :banner="banner[16]" class="product_index_page"></productPage>
+		      	<productPage :products="products[17]" :banner="banner[17]" class="product_index_page"></productPage> -->
 
 		  	</div>
 		</div>
@@ -190,7 +63,6 @@
     import 'swiper/dist/css/swiper.min.css';
     import qs from 'qs';
     import {getDataPageIndexAxios} from 'src/service/getData'
-    // import {getStore} from 'src/config/mUtils.js'
 
   	import ugHeader from './component/ugHeader'
     import classify from './component/classify'
@@ -242,43 +114,10 @@
 		},
 		mounted (){
 			this.getDataPageIndex(0);
-			/*if (!getStore('choseAddress')) {
-				this.getDataPosition();			
-			}
-			this.getView();*/
 		},
-		activated(){
-			console.log(444444);
-			// this.getDataPageIndex(0, () => {
-			// 	this.$nextTick(() => {
-			// 		if (!this.navSwiper) this.tab();
-			// 		if (!this.pageSwiper) this.page();
-			// 	})
-			// });
-			// this.getView();
-		},
-		beforeRouteEnter(to, from, next){
-        	// console.log(to);
-        	// console.log(from);
-        	/*// if (to.name=='http://localhost:8080/#/ug') {
-        	if (to.fullPath=='/ug/') {
-        		from.meta.keepAlive=true;
-        		// to.meta.keepAlive=true;
-        		console.log(1);
-        	} else{
-        		from.meta.keepAlive=false;
-        		// to.meta.keepAlive=true;
-        		// this.$route.meta.keepAlive=true;
-        		console.log(this.$route.meta.keepAlive);
-        		console.log(2);
-        	}
-        	from.meta.keepAlive=false;*/
-        	next();
-        },
         watch: {
         	s_choseAddress: function () {
-    			this.getDataPageIndex(0);
-				// this.getView();			
+    			this.getDataPageIndex(0);			
         	}
         },
 		computed: {
@@ -287,15 +126,11 @@
             ]),
         },
 		methods: {
-			/*...mapMutations([
-                'SET_POSITION'
-            ]),*/
 			// 获取index数据
 			async getDataPageIndex(product_index) {
 				let response=await getDataPageIndexAxios(product_index);
 				let product_list=response.product_list;
 				if (product_index==0) {
-					// this.categorylist[product_index]=[].concat(response.category_list);	
 					this.$set(this.categorylist, product_index, response.category_list);
 					this.$set(this.brands, product_index, product_list.brands);
 					this.$set(this.categoryareas, product_index, product_list.category_areas);
@@ -303,76 +138,21 @@
 				}
 				this.$set(this.banner, product_index, product_list.banner);
 				this.$set(this.products, product_index, product_list.products);
-				console.log(this.products[0]);
 				this.loading=false;
 				this.$nextTick(() => {
 					if (!this.navSwiper) this.tab();
 					if (!this.pageSwiper) this.page();
 				})
 			},
-			/*//获取当前地址
-			async getDataPosition(callback) {
-				let response=await getDataPositionAxios();
-				let ad_info=response.ad_info
-				let chosecity={
-					id: ad_info.adcode,
-					name: ad_info.city,
-					province: ad_info.province,
-					district: ad_info.district
-				}
-				this.SET_POSITION({
-					type: 0,
-					city: chosecity
-				});
-
-				
-
-
-				//post方法
-				// this.axios.post('http://localhost:3390/position/locationsuggestion', {
-				//     keyword:'知春路',
-				// 	cityName:'北京'
-				// }, {
-    //                 headers:{
-    //                     'Content-Type': 'application/x-www-form-urlencoded'
-    //                 }
-    //             })
-				// .then(function (response) {
-				//   	console.log(response.data);
-				// })
-				// .catch(function (error) {
-				//   	console.log(error);
-				// });	
-
-				//get方法
-				// this.axios.get('http://localhost:3390/position/locationsearch',{params:{
-				//     keyword:'知春路',
-				// 	cityName:'北京'
-				// }})
-				// .then(function (response) {
-				//   	console.log(response.data);
-				// })
-				// .catch(function (error) {
-				//   	console.log(error);
-				// });		
-			},*/
-			/*//获取配送的类型信息
-			getView() {
-				getViewAxios(this.s_viewType).then(response=>{
-					this.view=response;
-				})
-			},*/
 			// 导航栏
 			tab() {
 				var _this=this;
-				//this.navSwiper=new Swiper(this.$refs.tabNav, {
 				this.navSwiper=new Swiper('.tab-nav', {
 					slidesPerView: 'auto',
 					freeMode: true,
 					observer:true,
       				observeParents:true,
-      				// resistanceRatio : 0,
-					on: {
+      				on: {
 						init: function() {
 							//设置transition-duration值
 							this.setTransition(_this.tSpeed);
@@ -407,9 +187,6 @@
 			},
 			// 点击导航	
 			tabClick(index,event) {
-				/*this.tabIndex=index;
-				//对应的内容显示
-				this.pageSwiper.slideTo(index, 0);*/
 				this.pageShow(index);
 				//请求对应种类的数据,没有加载过的话加载数据,已经加载过不再加载。
 				if (!this.products[index]) {

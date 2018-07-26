@@ -53,7 +53,6 @@
 					is_chrome_city: city.is_chrome_city,
 					ordering: city.ordering
 				});
-				// this.$router.push('/ug/addressChose');
 				this.$router.replace('/ug/addressChose');
 			}
 		}
