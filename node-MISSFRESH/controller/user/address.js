@@ -15,7 +15,7 @@ class Address extends MissMysql{
     async getAddressList(req, res, next){
         let user_id=parseInt(req.query.user_id);
         let sqlresult,result=[];
-        console.log(req.query.user_id);
+        // console.log(req.query.user_id);
         sqlresult=await this.missSelectMysql('address_list', {}, {
             user_id: user_id
         });

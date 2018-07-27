@@ -85,7 +85,7 @@
 	// 上滑加载、下拉刷新
 	.swiper-container.pull-refresh{
 		overflow: visible;
-		margin-bottom: 53px;
+		// margin-bottom: 53px;
 		.wh(100%);
 		.list-group-item{    
 			position: relative; 

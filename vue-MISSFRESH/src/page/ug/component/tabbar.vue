@@ -23,158 +23,174 @@
 		  	<div class="swiper-wrapper">
 
 				<!-- nav对应页面 -->
-				<!-- 热卖 -->
-		      	<!-- <productPage :products="products" :banner="banner" :brands="brands" :categoryareas="categoryareas" class="product_index_0"></productPage> -->
-		      	<!-- <productPage :products="products[0]||[]" :banner="banner[0]||[]" class="product_index_0"> -->
-		      	<productPage :products="products[0]" :banner="banner[0]" class="product_index_0">
+				<productPage :products="products[0]" :banner="banner[0]" class="product_index_0">
 		      		<guarantee :brands="brands[0]"></guarantee>
             		<card :categoryareas="categoryareas[0]"></card>
-        			<!-- {{products[0]}} -->
 		      	</productPage>
-		      	<!-- <productPage :products="products[1]||[]" :banner="banner[1]||[]" class="product_index_0"></productPage> -->
-		      	<productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage>
-		      	<productPage :products="products[2]" :banner="banner[2]" class="product_index_0"></productPage>
-		      	<!-- <productPage :products="products[1]" :banner="banner[1]" class="product_index_0"></productPage> -->
-			    <!-- <div class="swiper-slide slidepage swiper-container gif-show">
+		      	<!-- <productPage :products="products[1]" :banner="banner[1]" class="product_index_0">
+		      		2
+	          		<img src="~src/images/carousel/0.jpg">
+		      	</productPage>
+		      	<productPage :products="products[2]" :banner="banner[2]" class="product_index_0">
+		      		3
+	          		<img src="~src/images/carousel/0.jpg">
+		      	</productPage> -->
+				
+
+				<!-- <productPage :products="products[1]" :banner="banner[1]" class="product_index_page"></productPage>
+		      	<productPage :products="products[2]" :banner="banner[2]" class="product_index_page"></productPage> -->
+
+
+
+				<productPage v-for="(item,index) in categorylist[0]" :key="index" v-if="products[index]&&products[index].length!=0&&index>0" :products="products[index]" :banner="banner[index]" class="product_index_page">aaaabbbb</productPage>
+
+		      	<!-- <productPage :products="products[3]" :banner="banner[3]" class="product_index_page"></productPage>
+		      	<productPage :products="products[4]" :banner="banner[4]" class="product_index_page"></productPage>
+		      	<productPage :products="products[5]" :banner="banner[5]" class="product_index_page"></productPage>
+		      	<productPage :products="products[6]" :banner="banner[6]" class="product_index_page"></productPage>
+		      	<productPage :products="products[7]" :banner="banner[7]" class="product_index_page"></productPage>
+		      	<productPage :products="products[8]" :banner="banner[8]" class="product_index_page"></productPage>
+		      	<productPage :products="products[9]" :banner="banner[9]" class="product_index_page"></productPage>
+		      	<productPage :products="products[10]" :banner="banner[10]" class="product_index_page"></productPage>
+		      	<productPage :products="products[11]" :banner="banner[11]" class="product_index_page"></productPage>
+		      	<productPage :products="products[12]" :banner="banner[12]" class="product_index_page"></productPage>
+		      	<productPage :products="products[13]" :banner="banner[13]" class="product_index_page"></productPage>
+		      	<productPage :products="products[14]" :banner="banner[14]" class="product_index_page"></productPage>
+		      	<productPage :products="products[15]" :banner="banner[15]" class="product_index_page"></productPage>
+		      	<productPage :products="products[16]" :banner="banner[16]" class="product_index_page"></productPage>
+		      	<productPage :products="products[17]" :banner="banner[17]" class="product_index_page"></productPage> -->
+
+
+		      	<!-- <div class="swiper-slide slidepage">
 		      		<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								2
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div> -->
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								3
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								4
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								5
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								6
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								7
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								8
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								9
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								10
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								11
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								12
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-			    <div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								13
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								14
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
-				<div class="swiper-slide slidepage">
-			      	<div class="swiper-container scroll" ref="scroll">
-				        <div class="swiper-wrapper">
-				          	<div class="swiper-slide slidescroll">
-								15
-				          		<img src="~src/images/carousel/0.jpg">
-				      		</div>
-				        </div>
-			      	</div>
-			    </div>
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					3
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					4
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					5
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					6
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					7
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					8
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					9
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					10
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					11
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					12
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					13
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					14
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="swiper-slide slidepage">
+		      		<div class="swiper-container scroll" ref="scroll">
+		      			<div class="swiper-wrapper">
+		      				<div class="swiper-slide slidescroll">
+		      					15
+		      					<img src="~src/images/carousel/0.jpg">
+		      				</div>
+		      			</div>
+		      		</div>
+		      	</div> -->
 
 
 		  	</div>
@@ -261,10 +277,11 @@
 				this.$set(this.banner, product_index, product_list.banner);
 				this.$set(this.products, product_index, product_list.products);
 				this.loading=false;
-				this.$nextTick(() => {
-					if (!this.navSwiper) this.tab();
-					if (!this.pageSwiper) this.page();
-				})
+				this.navSwiper?this.navSwiper.update():this.tab();
+				this.pageSwiper?this.pageSwiper.update():this.page();
+				setTimeout(()=>{
+					this.pageShow(product_index);
+				},10)
 			},
 			// 导航栏
 			tab() {
@@ -310,17 +327,15 @@
 			},
 			// 点击导航	
 			tabClick(index,event) {
-				this.pageShow(index);
 				//请求对应种类的数据,没有加载过的话加载数据,已经加载过不再加载。
-				if (!this.products[index]) {
-					this.getDataPageIndex(index);		
-				}
+				this.products[index]?this.pageShow(index):this.getDataPageIndex(index);
 			},
 			// 对应内容显示
 			pageShow(index) {
+				console.log(index);
 				this.tabIndex=index;
 				//对应的内容显示
-				this.pageSwiper.slideTo(index, 0);
+				this.pageSwiper.slideTo(index, 300);
 			},
 			// 导航移动
 			slideMove(index,navSlideWidth) {
@@ -346,8 +361,7 @@
 	        //导航移动、导航对应的page显示
 	        tabMove(index) {
 	        	this.tabClick(index);
-	        }
-	        	
+	        }	
         },
         components: {
         	ugHeader,
@@ -364,6 +378,7 @@
 	// 添加gif的pullRefresh组件的父级需要加‘gif-show’的ClassName
 	.gif-show{
 		margin-top: 34px;
+		padding-bottom: 53px;
 	}
 	.tabbar{
 		position: absolute;
@@ -420,14 +435,14 @@
 		}
 	}
 	#page {
-		margin-bottom:50px;
+		// margin-bottom:50px;
 		height:100%;
 		overflow-y: auto;
 		.slidepage{
 			height: auto;
 			&:nth-of-type(1){
 				.slidescroll{
-					padding-bottom: 53px;
+					// padding-bottom: 53px;
 				}
 			}
 		}

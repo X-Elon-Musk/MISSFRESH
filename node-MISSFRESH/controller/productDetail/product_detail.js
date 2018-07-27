@@ -19,8 +19,13 @@ export default class ProductDetail{
         this.getProductDetail=this.getProductDetail.bind(this);
     }
     async getProductDetail(req, res, next){
-        let product_id=parseInt(req.query.product_id),
-        product_index=parseInt(req.query.product_index);
+        /*let product_id=parseInt(req.query.product_id),
+        product_index=parseInt(req.query.product_index);*/
+
+        // ------------------------
+        let product_id=2,
+        product_index=0;
+        // ------------------------
 
         let productdetail;
         let buyer=await Buyer.getBuyer(product_index),

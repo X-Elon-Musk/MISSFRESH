@@ -102,7 +102,7 @@
 						town = values[1].child;
 					}
 					picker.setSlotValues(2,town);
-					console.log(values[0].name, values[1].name);
+					// console.log(values[0].name, values[1].name);
 					this.pickerCity=values[1].name;
 				}
 			},

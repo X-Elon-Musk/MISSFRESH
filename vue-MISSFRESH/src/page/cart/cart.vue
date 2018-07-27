@@ -16,10 +16,10 @@
 					<li class="swiper-container commodity-item clearfix" v-for="item in products">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide swiper-content">
-								<i class="marquee" @click="productCheck(item.id)" :class="{active:item.status}"></i>
-								<product :product="item" :subtitle="false" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true" v-on:callbackFunction="setDeleteProductId"></product>
+								<i class="marquee" @click.stop="productCheck(item.id)" :class="{active:item.status}"></i>
+								<product :product="item" :subtitle="false" :noClick="noClick" :priceUp="getValue(item,'price_up')" :priceDown="getValue(item,'price_down')" :mpromptExist="true" v-on:callbackFunction="setDeleteProductId"></product>
 							</div>
-					        <div class="swiper-slide swiper-delete" @click="productDelete(item.id)"><span>删除</span></div>
+					        <div class="swiper-slide swiper-delete" @click.stop="productDelete(item.id)"><span>删除</span></div>
 					    </div>	
 					</li>
 				</ul>
@@ -144,9 +144,13 @@
 				mpromptShow: false,
 				deleteProductId: '',
 				addressChoseShow: false,
-				settleAccountsShow: false
+				settleAccountsShow: false,
+				noClick: true
 		  	}
 	  	},
+		created (){
+	    	// this.calculateTotal();
+	    },
 	    mounted: function () {
 	    	this.SET_MPROMPTEXIST({status: true});
 	    	this.INIT_CARTLIST();
@@ -223,7 +227,8 @@
 			},
 			// 配送地址
             choseAddress: function () {
-            	return this.s_choseAddress ? this.s_choseAddress : '';
+            	// return this.s_choseAddress ? this.s_choseAddress : '';
+            	return this.s_choseAddress||getStore('choseAddress')||'';
             },
             // 操作选择城市列表出现或消失
 			pickerAction(status){
@@ -248,12 +253,6 @@
 		    			touchStart: function() {
 
 		    			},
-		    			touchEnd: function(swiper) {
-		    				console.log(1);
-		    			},
-		    			reachEnd: function(){
-		    				console.log('最后一个');
-				      	},
 					}
 				});		
 			}, 

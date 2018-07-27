@@ -61,10 +61,12 @@
         methods: {
 			// 收货地址列表
 			getAddressList(){
-				let userId=getStore('userId');
-				getAddressListAxios(this.s_userInfo.userId||userId).then(response=>{
-					this.addressList=response;
-				})
+				let userId=this.s_userInfo.userId||getStore('userId');
+				if (userId) {
+					getAddressListAxios(userId).then(response=>{
+						this.addressList=response;
+					})				
+				}
 			},
 			// 操作添加新地址出现或消失
 			newAction(status){

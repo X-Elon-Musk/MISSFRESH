@@ -325,6 +325,10 @@
 			addressConfirm(item){
 				this.choseAddress=item;
 				console.log(this.choseAddress);
+			},
+			// 改变头部文字
+			changeHeaderText(){
+				
 			}
 		},
 		components:{
