@@ -115,7 +115,7 @@
 				let _this=this;
 				if (this.inputVaule) {
 					let keyword=this.inputVaule,
-					cityName=this.city;
+					cityName=this.city||this.choseCity;
 					suggestionLocationAxios(keyword, cityName).then(response=>{
 						this.searchResult=response.data;
 					})

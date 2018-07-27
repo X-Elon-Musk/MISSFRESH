@@ -38,7 +38,7 @@
     	<toastWrap :toastWrap="toastText"></toastWrap>
     	<div class="button-common save-address" @click="saveAddress">保存收货地址</div>	
 
-
+		<!-- 收货地址 -->
     	<transition name="bottom" mode="out-in">
     		<addressDelivery v-show="deliveryShow" v-on:locationSure="locationSure" v-on:deliveryAction="deliveryAction" :newShow="newShow"></addressDelivery>
 		</transition>
@@ -52,6 +52,7 @@
 	import {testTele} from 'src/config/mUtils'
 	import {mapState} from 'vuex'
 	import {addAddressAxios,deleteAddressAxios,updateAddressAxios} from 'src/service/getData'
+	import {getStore} from 'src/config/mUtils.js'
 
 	import mheader from 'src/components/mheader/mheader'
 	import mprompt from 'src/components/mprompt/mprompt'
@@ -139,7 +140,7 @@
 			},
 			//保存收货地址
 			async saveAddress(){
-				let response;
+				let userId=userId||getStore('userId'),response;
 				if (this.name=='') {
 					this.toastText='请填写收货人姓名';
 					return;			
@@ -161,8 +162,9 @@
 					return;			
 				}
 				this.address_detail=this.address_1+this.address_2;
+				console.log(userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
 				if (this.newMode==0) {
-					response=await addAddressAxios(this.s_userInfo.userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);	
+					response=await addAddressAxios(userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);	
 				} else if(this.newMode==1){
 					response=await updateAddressAxios(this.defaultAddress.id, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
 				}

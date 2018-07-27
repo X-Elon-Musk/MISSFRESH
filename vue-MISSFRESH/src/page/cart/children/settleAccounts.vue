@@ -2,8 +2,8 @@
 	<div class="shopping-cart modal-backdrop">
 		<mheader title="订单确认" :functionOrLink="true" v-on:backFunction="backFunction"></mheader>
 		<pull>
-			<div class="select-address" @click="addressAction(true)" v-show="!choseAddress.tag">点击选择收货地址</div>
-			<div class="address-content select-address-content" @click="addressAction(true)" v-show="choseAddress.tag">
+			<div class="select-address" @click="actionCommonFunction('addressPageShow', true)" v-show="!choseAddress.tag">点击选择收货地址</div>
+			<div class="address-content select-address-content" @click="actionCommonFunction('addressPageShow', true)" v-show="choseAddress.tag">
     			<div class="address-detail">
     				<div class="ellips address-info">
     					<span class="address-tag" v-if="choseAddress.tag === 'HOME'">住宅</span>
@@ -21,12 +21,11 @@
     		</div>
 			<div class="commodity">
 				<div class="clearfix commodity-header">
-					<!-- <i class="marquee" @click="checkedAll" :class="{active:checkAll}"></i> -->
 					<span class="service">全国送商品</span>
-					<span class="f_r delivery-time">今天2小时内送达[可选]</span>
+					<!-- <span class="f_r delivery-time">今天2小时内送达[可选]</span> -->
 				</div>
 				<!-- 商品 -->
-				<div class="products-list-content" @click="settlementListAction(true)">
+				<div class="products-list-content" @click="actionCommonFunction('settlementListShow', true)">
 					<ul class="commodity-items products">
 						<li class="swiper-container commodity-item clearfix products-img">
 							<div class="swiper-wrapper">
@@ -35,7 +34,6 @@
 										<img src="" v-lazy="item.image" alt="" class="product-img">
 									</div>
 								</div>
-						        <!-- <div class="swiper-slide swiper-delete" @click="productDelete(item.id)"><span>删除</span></div> -->
 						    </div>	
 						</li>
 					</ul>
@@ -102,12 +100,13 @@
 	    <transition name="" mode="out-in">
     		<mprompt promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt>
 		</transition>
-
+		<!-- 收货地址 -->
 		<transition name="bottom" mode="out-in">
-    		<addressPage :style="{zIndex:5}" v-show="addressPageShow" :isComponent="true" v-on:backFunction="addressAction(false)" v-on:addressConfirm="addressConfirm"></addressPage>
+    		<addressPage :style="{zIndex:5}" v-show="addressPageShow" :isComponent="true" v-on:backFunction="actionCommonFunction('addressPageShow', false)" v-on:addressConfirm="addressConfirm"></addressPage>
 		</transition>
 		<transition name="bottom" mode="out-in">
-    		<settlementList :style="{zIndex:6}" v-show="settlementListShow" v-on:backFunction="settlementListAction(false)" :products="products"></settlementList>
+    		<!-- <settlementList :style="{zIndex:6}" v-show="settlementListShow" v-on:backFunction="settlementListAction(false)" :products="products"></settlementList> -->
+    		<settlementList :style="{zIndex:6}" v-show="settlementListShow" v-on:backFunction="actionCommonFunction('settlementListShow', false)" :products="products"></settlementList>
 		</transition>
 	</div>
 </template>
@@ -169,7 +168,8 @@
 	    },
 	    watch: {
 			s_mpromptStatus: function () {
-				if (this.s_mpromptStatus) this.mpromptStatus(true);
+				// if (this.s_mpromptStatus) this.mpromptStatus(true);
+				if (this.s_mpromptStatus) this.actionCommonFunction('mpromptShow', true);
 			}
 		},
 	    computed: {
@@ -296,13 +296,14 @@
 				}
 							
 			},
-			// 显示或隐藏提示
+			/*// 显示或隐藏提示
 			mpromptStatus(status){
 				this.mpromptShow=status;
-			},
+			},*/
 			// 点击“取消”按钮
 			cancelActionFunction(){
-				this.mpromptStatus(false);
+				// this.mpromptStatus(false);
+				this.actionCommonFunction('mpromptShow', false);
 				this.SET_MPROMPT({status: false});	
 			},
 			// 点击“确定”按钮，删除单个商品
@@ -313,13 +314,17 @@
 				this.swiperDelete();
 				this.swiperReachEnd();
 			},
-			// 操作收货地址
+			/*// 操作收货地址
 			addressAction(status){
 				this.addressPageShow=status;
-			},
+			},*/
 			// 操作商品列表
 			settlementListAction(status){
 				this.settlementListShow=status;
+			},
+			// 操作页面显示通用function
+			actionCommonFunction(parameter, status){
+				this[parameter]=status;
 			},
 			// 收货地址确认
 			addressConfirm(item){

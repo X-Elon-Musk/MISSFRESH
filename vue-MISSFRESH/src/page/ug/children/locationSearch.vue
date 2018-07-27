@@ -22,6 +22,7 @@
 <script>
 	import {mapState, mapMutations} from 'vuex'
 	import {suggestionLocationAxios} from 'src/service/getData'
+	import {getStore} from 'src/config/mUtils.js'
 	export default{
 		data(){
 			return {
@@ -43,7 +44,7 @@
 				let _this=this;
 				if (this.inputVaule) {
 					let keyword=this.inputVaule,
-					cityName=this.s_choseCity;
+					cityName=this.s_choseCity||getStore('choseCity');
 					suggestionLocationAxios(keyword, cityName).then(response=>{
 						this.searchResult=response.data;
 					})

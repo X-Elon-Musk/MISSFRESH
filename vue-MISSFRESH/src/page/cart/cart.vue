@@ -95,9 +95,11 @@
 	    <transition name="" mode="out-in">
     		<mprompt promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt>
 		</transition>
+		<!-- 选择收货地址 -->
 		<transition name="bottom" mode="out-in">
     		<addressChose v-show="addressChoseShow" v-on:addressChose="actionCommonFunction('addressChoseShow', false)" :newText="true" :functionOrLink="true"></addressChose>
 		</transition>
+		<!-- 订单确认 -->
 		<transition name="bottom" mode="out-in">
     		<settleAccounts v-show="settleAccountsShow" ref="settleAccounts" v-on:backFunction="actionCommonFunction('settleAccountsShow', false)"></settleAccounts>
 		</transition>
@@ -170,7 +172,8 @@
 	    },
 	    watch: {
 			s_mpromptStatus: function () {
-				if (this.s_mpromptStatus) this.mpromptStatus(true);
+				// if (this.s_mpromptStatus) this.mpromptStatus(true);
+				if (this.s_mpromptStatus) this.actionCommonFunction('mpromptShow', true);
 			}
 		},
 	    computed: {
@@ -276,7 +279,8 @@
 			},
 			// 点击“删除”按钮后删除商品
 			productDelete(deleteProductId) {
-				this.mpromptStatus(true);
+				// this.mpromptStatus(true);
+				this.actionCommonFunction('mpromptShow', true);
 				this.deleteProductId=deleteProductId;
 			},
 			// 设定删除产品的id
@@ -323,13 +327,14 @@
 				}
 							
 			},
-			// 显示或隐藏提示
+			/*// 显示或隐藏提示
 			mpromptStatus(status){
 				this.mpromptShow=status;
-			},
+			},*/
 			// 点击“取消”按钮
 			cancelActionFunction(){
-				this.mpromptStatus(false);
+				// this.mpromptStatus(false);
+				this.actionCommonFunction('mpromptShow', false);
 				this.SET_MPROMPT({status: false});	
 			},
 			// 点击“确定”按钮，删除单个商品

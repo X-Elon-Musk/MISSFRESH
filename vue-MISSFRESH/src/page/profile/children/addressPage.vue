@@ -26,6 +26,7 @@
     	<!-- <div class="add-address-button" :style="{bottom:isComponent?'0px':'53px'}" @click="newAction(true)">新增收货地址</div> -->
     	<div class="add-address-button" v-if="!isComponent" @click="newAction(true)">新增收货地址</div>
     	<div class="add-address-button add-address-button-isComponent" v-else @click="newAction(true)">新增收货地址</div>
+    	<!-- 编辑收货地址/新增收货地址 -->
 		<transition name="bottom" mode="out-in">
     		<addressNew v-show="newShow" v-on:newAction="newAction" v-on:getAddressList="getAddressList" :defaultAddress="defaultAddress" :newShow="newShow"></addressNew>
 		</transition>
@@ -113,6 +114,7 @@
 		}
 		.header-component{
 			text-align: center;
+			z-index: 3;
 		}
 		.address-list{
 			.address-item{
