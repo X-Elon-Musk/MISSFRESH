@@ -237,7 +237,7 @@
             ]),
             // 页面显示或者隐藏
 			backFunction(){
-				console.log(11111);
+				// console.log(11111);
 				this.$emit("backFunction");
 			},
             // 商品图片列表

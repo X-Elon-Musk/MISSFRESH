@@ -1,6 +1,6 @@
 <template>
     <div class="profile-item-page profile-item-page-phone">
-    	<mheader title="绑定手机"></mheader>	
+    	<mheader title="绑定手机" :functionOrLink="functionOrLink" v-on:backFunction="backFunction"></mheader>	
         <div class="login-panel">
         	<ul class="list-inset">
         		<li class="list-item">
@@ -85,14 +85,19 @@
 					this.SET_USERINFO({
 						info: {...response}
 					})
-					this.$router.replace('/profile');
+					this.functionOrLink?this.$emit("bindingPhoneCallback"):this.$router.replace('/profile');
 				}
 	        },
 	        // 提示信息状态操作
 	        mpromptActionFunction(status){
 	        	this.mpromptShow=status;
-	        }
+	        },
+	        // 页面显示或者隐藏
+			backFunction(){
+				this.$emit("backFunction");
+			},
 		},
+		props: ['functionOrLink'],
 		components: {
 			mheader,
 			mprompt,

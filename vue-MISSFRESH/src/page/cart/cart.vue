@@ -1,7 +1,7 @@
 <template>
 	<div class="shopping-cart">
 		<pull :backFunction="true" v-on:backFunction="changeHeaderText">
-			<div class="address" @click="addressChoseAction(true)">
+			<div class="address" @click="actionCommonFunction('addressChoseShow', true)">
 				<span class="coordinate"></span>
 				<span class="address-text">{{choseAddress}}</span>
 				<span class="arrow"></span>
@@ -89,16 +89,20 @@
     				</strong>
     			</span>
     		</div>
-    		<div class="f_r settlement-button" @click="backFunction(true)">去结算</div>
+    		<!-- <div class="f_r settlement-button" @click="backFunction(true)">去结算</div> -->
+    		<div class="f_r settlement-button" @click="toSettle">去结算</div>
 	    </div>
 	    <transition name="" mode="out-in">
     		<mprompt promptTitle="您确定删除该商品么?" promptText="" v-show="mpromptShow" :cancelShow="true" v-on:cancelActionFunction="cancelActionFunction" v-on:confirmActionFunction="confirmActionFunction"></mprompt>
 		</transition>
 		<transition name="bottom" mode="out-in">
-    		<addressChose v-show="addressChoseShow" v-on:addressChose="addressChoseAction(false)" :newText="true" :functionOrLink="true"></addressChose>
+    		<addressChose v-show="addressChoseShow" v-on:addressChose="actionCommonFunction('addressChoseShow', false)" :newText="true" :functionOrLink="true"></addressChose>
 		</transition>
 		<transition name="bottom" mode="out-in">
-    		<settleAccounts v-show="settleAccountsShow" ref="settleAccounts" v-on:backFunction="backFunction(false)"></settleAccounts>
+    		<settleAccounts v-show="settleAccountsShow" ref="settleAccounts" v-on:backFunction="actionCommonFunction('settleAccountsShow', false)"></settleAccounts>
+		</transition>
+		<transition name="bottom" mode="out-in">
+    		<phone v-show="phoneShow" ref="phone" :functionOrLink="true" v-on:backFunction="actionCommonFunction('phoneShow', false)" v-on:bindingPhoneCallback="bindingPhoneCallback"></phone>
 		</transition>
 		<mfooter></mfooter>
 	</div>
@@ -114,6 +118,7 @@
 	import mprompt from 'src/components/mprompt/mprompt'
 	import addressChose from 'src/page/ug/children/addressChose'
 	import settleAccounts from './children/settleAccounts'
+	import phone from 'src/page/profile/children/phone'
 	export default{
 		data(){
 		  	return {
@@ -145,7 +150,8 @@
 				deleteProductId: '',
 				addressChoseShow: false,
 				settleAccountsShow: false,
-				noClick: true
+				noClick: true,
+				phoneShow: false
 		  	}
 	  	},
 		created (){
@@ -334,17 +340,36 @@
 				this.swiperDelete();
 				this.swiperReachEnd();
 			},
-			// 操作页面显示
+			/*// 操作页面显示
 			backFunction(status){
 				this.settleAccountsShow=status;
 			},
 			// 操作收货地址页面显示
 			addressChoseAction(status){
 				this.addressChoseShow=status;
+			},*/
+			// 操作页面显示通用function
+			actionCommonFunction(parameter, status){
+				this[parameter]=status;
+			},
+			// 绑定手机后
+			bindingPhoneCallback(){
+				this.actionCommonFunction('phoneShow', false);
+				this.actionCommonFunction('settleAccountsShow', true);
 			},
 			// 改变头部文字
 			changeHeaderText(){
 				this.$refs.settleAccounts.changeHeaderText()
+			},
+			// 去结算
+			toSettle(){
+				let accessToken=getStore('accessToken');
+				/*if (!accessToken) {
+					this.phoneShow=true;			
+				} else{
+					this.backFunction(true);
+				}*/
+				accessToken?this.actionCommonFunction('settleAccountsShow', true):this.phoneShow=true;
 			}
 		},
 		components:{
@@ -353,7 +378,8 @@
 	        product,
 	        mprompt,
 	        addressChose,
-	        settleAccounts
+	        settleAccounts,
+	        phone
 	    },
 	}
 </script>
