@@ -2,3 +2,8 @@
 - insert into price_down (product_id,color,name,price,show_type) select concat('1',product_id),color,name,price,show_type from price_down;
 - delete from banner where product_index>244;
 - update banner set product_index = replace(product_index,'111','5');
+- insert into products(product_index,buy_permission,cart_btn_name,cart_image,image,name,nationwide,pao,promoteLevel,promote_tag,promote_tag_new,seckill_limit,sell_out,sku,stock,subtitle,supplier,type,vip_product,vip_price,unit,weight,pack,storage_time,storage_method,storage_code) select product_index,buy_permission,cart_btn_name,cart_image,image,name,nationwide,pao,promoteLevel,promote_tag,promote_tag_new,seckill_limit,sell_out,sku,stock,subtitle,supplier,type,vip_product,vip_price,unit,weight,pack,storage_time,storage_method,storage_code from products;
+- update products set id = id - 2 where id>18;
+- update products set product_index = 1 where id>17 and id <35;
+- select count(*) as value from product_tags;
+- update product_tags set product_id = id;
