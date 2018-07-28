@@ -42,7 +42,7 @@
 
 
 
-				<productPage v-for="(item,index) in categorylist[0]" :key="index" v-if="products[index]&&products[index].length!=0&&index>0" :products="products[index]" :banner="banner[index]" class="product_index_page">aaaabbbb</productPage>
+				<productPage v-for="(item,index) in categorylist[0]" :key="index" v-if="products[index]&&products[index].length!=0&&index>0" :products="products[index]" :banner="banner[index]" class="product_index_page"></productPage>
 
 		      	<!-- <productPage :products="products[3]" :banner="banner[3]" class="product_index_page"></productPage>
 		      	<productPage :products="products[4]" :banner="banner[4]" class="product_index_page"></productPage>
