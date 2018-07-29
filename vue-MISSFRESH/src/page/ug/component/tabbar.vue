@@ -277,11 +277,23 @@
 				this.$set(this.banner, product_index, product_list.banner);
 				this.$set(this.products, product_index, product_list.products);
 				this.loading=false;
-				this.navSwiper?this.navSwiper.update():this.tab();
-				this.pageSwiper?this.pageSwiper.update():this.page();
-				setTimeout(()=>{
+				/*if (this.navSwiper) {
+					this.navSwiper.update()			
+				} else{
+					this.$nextTick(()=>{
+						this.tab();
+					})
+					
+				}*/
+
+				this.$nextTick(()=>{
+					this.navSwiper?this.navSwiper.update():this.tab();
+					this.pageSwiper?this.pageSwiper.update():this.page();
 					this.pageShow(product_index);
-				},10)
+				})
+				/*setTimeout(()=>{
+					this.pageShow(product_index);
+				},10)*/
 			},
 			// 导航栏
 			tab() {
@@ -303,6 +315,7 @@
 				  				_this.navWidth += parseInt(this.slides[i].offsetWidth)
 				  			}
 				  			_this.maxLeft=_this.navWidth-_this.clientWidth;
+				  			console.log(_this.navWidth,_this.clientWidth,_this.maxLeft);
 				  		}
 				  	},
 				});
@@ -318,6 +331,7 @@
 				  	on: {
 				  		transitionStart: function () {
 				  			let index=this.activeIndex;
+				  			console.log('+',index);
 				  			_this.tabIndex=index;
 				  			_this.navSlideWidth=_this.navSwiper.slides[index].offsetWidth; 
 				  			_this.slideMove(index,_this.navSlideWidth);
@@ -343,11 +357,14 @@
 				clientWidth=this.clientWidth;
 				let navActiveSlideLeft=navSwiper.slides[index].offsetLeft;
 				let left=navActiveSlideLeft-clientWidth/2;
+				console.log(navActiveSlideLeft,navActiveSlideLeft-clientWidth/2,this.maxLeft);
 				if (left<=0) {
 					left=0;	
 				} else if(left>=this.maxLeft){
 					left=this.maxLeft;
 				} 
+				console.log('-',index);
+				console.log('++',left);
 				navSwiper.setTranslate(-left);
 				this.pageShow(index);
 			},
