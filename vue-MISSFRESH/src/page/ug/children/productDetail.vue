@@ -125,24 +125,25 @@
 		</router-link>
     	<div class="clearfix product-bar-footer-container">
     		<router-link :to="{path: '/cart'}" tag='div' class="f_l image-spot-container">
-				<span class="cart-count image-spot-dot">{{s_cartCount}}</span>
+				<span class="cart-count image-spot-dot">{{cartCount}}</span>
 			</router-link>
-    		<!-- <div class="f_l image-spot-container">
-    			<span class="cart-count image-spot-dot">{{s_cartCount}}</span>
-    		</div> -->
     		<div class="f_r add-cart-btn" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
     			加入购物车
     		</div>
     	</div>
+
+    	<loading :loading="loading" zIndex="2"></loading>
     </div>  
 </template>
 <script>
 	import {mapState, mapMutations} from 'vuex'
 	import {getDataProductDetailAxios} from 'src/service/getData'
+	import {getStore} from 'src/config/mUtils.js'
 
 	import carousel from 'src/components/carousel/carousel'
 	import price from 'src/components/price/price'
 	import icons from 'src/components/icons/icons'
+	import loading from 'src/components/loading/loading'
 	export default{
 		data(){
 			return {
@@ -164,7 +165,8 @@
 				//会员卡
 				vip_card: {},
 				//商品分享信息
-				product_share_info_v2: {}
+				product_share_info_v2: {},
+				loading: true
 			}
 		},
 		created(){
@@ -181,6 +183,10 @@
             //选择的配送地址
             choseAddress: function () {
             	return this.s_choseAddress ? this.s_choseAddress : '';
+            },
+            // 购物车商品数量
+            cartCount: function () {
+            	return this.s_cartCount?this.s_cartCount:getStore('cartCount');
             }
         },
 		methods: {
@@ -189,6 +195,7 @@
             ]),
             // 商品详情
 			async getDataProductDetail(){	
+				this.loading=true;
 				let response=await getDataProductDetailAxios(this.product_id, this.product_index);
 				let data=response.data;
 				this.product=response;	
@@ -197,6 +204,7 @@
 				this.share_info=response.share_info;	
 				this.vip_card=response.vip_card;	
 				this.product_share_info_v2=response.product_share_info_v2;	
+				this.loading=false;
 			},
 			// 分享
 			shareAction(state){
@@ -221,7 +229,8 @@
 		components: {
 			carousel,
 			price,
-			icons
+			icons,
+			loading
 		}
 	}
 </script>
