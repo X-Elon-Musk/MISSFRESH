@@ -1,8 +1,6 @@
 <template>
 	<div class="tabbar">
         <div id="top">
-        	<!-- <div class="addr"></div> -->
-        	<!-- <ugHeader :view="view"></ugHeader> -->
         	<ugHeader></ugHeader>
         	<div class="swiper-container tab-nav" id="nav" ref="tabNav">
         		<div class="swiper-wrapper" ref="tabItems">
@@ -23,179 +21,14 @@
 		  	<div class="swiper-wrapper">
 
 				<!-- nav对应页面 -->
-				<productPage :products="products[0]" :banner="banner[0]" class="product_index_0">
-		      		<guarantee :brands="brands[0]"></guarantee>
-            		<card :categoryareas="categoryareas[0]"></card>
-		      	</productPage>
-		      	<!-- <productPage :products="products[1]" :banner="banner[1]" class="product_index_0">
-		      		2
-	          		<img src="~src/images/carousel/0.jpg">
-		      	</productPage>
-		      	<productPage :products="products[2]" :banner="banner[2]" class="product_index_0">
-		      		3
-	          		<img src="~src/images/carousel/0.jpg">
-		      	</productPage> -->
-				
 
-				<!-- <productPage :products="products[1]" :banner="banner[1]" class="product_index_page"></productPage>
-		      	<productPage :products="products[2]" :banner="banner[2]" class="product_index_page"></productPage> -->
-
-
-
-				<productPage v-for="(item,index) in categorylist[0]" :key="index" v-if="products[index]&&products[index].length!=0&&index>0" :products="products[index]" :banner="banner[index]" class="product_index_page"></productPage>
-
-		      	<!-- <productPage :products="products[3]" :banner="banner[3]" class="product_index_page"></productPage>
-		      	<productPage :products="products[4]" :banner="banner[4]" class="product_index_page"></productPage>
-		      	<productPage :products="products[5]" :banner="banner[5]" class="product_index_page"></productPage>
-		      	<productPage :products="products[6]" :banner="banner[6]" class="product_index_page"></productPage>
-		      	<productPage :products="products[7]" :banner="banner[7]" class="product_index_page"></productPage>
-		      	<productPage :products="products[8]" :banner="banner[8]" class="product_index_page"></productPage>
-		      	<productPage :products="products[9]" :banner="banner[9]" class="product_index_page"></productPage>
-		      	<productPage :products="products[10]" :banner="banner[10]" class="product_index_page"></productPage>
-		      	<productPage :products="products[11]" :banner="banner[11]" class="product_index_page"></productPage>
-		      	<productPage :products="products[12]" :banner="banner[12]" class="product_index_page"></productPage>
-		      	<productPage :products="products[13]" :banner="banner[13]" class="product_index_page"></productPage>
-		      	<productPage :products="products[14]" :banner="banner[14]" class="product_index_page"></productPage>
-		      	<productPage :products="products[15]" :banner="banner[15]" class="product_index_page"></productPage>
-		      	<productPage :products="products[16]" :banner="banner[16]" class="product_index_page"></productPage>
-		      	<productPage :products="products[17]" :banner="banner[17]" class="product_index_page"></productPage> -->
-
-
-		      	<!-- <div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					3
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					4
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					5
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					6
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					7
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					8
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					9
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					10
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					11
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					12
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					13
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					14
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div>
-		      	<div class="swiper-slide slidepage">
-		      		<div class="swiper-container scroll" ref="scroll">
-		      			<div class="swiper-wrapper">
-		      				<div class="swiper-slide slidescroll">
-		      					15
-		      					<img src="~src/images/carousel/0.jpg">
-		      				</div>
-		      			</div>
-		      		</div>
-		      	</div> -->
-
+				<productPage v-for="(item,index) in categorylist[0]" :key="index" v-if="products[index]&&products[index].length!=0" :products="products[index]" :banner="banner[index]" class="product_index_page">
+					<guarantee :brands="brands[index]" v-if="brands[index]&&brands[index].length!=0"></guarantee>
+            		<card :categoryareas="categoryareas[index]"  v-if="categoryareas[index]&&categoryareas[index].length!=0"></card>
+				</productPage>
 
 		  	</div>
 		</div>
-		<!-- <div class="img" id="footer"><img src="../../images/carousel/0.jpg"></div> -->
 	
 		<loading :loading="loading" zIndex="1"></loading>
 	</div>
@@ -266,6 +99,7 @@
 		methods: {
 			// 获取index数据
 			async getDataPageIndex(product_index) {
+				this.loading=true;
 				let response=await getDataPageIndexAxios(product_index);
 				let product_list=response.product_list;
 				if (product_index==0) {
@@ -277,23 +111,17 @@
 				this.$set(this.banner, product_index, product_list.banner);
 				this.$set(this.products, product_index, product_list.products);
 				this.loading=false;
-				/*if (this.navSwiper) {
-					this.navSwiper.update()			
-				} else{
-					this.$nextTick(()=>{
-						this.tab();
-					})
-					
-				}*/
-
+				this.swiperAction(product_index);
+			},
+			swiperAction(product_index){
 				this.$nextTick(()=>{
 					this.navSwiper?this.navSwiper.update():this.tab();
 					this.pageSwiper?this.pageSwiper.update():this.page();
-					this.pageShow(product_index);
+					// this.pageShow(product_index);
 				})
-				/*setTimeout(()=>{
+				setTimeout(()=>{
 					this.pageShow(product_index);
-				},10)*/
+				},10)
 			},
 			// 导航栏
 			tab() {
@@ -315,7 +143,6 @@
 				  				_this.navWidth += parseInt(this.slides[i].offsetWidth)
 				  			}
 				  			_this.maxLeft=_this.navWidth-_this.clientWidth;
-				  			console.log(_this.navWidth,_this.clientWidth,_this.maxLeft);
 				  		}
 				  	},
 				});
@@ -330,23 +157,22 @@
       				observeParents:true,
 				  	on: {
 				  		transitionStart: function () {
-				  			let index=this.activeIndex;
+				  			/*let index=this.activeIndex;
 				  			console.log('+',index);
 				  			_this.tabIndex=index;
 				  			_this.navSlideWidth=_this.navSwiper.slides[index].offsetWidth; 
-				  			_this.slideMove(index,_this.navSlideWidth);
+				  			_this.slideMove(index,_this.navSlideWidth);*/
 				  		}
 				  	}
 				});
 			},
 			// 点击导航	
-			tabClick(index,event) {
+			tabClick(index) {
 				//请求对应种类的数据,没有加载过的话加载数据,已经加载过不再加载。
 				this.products[index]?this.pageShow(index):this.getDataPageIndex(index);
 			},
 			// 对应内容显示
 			pageShow(index) {
-				console.log(index);
 				this.tabIndex=index;
 				//对应的内容显示
 				this.pageSwiper.slideTo(index, 300);
@@ -357,14 +183,11 @@
 				clientWidth=this.clientWidth;
 				let navActiveSlideLeft=navSwiper.slides[index].offsetLeft;
 				let left=navActiveSlideLeft-clientWidth/2;
-				console.log(navActiveSlideLeft,navActiveSlideLeft-clientWidth/2,this.maxLeft);
 				if (left<=0) {
 					left=0;	
 				} else if(left>=this.maxLeft){
 					left=this.maxLeft;
 				} 
-				console.log('-',index);
-				console.log('++',left);
 				navSwiper.setTranslate(-left);
 				this.pageShow(index);
 			},
@@ -378,6 +201,8 @@
 	        //导航移动、导航对应的page显示
 	        tabMove(index) {
 	        	this.tabClick(index);
+
+	  			this.slideMove(index);
 	        }	
         },
         components: {
