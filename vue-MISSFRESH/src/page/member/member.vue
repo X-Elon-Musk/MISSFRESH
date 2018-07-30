@@ -1,6 +1,6 @@
 <template>
 	<div class="member">
-		<pullRefresh :tabIndex="tabIndex" @getData="getData" :gif="false">
+		<pull>
 			<div class="vip-card">
 				<div class="card-bg"></div>
 				<div class="card-container">
@@ -49,11 +49,11 @@
 					<div class="area-header">会员商品&会员专享价</div>
 					<div class="area-introduce">精选全球美食 成为会员抢先购买</div>
 				</div>
-				<div class="clearfix list-group-item ticket-item" v-for="item in products">
+				<!-- <div class="clearfix list-group-item ticket-item" v-for="item in products">
 					<product :product="item"></product>
-				</div>
+				</div> -->
 			</div>
-		</pullRefresh>
+		</pull>
 		<mfooter></mfooter>
 	</div>
 </template>
@@ -62,37 +62,11 @@
 	import icons from 'src/components/icons/icons'
 	import pullRefresh from 'src/components/pullRefresh/pullRefresh'
 	import product from 'src/components/product/product'
+	import pull from 'src/components/pull/pull'
 	export default{
 		data(){
 			return {
 				tabIndex: 14,
-				//上拉刷新数据
-				products: [
-					{
-						hot: 0,
-						img: '',
-						name: '11111月盛斋羔羊肉片300g',
-						point: '预计11月26日后兑换兑换券',
-						preferential: [
-							'限每人1份',
-							'进口检验合格'
-						],
-						price: 29.9,
-						vip: 19.9
-					},
-					{
-						hot: 1,
-						img: '',
-						name: '11111月盛斋羔羊肉片300g',
-						point: '预计11月26日后兑换兑换券',
-						preferential: [
-							'限每人1份',
-							'进口检验合格'
-						],
-						price: 29.9,
-						vip: 19.9
-					}
-				],
 				icons: [
 					{
 						src: require('images/icon/privilege_0.png'),
@@ -117,29 +91,11 @@
 				]
 			}
 		},
-		methods: {
-			getData() {
-				for(var i = 0; i <3; i++) {
-              	  	this.products.push({
-						hot: 0,
-						img: '',
-						name: this.tabIndex+'月盛斋羔羊肉片300g',
-						point: '预计11月26日后兑换兑换券',
-						preferential: [
-							'限每人1份',
-							'进口检验合格'
-						],
-						price: 29.9,
-						vip: 19.9
-					});
-              	}
-			}	
-		},
 		components:{
 	        mfooter,
 	        icons,
-	        pullRefresh,
-	        product
+	        product,
+	        pull
 	    }
 	}
 </script>
@@ -152,6 +108,8 @@
 		top: 0;
 		bottom: 0;
 		.wh(100%);
+		padding-bottom: 60px;
+		box-sizing: border-box;
 		.vip-card{
 			width: 100%;
 			.card-bg{
@@ -240,6 +198,7 @@
 		}
 		.vip-products{
 			padding-top: 2rem;
+
 			.products-header{
 				padding: 0 0.9375rem;
 				.area-header{
