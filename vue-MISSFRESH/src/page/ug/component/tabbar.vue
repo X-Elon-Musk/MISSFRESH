@@ -110,17 +110,16 @@
 				}
 				this.$set(this.banner, product_index, product_list.banner);
 				this.$set(this.products, product_index, product_list.products);
-				this.loading=false;
 				this.swiperAction(product_index);
 			},
 			swiperAction(product_index){
 				this.$nextTick(()=>{
 					this.navSwiper?this.navSwiper.update():this.tab();
 					this.pageSwiper?this.pageSwiper.update():this.page();
-					// this.pageShow(product_index);
 				})
 				setTimeout(()=>{
 					this.pageShow(product_index);
+					this.loading=false;
 				},10)
 			},
 			// 导航栏
@@ -158,7 +157,6 @@
 				  	on: {
 				  		transitionStart: function () {
 				  			/*let index=this.activeIndex;
-				  			console.log('+',index);
 				  			_this.tabIndex=index;
 				  			_this.navSlideWidth=_this.navSwiper.slides[index].offsetWidth; 
 				  			_this.slideMove(index,_this.navSlideWidth);*/
@@ -175,7 +173,7 @@
 			pageShow(index) {
 				this.tabIndex=index;
 				//对应的内容显示
-				this.pageSwiper.slideTo(index, 300);
+				this.pageSwiper.slideTo(index, 0);
 			},
 			// 导航移动
 			slideMove(index,navSlideWidth) {
@@ -195,6 +193,7 @@
 	        showClassify() {
 	        	this.classifyState=true;
 	        },
+	        // 关闭分类
 	        closeClassify() {
 	        	this.classifyState=false;
 	        },

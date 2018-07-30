@@ -44,7 +44,6 @@ export default {
 			if (cart[id]['num']>0) {
 				
 				if (cart[id]['num']==1&&state.s_mpromptExist) {
-					console.log('删除');
 					state.s_mpromptStatus=true;	
 					return;
 				}
@@ -85,6 +84,10 @@ export default {
 	    })
 	    state.s_cartCount = num;
 		setStore('cartCount', state.s_cartCount);
+	},
+	// 设置会员卡
+	SET_VIPCARD: (state,{vipCard})=>{
+		state.s_vipCard = vipCard;
 	},
 	// 设置是否显示提示内容
 	SET_MPROMPTEXIST: (state,{status})=>{

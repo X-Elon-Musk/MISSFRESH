@@ -162,7 +162,6 @@
 					return;			
 				}
 				this.address_detail=this.address_1+this.address_2;
-				console.log(userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);
 				if (this.newMode==0) {
 					response=await addAddressAxios(userId, this.address_1, this.address_2, this.address_detail, this.area, this.city, this.code, this.full_address, this.lat_lng, this.name, this.phone_number, this.province, this.tag);	
 				} else if(this.newMode==1){

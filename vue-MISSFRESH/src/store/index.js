@@ -12,6 +12,7 @@ var state={
 	s_viewType: 0,// 配送的类型:1,次日到达;0,2小时达;2,全国送
 	s_cartList: {},// 购物车商品列表
 	s_cartCount: 0,// 购物车商品总数
+	s_vipCard: 0,// 会员卡
 	s_mpromptExist: false,// 是否存在提示信息
 	s_mpromptStatus: false,// 提示信息的状态
 	s_userInfo: {}, // 用户信息

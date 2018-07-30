@@ -1,6 +1,5 @@
 <template>
     <div class="product">
-    	<!-- <router-link :to="{path: '/ug/productDetail',query:{product_id: product.product_id,product_index: product.product_index}}" tag="div" class="clearfix product-link"> -->
     	<div class="clearfix product-link" @click.prevent="productDetail(product.id,product.product_index)">
 			<div class="f_l product-item-img">
 				<img src="" v-lazy="product.image" alt="" class="product-img">
@@ -32,16 +31,8 @@
 				</p> -->
 				
 			</div>
-		<!-- </router-link> -->
 		</div>
-		<!-- <div class="cart-operate">
-			<img :src="product.cart_image" class="shopping-cart-img" style="opacity: 0.3;" v-if="!productNum" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)">
-			<div class="clearfix cart-action" v-if="productNum">
-				<span class="minus-action" @touchstart.stop="minusOutCart(product.id,$event)"></span> 
-				<span class="count">{{productNum}}</span> 
-				<span class="add-action" @touchstart.stop="addToCart(product.id,product.image,product.name,product.product_tags,priceUp.price,priceDown.price,$event)"></span>
-			</div>
-		</div> -->
+		
 	</div> 
 </template>
 <script>

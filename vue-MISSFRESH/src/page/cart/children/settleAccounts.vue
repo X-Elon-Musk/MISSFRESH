@@ -68,27 +68,7 @@
 		    		合计<strong>¥ {{products_total_price}}</strong>
 		    	</div>
 		    </div>
-		    <!-- 会员卡优惠 -->
-		    <div class="vip-benefit">
-		    	<div class="vip-card clearfix">
-		    		<span class="card"></span>
-		    		<div class="card-info">
-		    			<span>
-		    				开通
-		    				<strong class="vip-time">{{cardTime}}</strong>
-		    				会员可得
-		    				<i>红包</i>
-		    			</span>
-		    			<span>本单更返<i>1.31</i>元</span>
-		    		</div>
-		    	</div>
-		    	<ul class="card-time">
-		    		<li v-for="card in cards">
-		    			<span :title="card.time"></span>
-		    			<i class="marquee" @click="cardCheck(card)" :class="{active:card.checked}"></i>
-		    		</li>
-		    	</ul>
-		    </div>
+
 	    </pull>	
 	    <!-- 结算 -->
 	    <div class="clearfix settlement">
@@ -105,7 +85,6 @@
     		<addressPage :style="{zIndex:5}" v-show="addressPageShow" :isComponent="true" v-on:backFunction="actionCommonFunction('addressPageShow', false)" v-on:addressConfirm="addressConfirm"></addressPage>
 		</transition>
 		<transition name="bottom" mode="out-in">
-    		<!-- <settlementList :style="{zIndex:6}" v-show="settlementListShow" v-on:backFunction="settlementListAction(false)" :products="products"></settlementList> -->
     		<settlementList :style="{zIndex:6}" v-show="settlementListShow" v-on:backFunction="actionCommonFunction('settlementListShow', false)" :products="products"></settlementList>
 		</transition>
 	</div>
@@ -174,7 +153,7 @@
 		},
 	    computed: {
 	    	...mapState([
-                's_cartList', 's_mpromptStatus', 's_choseAddress'
+                's_cartList', 's_mpromptStatus', 's_choseAddress', 's_vipCard'
             ]),
             // 商品列表
             products: function () {
@@ -203,7 +182,7 @@
                     	total_price+=parseFloat(item.total_price);	
                     }
                 })
-                return toDecimal(total_price);
+                return toDecimal(parseFloat(total_price)+parseFloat(this.s_vipCard));
             },
             // 是否选中购物车中所有商品
             checkAll: function () {
@@ -237,7 +216,6 @@
             ]),
             // 页面显示或者隐藏
 			backFunction(){
-				// console.log(11111);
 				this.$emit("backFunction");
 			},
             // 商品图片列表
@@ -550,78 +528,6 @@
 					color: rgb(255, 72, 145);
 				}
 			}	
-		}
-		.vip-benefit{
-			background: #fff;
-	    	margin-top: 10px;
-	    	padding-bottom: 102px;
-	    	.vip-card{
-	    		text-align: left;
-	    		padding: 0 15px;
-	    		border-bottom: 1px solid #f5f5f5;
-	    		.wh(49px,100%);
-	    		display: table;
-	    		box-sizing: border-box;
-	    		.card{
-	    			float: left;
-	    			vertical-align: middle;
-	    			margin-top: 15px;
-					.bg(60px,18px,transparent,'~src/images/icon/membership_card.png',auto 100%);
-	    		}
-	    		.card.active{
-	    			background: url(~src/images/icon/card_active.png) no-repeat;
-					background-size: auto 100%;
-	    		}
-	    		.card-info{
-	    			float: left;
-	    			.wh(100%,auto);
-	    			i{
-						color: #FF4891;
-					}
-	    			span{
-	    				display: block;
-	    				.wh(50%);
-	    				line-height: 25px;
-	    			}
-	    		}
-	    	}
-	    	.card-time{
-	    		overflow: hidden;
-	    		li{
-	    			background-color: #fff;
-	    			line-height: 70px;
-	    			height: 70px;
-	    			border-bottom: 1px solid #f5f5f5;
-	    			padding: 10px 15px;
-	    			box-sizing: border-box;
-	    			span{
-	    				float: left;
-	    				.wh(50px,66%);
-	    			}
-	    			.marquee{
-	    				float: right;
-	    				margin-top: 12px;
-	    			}
-					&:nth-of-type(1){
-						span{
-							background: url(~src/images/icon/card_0.png) no-repeat;
-							background-size: auto 100%;
-						}
-					}
-					&:nth-of-type(2){
-						span{
-							background: url(~src/images/icon/card_1.png) no-repeat;
-							background-size: auto 100%;
-						}
-					}
-					&:nth-of-type(3){
-						span{
-							background: url(~src/images/icon/card_2.png) no-repeat;
-							background-size: auto 100%;
-						}
-					}
-	    		}
-			}
 		}
 		.settlement{
 			bottom: 0;

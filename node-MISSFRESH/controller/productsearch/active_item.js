@@ -24,7 +24,6 @@ class ActiveItem extends MissMysql{
 			}
 			result=result.concat(obj);
 		})
-		console.log(result);
     	return result;
 	}
 }

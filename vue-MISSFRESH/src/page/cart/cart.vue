@@ -178,7 +178,7 @@
 		},
 	    computed: {
 	    	...mapState([
-                's_cartList', 's_mpromptStatus', 's_choseAddress'
+                's_cartList', 's_mpromptStatus', 's_choseAddress', 's_vipCard'
             ]),
             // 商品列表
             products: function () {
@@ -246,7 +246,7 @@
 	    },
 		methods: {
 			...mapMutations([
-                'SET_STATUS', 'DELETE_CART', 'INIT_CARTLIST', 'SET_MPROMPTEXIST', 'SET_MPROMPT'
+                'SET_STATUS', 'DELETE_CART', 'INIT_CARTLIST', 'SET_MPROMPTEXIST', 'SET_MPROMPT', 'SET_VIPCARD'
             ]),
             // 左滑商品，出现删除按钮
 			swiperDelete() {
@@ -324,8 +324,9 @@
 				} else{
 					this.cardTime='';
 					this.cardMoney=0;	
-				}
-							
+				}	
+				let vipCard=this.cardMoney;
+				this.SET_VIPCARD({vipCard});		
 			},
 			/*// 显示或隐藏提示
 			mpromptStatus(status){
@@ -369,11 +370,6 @@
 			// 去结算
 			toSettle(){
 				let accessToken=getStore('accessToken');
-				/*if (!accessToken) {
-					this.phoneShow=true;			
-				} else{
-					this.backFunction(true);
-				}*/
 				accessToken?this.actionCommonFunction('settleAccountsShow', true):this.phoneShow=true;
 			}
 		},

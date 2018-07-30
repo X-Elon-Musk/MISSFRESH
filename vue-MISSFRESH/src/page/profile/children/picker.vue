@@ -38,7 +38,6 @@
 		methods: {
 			onValuesChange(picker, values) {
 				if(!values[0]){
-					console.log(1);
 					this.$nextTick(()=>{
 						if(this.myAdress){
 	                        // 赋默认值

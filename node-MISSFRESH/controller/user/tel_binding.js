@@ -16,8 +16,9 @@ class TelBinding extends MissMysql{
 
 
         console.log('短信：',message);
-        // let smsStatus=await MissMethods.smsClient(telephone,message);
-        let smsStatus=true,basiccontent;
+        let basiccontent;
+        let smsStatus=await MissMethods.smsClient(telephone,message);
+        // let smsStatus=true;
 
         console.log('短信状态：',smsStatus);
 

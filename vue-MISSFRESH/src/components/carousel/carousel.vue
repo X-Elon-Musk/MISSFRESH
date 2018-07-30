@@ -3,7 +3,8 @@
 		<div class="swiper-wrapper">
 			
 			<template v-if="link">
-				<router-link  v-for="(item,index) in banner" :key="index" :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}" tag="div" class="swiper-slide">
+				<!-- <router-link  v-for="(item,index) in banner" :key="index" :to="{path: item.link,query:{id: item.product_id,index: item.product_index}}" tag="div" class="swiper-slide"> -->
+				<router-link  v-for="(item,index) in banner" :key="index" :to="{path: '/ug/productDetail',query:{product_id: item.product_id,product_index: item.product_index}}" tag="div" class="swiper-slide">
 						<img :src="item.image" class="banner-img">
 				</router-link>
 			</template>
