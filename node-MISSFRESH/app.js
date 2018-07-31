@@ -43,7 +43,7 @@ app.all('*', function(req, res, next) {
 router(app);
 
 
-let server = app.listen(3390, 'localhost', function () {
+let server = app.listen(3396, 'localhost', function () {
     console.log("地址信息:",server.address());
     const host = server.address().address;
     const port = server.address().port;

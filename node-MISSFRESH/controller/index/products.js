@@ -3,7 +3,7 @@
 import MissMysql from '../../prototype/missmysql.js'
 import MissMethods from '../../prototype/missMethods.js'
 import VipPricePro from './vip_price_pro.js'
-let dirname='http://localhost:3390/public/images/';
+let dirname='http://localhost:3396/public/images/';
 
 class Products extends MissMysql{
 	constructor(){

@@ -3,7 +3,7 @@ import Mysql from '../model/sql-config.js'
 
 let mysql=(new Mysql()).mysqlAnalysis;
 
-let dirname='http://localhost:3390/public/images/';
+let dirname='http://localhost:3396/public/images/';
 
 
 
