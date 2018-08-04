@@ -1,8 +1,8 @@
 let mysql=require('mysql');
 let connection=mysql.createConnection({
-	host: '*************',
+	host: '39.104.65.227',
 	user: 'root',
-	password: '************',
+	password: 'Beijing@0983',
 	database: 'missfresh',
 	useConnectionPooling: true
 })
