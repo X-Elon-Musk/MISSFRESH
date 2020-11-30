@@ -18,7 +18,6 @@ export default class MissAddress{
 		console.log('地址');
 		let ip=await this.getPositionIp(req);
 		if (process.env.NODE_ENV=='development') {
- 			// ip = '61.148.16.170';
  			ip='113.44.129.183';
  		}
  		let data=await this.getPositionAxios({
