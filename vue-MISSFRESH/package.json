@@ -1,8 +1,8 @@
 {
   "name": "vue-missfresh",
   "version": "1.0.0",
-  "description": "MISSFRESH",
-  "author": "792884274 <792884274@qq.com>",
+  "description": "",
+  "author": "",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
